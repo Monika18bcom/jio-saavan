@@ -11,7 +11,7 @@ import {BsThreeDots} from 'react-icons/bs'
 import {MdVolumeOff} from 'react-icons/md'
 import {MdVolumeUp} from 'react-icons/md'
 import {GrExpand} from 'react-icons/gr'
-import defaultSong from './song/DefaultAudio.mp3'
+import defaultSong from '../song/DefaultAudio.mp3'
 
 import useSound from 'use-sound'
 import { JiosaavnContext } from "../App/App";
