@@ -14,7 +14,7 @@ import {GrExpand} from 'react-icons/gr'
 import defaultSong from './song/DefaultAudio.mp3'
 
 import useSound from 'use-sound'
-import { JiosaavanContext } from "./App";
+import { JiosaavnContext } from "../App/App";
 
 
 
@@ -24,8 +24,9 @@ function AsideBottom() {
     const [isRepeat, setIsRepeat] = useState(1)
     const [isPlay, setIsPlay] = useState(true)
     const [isVolume, setIsVolume] = useState(true)
+    const [progressWidth, setProgressWidth] = useState(0)
 
-    const {songData, setSongData} = useContext(JiosaavanContext)
+    const {songData, setSongData} = useContext(JiosaavnContext)
     const [localSongData, setLocalSongData] = useState({})
 
     const [songUrl, setSongUrl] = useState(defaultSong)
@@ -49,6 +50,7 @@ function AsideBottom() {
             play()
             setIsPlay(false)
         }
+        
     },[duration])
 
     useEffect(()=>{
@@ -75,7 +77,7 @@ function AsideBottom() {
   return (
     <div id='aside-bottom' className='aside-bottom-section'>
         <div className='aside-bottom-progress-bar'>
-            <div className='aside-bottom-progress'>
+            <div className='aside-bottom-progress' style={{minWidth: '0', maxWidth: '100%', width: `${progressWidth}px`}}>
                 
             </div>
         </div>

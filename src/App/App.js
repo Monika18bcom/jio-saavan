@@ -1,21 +1,21 @@
 import './App.css';
 import { createContext, useState } from 'react';
-import NavBar from './NavBar';
-import AsideLeft from './AsideLeft'
-import Main from './Main'
-import Form from './Form';
-import AsideBottom from './AsideBottom';
-import AsideRight from './AsideRight';
+import NavBar from '../NavBar/NavBar';
+import AsideLeft from '../AsideLeft/AsideLeft'
+import Main from '../Main/Main'
+import Form from '../Form/Form';
+import AsideBottom from '../AsideBottom/AsideBottom';
+import AsideRight from '../AsideRight/AsideRight';
 // import { Route, Routes } from 'react-router-dom';
 
 
-export const JiosaavanContext = createContext({})
+export const JiosaavnContext = createContext({})
 
 function App() {
   const [songData , setSongData] =  useState([])
 
   return (
-    <JiosaavanContext.Provider value={{songData:songData , setSongData: setSongData}}>
+    <JiosaavnContext.Provider value={{songData:songData , setSongData: setSongData}}>
 
     <div className="App">
      <NavBar />
@@ -32,7 +32,7 @@ function App() {
 
     </div>
 
-    </JiosaavanContext.Provider>
+    </JiosaavnContext.Provider>
   );
 }
 

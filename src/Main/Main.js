@@ -1,30 +1,21 @@
 import { useEffect, useState } from "react";
 import './Main.css'
-import Footer from './Footer.js'
-import MusicData from './MusicData'
-import Loader from "./Loader";
+import Footer from '../Footer/Footer'
+import MusicData from '../MusicData/MusicData'
+import Loader from "../Loader/Loader";
 
 function Main() {
 
     const [mainAlbumArr, setMainAlbumArr] = useState([])
-    const [isLoading , setIsLoading] = useState(false)
-        // {title: 'Top Charts', data:[] , type: 'song'},
-        // {title: 'Edotorial Picks', data:[] , type: 'song'},
-        // {title: 'Trending Podcasts', data:[] , type: 'song'},
-        // {title: 'Radio Stations', data:[] , type: 'song'},
-        // {title: 'Whats Hot in Hosur', data:[] , type: 'song'},
-        // {title: 'September To Remember', data:[] , type: 'song'},
-        // {title: 'Best of 90s', data:[] , type: 'song'},
-
-
+    const [isLoading , setIsLoading] = useState(true)
 
     const mainAlbumContainer = [
         {title: 'Trending Now', data:[] , type: 'song' , limit: '40'},
         {title: 'New Releases', data:[] , type: 'song' , limit: '40'},
-        {title: 'Recommended artist Stations', data:[] , type: 'artist', limit: '20'},
         {title: 'Top Genres & Moods', data:[] , type: 'song', limit: '40'},
         {title: 'Pick Your Mood', data:[] , type: 'song', limit: '40'},
-        {title: 'Top Albumns - Hindi', data:[] , type: 'album', limit: '20'},   
+        {title: 'Top Albumns - Hindi', data:[] , type: 'album', limit: '20'}, 
+        {title: 'Recommended artist Stations', data:[] , type: 'artist', limit: '20'},  
     ]
 
 
@@ -49,17 +40,17 @@ function Main() {
             setIsLoading(true)
             fetchMusicData(album)
         })
-        // setIsLoading(false)
     },[])
 
     return(
+
+        isLoading ? 
+        <div className="loader-container">
+            <Loader />
+        </div> :
         <div className="main-section"> 
             <main className='main-album-content'>
                 {
-                isLoading ? 
-                <div className="loader-container">
-                    <Loader />
-                </div> :
                 mainAlbumArr.map((album, idx)=>(
                     <div className="main-album-section" key={idx}>
                         <h2 className='main-album-heading'>{album.title}</h2>
@@ -67,10 +58,6 @@ function Main() {
                     </div>
                 ))
                 }
-                {/* <div className="main-album-1">
-                    <h2 className='main-album-heading'>Trending Now</h2>
-                    <MusicData />
-                </div> */}
             </main>
             <footer id='main-footer'>
                 <Footer />

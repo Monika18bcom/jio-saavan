@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import MusicCard from "./MusicCard";
+import MusicCard from "../MusicCard/MusicCard";
 import './MusicData.css'
 import {IoIosArrowBack} from 'react-icons/io'
 import {IoIosArrowForward} from 'react-icons/io'
@@ -17,11 +17,11 @@ function MusicData({album}){
     const musicDataRef = useRef()
 
     const handleArrowMouseOver = ()=>{
-        // setIsArrowHover(true)
+        setIsArrowHover(true)
     }
 
     const handleArrowMouseOut = ()=>{
-        // setIsArrowHover(false)
+        setIsArrowHover(false)
     }
 
     const handleRightArrow = ()=>{
@@ -63,12 +63,12 @@ function MusicData({album}){
                 ref={musicDataRef} >
                 <div className="music-data-row-1">
                     {album?.data?.map((e,idx)=>(
-                        idx < 20 && <div key={idx} className="music-data-card"><MusicCard data={e}/></div>
+                        idx < 20 && <div key={idx} className="music-data-card"><MusicCard data={{...e, type: album.type}}/></div>
                     ))}
                 </div>
                 <div className="music-data-row-2">
                     {album?.data?.map((e,idx)=>(
-                       idx >= 20 && <div key={idx} className="music-data-card"><MusicCard data={e}/></div>
+                       idx >= 20 && <div key={idx} className="music-data-card"><MusicCard data={{...e, type: album.type}}/></div>
                     ))}
                 </div>
             </div> 

@@ -1,16 +1,14 @@
 import { useContext } from "react"
 import { NavLink } from "react-router-dom";
-import { JiosaavanContext } from "./App";
+import { JiosaavnContext } from "../App/App";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import './NavBar.css';
-import logo from '../src/img/jio-saavan-logo.png'
-
-// c9v1lq5ej7xf
+import logo from '../img/jio-saavn-logo.png'
 
 
 function NavBar(){
-    const {count} = useContext(JiosaavanContext)
+    const {count} = useContext(JiosaavnContext)
     return(
         <div className="nav-bar">
             <div className="logo-container">
