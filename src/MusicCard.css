@@ -1,0 +1,76 @@
+.music-card-container{
+    width: 141.6px;
+    height: 194.2px;
+}
+
+.music-card-img{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 141.6px;
+    height: 141.6px;
+    margin-bottom: 11px;
+    border-radius: 4px;
+}
+
+.music-card-controls{
+    width: inherit;
+    height: inherit;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+}
+
+.music-card-play{
+    width: inherit;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;    
+}
+
+.music-card-play:hover{
+    transform: scale(1.11);
+    transition: all 0.15s ease-in-out;
+}
+
+.music-card-play-btn-bg{
+    width: calc(100px/2);
+    height: calc(100px/2);
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.music-card-play-btn{
+    font-size: 20px;
+}
+
+.music-card-heart-ellipsis{
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0 10px 10px 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.music-card-info{
+    color: #595757;
+    font-size: .8666666667rem;
+    cursor: pointer;
+}
+
+.music-card-title, .music-card-artist {
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    color: #595757;
+}

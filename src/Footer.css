@@ -1,0 +1,92 @@
+#footer{
+    position: absolute;
+    /* left: -220px; */
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6f6f6;
+    color: #3e3e3e;
+    padding-top: 44px;
+}
+
+#footer-main{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 44px;
+    margin-top: 44px;
+}
+
+.footer-line-break{
+    margin-bottom: 22px;
+    /* color: #e9e9e9; */
+}
+
+.footer-main-content{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.f-title{
+    letter-spacing: 1px;
+    font-size: .7333333333rem;
+    text-transform: uppercase;
+    margin-bottom: 11px;
+}
+
+
+.f-list{
+    list-style-type: none;
+    margin-bottom: 22px;
+}
+
+.f-a-tag{
+    font-size: .8666666667rem;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
+
+#footer-top-artists, #footer-top-actors, #footer-devotional-songs, #footer-language, #footer-artists-originals, #footer-company{
+    width: 168.9px;
+    /* height: 267.9px; */
+}
+
+#footer-app-version{
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+}
+ 
+#footer-app-version a{
+    padding-right: 22px;
+}
+
+#footer-icons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-copyright{
+    margin-bottom: 22px;
+    font-size: .8666666667rem;
+    padding: 8px 0;
+}
+
+.footer-follow-us{
+    display: flex;
+    gap: 20px;
+
+}
+
+.footer-follow-us-title{
+    text-transform: uppercase;
+    padding: 8px 0;
+    font-size: .7333333333rem;
+}
+
+.footer-follow-us-icons span{
+    padding-left: 22px;
+}
