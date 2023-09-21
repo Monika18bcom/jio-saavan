@@ -2,7 +2,7 @@ import './App.css';
 import { createContext, useState } from 'react';
 import NavBar from '../NavBar/NavBar';
 import AsideLeft from '../AsideLeft/AsideLeft'
-import Main from '../Main/Main'
+import Home from '../Home/Home'
 import Form from '../Form/Form';
 import AsideBottom from '../AsideBottom/AsideBottom';
 import AsideRight from '../AsideRight/AsideRight';
@@ -20,7 +20,7 @@ function App() {
     <div className="App">
      <NavBar />
      <AsideLeft />
-     <Main />
+     <Home />
      <AsideBottom />
      <AsideRight />
      <Form />

@@ -1,0 +1,15 @@
+.main-section{
+    position: absolute;
+    top: 64px;
+    left: 220px;
+    width: calc(100% - 220px);
+    height: 100vh;
+}
+
+.loader-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+

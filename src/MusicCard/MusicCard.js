@@ -2,9 +2,9 @@ import './MusicCard.css'
 import { useState , useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHeart} from '@fortawesome/free-regular-svg-icons'
+import {AiFillHeart} from 'react-icons/ai'
 import {faEllipsis} from '@fortawesome/free-solid-svg-icons'
 import {faPlay} from '@fortawesome/free-solid-svg-icons'
-import {AiFillHeart} from 'react-icons/ai'
 
 
 import { JiosaavnContext } from "../App/App";
