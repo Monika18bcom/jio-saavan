@@ -4,6 +4,7 @@ import Footer from '../Footer/Footer'
 import Loader from "../Loader/Loader";
 import Main from "../Main/Main";
 import Album from "../Album/Album";
+import { Route, Routes } from 'react-router-dom';
 
 function Home() {
 
@@ -50,11 +51,14 @@ function Home() {
             <Loader />
         </div> :
         <div className="main-section"> 
-            <Main mainAlbumArr={homeAlbumArr}/>
+            {/* <Main mainAlbumArr={homeAlbumArr}/> */}
             <Album />
-            <footer id='main-footer'>
-                <Footer />
-            </footer>
+            
+            <Routes>
+                <Route path='/' element={<Main />}/>
+                <Route path='/album' element={<Album />}/>
+            </Routes>
+            <Footer />
         </div>
     )
 }

@@ -6,7 +6,6 @@ import Home from '../Home/Home'
 import Form from '../Form/Form';
 import AsideBottom from '../AsideBottom/AsideBottom';
 import AsideRight from '../AsideRight/AsideRight';
-// import { Route, Routes } from 'react-router-dom';
 
 
 export const JiosaavnContext = createContext({})
@@ -24,11 +23,7 @@ function App() {
      <AsideBottom />
      <AsideRight />
      <Form />
-     {/* <Routes>
-      <Route path='/' element={<Home />}/>
-      <Route path='/podcasts' element={<Podcasts />}/>
-      <Route path='/gopro' element={<GoPro />}/>
-     </Routes> */}
+     
 
     </div>
 
