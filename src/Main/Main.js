@@ -3,7 +3,7 @@ import './Main.css'
 import MusicData from '../MusicData/MusicData'
 
 function Main({mainAlbumArr}) {
-  console.log(mainAlbumArr)
+
   return (
     <main className='main-album-content'>
         {

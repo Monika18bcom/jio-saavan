@@ -49,7 +49,7 @@ function AlbumPoster() {
             <p className='album-poster-details a-p-overflow'>by <span className='album-poster-artist-name'>Kishore Kumar</span> . <span>30 Songs</span> . <span>260,848,504 Plays</span> . <span>2:36:00</span></p>
             <p className='album-poster-copyrights a-p-overflow'>&copy; 1973 Universal Music India Pvt. Ltd.</p>
             <div className='album-poster-controls' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
-                <div className='album-poster-play-btn' style={{opacity: isPlayHover && '#707070'}} >Play</div>
+                <div className='album-poster-play-btn' style={{opacity: isPlayHover && '0.9'}} >Play</div>
                 <div className='album-poster-like-btn' style={{borderColor: isLikeHover && '#707070'}} >
                     <AiOutlineHeart className='album-poster-like-icon'/>
                 </div>

@@ -8,6 +8,7 @@ import {faPlay} from '@fortawesome/free-solid-svg-icons'
 
 
 import { JiosaavnContext } from "../App/App";
+import { useNavigate } from 'react-router-dom'
 
 
 function MusicCard({data}){
@@ -15,10 +16,11 @@ function MusicCard({data}){
     //     console.log(e)
     // })
 
-    console.log(data.type)
+    // console.log(data)
 
     const [isHover, setIsHover] = useState(false);
     const [isLikeRed, setIsLikeRed] = useState(false);
+    const navigate = useNavigate()
     
     const {setSongData} = useContext(JiosaavnContext);
 
@@ -41,11 +43,13 @@ function MusicCard({data}){
             setIsLikeRed(!isLikeRed);
         }else if(e.target.classList.contains('music-card-option-btn') || e.target.parentElement.classList.contains('music-card-option-btn')){
             console.log('option btn')
+        }else{
+            navigate(`/${data.type}/${(data.name) || (data.title)}/${data._id}`)
         }
     }
 
     return (
-        <div className='music-card-container' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+        <div className='music-card-container' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
             <div className='music-card-img' style={{backgroundImage:`url(${data.image || data.thumbnail})`, borderRadius : data.type === "artist" && '50%'}}>
                 {
                     isHover &&

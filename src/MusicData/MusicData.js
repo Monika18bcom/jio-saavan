@@ -7,8 +7,6 @@ import {IoIosArrowForward} from 'react-icons/io'
 function MusicData({album}){
     // const [musicDataArr , setMusicDataArr] = useState([]);
 
-    console.log(album)
-
     const [isArrowHover, setIsArrowHover] = useState(false);
     const [isALDisabled ,setIsALDisabled] = useState(true)
     //AL -> Arrow Left

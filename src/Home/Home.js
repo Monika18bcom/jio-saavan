@@ -50,13 +50,10 @@ function Home() {
         <div className="loader-container">
             <Loader />
         </div> :
-        <div className="home-section"> 
-            {/* <Main mainAlbumArr={homeAlbumArr}/> */}
-            <Album />
-            
+        <div className="home-section">             
             <Routes>
-                <Route path='/' element={<Main />}/>
-                <Route path='/album' element={<Album />}/>
+                <Route path='/' element={<Main mainAlbumArr={homeAlbumArr}/>}/>
+                <Route path='/:type/:name/:id' element={<Album />}/>
             </Routes>
             <Footer />
         </div>
