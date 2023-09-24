@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import './Album.css'
 import AlbumPoster from '../AlbumPoster/AlbumPoster'
 import SongList from '../SongList/SongList'
-import { useParams } from 'react-router-dom'
+import Loader from "../Loader/Loader";
+
 
 function Album() {
   const {type, id} = useParams()
 
   const [dataArr, setDataArr] = useState([])
+  const [isLoading , setIsLoading] = useState(false)
 
   async function fetchData(){
     try{
@@ -18,7 +21,7 @@ function Album() {
       })
 
       const result = await res.json()
-      console.log(result)
+      setIsLoading(false)
       setDataArr(result.data)
     }
     catch(err){
@@ -27,15 +30,29 @@ function Album() {
   }
 
   useEffect(()=>{
+    setIsLoading(true)
     fetchData()
     
-  },[])
+  },[type])
+
   return (
+    isLoading ? 
+    <div className="loader-container">
+        <Loader />
+    </div> :
     <div className='album-container'>
-      <AlbumPoster />
+      <AlbumPoster data={dataArr}/>
 
       <div className='album-list'>
-        <SongList />
+        {
+          dataArr?.songs?.map((e, id)=>(
+            <div key={id}><SongList data={e} num={id} /></div>
+          ))
+
+          ||
+          
+          dataArr && <SongList data={dataArr} />
+        }
       </div>
         
     </div>

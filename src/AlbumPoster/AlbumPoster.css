@@ -59,16 +59,15 @@
 }
 
 .album-poster-play-btn{
-    width: 16%;
+    width: 15%;
     height: 48px;
-    padding-top: 10px;
+    padding-top: 13px;
     background-color: #2bc5b4;
     color: #fff;
     text-align: center;
     border-radius: 23px;
-    font-size: .933rem;
     cursor: pointer;
-    font-size: 1.33rem;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 

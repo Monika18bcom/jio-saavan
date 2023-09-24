@@ -9,7 +9,7 @@ import { Route, Routes } from 'react-router-dom';
 function Home() {
 
     const [homeAlbumArr, setHomeAlbumArr] = useState([])
-    const [isLoading , setIsLoading] = useState(true)
+    const [isLoading , setIsLoading] = useState(false)
 
     const homeAlbumContainer = [
         {title: 'Trending Now', data:[] , type: 'song' , limit: '40'},

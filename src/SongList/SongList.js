@@ -6,7 +6,9 @@ import {AiOutlineHeart} from 'react-icons/ai'
 import {AiFillHeart} from 'react-icons/ai'
 
 
-function SongList() {
+function SongList({data, num}) {
+
+    // console.log(data)
 
     const [isHover, setIsHover] = useState(false)
 
@@ -22,12 +24,12 @@ function SongList() {
     <div className='song-list-container' style={{backgroundColor: isHover && '#fff',borderRadius: isHover && '4px', border: isHover && '1px solid #e9e9e9'}} onMouseOver={songListMouseOver} onMouseOut={songListMouseOut} >
         <div className='song-list-play-index'>  
             {
-                isHover ? <BsPlayCircle className='song-list-play-icon' style={{fontSize: "26px"}} />  : <div className='song-list-song-num'>1</div>
+                isHover ? <BsPlayCircle className='song-list-play-icon' style={{fontSize: "26px"}} />  : <div className='song-list-song-num'>{num ? num + 1 : 1}</div>
             }
         </div>
         <div className='song-list-song-info'>
-            <h4 className='song-list-song-title'>Pal Pal Dil Ke Pass(From "Blackmail")</h4>
-            <p className='song-list-song-artist'>Kishore Kumar</p>
+            <h4 className='song-list-song-title'>{data.title}</h4>
+            <p className='song-list-song-artist'>{data?.artist?.map((e)=> e.name).join(',')}</p>
         </div>
         <div className='song-list-like-icon' style={{fontSize: "24px"}}>
             <AiOutlineHeart />

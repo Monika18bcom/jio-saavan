@@ -5,7 +5,9 @@ import {AiOutlineHeart} from 'react-icons/ai'
 import {AiFillHeart} from 'react-icons/ai'
 
 
-function AlbumPoster() {
+function AlbumPoster({data}) {
+
+    console.log(data)
 
     const [isPlayHover, setIsPlayHover] = useState(false)
     const [isLikeHover, setIsLikeHover] = useState(false)
@@ -42,11 +44,11 @@ function AlbumPoster() {
   return (
     <div className='album-poster-container'>
         <div className='album-poster-image-section'>
-            <img className='album-poster-image' src='https://newton-project-resume-backend.s3.amazonaws.com/thumbnail/64cee72fe41f6d0a8b0cd0a7.jpg' alt='album image'></img>
+            <img className='album-poster-image' src={(data?.image) || (data?.thumbnail)} alt={(data?.name) || (data?.title)}></img>
         </div>
         <div className='album-poster-description'>
-            <h1 className='album-poster-title a-p-overflow'>Jai Ganesha (From "Ganapath")</h1>
-            <p className='album-poster-details a-p-overflow'>by <span className='album-poster-artist-name'>Kishore Kumar</span> . <span>30 Songs</span> . <span>260,848,504 Plays</span> . <span>2:36:00</span></p>
+            <h1 className='album-poster-title a-p-overflow'>{(data?.name) || (data?.title)}</h1>
+            <p className='album-poster-details a-p-overflow'>by <span className='album-poster-artist-name'>{data?.artist?.map((e)=> e.name).join(',') || data?.artists?.map((e)=> e.name).join(',')}</span> . <span>{data?.artist?.length} {data?.artist?.length ===1 ? 'song' : 'songs'}</span> . <span>260,848,504 Plays</span> . <span>2:36:00</span></p>
             <p className='album-poster-copyrights a-p-overflow'>&copy; 1973 Universal Music India Pvt. Ltd.</p>
             <div className='album-poster-controls' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
                 <div className='album-poster-play-btn' style={{opacity: isPlayHover && '0.9'}} >Play</div>
