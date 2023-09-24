@@ -35,10 +35,11 @@ function Album() {
     
   },[type])
 
+
   return (
     isLoading ? 
     <div className="loader-container">
-        <Loader />
+      <Loader />
     </div> :
     <div className='album-container'>
       <AlbumPoster data={dataArr}/>
@@ -46,7 +47,7 @@ function Album() {
       <div className='album-list'>
         {
           dataArr?.songs?.map((e, id)=>(
-            <div key={id}><SongList data={e} num={id} /></div>
+            <SongList key={id} data={e} num={id} artistArr={dataArr} artistName={dataArr.name}/>
           ))
 
           ||

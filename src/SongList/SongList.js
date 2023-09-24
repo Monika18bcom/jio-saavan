@@ -6,9 +6,9 @@ import {AiOutlineHeart} from 'react-icons/ai'
 import {AiFillHeart} from 'react-icons/ai'
 
 
-function SongList({data, num}) {
+function SongList({data, num, artistName, artistArr}) {
 
-    // console.log(data)
+    console.log(data , "data 11 line song list")
 
     const [isHover, setIsHover] = useState(false)
 
@@ -29,7 +29,11 @@ function SongList({data, num}) {
         </div>
         <div className='song-list-song-info'>
             <h4 className='song-list-song-title'>{data.title}</h4>
-            <p className='song-list-song-artist'>{data?.artist?.map((e)=> e.name).join(',')}</p>
+            <p className='song-list-song-artist'>{artistName || artistArr?.artists.map((e)=>{
+                if(data.artist.includes(e._id)){
+                    return `${e.name},`;
+                }
+            }) || data?.artist?.map((e)=> e.name).join(',')}</p>
         </div>
         <div className='song-list-like-icon' style={{fontSize: "24px"}}>
             <AiOutlineHeart />

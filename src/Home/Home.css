@@ -3,7 +3,9 @@
     top: 64px;
     left: 220px;
     width: calc(100% - 220px);
-    height: 100vh;
+    height: auto;
+    background-color: #f6f6f6;
+    /* height: 100vh; */
 }
 
 .loader-container{
