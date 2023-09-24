@@ -1,5 +1,6 @@
 .album-container{
     width: 95%;
-    height: auto;
-    /* height: 100%; */
+    /* height: auto; */
+    padding: 34px 44px;
+    /* margin-bottom: 44px; */
 }

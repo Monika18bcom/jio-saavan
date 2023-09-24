@@ -51,10 +51,10 @@ function AlbumPoster() {
             <div className='album-poster-controls' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
                 <div className='album-poster-play-btn' style={{opacity: isPlayHover && '#707070'}} >Play</div>
                 <div className='album-poster-like-btn' style={{borderColor: isLikeHover && '#707070'}} >
-                    <span className='album-poster-like-icon'><AiOutlineHeart /></span>
+                    <AiOutlineHeart className='album-poster-like-icon'/>
                 </div>
-                <div className='album-poster-options-btn'>
-                    <span className='album-poster-options-icon' style={{borderColor: isOptionsHover && '#707070'}} ><BsThreeDots /></span>
+                <div className='album-poster-options-btn' style={{borderColor: isOptionsHover && '#707070'}}>
+                    <BsThreeDots className='album-poster-options-icon' />
                 </div>
             </div>
         </div>

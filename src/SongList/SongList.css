@@ -1,7 +1,57 @@
 .song-list-container{
     width: 100%;
-    height: 35px;
+    height: 44px;
     display: flex;
     align-items: center;
-    background-color: #f6f6f6;
+    gap: 20px;
+    padding: 11px 12px;
+    color: #3e3e3e;
+    font-size: 13px;
 }
+
+.song-list-play-index{
+    width: 3%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.song-list-song-num{
+    width: 100%;
+    font-size: 13px;
+    text-align: center;
+}
+
+.song-list-song-info{
+    display: flex;
+    width: 91%;
+    font-size: 13px;
+}
+
+.song-list-song-info h4{
+    width: 50%;
+}
+
+.song-list-song-info p{
+    width: 50%;
+}
+
+.song-list-like-icon{
+    width: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.song-list-duration-option{
+    width: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.song-list-song-duration{
+    font-size: 13px;
+}
+

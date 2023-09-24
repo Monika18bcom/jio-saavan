@@ -6,8 +6,11 @@ import SongList from '../SongList/SongList'
 function Album() {
   return (
     <div className='album-container'>
-        <AlbumPoster />
+      <AlbumPoster />
+      <div className='album-list'>
         <SongList />
+      </div>
+        
     </div>
   )
 }

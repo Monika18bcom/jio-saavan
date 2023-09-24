@@ -11,7 +11,7 @@ function Home() {
     const [homeAlbumArr, setHomeAlbumArr] = useState([])
     const [isLoading , setIsLoading] = useState(true)
 
-    const mainAlbumContainer = [
+    const homeAlbumContainer = [
         {title: 'Trending Now', data:[] , type: 'song' , limit: '40'},
         {title: 'New Releases', data:[] , type: 'song' , limit: '40'},
         {title: 'Top Genres & Moods', data:[] , type: 'song', limit: '40'},
@@ -38,7 +38,7 @@ function Home() {
     }
 
     useEffect(()=>{
-        mainAlbumContainer.map((album)=>{
+        homeAlbumContainer.map((album)=>{
             setIsLoading(true)
             fetchMusicData(album)
         })
@@ -50,7 +50,7 @@ function Home() {
         <div className="loader-container">
             <Loader />
         </div> :
-        <div className="main-section"> 
+        <div className="home-section"> 
             {/* <Main mainAlbumArr={homeAlbumArr}/> */}
             <Album />
             
