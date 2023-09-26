@@ -7,7 +7,7 @@ import {AiFillHeart} from 'react-icons/ai'
 
 function AlbumPoster({data}) {
 
-    console.log(data)
+    // console.log(data)
 
     const [isPlayHover, setIsPlayHover] = useState(false)
     const [isLikeHover, setIsLikeHover] = useState(false)
@@ -16,26 +16,20 @@ function AlbumPoster({data}) {
 
     const handleMouseOver = (e)=>{
         if(e.target.classList.contains('album-poster-play-btn')){
-            console.log('play clicked')
             setIsPlayHover(true)           
         }else if(e.target.classList.contains('album-poster-like-btn') || e.target.classList.contains('album-poster-like-icon') || e.target.parentElement.classList.contains('album-poster-like-icon')){
-            console.log("clicked like button")
             setIsLikeHover(true)
         }else if(e.target.classList.contains('album-poster-options-btn') || e.target.classList.contains('album-poster-options-icon') || e.target.parentElement.classList.contains('album-poster-options-icon')){
-            console.log('option btn')
             setIsOptionsHover(true)
         }
     }
 
     const handleMouseOut = (e)=>{
         if(e.target.classList.contains('album-poster-play-btn')){
-            console.log('play clicked')
             setIsPlayHover(false)           
         }else if(e.target.classList.contains('album-poster-like-btn') || e.target.classList.contains('album-poster-like-icon') || e.target.parentElement.classList.contains('album-poster-like-icon')){
-            console.log("clicked like button")
             setIsLikeHover(false)
         }else if(e.target.classList.contains('album-poster-options-btn') || e.target.classList.contains('album-poster-options-icon') || e.target.parentElement.classList.contains('album-poster-options-icon')){
-            console.log('option btn')
             setIsOptionsHover(false)
         }
     }

@@ -35,7 +35,7 @@ function Album() {
     
   },[type])
 
-
+// console.log("dataArr",dataArr)
   return (
     isLoading ? 
     <div className="loader-container">
@@ -47,7 +47,7 @@ function Album() {
       <div className='album-list'>
         {
           dataArr?.songs?.map((e, id)=>(
-            <SongList key={id} data={e} num={id} artistArr={dataArr} artistName={dataArr.name}/>
+            <SongList key={id} data={e} num={id} artistArr={dataArr} />
           ))
 
           ||

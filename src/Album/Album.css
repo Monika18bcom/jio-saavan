@@ -5,3 +5,9 @@
     padding: 34px 44px;
     /* margin-bottom: 44px; */
 }
+
+.loader-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}

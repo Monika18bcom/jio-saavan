@@ -12,19 +12,13 @@ import { useNavigate } from 'react-router-dom'
 
 
 function MusicCard({data}){
-    // const artistData = artist.map((e)=>{
-    //     console.log(e)
-    // })
-
-    // console.log(data)
+    // console.log("musiccard.....",data)
 
     const [isHover, setIsHover] = useState(false);
     const [isLikeRed, setIsLikeRed] = useState(false);
     const navigate = useNavigate()
     
     const {setSongData} = useContext(JiosaavnContext);
-
-
 
     const handleMouseOver = ()=>{
         setIsHover(true);
@@ -37,7 +31,14 @@ function MusicCard({data}){
     const handleMusicCardControls = (e)=>{
         if(e.target.classList.contains('music-card-play-btn-bg') || e.target.classList.contains('music-card-play-btn') || e.target.parentElement.classList.contains('music-card-play-btn')){
             console.log('play clicked')
-            setSongData(data)           
+            if(data.type === "song"){
+                setSongData(data._id)
+            }else if(data.type === "album"){
+                setSongData(data.songs[0]._id)
+            }else{
+                setSongData(data.songs[0])
+            }
+                       
         }else if(e.target.classList.contains('music-card-like-btn') || e.target.parentElement.classList.contains('music-card-like-btn')){
             console.log("clicked like button")
             setIsLikeRed(!isLikeRed);

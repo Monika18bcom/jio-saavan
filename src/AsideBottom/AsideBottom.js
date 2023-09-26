@@ -27,6 +27,8 @@ function AsideBottom() {
     const [progressWidth, setProgressWidth] = useState(0)
 
     const {songData, setSongData} = useContext(JiosaavnContext)
+    
+
     const [localSongData, setLocalSongData] = useState({})
 
     const [songUrl, setSongUrl] = useState(defaultSong)
@@ -34,6 +36,7 @@ function AsideBottom() {
     const [songSec, setSongSec] = useState("00")
 
     const [play , {stop, pause , duration}] = useSound(songUrl)
+    
     
     useEffect(()=>{
         stop()
@@ -56,9 +59,22 @@ function AsideBottom() {
     useEffect(()=>{
         stop()
         setSongUrl(defaultSong)
-        setLocalSongData(songData)
-        setSongUrl(songData.audio_url)
-
+        console.log("songData", songData)
+        if(songData.length >0){
+            fetch(`https://academics.newtonschool.co/api/v1/music/song/${songData}`, {
+            headers: {
+            'projectId': 'nwi12vygvqne'
+            }
+            })
+            .then((res)=> res.json())
+            .then((result)=> {
+                console.log(result)
+                setLocalSongData(result.data)
+                setSongUrl(result.data.audio_url)
+                
+            })
+        }
+        
     },[songData])
 
     const handlePlayBtn = ()=>{
@@ -72,18 +88,17 @@ function AsideBottom() {
     }
 
 
-    const image = 'https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg'
-
+    console.log(songUrl)
   return (
     <div id='aside-bottom' className='aside-bottom-section'>
         <div className='aside-bottom-progress-bar'>
-            <div className='aside-bottom-progress' style={{minWidth: '0', maxWidth: '100%', width: `${progressWidth}px`}}>
+            <div className='aside-bottom-progress' style={{minWidth: '0', maxWidth: '100%', width: `${progressWidth}%`}}>
                 
             </div>
         </div>
         <div className='aside-bottom-content'>
             <div className='aside-bottom-album'>
-                <img className='aside-bottom-img' src={localSongData ? localSongData?.thumbnail : image} alt={localSongData && localSongData?.title}></img>
+                <img className='aside-bottom-img' src={localSongData?.thumbnail} alt={localSongData?.title}></img>
                 <div className='aside-bottom-album-info'>
                     <h4 className='aside-bottom-album-title' style={{color: isHover ? 'black' : '#3e3e3e'}} >{localSongData?.title}</h4>
                     <p className='aside-bottom-album-artist'>{localSongData?.artist && localSongData?.artist.map((e)=> e.name).join(',')}</p>

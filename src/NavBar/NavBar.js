@@ -1,14 +1,17 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { NavLink } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import './NavBar.css';
 import logo from '../img/jio-saavn-logo.png'
+import {RiArrowDownSLine} from 'react-icons/ri'
+import {RiArrowUpSLine} from 'react-icons/ri'
 
 
 function NavBar(){
     const {count} = useContext(JiosaavnContext)
+    const [isSelected, setIsSelected] = useState(false)
+
     return(
         <div className="nav-bar">
             <div className="logo-container">
@@ -30,7 +33,7 @@ function NavBar(){
                             <p className="music-lang">Music Languages</p>
                             <p className="lang">Hindi</p>
                         </div>
-                        <KeyboardArrowDownOutlinedIcon />
+                        {isSelected ? <RiArrowUpSLine className="arrow-icon" /> : <RiArrowDownSLine className="arrow-icon" />}
                     </div>
                     <ul className="right-ul">
                         <li><NavLink className="navlink" to="/login">Log In</NavLink></li>

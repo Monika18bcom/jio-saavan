@@ -1,6 +1,4 @@
 #footer{
-    position: absolute;
-    /* left: -220px; */
     width: 100%;
     height: 100vh;
     display: flex;
@@ -17,6 +15,7 @@
     flex-direction: column;
     padding: 0 44px;
     margin-top: 44px;
+    /* border-top: 1px solid #e9e9e9; */
 }
 
 .footer-line-break{

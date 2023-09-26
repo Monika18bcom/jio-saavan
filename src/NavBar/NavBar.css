@@ -11,29 +11,36 @@
 }
 
 .logo-container{
-    width: 150px;
-    height: inherit;
+    width: 10%;
+    height: 100%;
+    padding-right: 10px;
 }
 
 #logo-img{
-    width: 115px;
+    width: 94%;
     padding: 13px 0;
-    height: 62px;
 }
 
 .nav-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    height: inherit;
+    width: 90%;
+    height: 100%;
 }
 
 .nav-left{
     display: flex;
+    justify-content: space-between;
     list-style-type: none;
-    gap: 20px;
     color: #3e3e3e;
+    width: 15%;
+    height: 100%;
+}
+
+.nav-left li{
+    width: auto;
+    height: 100%;
 }
 
 .navlink{
@@ -41,6 +48,18 @@
     text-decoration: none;
     font-weight: bold;
     font-size: 15px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+
+.nav-left li:hover{
+    padding-top: 3px;
+    border-bottom: 3px solid #3e3e3e;
+    /* transition: border .2s ease-in-out; */
 }
 
 .nav-center{
@@ -68,23 +87,26 @@
     font-size: 14px;
 }
 
-
 .nav-right{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-right: 10px;
+    justify-content: space-between;
+    margin-right: 25px;
+    color: #3e3e3e;
+    width: 22%;
+    height: 100%;
 }
 
 .select-lang{
     display: flex;
-    gap: 5px;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 100%;
 }
 
 .music-lang{
     font-size: 15px;
-    color: #3e3e3e;
+    font-weight: 600;
 }
 
 .lang{
@@ -92,11 +114,23 @@
     color: #707070;
 }
 
+.arrow-icon{
+    font-size: 24px;
+    color: #707070;
+}
+
 .right-ul{
     display: flex;
+    justify-content: space-around;
     list-style-type: none;
-    gap: 20px;
+    width: 50%;
+    height: 100%;
+}
 
+.right-ul li:hover{
+    padding-top: 3px;
+    border-bottom: 3px solid #3e3e3e;
+    /* transition: border .2s ease-in-out; */
 }
 
 
