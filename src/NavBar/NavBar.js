@@ -6,6 +6,7 @@ import './NavBar.css';
 import logo from '../img/jio-saavn-logo.png'
 import {RiArrowDownSLine} from 'react-icons/ri'
 import {RiArrowUpSLine} from 'react-icons/ri'
+import {IoIosSearch} from 'react-icons/io'
 
 
 function NavBar(){
@@ -24,7 +25,7 @@ function NavBar(){
                     <li><NavLink className="navlink" to="/gopro">Go Pro</NavLink></li>
                 </ul> 
                 <div className="nav-center">
-                    <SearchRoundedIcon className="search-icon"/>
+                    <IoIosSearch className="search-icon"/>
                     <p id="search-input">Search</p>
                 </div>
                 <div className="nav-right">
