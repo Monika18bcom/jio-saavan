@@ -5,6 +5,12 @@
     flex-direction: column;
 }
 
+.new-releases-container .loader-container{
+    position: absolute;
+    top: 25%;
+    left: 40%;
+}
+
 .new-releases-main-section{
     /* width: calc(100% - 75px); */
     width: 88%;

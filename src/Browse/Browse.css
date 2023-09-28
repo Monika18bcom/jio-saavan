@@ -27,22 +27,24 @@
     color: #3e3e3e;
 }
 
-.browse-nav-ul li{
-    display: flex;
-    align-items: center;
+.browse-nav-ul li{  
     width: auto;
     height: 100%;
+    cursor: pointer;
 }
 
 .browse-nav-ul a{
+    height: 100%;
+    display: flex;
+    align-items: center;
     color: #3e3e3e;
     text-decoration: none;
 }
 
-/* .browse-nav-ul .active{
+.browse-nav-ul .active{
     padding-top: 1px;
     border-bottom: 2px solid #3e3e3e;
-} */
+}
 
 .browse-nav-btn{
     background-color: #2bc5b4;
@@ -54,6 +56,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 

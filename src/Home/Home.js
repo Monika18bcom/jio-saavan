@@ -7,7 +7,6 @@ import Album from "../Album/Album";
 import { Route, Routes } from 'react-router-dom';
 import NewReleases from "../Browse/NewReleases";
 import TopCharts from "../Browse/TopCharts";
-import TopPlaylists from "../Browse/TopPlaylists";
 
 function Home() {
 
