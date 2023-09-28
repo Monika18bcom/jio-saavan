@@ -1,7 +1,6 @@
 import { useContext, useState } from "react"
 import { NavLink } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import './NavBar.css';
 import logo from '../img/jio-saavn-logo.png'
 import {RiArrowDownSLine} from 'react-icons/ri'

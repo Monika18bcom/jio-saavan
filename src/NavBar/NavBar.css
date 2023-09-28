@@ -34,7 +34,7 @@
     justify-content: space-between;
     list-style-type: none;
     color: #3e3e3e;
-    width: 15%;
+    width: 14%;
     height: 100%;
 }
 
@@ -47,7 +47,7 @@
     color: #3e3e3e;
     text-decoration: none;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 14.8px;
     width: 100%;
     height: 100%;
     display: flex;
@@ -94,7 +94,7 @@
     justify-content: space-between;
     margin-right: 25px;
     color: #3e3e3e;
-    width: 22%;
+    width: 20%;
     height: 100%;
 }
 
@@ -102,23 +102,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 50%;
+    width: 53%;
     height: 100%;
     cursor: pointer;
 }
 
 .music-lang{
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .lang{
+    padding-top: 3px;
     font-size: 12px;
     color: #707070;
 }
 
 .arrow-icon{
-    font-size: 24px;
+    font-size: 26px;
     color: #707070;
 }
 
@@ -126,8 +127,9 @@
     display: flex;
     justify-content: space-around;
     list-style-type: none;
-    width: 50%;
+    width: 47%;
     height: 100%;
+    padding-left: 5px;
 }
 
 .right-ul li:hover{
