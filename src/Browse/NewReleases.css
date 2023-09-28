@@ -1,0 +1,41 @@
+.new-releases-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-releases-main-section{
+    /* width: calc(100% - 75px); */
+    width: 88%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 44px;
+}
+
+.new-releases-heading{
+    margin-bottom: 22px;
+    font-size: 24px;
+    color: #3e3e3e;
+}
+
+.new-releases-album-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.new-releases-album{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+
+.new-releases-album-end{
+    margin: 22px 0;
+    font-size: 20px;
+    text-align: center;
+    font-style: italic;
+    color: #3e3e3e;
+    font-family: 'Lato', sans-serif;
+}

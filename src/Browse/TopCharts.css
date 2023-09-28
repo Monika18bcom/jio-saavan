@@ -1,0 +1,21 @@
+.top-charts-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-charts-content{
+    width: 88%;
+    height: 100vh;
+    margin: 0 44px;
+}
+
+.top-charts-message{
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
+    font-style: italic;
+    color: #3e3e3e;
+    font-family: 'Lato', sans-serif;
+}

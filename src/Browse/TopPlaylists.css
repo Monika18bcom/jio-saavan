@@ -1,0 +1,40 @@
+.top-playlists-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-playlists-main-section{
+    width: 88%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 44px;
+}
+
+.top-playlists-heading{
+    margin-bottom: 22px;
+    font-size: 24px;
+    color: #3e3e3e;
+}
+
+.top-playlists-album-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.top-playlists-album{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+
+.top-playlists-album-end{
+    margin: 22px 0;
+    font-size: 20px;
+    text-align: center;
+    font-style: italic;
+    color: #3e3e3e;
+    font-family: 'Lato', sans-serif;
+}

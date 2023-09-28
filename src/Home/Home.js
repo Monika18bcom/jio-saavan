@@ -5,7 +5,9 @@ import Loader from "../Loader/Loader";
 import Main from "../Main/Main";
 import Album from "../Album/Album";
 import { Route, Routes } from 'react-router-dom';
-import Browse from "../Browse/Browse";
+import NewReleases from "../Browse/NewReleases";
+import TopCharts from "../Browse/TopCharts";
+import TopPlaylists from "../Browse/TopPlaylists";
 
 function Home() {
 
@@ -55,7 +57,12 @@ function Home() {
             <Routes>
                 <Route path='/' element={<Main mainAlbumArr={homeAlbumArr}/>}/>
                 <Route path='/:type/:name/:id' element={<Album />}/>
-                <Route path='/new-releases' element={<Browse />} />
+                <Route path='/new-releases' element={<NewReleases type='album' />} />
+                <Route path='/top-charts' element={<TopCharts />} />
+                <Route path='/top-playlists' element={<NewReleases type='song' />} />
+                <Route path='/original-podcasts' element={<TopCharts />} />
+                <Route path='/top-artists' element={<NewReleases type='artist' />} />
+                <Route path='/radio' element={<TopCharts />} />
             </Routes>
             <Footer />
         </div>
