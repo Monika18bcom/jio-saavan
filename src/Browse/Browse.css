@@ -41,6 +41,11 @@
     text-decoration: none;
 }
 
+.browse-nav-ul a:hover{
+    padding-top: 1px;
+    border-bottom: 2px solid #3e3e3e;
+}
+
 .browse-nav-ul .active{
     padding-top: 1px;
     border-bottom: 2px solid #3e3e3e;
