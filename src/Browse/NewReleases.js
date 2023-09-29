@@ -12,6 +12,8 @@ function NewReleases({type}) {
     const [isLoading , setIsLoading] = useState(false)
     const [surpriseMeId , setSurpriseMeId] = useState('')
 
+    const [randomIdx , setRandonIdx] = useState(0)
+
 
     useEffect(()=>{
         setIsLoading(true)
@@ -25,21 +27,23 @@ function NewReleases({type}) {
                 if(type === 'song'){
                     setIsLoading(false)
                     setSongDataArr(result.data) 
-                    setSurpriseMeId(result.data[0]._id)
+                    setRandonIdx(Math.floor((Math.random() * result?.data?.length)-1))
+                    setSurpriseMeId(result.data[randomIdx]._id)
                 }else if(type === 'album'){
                     setIsLoading(false)
                     setAlbumDataArr(result.data)
-                    setSurpriseMeId(result.data[0].songs[0]._id)
+                    setRandonIdx(Math.floor((Math.random() * result?.data?.length)-1))
+                    setSurpriseMeId(result.data[randomIdx].songs[0]._id)
                 }else{
                     setIsLoading(false)
                     setArtistDataArr(result.data)
-                    setSurpriseMeId(result.data[0].songs[0])
+                    setRandonIdx(Math.floor((Math.random() * result?.data?.length)-1))
+                    setSurpriseMeId(result.data[randomIdx].songs[0])
                 }           
             })
         
     },[type])
 
-    console.log(surpriseMeId)
   return (
     <div className='new-releases-container'>
         <Browse type={type} surpriseMeId={surpriseMeId}/>

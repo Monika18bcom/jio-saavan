@@ -56,7 +56,12 @@
     
 }
 
-.nav-left li:hover{
+.podcasts.active{
+    padding-top: 3px;
+    border-bottom: 3px solid #3e3e3e;
+}
+
+.nav-left a:hover{
     padding-top: 3px;
     border-bottom: 3px solid #3e3e3e;
     /* transition: border .2s ease-in-out; */

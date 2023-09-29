@@ -20,7 +20,7 @@ function NavBar(){
             <div className="nav-container">
                 <ul className="nav-left">
                     <li><NavLink className="navlink" to="/">Music</NavLink></li>
-                    <li><NavLink className="navlink" to="/podcasts">Podcasts</NavLink></li>
+                    <li><NavLink className="navlink podcasts" to="/original-podcasts">Podcasts</NavLink></li>
                     <li><NavLink className="navlink" to="/gopro">Go Pro</NavLink></li>
                 </ul> 
                 <div className="nav-center">

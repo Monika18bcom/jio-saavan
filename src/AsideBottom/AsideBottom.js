@@ -68,7 +68,7 @@ function AsideBottom() {
             })
             .then((res)=> res.json())
             .then((result)=> {
-                console.log(result)
+                // console.log(result)
                 setLocalSongData(result.data)
                 setSongUrl(result.data.audio_url)
                 
