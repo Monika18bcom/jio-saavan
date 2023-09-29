@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import './Browse.css'
 import {IoIosArrowBack} from 'react-icons/io'
 import {IoIosArrowForward} from 'react-icons/io'
@@ -9,6 +9,8 @@ import { JiosaavnContext } from "../App/App";
 
 
 function Browse({type,surpriseMeId}) {
+
+  const {setSongData} = useContext(JiosaavnContext)
   
   const langArr = ['For You','Hindi','Tamil','Telugu','English','Punjabi',
                   'Marathi','Gujarati','Bengali',
@@ -16,17 +18,31 @@ function Browse({type,surpriseMeId}) {
                   'Haryanvi','Rajasthani','Odia','Assamese']
 
   const [selectedIdx, setSelectedIdx] = useState(0)
+  const [isALDisabled ,setIsALDisabled] = useState(true)
+    //AL -> Arrow Left
+    const [isARDisabled ,setIsARDisabled] = useState(false)
+    //AR -> Arrow Right
 
-  const {setSongData} = useContext(JiosaavnContext)
-
+  const browseRef = useRef()
 
   const handleSurpriseMe =()=>{
     console.log("surprise me" , surpriseMeId)
     if(surpriseMeId){
       setSongData(surpriseMeId)
     }
-
   }
+
+  const handleLeftArrow = ()=>{
+    browseRef.current.scrollBy({left: - browseRef.current.offsetWidth , behavior: 'smooth'})
+  }
+
+  const handleRightArrow = ()=>{
+    browseRef.current.scrollBy({left: browseRef.current.offsetWidth , behavior: 'smooth'})
+  }
+
+  console.log(isALDisabled , isARDisabled)
+
+
   return (
     <div className='browse-container'>
       <div className='browse-nav-section'>
@@ -40,21 +56,40 @@ function Browse({type,surpriseMeId}) {
         </ul>
         <div className='browse-nav-btn' onClick={handleSurpriseMe} >Surprise Me</div>
       </div>
-      {type !== 'artist' && (<div className='browse-lang-section'>
-        <div className='browse-left-arrow'>
-          <IoIosArrowBack className='lang-left-arrow'/>
-        </div>
-        <ul className='browse-lang-ul'>
+      {
+        type !== 'artist' && 
+        (<div className='browse-lang-section'>
+          <div className='browse-left-arrow'>
+            <IoIosArrowBack className='lang-left-arrow' onClick={handleLeftArrow} style={{cursor: isALDisabled ? 'auto' : 'pointer', opacity: isALDisabled? '0' : '1'}}/>
+          </div>
+          <ul className='browse-lang-ul'
+            onScroll={()=>{
+              if(browseRef.current.scrollLeft >0){
+                setIsALDisabled(false)
+              }else{
+                setIsALDisabled(true)
+              }
+
+              if((browseRef.current.scrollWidth - (browseRef.current.scrollLeft + browseRef.current.offsetWidth)) >1){
+                console.log((browseRef.current.scrollWidth - (browseRef.current.scrollLeft + browseRef.current.offsetWidth)))
+                setIsARDisabled(false)
+              }else{
+                setIsARDisabled(true)
+              }
+            }} 
+      
+            ref={browseRef}>
             { 
               langArr.map((e, idx)=>(
                 <li key={idx}><span style={{borderRadius:selectedIdx === idx && '16px' , backgroundColor:selectedIdx === idx && '#e1dddd'}} onClick={()=>setSelectedIdx(idx)} >{e}</span></li>
               ))
             }
           </ul>
-        <div className='browse-right-arrow'>
-          <IoIosArrowForward className='lang-right-arrow'/>
-        </div>
-      </div>)}
+          <div className='browse-right-arrow'>
+            <IoIosArrowForward className='lang-right-arrow' onClick={handleRightArrow} style={{cursor: isARDisabled ? 'auto' : 'pointer', opacity: isARDisabled? '0' : '1'}}/>
+          </div>
+        </div>)
+      }
     </div>
   )
 }

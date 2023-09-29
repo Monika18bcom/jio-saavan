@@ -31,6 +31,7 @@ function MusicData({album}){
         musicDataRef.current.scrollBy({left:- musicDataRef.current.offsetWidth, behavior:"smooth"})
     }
 
+
     return (
         <div className="music-data-section" onMouseOver={handleArrowMouseOver} onMouseOut={handleArrowMouseOut}>
             <div className="music-data-arrow">
