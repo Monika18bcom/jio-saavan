@@ -31,12 +31,21 @@ function MusicCard({data}){
     const handleMusicCardControls = (e)=>{
         if(e.target.classList.contains('music-card-play-btn-bg') || e.target.classList.contains('music-card-play-btn') || e.target.parentElement.classList.contains('music-card-play-btn')){
             console.log('play clicked')
+            setSongData('')
             if(data.type === "song"){
-                setSongData(data._id)
+                setTimeout(()=>{
+                    setSongData(data._id)
+                },500)
             }else if(data.type === "album"){
-                setSongData(data.songs[0]._id)
+                setTimeout(()=>{
+                    setSongData(data?.songs[0]._id)
+                },500)
+                
             }else{
-                setSongData(data.songs[0])
+                setTimeout(()=>{
+                    setSongData(data.songs[0])
+                },500)
+                
             }
                        
         }else if(e.target.classList.contains('music-card-like-btn') || e.target.parentElement.classList.contains('music-card-like-btn')){

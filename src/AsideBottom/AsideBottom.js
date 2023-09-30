@@ -27,6 +27,7 @@ function AsideBottom() {
     const [progressWidth, setProgressWidth] = useState(0)
 
     const {songData, setSongData} = useContext(JiosaavnContext)
+    console.log("songData", songData)
     
 
     const [localSongData, setLocalSongData] = useState({})

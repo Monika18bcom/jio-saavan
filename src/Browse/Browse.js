@@ -81,7 +81,7 @@ function Browse({type,surpriseMeId}) {
             ref={browseRef}>
             { 
               langArr.map((e, idx)=>(
-                <li key={idx}><span style={{borderRadius:selectedIdx === idx && '16px' , backgroundColor:selectedIdx === idx && '#e1dddd'}} onClick={()=>setSelectedIdx(idx)} >{e}</span></li>
+                <li key={idx}><span style={{borderRadius:selectedIdx === idx && '16px' , backgroundColor:selectedIdx === idx && '#ede8e8'}} onClick={()=>setSelectedIdx(idx)} >{e}</span></li>
               ))
             }
           </ul>

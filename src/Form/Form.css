@@ -1,14 +1,14 @@
-.hidden{
+/* .hidden{
     display: none;
-}
+} */
 
-.form-modal{
+/* .form-modal{
     background: rgba(0,0,0,0.5);
     height: 100%;
     width: 100%;
     z-index: 9999;
     position: fixed;
-}
+} */
 
 .form-container{
     width: 420px;
