@@ -1,11 +1,23 @@
-import React from 'react'
+import React from "react";
 
-function FormButton({style}) {
+function FormButton(props) {
+  console.log(props)
   return (
-    <div className='form-button' style={{backgroundColor: style.bg , color: style.color, textAlign: style.textAlign, height: style.height , width: style.width, borderRadius: style.borderRadius, padding:style.padding}}>
-      {style.content}
+    <div
+      className="form-button"
+      style={{
+        backgroundColor: props.bg,
+        color: props.color,
+        textAlign: props.textAlign,
+        height: props.height,
+        width: props.width,
+        borderRadius: props.borderRadius,
+        padding: props.padding,
+      }}
+    >
+      {props.children}
     </div>
-  )
+  );
 }
 
-export default FormButton
+export default FormButton;

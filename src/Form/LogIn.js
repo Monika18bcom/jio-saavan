@@ -8,8 +8,6 @@ import FormButton from './FormButton'
 
 function LogIn({loginType}) {
 
-  console.log(loginType)
-
   const imageArr = [
     {src:'https://staticfe.saavn.com/web6/jioindw/dist/1695272228/_i/artist/A.R.Rahman.png',bg:'rgb(49,92,134)',color:'rgb(83,155,218)'},
     {src:'https://staticfe.saavn.com/web6/jioindw/dist/1695272228/_i/artist/ArijitSingh.png',bg:'rgb(24,32,50)',color:'rgb(71,88,125)'},
@@ -23,22 +21,11 @@ function LogIn({loginType}) {
     {src:'https://staticfe.saavn.com/web6/jioindw/dist/1695877539/_i/artist/YoYoHoneySingh.png',bg:'rgb(120,37,59)',color:'rgb(210,65,103)'}
   ]
 
-  const [randomImgIdx, setRandomImgIdx] = useState(0);
+  const [randomImgIdx, setRandomImgIdx] = useState(null);
 
   useEffect(()=>{
-    setRandomImgIdx(Math.floor((Math.random() * imageArr?.length)-1))
-  },[loginType])
-
-  const facebook={
-    content: "FaceBook",
-    bg: "#3d5798",
-    color: "#fff",
-    textAlign: "center",
-    height: "50%",
-    width: "50%",
-    borderRadius: "23px",
-    padding: "10px"
-  }
+    setRandomImgIdx(Math.floor((Math.random() * (imageArr?.length -1))))
+  },[])
 
   return (
     <div className='login-container'>
@@ -58,7 +45,7 @@ function LogIn({loginType}) {
         </div>
       </div>
       <div className='login-right-section'>
-        <div className='login-facebook'><FormButton style={facebook} /></div>
+        <div className='login-facebook'><FormButton bg="#3d5798" color="#fff" textAlign="center" height="50%" width="50%" borderRadius="23px" padding="10px" >FaceBook</FormButton></div>
       </div>
     </div>
   )
