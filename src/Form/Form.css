@@ -13,10 +13,10 @@
 .form-container{
     width: 420px;
     height: 530px;
-    overflow-y: scroll;
-    position: relative;
+    /* overflow-y: scroll; */
+    /* position: relative;
     top: 50px;
-    left: 500px;
+    left: 500px; */
     border-radius: 8px;
     background-color: #f6f6f6;
     color: #3e3e3e;

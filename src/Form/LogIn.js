@@ -3,9 +3,12 @@ import Form from './Form'
 import './LogIn.css'
 import logo from '../img/jio-saavn-white-logo.png'
 import { NavLink } from 'react-router-dom'
+import FormButton from './FormButton'
 
 
 function LogIn({loginType}) {
+
+  console.log(loginType)
 
   const imageArr = [
     {src:'https://staticfe.saavn.com/web6/jioindw/dist/1695272228/_i/artist/A.R.Rahman.png',bg:'rgb(49,92,134)',color:'rgb(83,155,218)'},
@@ -26,23 +29,36 @@ function LogIn({loginType}) {
     setRandomImgIdx(Math.floor((Math.random() * imageArr?.length)-1))
   },[loginType])
 
+  const facebook={
+    content: "FaceBook",
+    bg: "#3d5798",
+    color: "#fff",
+    textAlign: "center",
+    height: "50%",
+    width: "50%",
+    borderRadius: "23px",
+    padding: "10px"
+  }
+
   return (
     <div className='login-container'>
       <div className='login-left-section' style={{background:imageArr[randomImgIdx]?.bg}}>
-        <div className='login-logo'>
+        <div className='login-logo-container'>
           <NavLink to="/">
-            <img className="login-logo-img" src={logo} alt="logo-image"></img>
-            <img src=''></img>
+            <div className='login-logo'>
+              <img className="login-logo-img" src={logo} alt="logo-image"></img>
+              <h1 className='login-logo-title'>JioSaavn</h1>
+            </div>
           </NavLink>
         </div>
         <div className='login-image-content'>
-          <img className='login-image' src={imageArr[randomImgIdx].src}></img>
+          <img className='login-image' src={imageArr[randomImgIdx]?.src}></img>
           <h2 className='login-content1' >All Your Music.</h2>
-          <h4 className='login-content2' style={{color:imageArr[randomImgIdx].color}}>Anytime, anywhere.</h4>
+          <h4 className='login-content2' style={{color:imageArr[randomImgIdx]?.color}}>Anytime, anywhere.</h4>
         </div>
       </div>
       <div className='login-right-section'>
-        <Form />
+        <div className='login-facebook'><FormButton style={facebook} /></div>
       </div>
     </div>
   )
