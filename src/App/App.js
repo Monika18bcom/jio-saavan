@@ -2,7 +2,6 @@ import './App.css';
 import { createContext, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './MainPage';
-import SignUp from '../Form/SignUp';
 import LogIn from '../Form/LogIn';
 
 

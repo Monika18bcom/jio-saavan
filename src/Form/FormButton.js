@@ -13,6 +13,12 @@ function FormButton(props) {
         width: props.width,
         borderRadius: props.borderRadius,
         padding: props.padding,
+        border:props.border,
+        fontWeight:props.fontWeight,
+        fontSize:props.fontSize,
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
       }}
     >
       {props.children}

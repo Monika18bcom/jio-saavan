@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Form from './Form'
 import './LogIn.css'
 import logo from '../img/jio-saavn-white-logo.png'
 import { NavLink } from 'react-router-dom'
 import FormButton from './FormButton'
+import LoginSignupForm from './LoginSignupForm'
 
 
 function LogIn({loginType}) {
@@ -45,7 +45,13 @@ function LogIn({loginType}) {
         </div>
       </div>
       <div className='login-right-section'>
-        <div className='login-facebook'><FormButton bg="#3d5798" color="#fff" textAlign="center" height="50%" width="50%" borderRadius="23px" padding="10px" >FaceBook</FormButton></div>
+        <div className='login-right-form-container-top'>
+          <p>{loginType === 'signUp' ? "Already have an account?" : "Don't have a JioSaavn account yet?"}</p>
+          <FormButton bg="#f6f6f6" color="#2a2d36" fontWeight='bolder' fontSize='14px' border='1px solid #2a2d36' height="35px" width="90px" borderRadius="20px" >{loginType === 'signup' ? 'Login':'Sign Up'}</FormButton>        
+        </div>
+        <div className='login-right-form-container-bottom'>
+          <LoginSignupForm loginType={loginType} />
+        </div>
       </div>
     </div>
   )
