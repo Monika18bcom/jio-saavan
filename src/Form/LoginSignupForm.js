@@ -1,12 +1,18 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import FormButton from "./FormButton";
 import FormInput from "./FormInput";
 import "./LoginSignupForm.css";
 
 function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
 
-  console.log(loginType)
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    if((loginType === "forgotpassword") && isMobileLogin){
+      navigate('/login')
+    } 
+  },[])
 
 
   const handleEmailMobileLogin = () =>{
@@ -43,7 +49,7 @@ function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
           height="48px"
         />
         {
-          isMobileLogin === false &&
+          isMobileLogin === false && loginType !== "forgotpassword" &&
           <FormInput
           isMobileLogin={isMobileLogin}
           type="password"
@@ -75,7 +81,8 @@ function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
           {loginType === "forgotpassword" ? "Send Reminder" : "Continue"}
         </FormButton>
       </form>
-      {
+      { loginType !== "forgotpassword" &&
+      <>{
         isMobileLogin ?
         <p className="login-signup-form-terms-field">
         Select ‘Continue’ to give consent to JioSaavn’s{" "}
@@ -145,6 +152,7 @@ function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
           Facebook
         </FormButton>
       </div>
+      </>}
     </div>
   );
 }

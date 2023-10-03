@@ -88,7 +88,7 @@ function LogIn({ loginType }) {
       <div className="login-right-section">
         <div className="login-right-form-container-top">
           {
-            loginType === "forgetpassword" ?
+            loginType === "forgotpassword" ?
             <>
               <FormButton
                 bg="#f6f6f6"
