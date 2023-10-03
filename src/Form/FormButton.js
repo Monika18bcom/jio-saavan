@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import './FormButton.css'
 
 function FormButton(props) {
-  console.log(props)
+
+  const [isHover , seIsHover] = useState(false)
+  console.log(props.hoverBg , props.bg)
+
   return (
     <div
       className="form-button"
       style={{
-        backgroundColor: props.bg,
-        color: props.color,
+        backgroundColor: isHover ? props.hoverBg :props.bg ,
+        color: isHover ? props.hoverColor : props.color,
         textAlign: props.textAlign,
         height: props.height,
         width: props.width,
@@ -16,10 +20,14 @@ function FormButton(props) {
         border:props.border,
         fontWeight:props.fontWeight,
         fontSize:props.fontSize,
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
+        cursor:props.cursor,
+        opacity: isHover && props.opacity
       }}
+
+      onClick={props.onClick}
+
+      onMouseOver={()=> seIsHover(true)}
+      onMouseOut={()=> seIsHover(false)}
     >
       {props.children}
     </div>

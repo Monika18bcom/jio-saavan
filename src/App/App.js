@@ -19,6 +19,7 @@ function App() {
         <Route path='*' element={<MainPage />} />
         <Route path='/login' element={<LogIn loginType="login" />} />
         <Route path='/signup' element={<LogIn loginType="signup" />} />
+        <Route path='/forgot-password' element={<LogIn loginType="forgotpassword" />} />
       </Routes>
     </div>
 

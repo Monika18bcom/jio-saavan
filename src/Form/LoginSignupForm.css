@@ -1,23 +1,95 @@
 .login-signup-form-container{
     display: flex;
     flex-direction: column;
-    width: 55%;
+    width: 53%;
     height: 85%;
-    background-color: aqua;
+    gap: 20px;
 }
 
 .login-signup-welcome{
     text-align: left;
-    margin-bottom: 22px;
+    margin-bottom: 12px;
+    color: #3e3e3e;
 }
 
 .login-signup-welcome h1{
-    color: #3e3e3e;
     font-size: 34px;
-    line-height: 2.5rem;
+    line-height: 1.4;
+    font-weight: 600;
 }
 
 .login-signup-welcome > p{
-    color: #3e3e3e;
     font-size: 15px;
 }
+
+.login-signup-input-section{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.login-signup-form-terms-field{
+    color: #3e3e3e;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.terms-page{
+    text-decoration: none;
+    color: #3e3e3e;
+}
+
+.login-signup-form-separator{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #a9a9a9;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+}
+  
+.login-signup-form-separator::before,
+.login-signup-form-separator::after {
+content: '';
+flex: 1;
+border-bottom: 1px solid #e9e9e9;
+}
+  
+.login-signup-form-separator:not(:empty)::before {
+margin-right: 1em;
+}
+
+.login-signup-form-separator:not(:empty)::after {
+margin-left: 1em;
+}
+
+.login-signup-email-fb{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.forget-password-terms-section{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 10px;
+}
+
+.forget-password-terms-section > a{
+    text-decoration: none;
+    color:#2bc5b4;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.forget-password-terms-section > a:hover{
+    color: #3e3e3e;
+}
+
+
+
