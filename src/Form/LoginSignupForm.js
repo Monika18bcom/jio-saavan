@@ -28,7 +28,7 @@ function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
           <p>Enter the email address you used when you signed up and we'll help you out.</p> :
           <p>
           {loginType === "signup"
-            ? `Sign up with your .`
+            ? `Sign up with your ${isMobileLogin ? "mobile number" : "email address"}.`
             : `Log in or Sign up with your ${isMobileLogin ? "mobile number" : "email address"}.`
           }
         </p>
@@ -54,6 +54,22 @@ function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
           isMobileLogin={isMobileLogin}
           type="password"
           placeHolder="Password"
+          textAlign="center"
+          gap="23px"
+          border="1px solid #e9e9e9"
+          inputWidth="100%"
+          borderRadius="23px"
+          bg="#fff"
+          width="100%"
+          height="48px"
+          />
+        }
+        {
+          isMobileLogin === false && loginType !== "forgotpassword" && loginType === "signup" &&
+          <FormInput
+          isMobileLogin={isMobileLogin}
+          type="password"
+          placeHolder="Confirm Password"
           textAlign="center"
           gap="23px"
           border="1px solid #e9e9e9"
@@ -105,7 +121,7 @@ function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
         rates may apply.
         </p> :
         <div className="forget-password-terms-section">
-          <NavLink to='/forgot-password'>Forget password?</NavLink>
+          {loginType === "login" && <NavLink to='/forgot-password'>Forget password?</NavLink>}
           <p className="login-signup-form-terms-field">
             By selecting ‘Continue’, you agree to JioSaavn’s
             <a className="terms-page" href="https://www.jiosaavn.com/corporate/terms/" target="_blank"> Terms of Service </a>and
