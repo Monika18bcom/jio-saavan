@@ -57,7 +57,7 @@ function Browse({type,surpriseMeId}) {
         <div className='browse-nav-btn' onClick={handleSurpriseMe} >Surprise Me</div>
       </div>
       {
-        type !== 'artist' && 
+        ((type === 'song')|| (type === 'album') || (type === 'radio')) && 
         (<div className='browse-lang-section'>
           <div className='browse-left-arrow'>
             <IoIosArrowBack className='lang-left-arrow' onClick={handleLeftArrow} style={{cursor: isALDisabled ? 'auto' : 'pointer', opacity: isALDisabled? '0' : '1'}}/>

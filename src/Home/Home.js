@@ -57,11 +57,11 @@ function Home() {
                 <Route path='/' element={<Main mainAlbumArr={homeAlbumArr}/>}/>
                 <Route path='/:type/:name/:id' element={<Album />}/>
                 <Route path='/new-releases' element={<NewReleases type='album' />} />
-                <Route path='/top-charts' element={<TopCharts />} />
+                <Route path='/top-charts' element={<TopCharts type="charts" />} />
                 <Route path='/top-playlists' element={<NewReleases type='song' />} />
-                <Route path='/original-podcasts' element={<TopCharts />} />
+                <Route path='/original-podcasts' element={<TopCharts type="podcasts" />} />
                 <Route path='/top-artists' element={<NewReleases type='artist' />} />
-                <Route path='/radio' element={<TopCharts />} />
+                <Route path='/radio' element={<TopCharts type="radio" />} />
             </Routes>
             <Footer />
         </div>
