@@ -6,7 +6,6 @@ import LoginSignupForm from "./LoginSignupForm";
 import FormImages from "./FormImages";
 
 function LogIn({ loginType }) {
-  
 
   const navigate = useNavigate();
 
