@@ -1,12 +1,16 @@
 .login-signup-form-container{
     display: flex;
     flex-direction: column;
-    width: 53%;
+    width: 50%;
     height: 85%;
     gap: 20px;
+    padding-top: 50px;
 }
 
 .login-signup-welcome{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     text-align: left;
     margin-bottom: 12px;
     color: #3e3e3e;
@@ -20,6 +24,7 @@
 
 .login-signup-welcome > p{
     font-size: 15px;
+    line-height: 1.4;
 }
 
 .login-signup-input-section{

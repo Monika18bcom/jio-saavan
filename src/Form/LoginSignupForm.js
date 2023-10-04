@@ -4,7 +4,7 @@ import FormButton from "./FormButton";
 import FormInput from "./FormInput";
 import "./LoginSignupForm.css";
 
-function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
+function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , setIsMobileLogin }) {
 
   const navigate = useNavigate()
 
@@ -20,19 +20,27 @@ function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
   }
 
   return (
-    <div className="login-signup-form-container">
-      <div className="login-signup-welcome">
-        <h1>{loginType === "forgotpassword" ? "Forgot Your Password?" : "Welcome to JioSaavn."}</h1>
+    <div className="login-signup-form-container" style={{width: modal && '100%' , height: modal && '100%' , padding : modal && '0px 48px'}}>
+      <div className="login-signup-welcome" style={{textAlign: modal && 'center' , paddingTop: modal && '10px'}}>
+        <h1 style={{fontSize : modal && '24px'}}>{loginType === "forgotpassword" ? "Forgot Your Password?" : "Welcome to JioSaavn."}</h1>
         {
           loginType === "forgotpassword" ?
-          <p>Enter the email address you used when you signed up and we'll help you out.</p> :
+          <p style={{fontSize: '13px'}} >Enter the email address you used when you signed up and we'll help you out.</p> : 
+          (modal ? 
+          <p style={{fontSize: '13px'}}>
+            {(loginType === "signup")
+              ? "Sign up to create playlists, build your library, get personalized recommendations & more!"
+              : "Log in to create playlists, build your library, get personalized recommendations & more!"
+            }
+          </p> :
           <p>
-          {loginType === "signup"
-            ? `Sign up with your ${isMobileLogin ? "mobile number" : "email address"}.`
-            : `Log in or Sign up with your ${isMobileLogin ? "mobile number" : "email address"}.`
-          }
-        </p>
-        }
+            {(loginType === "signup")
+              ? `Sign up with your ${isMobileLogin ? "mobile number" : "email address"}.`
+              : `Log in or Sign up with your ${isMobileLogin ? "mobile number" : "email address"}.`
+            }
+          </p>
+          )
+        } 
       </div>
       <form className="login-signup-input-section">
         <FormInput
@@ -100,12 +108,13 @@ function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
       { loginType !== "forgotpassword" &&
       <>{
         isMobileLogin ?
-        <p className="login-signup-form-terms-field">
+        <p className="login-signup-form-terms-field" style={{color : modal && '#a9a9a9'}}>
         Select ‘Continue’ to give consent to JioSaavn’s{" "}
         <a
           className="terms-page"
           href="https://www.jiosaavn.com/corporate/terms/"
           target="_blank"
+          style={{color: modal && '#2a2d36'}}
         >
           Terms of Service
         </a>{" "}
@@ -114,6 +123,7 @@ function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
           className="terms-page"
           href="https://www.jiosaavn.com/corporate/privacy/"
           target="_blank"
+          style={{color: modal && '#2a2d36'}}
         >
           Privacy Policy
         </a>
@@ -121,11 +131,11 @@ function LoginSignupForm({ loginType , isMobileLogin , setIsMobileLogin }) {
         rates may apply.
         </p> :
         <div className="forget-password-terms-section">
-          {loginType === "login" && <NavLink to='/forgot-password'>Forget password?</NavLink>}
+          {loginType === "login" && <p style={{color: modal && '#2bc5b4' , cursor: modal && 'pointer'}} onClick={()=> modal ? setLoginType("forgotpassword") : navigate('/forgot-password') }>Forget password?</p>}
           <p className="login-signup-form-terms-field">
             By selecting ‘Continue’, you agree to JioSaavn’s
-            <a className="terms-page" href="https://www.jiosaavn.com/corporate/terms/" target="_blank"> Terms of Service </a>and
-            <a className="terms-page" href="https://www.jiosaavn.com/corporate/privacy/" target="_blank"> Privacy Policy</a>.
+            <a className="terms-page" href="https://www.jiosaavn.com/corporate/terms/" target="_blank" style={{color: modal && '#2a2d36'}}> Terms of Service </a>and
+            <a className="terms-page" href="https://www.jiosaavn.com/corporate/privacy/" target="_blank" style={{color: modal && '#2a2d36'}}> Privacy Policy</a>.
           </p>
         </div>
       }

@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import MainPage from './MainPage';
 import LogIn from '../Form/LogIn';
 import Modal from '../Modal/Modal';
-import { Login } from '@mui/icons-material';
+import FormContent from '../Form/FormContent';
 
 
 
@@ -14,6 +14,7 @@ function App() {
   const [songData , setSongData] =  useState([])
   const [isUserLogin , setIsUserLogin] = useState(false)
   const [showModal , setShowModal] = useState(null)
+  const [loginType , setLoginType] = useState("login")
 
   return (
     <JiosaavnContext.Provider value={{songData , setSongData , isUserLogin , setIsUserLogin , showModal , setShowModal}}>
@@ -25,14 +26,15 @@ function App() {
         <Route path='/signup' element={<LogIn loginType="signup" />} />
         <Route path='/forgot-password' element={<LogIn loginType="forgotpassword" />} />
       </Routes>
-    </div>
 
-    {
-      (showModal && !isUserLogin) &&
-      <Modal>
-        <Login loginType="Login" />
-      </Modal>
-    }
+      {
+        (showModal && !isUserLogin) &&
+        <Modal setShowModal={setShowModal} >
+          <FormContent loginType={loginType} setLoginType={setLoginType} modal={showModal} />
+        </Modal>
+      }
+
+    </div>
 
     </JiosaavnContext.Provider>
   );

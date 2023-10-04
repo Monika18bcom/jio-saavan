@@ -22,7 +22,6 @@ function AsideLeft(){
             if(!isUserLogin){
                 console.log("setModal")
                 setShowModal(true)
-                // <Modal > <LogIn loginType="login" /> </Modal>
             }
         }
         else if(e.target.classList.contains('library-songs') || e.target.parentElement.classList.contains('library-songs') ){
@@ -54,34 +53,34 @@ function AsideLeft(){
             <h3>Library</h3>
             <ul className='asideLeft-ul' onClick={e => handleLibrary(e)}>
                 <li className='library-history'>
-                    <NavLink className="asideLeft library" to="listening-history">
+                    <div className="asideLeft library">
                     <GoHistory className='library-history' />
                     History
-                    </NavLink>
+                    </div>
                 </li>
                 <li className='library-songs'>
-                    <NavLink className="asideLeft library" to="songs">
+                    <div className="asideLeft library" >
                     <IoMusicalNoteOutline className='library-songs' />
                     Songs
-                    </NavLink>
+                    </div>
                 </li>
                 <li className='library-albums'>
-                    <NavLink className="asideLeft library" to="albums">
+                    <div className="asideLeft library" >
                     <RiAlbumLine className='library-albums' />
                     Albums
-                    </NavLink>
+                    </div>
                 </li>
                 <li className='library-podcasts'>
-                    <NavLink className="asideLeft library" to="podcasts">
+                    <div className="asideLeft library" >
                     <MdPodcasts className='library-podcasts' />
                     Podcasts
-                    </NavLink>
+                    </div>
                 </li>
                 <li className='library-artists'>
-                    <NavLink className="asideLeft library" to="artists">
+                    <div className="asideLeft library" >
                     <LiaMicrophoneAltSolid className='library-artists' />
                     Artists
-                    </NavLink>
+                    </div>
                 </li>
             </ul>
             <div id="new-playlist" className='asideLeft-new-playlist'>

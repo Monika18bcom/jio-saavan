@@ -1,9 +1,13 @@
 import React from 'react'
+import './Modal.css'
 
 function Modal(props) {
-    console.log(props.children)
   return (
-    <div className='modal-container'>{props.children}</div>
+    <div className='modal-container'>
+      <div className='login-modal-container'>
+        <div className='login-modal-content'>{props.children}</div>
+      </div>
+    </div>
   )
 }
 

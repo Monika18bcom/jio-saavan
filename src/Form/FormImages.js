@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import logo from "../img/jio-saavn-white-logo.png";
+import './FormImages.css'
 
 
 function FormImages() {
