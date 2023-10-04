@@ -132,7 +132,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
         </p> :
         <div className="forget-password-terms-section">
           {loginType === "login" && <p style={{color: modal && '#2bc5b4' , cursor: modal && 'pointer'}} onClick={()=> modal ? setLoginType("forgotpassword") : navigate('/forgot-password') }>Forget password?</p>}
-          <p className="login-signup-form-terms-field">
+          <p className="login-signup-form-terms-field" style={{color : modal && '#a9a9a9'}} >
             By selecting ‘Continue’, you agree to JioSaavn’s
             <a className="terms-page" href="https://www.jiosaavn.com/corporate/terms/" target="_blank" style={{color: modal && '#2a2d36'}}> Terms of Service </a>and
             <a className="terms-page" href="https://www.jiosaavn.com/corporate/privacy/" target="_blank" style={{color: modal && '#2a2d36'}}> Privacy Policy</a>.
@@ -140,7 +140,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
         </div>
       }
       <div className="login-signup-form-separator">or connect with</div>
-      <div className="login-signup-email-fb">
+      <div className="login-signup-email-fb" style={{paddingBottom: modal && '30px'}}>
         <FormButton
           bg="#2a2d36"
           hoverBg="#2a2d36"
@@ -152,7 +152,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
           fontWeight="bolder"
           textAlign="center"
           height="48px"
-          width="100%"
+          width={modal ? '115%' :"100%"}
           borderRadius="23px"
           padding="20px"
           onClick={handleEmailMobileLogin}
