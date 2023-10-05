@@ -17,24 +17,22 @@ function AsideLeft(){
     const {isUserLogin , setShowModal} = useContext(JiosaavnContext)
 
     const handleLibrary = (e)=>{
-        if(e.target.classList.contains('library-history') || e.target.parentElement.classList.contains('library-history') ){
-            console.log("History")
+        if( e.target.parentElement.classList.contains('asideLeft-ul') || 
+        e.target.classList.contains('library-history') || 
+        e.target.parentElement.classList.contains('library-history') || 
+        e.target.classList.contains('library-songs') || 
+        e.target.parentElement.classList.contains('library-songs') ||
+        e.target.classList.contains('library-albums') || 
+        e.target.parentElement.classList.contains('library-albums') ||
+        e.target.classList.contains('library-podcasts') || 
+        e.target.parentElement.classList.contains('library-podcasts') ||
+        e.target.classList.contains('library-artists') || 
+        e.target.parentElement.classList.contains('library-artists')
+        ){
             if(!isUserLogin){
                 console.log("setModal")
                 setShowModal(true)
             }
-        }
-        else if(e.target.classList.contains('library-songs') || e.target.parentElement.classList.contains('library-songs') ){
-            console.log("songs")
-        }
-        else if(e.target.classList.contains('library-albums') || e.target.parentElement.classList.contains('library-albums') ){
-            console.log("albums")
-        }
-        else if(e.target.classList.contains('library-podcasts') || e.target.parentElement.classList.contains('library-podcasts') ){
-            console.log("podcasts")
-        }
-        else if(e.target.classList.contains('library-artists') || e.target.parentElement.classList.contains('library-artists') ){
-            console.log("artists")
         }
 
     }
