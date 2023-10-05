@@ -35,14 +35,13 @@ function Album() {
     
   },[type])
 
-// console.log("dataArr",dataArr)
   return (
     isLoading ? 
     <div className="loader-container">
       <Loader />
     </div> :
     <div className='album-container'>
-      <AlbumPoster data={dataArr}/>
+      <AlbumPoster data={dataArr} type={type}/>
 
       <div className='album-list'>
         {
