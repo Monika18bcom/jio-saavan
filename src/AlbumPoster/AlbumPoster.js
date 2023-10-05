@@ -3,11 +3,12 @@ import './AlbumPoster.css'
 import {BsThreeDots} from 'react-icons/bs'
 import {AiOutlineHeart} from 'react-icons/ai'
 import {AiFillHeart} from 'react-icons/ai'
+import {BsDot} from 'react-icons/bs'
 
 
-function AlbumPoster({data}) {
+function AlbumPoster({data , type}) {
 
-    // console.log(data)
+    console.log("Album poster container " , type , data)
 
     const [isPlayHover, setIsPlayHover] = useState(false)
     const [isLikeHover, setIsLikeHover] = useState(false)
@@ -38,12 +39,17 @@ function AlbumPoster({data}) {
   return (
     <div className='album-poster-container'>
         <div className='album-poster-image-section'>
-            <img className='album-poster-image' src={(data?.image) || (data?.thumbnail)} alt={(data?.name) || (data?.title)}></img>
+            <img className='album-poster-image' src={(data?.image) || (data?.thumbnail)} alt={(data?.name) || (data?.title)} style={{borderRadius: type === 'artist' && '50%'}} ></img>
         </div>
         <div className='album-poster-description'>
-            <h1 className='album-poster-title a-p-overflow'>{(data?.name) || (data?.title)}</h1>
-            <p className='album-poster-details a-p-overflow'>by <span className='album-poster-artist-name'>{data?.artist?.map((e)=> e.name).join(',') || data?.artists?.map((e)=> e.name).join(',')}</span> . <span>{data?.artist?.length} {data?.artist?.length ===1 ? 'song' : 'songs'}</span> . <span>260,848,504 Plays</span> . <span>2:36:00</span></p>
-            <p className='album-poster-copyrights a-p-overflow'>&copy; 1973 Universal Music India Pvt. Ltd.</p>
+            <h1 className='album-poster-title a-p-overflow' style={{fontSize: type === 'artist' && '50px'}} >{(data?.name) || (data?.title)}</h1>
+            {type === 'artist' ? 
+            <p style={{paddingBottom: '20px'}} >Artist</p> :
+            <>
+            <p className='album-poster-details a-p-overflow'>by <span className='album-poster-artist-name'>{type === 'album' ? 'Various Artists' : data?.artist?.map((e)=> e.name).join(',')}</span> <BsDot /> <span>{data?.songs?.length} {data?.songs?.length ===1 ? 'song' : 'songs'}</span> <BsDot /> <span>260,848,504 Plays</span> <BsDot /> <span>2:36:00</span></p>
+            <p className='album-poster-copyrights a-p-overflow'>&copy; 1973 Universal Music India Pvt. Ltd.</p> 
+            </>
+            }
             <div className='album-poster-controls' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
                 <div className='album-poster-play-btn' style={{backgroundColor: isPlayHover && '#1E897D'}} >Play</div>
                 <div className='album-poster-like-btn' style={{borderColor: isLikeHover && '#707070'}} >
