@@ -1,4 +1,4 @@
-import React, { useState , useContext, useEffect } from 'react'
+import React, { useState , useContext, useEffect, useReducer } from 'react'
 import './AsideBottom.css'
 import {IoIosPause} from 'react-icons/io'
 import {RiRepeatLine} from 'react-icons/ri'
@@ -28,15 +28,54 @@ function AsideBottom() {
 
     const {songData, setSongData} = useContext(JiosaavnContext)
     // console.log("songData", songData)
+    const [localSongData, setLocalSongData] = useState({})
+    const [songUrl, setSongUrl] = useState(defaultSong)
+
+    const initialDuration = {
+        currMin: "00",
+        currSec: "00",
+        totalMin: "00",
+        totalSec: "00"
+    }
+
     
 
-    const [localSongData, setLocalSongData] = useState({})
+    const durationReducer = (state , action) => {
+        console.log(action.type)
 
-    const [songUrl, setSongUrl] = useState(defaultSong)
-    const [songMin, setSongMin] = useState("00")
-    const [songSec, setSongSec] = useState("00")
+        switch(action.type){    
+            case 'currMin':
+                return {...state , currMin : action.payload}
+            case 'currSec':
+                return {...state , currSec : action.payload}
+            case 'totalMin':
+                return {...state , totalMin : action.payload}
+            case 'totalSec':
+                return {...state , totalSec : action.payload}
+            default : return state
+            
+        }
+
+    }
+
+    const [durationState , durationDispatch] = useReducer(durationReducer , initialDuration)
 
     const [play , {stop, pause , duration}] = useSound(songUrl)
+
+    const [dur , setDur] = useState(0)
+    
+    useEffect(()=>{
+
+        const timer = setTimeout(()=>{
+           setDur((prev)=> prev+1)
+            console.log(dur+1)
+        },[1000])
+    
+        if(Math.floor(duration/1000) === dur){
+            clearTimeout(timer)
+            console.log("timer current status" ,timer)
+        }
+    },[dur , duration])
     
     
     useEffect(()=>{
@@ -45,11 +84,20 @@ function AsideBottom() {
             if(duration > 60000){
             let min = Math.floor(duration / 60000)
             let sec = (duration / 1000)- (Math.floor(duration / 60000) * 60)
-            setSongMin(min)
-            setSongSec(sec)
+            durationDispatch({
+                type: 'totalMin',
+                payload: min,
+            })
+            durationDispatch({
+                type: 'totalSec',
+                payload: sec,
+            })
             }else{
                 let sec = Math.floor(duration / 1000)
-                setSongSec(sec)
+                durationDispatch({
+                    type: 'totalSec',
+                    payload: sec,
+                })
             }
             play()
             setIsPlay(false)
@@ -89,7 +137,7 @@ function AsideBottom() {
     }
 
 
-    // console.log(songUrl)
+    console.log(durationState)
   return (
     <div id='aside-bottom' className='aside-bottom-section'>
         <div className='aside-bottom-progress-bar'>
@@ -128,7 +176,7 @@ function AsideBottom() {
             </ul>
             <ul className='aside-bottom-actions'>
                 <li className='aside-btm-item duration'>
-                    <span id='real-time-duration'>0:03</span> / <span id='total-duration'>{`${songMin}:${songSec}`}</span>
+                    <span id='real-time-duration'>{`${durationState.currMin}:${durationState.currSec}`}</span> / <span id='total-duration'>{`${durationState.totalMin}:${durationState.totalSec}`}</span>
                 </li>
                 <li className='aside-btm-item more-info'>
                     <BsThreeDots />

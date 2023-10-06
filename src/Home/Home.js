@@ -10,7 +10,6 @@ import TopCharts from "../Browse/TopCharts";
 
 function Home() {
 
-    const [homeAlbumArr, setHomeAlbumArr] = useState([])
     const [isLoading , setIsLoading] = useState(false)
 
     const homeAlbumContainer = [
@@ -27,6 +26,7 @@ function Home() {
             case action.type:
                 return state.map((e) => {
                     if(e.action === action.type){
+                        setIsLoading(false)
                         return {...e , data : action.payload}
                     }
                     else return {...e}
@@ -35,9 +35,11 @@ function Home() {
             default : return state
             
         }
+        
     }
 
     const [homeState , homeDispatch] = useReducer(homeAlbumReducer , homeAlbumContainer)
+
 
 
     async function fetchMusicData(e){
@@ -49,7 +51,6 @@ function Home() {
                 }})
 
                 const result = await response.json()
-                // setIsLoading(false)
                 homeDispatch({
                     type: e.action ,
                     payload : result.data
@@ -62,7 +63,6 @@ function Home() {
                 }})
 
                 const result = await response.json()
-                // setIsLoading(false)
                 homeDispatch({
                     type: e.action ,
                     payload : result.data
@@ -75,14 +75,13 @@ function Home() {
                 }})
 
                 const result = await response.json()
-                // setIsLoading(false)
                 homeDispatch({
                     type: e.action ,
                     payload : result.data
                 })
-                setHomeAlbumArr((prev)=>[...prev, {...e, data: result.data}]) 
 
             }
+
         }
         catch(err){
             console.log(err)
@@ -93,11 +92,11 @@ function Home() {
         homeAlbumContainer.map((album)=>{
             setIsLoading(true)
             fetchMusicData(album)
-            setIsLoading(false)
         })
+        // setIsLoading(false)
     },[])
 
-    console.log(homeState , homeAlbumArr)
+    // console.log(homeState , homeAlbumArr)
 
     return(
 
@@ -107,7 +106,7 @@ function Home() {
         </div> :
         <div className="home-section">             
             <Routes>
-                <Route path='/' element={<Main mainAlbumArr={homeState}/>}/>
+                <Route path='/' element={<Main mainAlbumArr={homeState} />}/>
                 <Route path='/:type/:name/:id' element={<Album />}/>
                 <Route path='/new-releases' element={<NewReleases type='album' />} />
                 <Route path='/top-charts' element={<TopCharts type="charts" />} />
