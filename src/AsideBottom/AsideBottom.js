@@ -32,16 +32,14 @@ function AsideBottom() {
     const [songUrl, setSongUrl] = useState(defaultSong)
 
     const initialDuration = {
-        currMin: "00",
-        currSec: "00",
-        totalMin: "00",
-        totalSec: "00"
+        currMin: 0,
+        currSec: 0,
+        totalMin: 0,
+        totalSec: 0,
+        totalDuration: 0,
     }
 
-    
-
     const durationReducer = (state , action) => {
-        console.log(action.type)
 
         switch(action.type){    
             case 'currMin':
@@ -52,6 +50,8 @@ function AsideBottom() {
                 return {...state , totalMin : action.payload}
             case 'totalSec':
                 return {...state , totalSec : action.payload}
+            case 'totalDuration':
+                return {...state , totalDuration : action.payload === 0 ? 0 : state.totalDuration +1}
             default : return state
             
         }
@@ -61,21 +61,63 @@ function AsideBottom() {
     const [durationState , durationDispatch] = useReducer(durationReducer , initialDuration)
 
     const [play , {stop, pause , duration}] = useSound(songUrl)
-
-    const [dur , setDur] = useState(0)
     
     useEffect(()=>{
+        console.log("Time updated", isPlay , duration , durationState.totalDuration)
 
         const timer = setTimeout(()=>{
-           setDur((prev)=> prev+1)
-            console.log(dur+1)
+            if(!isPlay && duration){
+                console.log("duration updating")
+                durationDispatch({
+                    type: 'totalDuration',
+                })
+            }
         },[1000])
+
+        if(durationState.totalDuration > 60){
+            let min = Math.floor(durationState.totalDuration / 60)
+            let sec = durationState.totalDuration - (Math.floor(durationState.totalDuration / 60) * 60)
+            durationDispatch({
+                type: 'currMin',
+                payload: min,
+            })
+            durationDispatch({
+                type: 'currSec',
+                payload: sec,
+            })
+            }else{
+                let sec = Math.floor(durationState.totalDuration)
+                durationDispatch({
+                    type: 'currSec',
+                    payload: sec,
+                })
+            }
+
+            if(!isPlay){
+                setProgressWidth(Math.floor((durationState.totalDuration / Math.floor(duration /1000))*100))   
+            }
     
-        if(Math.floor(duration/1000) === dur){
+        if(Math.floor(duration/1000) === durationState.totalDuration){
             clearTimeout(timer)
-            console.log("timer current status" ,timer)
+            setIsPlay(true)
+            durationDispatch({
+                type: 'currMin',
+                payload: 0,
+            })
+            durationDispatch({
+                type: 'currSec',
+                payload: 0,
+            })
+
+            durationDispatch({
+                type: 'totalDuration',
+                payload: 0,
+            })
+            setProgressWidth(0)
+            // console.log("timer current status" ,timer)
         }
-    },[dur , duration])
+
+    },[durationState.totalDuration, isPlay , duration])
     
     
     useEffect(()=>{
@@ -108,7 +150,6 @@ function AsideBottom() {
     useEffect(()=>{
         stop()
         setSongUrl(defaultSong)
-        // console.log("songData", songData)
         if(songData.length >0){
             fetch(`https://academics.newtonschool.co/api/v1/music/song/${songData}`, {
             headers: {
@@ -129,14 +170,15 @@ function AsideBottom() {
     const handlePlayBtn = ()=>{
         if(isPlay){
             play()
+            setIsPlay(false)
         }else{   
             pause()
+            setIsPlay(true)
         }
-        setIsPlay(!isPlay)
         console.log('play clicked')
     }
 
-
+    console.log("progressWidth",progressWidth , "%")
     console.log(durationState)
   return (
     <div id='aside-bottom' className='aside-bottom-section'>
@@ -176,7 +218,7 @@ function AsideBottom() {
             </ul>
             <ul className='aside-bottom-actions'>
                 <li className='aside-btm-item duration'>
-                    <span id='real-time-duration'>{`${durationState.currMin}:${durationState.currSec}`}</span> / <span id='total-duration'>{`${durationState.totalMin}:${durationState.totalSec}`}</span>
+                    <span id='real-time-duration'>{`${durationState.currMin > 9 ? durationState.currMin : "0"+ durationState.currMin}:${durationState.currSec > 9 ? durationState.currSec : "0"+durationState.currSec}`}</span> / <span id='total-duration'>{`${durationState.totalMin >9 ? durationState.totalMin : "0" + durationState.totalMin}:${durationState.totalSec > 9 ? durationState.totalSec : "0" + durationState.totalSec}`}</span>
                 </li>
                 <li className='aside-btm-item more-info'>
                     <BsThreeDots />

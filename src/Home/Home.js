@@ -15,8 +15,8 @@ function Home() {
     const homeAlbumContainer = [
         {title: 'Trending Now', data:[] , type: 'song' , limit: '40' , action: 'trendingNow'},
         {title: 'New Releases', data:[] , type: 'song' , limit: '40' , sort : 'sort' , action: 'newReleases'},
-        {title: 'Top Albums - Hindi', data:[] , type: 'album', limit: '20', action: 'topAlbums'}, 
         {title: 'Recommended artist Stations', data:[] , type: 'artist', limit: '20' , action: 'artistStation'}, 
+        {title: 'Top Albums - Hindi', data:[] , type: 'album', limit: '20', action: 'topAlbums'}, 
         {title: 'Top Genres & Moods', data:[] , type: 'song', limit: '40' , mood: 'romantic' , action: 'topGenres'},
         {title: 'Pick Your Mood', data:[] , type: 'song', limit: '40' , mood: 'happy' , action: 'pickYourMood'},    
     ]
@@ -26,7 +26,9 @@ function Home() {
             case action.type:
                 return state.map((e) => {
                     if(e.action === action.type){
-                        setIsLoading(false)
+                        setTimeout(()=>{
+                            setIsLoading(false)
+                        },500)
                         return {...e , data : action.payload}
                     }
                     else return {...e}
@@ -93,7 +95,6 @@ function Home() {
             setIsLoading(true)
             fetchMusicData(album)
         })
-        // setIsLoading(false)
     },[])
 
     // console.log(homeState , homeAlbumArr)
