@@ -8,7 +8,7 @@ import {RiArrowUpSLine} from 'react-icons/ri'
 import {IoIosSearch} from 'react-icons/io'
 
 
-function NavBar(){
+function NavBar({setIsNavMusicHover}){
     const {count} = useContext(JiosaavnContext)
     const [isSelected, setIsSelected] = useState(false)
 
@@ -19,7 +19,7 @@ function NavBar(){
             </div>
             <div className="nav-container">
                 <ul className="nav-left">
-                    <li><NavLink className="navlink" to="/">Music</NavLink></li>
+                    <li onMouseEnter={()=> setIsNavMusicHover(true)} onMouseLeave={() => setIsNavMusicHover(false)} ><NavLink className="navlink" to="/">Music</NavLink></li>
                     <li><NavLink className="navlink podcasts" to="/original-podcasts">Podcasts</NavLink></li>
                     <li><NavLink className="navlink" to="/gopro">Go Pro</NavLink></li>
                 </ul> 

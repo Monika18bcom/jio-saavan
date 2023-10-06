@@ -8,8 +8,6 @@ import { NavLink } from "react-router-dom";
 import './AsideLeft.css'
 import { useContext } from 'react'
 import { JiosaavnContext } from '../App/App'
-import Modal from '../Modal/Modal'
-import LogIn from '../Form/LogIn'
 
 
 function AsideLeft(){

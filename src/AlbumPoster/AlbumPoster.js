@@ -8,7 +8,7 @@ import {BsDot} from 'react-icons/bs'
 
 function AlbumPoster({data , type}) {
 
-    console.log("Album poster container " , type , data)
+    // console.log("Album poster container " , type , data)
 
     const [isPlayHover, setIsPlayHover] = useState(false)
     const [isLikeHover, setIsLikeHover] = useState(false)

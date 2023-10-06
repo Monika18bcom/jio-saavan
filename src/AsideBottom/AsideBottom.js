@@ -27,7 +27,7 @@ function AsideBottom() {
     const [progressWidth, setProgressWidth] = useState(0)
 
     const {songData, setSongData} = useContext(JiosaavnContext)
-    console.log("songData", songData)
+    // console.log("songData", songData)
     
 
     const [localSongData, setLocalSongData] = useState({})
@@ -60,7 +60,7 @@ function AsideBottom() {
     useEffect(()=>{
         stop()
         setSongUrl(defaultSong)
-        console.log("songData", songData)
+        // console.log("songData", songData)
         if(songData.length >0){
             fetch(`https://academics.newtonschool.co/api/v1/music/song/${songData}`, {
             headers: {
@@ -89,7 +89,7 @@ function AsideBottom() {
     }
 
 
-    console.log(songUrl)
+    // console.log(songUrl)
   return (
     <div id='aside-bottom' className='aside-bottom-section'>
         <div className='aside-bottom-progress-bar'>

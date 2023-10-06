@@ -3,19 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import FormButton from "./FormButton";
 import LoginSignupForm from "./LoginSignupForm";
 import './FormContent.css'
-// import userAuth from '../userAuth/userAuth';
+import { useAuth } from '../useAuth';
 
 
 function FormContent({ loginType , modal , setLoginType }) {
     console.log(modal , loginType , setLoginType)
-    // const {logIn , signUp , updatePassword} =  userAuth()
 
     const [isMobileLogin, setIsMobileLogin] = useState(true);
     const navigate = useNavigate()
 
-    // useEffect(()=>{
-    //   updatePassword()
-    // },[])
+    const { userData, logIn, signUp, updatePassword } = useAuth()
+
+    useEffect(()=>{
+      logIn()
+    },[])
 
 
   return (
