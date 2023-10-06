@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import './Home.css'
 import Footer from '../Footer/Footer'
 import Loader from "../Loader/Loader";
@@ -14,25 +14,75 @@ function Home() {
     const [isLoading , setIsLoading] = useState(false)
 
     const homeAlbumContainer = [
-        {title: 'Trending Now', data:[] , type: 'song' , limit: '40'},
-        {title: 'New Releases', data:[] , type: 'song' , limit: '40'},
-        {title: 'Top Genres & Moods', data:[] , type: 'song', limit: '40'},
-        {title: 'Pick Your Mood', data:[] , type: 'song', limit: '40'},
-        {title: 'Top Albumns - Hindi', data:[] , type: 'album', limit: '20'}, 
-        {title: 'Recommended artist Stations', data:[] , type: 'artist', limit: '20'},  
+        {title: 'Trending Now', data:[] , type: 'song' , limit: '40' , action: 'trendingNow'},
+        {title: 'New Releases', data:[] , type: 'song' , limit: '40' , sort : 'sort' , action: 'newReleases'},
+        {title: 'Top Albums - Hindi', data:[] , type: 'album', limit: '20', action: 'topAlbums'}, 
+        {title: 'Recommended artist Stations', data:[] , type: 'artist', limit: '20' , action: 'artistStation'}, 
+        {title: 'Top Genres & Moods', data:[] , type: 'song', limit: '40' , mood: 'romantic' , action: 'topGenres'},
+        {title: 'Pick Your Mood', data:[] , type: 'song', limit: '40' , mood: 'happy' , action: 'pickYourMood'},    
     ]
+
+    const homeAlbumReducer = (state , action) => {
+        switch(action.type){
+            case action.type:
+                return state.map((e) => {
+                    if(e.action === action.type){
+                        return {...e , data : action.payload}
+                    }
+                    else return {...e}
+                })
+            
+            default : return state
+            
+        }
+    }
+
+    const [homeState , homeDispatch] = useReducer(homeAlbumReducer , homeAlbumContainer)
 
 
     async function fetchMusicData(e){
         try{
-            const response =await  fetch(`https://academics.newtonschool.co/api/v1/music/${e.type}?limit=${e.limit}`, {
-            headers:{
-                'projectId': 'nwi12vygvqne'
-            }})
+            if(e.sort){
+                const response =await  fetch(`https://academics.newtonschool.co/api/v1/music/${e.type}?limit=${e.limit}&sort={"release":1}`, {
+                headers:{
+                    'projectId': 'nwi12vygvqne'
+                }})
 
-            const result = await response.json()
-            setIsLoading(false)
-            setHomeAlbumArr((prev)=>[...prev, {...e, data: result.data}])   
+                const result = await response.json()
+                // setIsLoading(false)
+                homeDispatch({
+                    type: e.action ,
+                    payload : result.data
+                })
+            }
+            else if(e.mood){
+                const response =await  fetch(`https://academics.newtonschool.co/api/v1/music/${e.type}?limit=${e.limit}&filter={"mood":"${e.mood}"}`, {
+                headers:{
+                    'projectId': 'nwi12vygvqne'
+                }})
+
+                const result = await response.json()
+                // setIsLoading(false)
+                homeDispatch({
+                    type: e.action ,
+                    payload : result.data
+                })
+            } 
+            else{
+                const response =await  fetch(`https://academics.newtonschool.co/api/v1/music/${e.type}?limit=${e.limit}`, {
+                headers:{
+                    'projectId': 'nwi12vygvqne'
+                }})
+
+                const result = await response.json()
+                // setIsLoading(false)
+                homeDispatch({
+                    type: e.action ,
+                    payload : result.data
+                })
+                setHomeAlbumArr((prev)=>[...prev, {...e, data: result.data}]) 
+
+            }
         }
         catch(err){
             console.log(err)
@@ -43,8 +93,11 @@ function Home() {
         homeAlbumContainer.map((album)=>{
             setIsLoading(true)
             fetchMusicData(album)
+            setIsLoading(false)
         })
     },[])
+
+    console.log(homeState , homeAlbumArr)
 
     return(
 
@@ -54,7 +107,7 @@ function Home() {
         </div> :
         <div className="home-section">             
             <Routes>
-                <Route path='/' element={<Main mainAlbumArr={homeAlbumArr}/>}/>
+                <Route path='/' element={<Main mainAlbumArr={homeState}/>}/>
                 <Route path='/:type/:name/:id' element={<Album />}/>
                 <Route path='/new-releases' element={<NewReleases type='album' />} />
                 <Route path='/top-charts' element={<TopCharts type="charts" />} />
