@@ -11,10 +11,13 @@ import {BsThreeDots} from 'react-icons/bs'
 import {MdVolumeOff} from 'react-icons/md'
 import {MdVolumeUp} from 'react-icons/md'
 import {GrExpand} from 'react-icons/gr'
+import {BsArrowsAngleContract} from 'react-icons/bs'
+// import {BsArrowsAngleExpand} from 'react-icons/bs'
 import defaultSong from '../song/DefaultAudio.mp3'
 
 import useSound from 'use-sound'
 import { JiosaavnContext } from "../App/App";
+import ExpandAlbum from './ExpandAlbum'
 
 
 
@@ -26,9 +29,9 @@ function AsideBottom() {
     const [isVolume, setIsVolume] = useState(true)
     const [progressWidth, setProgressWidth] = useState(0)
 
-    const {songData, setSongData} = useContext(JiosaavnContext)
+    const { songData , isExpand , setIsExpand } = useContext(JiosaavnContext)
     // console.log("songData", songData)
-    const [localSongData, setLocalSongData] = useState({})
+    const [localSongData, setLocalSongData] = useState(null)
     const [songUrl, setSongUrl] = useState(defaultSong)
 
     const initialDuration = {
@@ -63,11 +66,11 @@ function AsideBottom() {
     const [play , {stop, pause , duration}] = useSound(songUrl)
     
     useEffect(()=>{
-        console.log("Time updated", isPlay , duration , durationState.totalDuration)
+        // console.log("Time updated", isPlay , duration , durationState.totalDuration)
 
         const timer = setTimeout(()=>{
             if(!isPlay && duration){
-                console.log("duration updating")
+                // console.log("duration updating")
                 durationDispatch({
                     type: 'totalDuration',
                 })
@@ -178,10 +181,31 @@ function AsideBottom() {
         console.log('play clicked')
     }
 
-    console.log("progressWidth",progressWidth , "%")
-    console.log(durationState)
+    const handleActions = (e) =>{
+        // console.log(e)
+        if(e.target.classList.contains('expand-album') || e.target.parentElement.classList.contains('expand-album')){
+            console.log('expand clicked')
+            console.log(localSongData)
+            if(localSongData !== null){
+                setIsExpand(true)
+            }else{
+                console.log("no data")
+            }
+            
+        }
+        else if(e.target.classList.contains('contract-album') || e.target.parentElement.classList.contains('contract-album')){
+            setIsExpand(false)
+        }
+    }
+
+    // console.log("progressWidth",progressWidth , "%")
+    // console.log(durationState)
+    // console.log("line 185 asideBottom",localSongData)
+    console.log(isExpand)
+
   return (
-    <div id='aside-bottom' className='aside-bottom-section'>
+    <div id='aside-bottom' className='aside-bottom-section' style={{top: isExpand && '64px' , height: isExpand && '91%'}}>
+        {isExpand && <ExpandAlbum localSongData={localSongData} /> }
         <div className='aside-bottom-progress-bar'>
             <div className='aside-bottom-progress' style={{minWidth: '0', maxWidth: '100%', width: `${progressWidth}%`}}>
                 
@@ -189,11 +213,15 @@ function AsideBottom() {
         </div>
         <div className='aside-bottom-content'>
             <div className='aside-bottom-album'>
-                <img className='aside-bottom-img' src={localSongData?.thumbnail} alt={localSongData?.title}></img>
-                <div className='aside-bottom-album-info'>
-                    <h4 className='aside-bottom-album-title' style={{color: isHover ? 'black' : '#3e3e3e'}} >{localSongData?.title}</h4>
-                    <p className='aside-bottom-album-artist'>{localSongData?.artist && localSongData?.artist.map((e)=> e.name).join(',')}</p>
-                </div>
+                { !isExpand &&
+                    <>
+                        <img className='aside-bottom-img' src={localSongData?.thumbnail} alt={localSongData?.title}></img>
+                        <div className='aside-bottom-album-info'>
+                            <h4 className='aside-bottom-album-title' style={{color: isHover ? 'black' : '#3e3e3e'}} >{localSongData?.title}</h4>
+                            <p className='aside-bottom-album-artist'>{localSongData?.artist && localSongData?.artist.map((e)=> e.name).join(',')}</p>
+                        </div>
+                    </>
+                }
             </div>
             <ul className='aside-bottom-controls'>
                 <li className='aside-bottom-item repeat'>
@@ -216,7 +244,7 @@ function AsideBottom() {
                     <PiShuffleBold />
                 </li>    
             </ul>
-            <ul className='aside-bottom-actions'>
+            <ul className='aside-bottom-actions' onClick={(e)=> handleActions(e)} >
                 <li className='aside-btm-item duration'>
                     <span id='real-time-duration'>{`${durationState.currMin > 9 ? durationState.currMin : "0"+ durationState.currMin}:${durationState.currSec > 9 ? durationState.currSec : "0"+durationState.currSec}`}</span> / <span id='total-duration'>{`${durationState.totalMin >9 ? durationState.totalMin : "0" + durationState.totalMin}:${durationState.totalSec > 9 ? durationState.totalSec : "0" + durationState.totalSec}`}</span>
                 </li>
@@ -228,8 +256,8 @@ function AsideBottom() {
                         isVolume ? <MdVolumeUp /> : <MdVolumeOff />                       
                     }
                 </li>
-                <li className='aside-btm-item expand'>
-                    <GrExpand />
+                <li className='aside-btm-item expand' >
+                    {isExpand ? <BsArrowsAngleContract className='contract-album' /> : <GrExpand className='expand-album' />}
                 </li>
             </ul>
         </div>

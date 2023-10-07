@@ -24,12 +24,12 @@
 
 .aside-bottom-content{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding: 11px 0;
 }
 
 .aside-bottom-album{
-    width: 428px;
+    width: calc(100% /3);
     height: 50px;
     display: flex;
     padding: 0 11px;
@@ -74,10 +74,8 @@
     align-items: center;
     list-style-type: none;
     height: 50px;
-    width: 250px;
+    width: calc(100% /3);
     color: #3e3e3e;
-    position: relative;
-    left: -80px;
 }
 
 .aside-bottom-controls li{
@@ -88,12 +86,13 @@
 
 .aside-bottom-actions{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     list-style-type: none;
     height: 50px;
-    width: 250px;
+    width: calc(100% /3);
     color: #3e3e3e;
+    margin-right: 15px;
 }
 
 .aside-bottom-actions li{
@@ -109,12 +108,13 @@
     font-size: 28px;
 }
 
-.aside-bottom-actions >.volume{
+.aside-bottom-actions > .volume{
     font-size: 28px;
 }
 
 .aside-bottom-actions > .expand{
     font-size: 20px;
+    font-weight: bolder;
 }
 
 

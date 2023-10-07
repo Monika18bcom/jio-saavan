@@ -15,11 +15,12 @@ function App() {
   const [isUserLogin , setIsUserLogin] = useState(false)
   const [showModal , setShowModal] = useState(null)
   const [loginType , setLoginType] = useState("login")
+  const [isExpand , setIsExpand] = useState(false)
 
   return (
-    <JiosaavnContext.Provider value={{songData , setSongData , isUserLogin , setIsUserLogin , showModal , setShowModal}}>
+    <JiosaavnContext.Provider value={{songData , setSongData , isUserLogin , setIsUserLogin , showModal , setShowModal , isExpand , setIsExpand}}>
 
-    <div className="App">
+    <div className="App" >
       <Routes>
         <Route path='*' element={<MainPage />} />
         <Route path='/login' element={<LogIn loginType="login" />} />
