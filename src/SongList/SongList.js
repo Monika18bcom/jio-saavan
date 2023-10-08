@@ -10,9 +10,10 @@ import { JiosaavnContext } from "../App/App";
 
 function SongList({data, num, artistArr}) {
 
-    // console.log(data , "data 11 line song list")
+    
 
-    const {setSongData} = useContext(JiosaavnContext)
+    const {songData , setSongData} = useContext(JiosaavnContext)
+    console.log(songData , "data 11 line song list")
 
     const [isHover, setIsHover] = useState(false)
     const [isLikeRed, setIsLikeRed] = useState(false);
@@ -63,7 +64,7 @@ function SongList({data, num, artistArr}) {
             }
         </div>
         <div className='song-list-song-info'>
-            <h4 className='song-list-song-title' >{data.title}</h4>
+            <h4 className='song-list-song-title' style={{color: data._id === songData && 'green'}} >{data.title}</h4>
             <p className='song-list-song-artist'>
                 {
                     artistArr?.name || 

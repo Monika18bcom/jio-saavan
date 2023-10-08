@@ -58,6 +58,10 @@ function MusicCard({data}){
         }
     }
 
+    const handleClick = (data) => {
+        navigate(`/${data.type || 'artist' || 'album'}/${(data.name) || (data.title)}/${data._id}`)
+    }
+
     return (
         <div className='music-card-container' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
             <div className='music-card-img' style={{backgroundImage:`url(${data.image || data.thumbnail})`, borderRadius : data.type === "artist" && '50%'}}>
@@ -84,19 +88,23 @@ function MusicCard({data}){
                 }
             </div>
             <div className='music-card-info'>
-                <h4 className='music-card-title'>
+                <h4 className='music-card-title' onClick={()=>handleClick(data)}>
                     {
                         data.title || data.name
                     }
                 </h4>
                 <p className='music-card-artist'>
                     {
-                        data?.artist?.map((e)=> e.name).join(',')
+                        data?.artist?.map((e , idx) => (
+                            <span key={e._id} className={e._id} onClick={()=>handleClick(e)}>{e.name + `${idx < (data.artist.length -1) ? ", " : ""}`}</span>
+                        ))
                     }
                 </p>
             </div>
         </div>
     )
 }
+
+
 
 export default MusicCard;

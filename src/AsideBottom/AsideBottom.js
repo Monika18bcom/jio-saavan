@@ -174,6 +174,13 @@ function AsideBottom() {
         
     },[songData])
 
+    useEffect(()=>{
+        if(isExpand){
+            setIsExpand(false)
+        }
+
+    }, [window.location.pathname])
+
     const handlePlayBtn = ()=>{
         if(isPlay){
             play()
