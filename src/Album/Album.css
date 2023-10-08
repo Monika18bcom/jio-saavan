@@ -8,6 +8,7 @@
 
 .loader-container{
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 20%;
+    left: -6%;
+    width: 100%;
 }

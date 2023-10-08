@@ -12,10 +12,12 @@ function SongList({data, num, artistArr}) {
 
     // console.log(data , "data 11 line song list")
 
+    const {setSongData} = useContext(JiosaavnContext)
+
     const [isHover, setIsHover] = useState(false)
     const [isLikeRed, setIsLikeRed] = useState(false);
+    // const [idx , setIdx] = useState(null)
 
-    const {setSongData} = useContext(JiosaavnContext)
 
 
     const songListMouseOver = ()=>{
@@ -30,7 +32,9 @@ function SongList({data, num, artistArr}) {
         if(e.target.classList.contains("song-list-play-icon") || e.target.parentElement.classList.contains("song-list-play-icon")){
             console.log("play button clicked")
             if(data){
+                // console.log(data._id)
                 setSongData(data._id)
+                // setIdx(data._id)
             }
         }else if(e.target.classList.contains("song-list-song-title")){
             console.log("title")
@@ -45,6 +49,8 @@ function SongList({data, num, artistArr}) {
 
     }
 
+    // console.log(idx)
+
   return (
     <div className='song-list-container' 
         style={{backgroundColor: isHover && '#fff',borderRadius: isHover && '4px', border: isHover && '1px solid #e9e9e9'}} 
@@ -57,7 +63,7 @@ function SongList({data, num, artistArr}) {
             }
         </div>
         <div className='song-list-song-info'>
-            <h4 className='song-list-song-title'>{data.title}</h4>
+            <h4 className='song-list-song-title' >{data.title}</h4>
             <p className='song-list-song-artist'>
                 {
                     artistArr?.name || 

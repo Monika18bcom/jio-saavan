@@ -232,7 +232,7 @@ function AsideBottom() {
                                 {
                                     localSongData?.artist && 
                                     localSongData?.artist.map((e , idx)=> (
-                                        <span key={e._id} onClick={()=>handleClick(e)}>{e.name + `${idx < (localSongData.artist.length -1) ? "," : ""}`}</span>
+                                        <span key={e._id} onClick={()=>handleClick(e)}>{e.name + `${idx < (localSongData.artist.length -1) ? ", " : ""}`}</span>
                                     ))
                                 }
                             </p>

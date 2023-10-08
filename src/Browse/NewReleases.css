@@ -5,10 +5,10 @@
     flex-direction: column;
 }
 
-.new-releases-container .loader-container{
+.new-releases-container > .loader-container{
     position: absolute;
     top: 25%;
-    left: 40%;
+    left: -5%;
 }
 
 .new-releases-main-section{

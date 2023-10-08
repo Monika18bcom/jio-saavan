@@ -11,6 +11,7 @@ function Album() {
 
   const [dataArr, setDataArr] = useState([])
   const [isLoading , setIsLoading] = useState(false)
+  // const [isSelected , setIsSeleceted] = useState(null)
 
   async function fetchData(){
     try{
@@ -33,7 +34,7 @@ function Album() {
     setIsLoading(true)
     fetchData()
     
-  },[type])
+  },[type , id])
 
   return (
     isLoading ? 
