@@ -18,10 +18,16 @@ import defaultSong from '../song/DefaultAudio.mp3'
 import useSound from 'use-sound'
 import { JiosaavnContext } from "../App/App";
 import ExpandAlbum from './ExpandAlbum'
+import { useNavigate } from 'react-router-dom'
 
 
 
 function AsideBottom() {
+
+    const { songData , isExpand , setIsExpand } = useContext(JiosaavnContext)
+    // console.log("songData", songData)
+    const navigate = useNavigate()
+
 
     const [isHover, setIsHover] = useState(false);
     const [isRepeat, setIsRepeat] = useState(1)
@@ -29,10 +35,9 @@ function AsideBottom() {
     const [isVolume, setIsVolume] = useState(true)
     const [progressWidth, setProgressWidth] = useState(0)
 
-    const { songData , isExpand , setIsExpand } = useContext(JiosaavnContext)
-    // console.log("songData", songData)
     const [localSongData, setLocalSongData] = useState(null)
     const [songUrl, setSongUrl] = useState(defaultSong)
+    const [play , {stop, pause , duration}] = useSound(songUrl)
 
     const initialDuration = {
         currMin: 0,
@@ -63,7 +68,6 @@ function AsideBottom() {
 
     const [durationState , durationDispatch] = useReducer(durationReducer , initialDuration)
 
-    const [play , {stop, pause , duration}] = useSound(songUrl)
     
     useEffect(()=>{
         // console.log("Time updated", isPlay , duration , durationState.totalDuration)
@@ -198,10 +202,16 @@ function AsideBottom() {
         }
     }
 
+    const handleClick = (e) => {
+        console.log(e)
+        navigate(`/${e.type || 'artist'}/${(e.name) || (e.title)}/${e._id}`)
+    }
+
     // console.log("progressWidth",progressWidth , "%")
     // console.log(durationState)
     // console.log("line 185 asideBottom",localSongData)
-    console.log(isExpand)
+    // console.log(isExpand)
+
 
   return (
     <div id='aside-bottom' className='aside-bottom-section' style={{top: isExpand && '64px' , height: isExpand && '91%'}}>
@@ -217,8 +227,15 @@ function AsideBottom() {
                     <>
                         <img className='aside-bottom-img' src={localSongData?.thumbnail} alt={localSongData?.title}></img>
                         <div className='aside-bottom-album-info'>
-                            <h4 className='aside-bottom-album-title' style={{color: isHover ? 'black' : '#3e3e3e'}} >{localSongData?.title}</h4>
-                            <p className='aside-bottom-album-artist'>{localSongData?.artist && localSongData?.artist.map((e)=> e.name).join(',')}</p>
+                            <h4 className='aside-bottom-album-title' style={{color: isHover ? 'black' : '#3e3e3e'}} onClick={()=>handleClick(localSongData)} >{localSongData?.title}</h4>
+                            <p className='aside-bottom-album-artist'>
+                                {
+                                    localSongData?.artist && 
+                                    localSongData?.artist.map((e , idx)=> (
+                                        <span key={e._id} onClick={()=>handleClick(e)}>{e.name + `${idx < (localSongData.artist.length -1) ? "," : ""}`}</span>
+                                    ))
+                                }
+                            </p>
                         </div>
                     </>
                 }

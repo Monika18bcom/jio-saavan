@@ -37,8 +37,6 @@ function NavMusic({setIsNavMusicHover}) {
         setIsNavMusicHover(false)
     }
 
-
-
     useEffect(()=>{
         setIsLoading(true)
         initialData.map((e)=>{
