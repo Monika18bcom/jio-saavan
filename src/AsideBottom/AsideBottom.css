@@ -40,7 +40,7 @@
     height: 50px;
     border-radius: 4px;
     margin-right: 11px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .aside-bottom-album-info{
@@ -53,7 +53,7 @@
 .aside-bottom-album-title{
     height: 21px;
     font-size: 15px;
-    cursor: pointer;
+    /* cursor: pointer; */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -62,7 +62,7 @@
 .aside-bottom-album-artist{
     height: 21px;
     font-size: 13px;
-    cursor: pointer;
+    /* cursor: pointer; */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -81,7 +81,7 @@
 .aside-bottom-controls li{
     font-size: 30px;
     padding: 0 10px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .aside-bottom-actions{
@@ -97,7 +97,7 @@
 
 .aside-bottom-actions li{
     padding-right: 22px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .aside-bottom-actions .duration{

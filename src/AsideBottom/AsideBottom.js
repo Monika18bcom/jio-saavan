@@ -228,18 +228,18 @@ function AsideBottom() {
                 
             </div>
         </div>
-        <div className='aside-bottom-content'>
+        <div className='aside-bottom-content' style={{opacity: localSongData === null && '0.5'}}>
             <div className='aside-bottom-album'>
                 { !isExpand &&
                     <>
-                        <img className='aside-bottom-img' src={localSongData?.thumbnail} alt={localSongData?.title}></img>
+                        <img className='aside-bottom-img' src={localSongData?.thumbnail} alt={localSongData?.title} style={{cursor: localSongData && 'pointer'}} onClick={()=>handleClick(localSongData)} ></img>
                         <div className='aside-bottom-album-info'>
-                            <h4 className='aside-bottom-album-title' style={{color: isHover ? 'black' : '#3e3e3e'}} onClick={()=>handleClick(localSongData)} >{localSongData?.title}</h4>
+                            <h4 className='aside-bottom-album-title' style={{color: isHover ? 'black' : '#3e3e3e' , cursor: localSongData && 'pointer'}} onClick={()=>handleClick(localSongData)} >{localSongData?.title}</h4>
                             <p className='aside-bottom-album-artist'>
                                 {
                                     localSongData?.artist && 
                                     localSongData?.artist.map((e , idx)=> (
-                                        <span key={e._id} onClick={()=>handleClick(e)}>{e.name + `${idx < (localSongData.artist.length -1) ? ", " : ""}`}</span>
+                                        <span key={e._id} onClick={()=>handleClick(e)} style={{cursor: localSongData && 'pointer'}} >{e.name + `${idx < (localSongData.artist.length -1) ? ", " : ""}`}</span>
                                     ))
                                 }
                             </p>
@@ -248,39 +248,39 @@ function AsideBottom() {
                 }
             </div>
             <ul className='aside-bottom-controls'>
-                <li className='aside-bottom-item repeat'>
+                <li className='aside-bottom-item repeat' style={{cursor: localSongData && 'pointer'}} >
                     {
                         isRepeat === ( 1 || 2 ) ? <RiRepeatLine /> : <RiRepeatOneFill />
                     }
                 </li>
-                <li className='aside-bottom-item skip-back'>
+                <li className='aside-bottom-item skip-back' style={{cursor: localSongData && 'pointer'}} >
                     <TbPlayerSkipBackFilled />
                 </li>
-                <li className='aside-bottom-item play-pause' onClick={handlePlayBtn} >
+                <li className='aside-bottom-item play-pause' onClick={handlePlayBtn} style={{cursor: localSongData && 'pointer'}} >
                     {
                         isPlay ? <HiPlay /> : <IoIosPause /> 
                     }
                 </li>
-                <li className='aside-bottom-item skip-fwd'>
+                <li className='aside-bottom-item skip-fwd' style={{cursor: localSongData && 'pointer'}} >
                     <TbPlayerSkipForwardFilled />
                 </li>
-                <li className='aside-bottom-item shuffle'>
+                <li className='aside-bottom-item shuffle' style={{cursor: localSongData && 'pointer'}} >
                     <PiShuffleBold />
                 </li>    
             </ul>
             <ul className='aside-bottom-actions' onClick={(e)=> handleActions(e)} >
-                <li className='aside-btm-item duration'>
+                <li className='aside-btm-item duration' style={{cursor: localSongData ? 'pointer' : 'default'}} >
                     <span id='real-time-duration'>{`${durationState.currMin > 9 ? durationState.currMin : "0"+ durationState.currMin}:${durationState.currSec > 9 ? durationState.currSec : "0"+durationState.currSec}`}</span> / <span id='total-duration'>{`${durationState.totalMin >9 ? durationState.totalMin : "0" + durationState.totalMin}:${durationState.totalSec > 9 ? durationState.totalSec : "0" + durationState.totalSec}`}</span>
                 </li>
-                <li className='aside-btm-item more-info'>
+                <li className='aside-btm-item more-info' style={{cursor: localSongData && 'pointer'}} >
                     <BsThreeDots />
                 </li>
-                <li className='aside-btm-item volume'>
+                <li className='aside-btm-item volume' style={{cursor: localSongData && 'pointer'}} >
                     {
                         isVolume ? <MdVolumeUp /> : <MdVolumeOff />                       
                     }
                 </li>
-                <li className='aside-btm-item expand' >
+                <li className='aside-btm-item expand' style={{cursor: localSongData && 'pointer'}} >
                     {isExpand ? <BsArrowsAngleContract className='contract-album' /> : <GrExpand className='expand-album' />}
                 </li>
             </ul>
