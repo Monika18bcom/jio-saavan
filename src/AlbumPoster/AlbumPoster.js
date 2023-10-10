@@ -8,7 +8,7 @@ import {BsDot} from 'react-icons/bs'
 
 function AlbumPoster({data , type}) {
 
-    // console.log("Album poster container " , type , data)
+    console.log("Album poster container " , data)
 
     const [isPlayHover, setIsPlayHover] = useState(false)
     const [isLikeHover, setIsLikeHover] = useState(false)
@@ -46,7 +46,7 @@ function AlbumPoster({data , type}) {
             {type === 'artist' ? 
             <p style={{paddingBottom: '20px'}} >Artist</p> :
             <>
-            <p className='album-poster-details a-p-overflow'>by <span className='album-poster-artist-name'>{type === 'album' ? 'Various Artists' : data?.artist?.map((e)=> e.name).join(',')}</span> <BsDot /> <span>{data?.songs?.length} {data?.songs?.length ===1 ? 'song' : 'songs'}</span> <BsDot /> <span>260,848,504 Plays</span> <BsDot /> <span>2:36:00</span></p>
+            <p className='album-poster-details a-p-overflow'>by <span className='album-poster-artist-name'>{type === 'album' ? 'Various Artists' : data?.artist?.map((e)=> e.name).join(',')}</span> <BsDot /> <span>{data?.songs?.length || 1} {data?.songs?.length > 1 ? 'songs' : 'song'}</span> <BsDot /> <span>260,848,504 Plays</span> <BsDot /> <span>2:36:00</span></p>
             <p className='album-poster-copyrights a-p-overflow'>&copy; 1973 Universal Music India Pvt. Ltd.</p> 
             </>
             }

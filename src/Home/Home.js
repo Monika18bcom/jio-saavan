@@ -102,7 +102,7 @@ function Home() {
     return(
 
         isLoading ? 
-        <div className="loader-container">
+        <div className="home-loader-container">
             <Loader />
         </div> :
         <div className="home-section">             

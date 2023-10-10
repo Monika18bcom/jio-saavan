@@ -6,6 +6,7 @@ import {AiOutlineHeart} from 'react-icons/ai'
 import {AiFillHeart} from 'react-icons/ai'
 
 import { JiosaavnContext } from "../App/App";
+import { useNavigate } from 'react-router-dom'
 
 
 function SongList({data, num, artistArr}) {
@@ -13,7 +14,8 @@ function SongList({data, num, artistArr}) {
     
 
     const {songData , setSongData} = useContext(JiosaavnContext)
-    console.log(songData , "data 11 line song list")
+    const navigate = useNavigate()
+    // console.log(songData , "data 11 line song list")
 
     const [isHover, setIsHover] = useState(false)
     const [isLikeRed, setIsLikeRed] = useState(false);
@@ -38,9 +40,11 @@ function SongList({data, num, artistArr}) {
                 // setIdx(data._id)
             }
         }else if(e.target.classList.contains("song-list-song-title")){
-            console.log("title")
+            console.log("title" , e)
+            // navigate(`/${e.type || 'artist'}/${(e.name) || (e.title)}/${e._id}`)
         }else if(e.target.classList.contains("song-list-song-artist")){
-            console.log("artist")
+            console.log("artist" , e)
+            // navigate(`/${e.type || 'artist'}/${(e.name) || (e.title)}/${e._id}`)
         }else if(e.target.classList.contains("song-list-like-icon") || e.target.parentElement.classList.contains("song-list-like-icon")){
             console.log("like icon")
             setIsLikeRed(!isLikeRed)
@@ -49,6 +53,13 @@ function SongList({data, num, artistArr}) {
         }
 
     }
+
+    const handleClickAlbum = (e) => {
+        console.log(e)
+        navigate(`/${e.type || 'artist'}/${(e.name) || (e.title)}/${e._id}`)
+    }
+
+    
 
     // console.log(idx)
 
@@ -64,16 +75,19 @@ function SongList({data, num, artistArr}) {
             }
         </div>
         <div className='song-list-song-info'>
-            <h4 className='song-list-song-title' style={{color: data._id === songData && 'green'}} >{data.title}</h4>
+            <h4 className='song-list-song-title' style={{color: data._id === songData && '#2bc5b4'}} onClick={()=>handleClickAlbum(data)} >{data.title}</h4>
             <p className='song-list-song-artist'>
                 {
                     artistArr?.name || 
-                    artistArr?.artists.map((e)=>{
+                    artistArr?.artists.map((e , idx)=>{
                         if(data.artist.includes(e._id)){
-                            return `${e.name},`;
+                           return  <span key={e._id} onClick={()=>handleClickAlbum(e)}>{e.name + `${idx < (artistArr.artists.length -1) ? ", " : ""}`}</span>
+                            // return `${e.name},`;
                         }
                     }) || 
-                    data?.artist?.map((e)=> e.name).join(',')
+                    data?.artist?.map((e , idx)=> (
+                        <span key={e._id} onClick={()=>handleClickAlbum(e)}>{e.name + `${idx < (data.artist.length -1) ? ", " : ""}`}</span>
+                    ))
                 }
             </p>
         </div>
