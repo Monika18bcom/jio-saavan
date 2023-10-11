@@ -6,11 +6,19 @@ import logo from '../img/jio-saavn-logo.png'
 import {RiArrowDownSLine} from 'react-icons/ri'
 import {RiArrowUpSLine} from 'react-icons/ri'
 import {IoIosSearch} from 'react-icons/io'
+import { useAuth } from '../useAuth';
+
 
 
 function NavBar({setIsNavMusicHover}){
-    const {count} = useContext(JiosaavnContext)
+
+    const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
+
+    const {count} = useContext(JiosaavnContext) 
+    const { userData } = useAuth()
+
     const [isSelected, setIsSelected] = useState(false)
+    const [profileSelected , setProfileSelected] = useState(false)
 
     return(
         <div className="nav-bar">
@@ -35,10 +43,18 @@ function NavBar({setIsNavMusicHover}){
                         </div>
                         {isSelected ? <RiArrowUpSLine className="arrow-icon" /> : <RiArrowDownSLine className="arrow-icon" />}
                     </div>
-                    <ul className="right-ul">
-                        <li><NavLink className="navlink" to="/login">Log In</NavLink></li>
-                        <li><NavLink className="navlink" to="/signup">Sign Up</NavLink></li>
-                    </ul>
+                    {
+                        userData ? 
+                        <div className="nav-bar-user-profile" >
+                            <img className="nav-bar-profile-img" src={profileImg} alt='Profile Image' ></img>
+                            {profileSelected ? <RiArrowUpSLine className="arrow-icon" /> : <RiArrowDownSLine className="arrow-icon" />}
+                        </div> :
+                        <ul className="right-ul">
+                            <li><NavLink className="navlink" to="/login">Log In</NavLink></li>
+                            <li><NavLink className="navlink" to="/signup">Sign Up</NavLink></li>
+                        </ul>
+                    }
+                    
                 </div>
             </div>
             

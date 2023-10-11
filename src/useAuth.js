@@ -12,6 +12,8 @@ export function useAuth() {
         userToken : null,
     });
 
+    const [errApiResult , setErrApiResult] = useState('')
+
   const logIn = (email , password) => {
     console.log("login from useAuth")
 
@@ -30,10 +32,15 @@ export function useAuth() {
     .then((response)=> response.json())
     .then((result)=> {
       console.log(result)
-      setUserData({
-        userDetails: result.data.user,
-        userToken: result.token
-      })
+      if(result.status === 'success'){
+        setUserData({
+          userDetails: result.data.user,
+          userToken: result.token
+        })
+        navigate('/')
+      }else{
+        setErrApiResult(result.message)
+      }
     })   
   };
 
@@ -55,10 +62,18 @@ export function useAuth() {
     })
     .then((response)=> response.json())
     .then((result)=> {
-      setUserData({
-        userDetails: result.data.user,
-        userToken: result.token
-      })
+      console.log(result)
+      if(result.status === 'success'){
+        setUserData({
+          userDetails: result.data.user,
+          userToken: result.token
+        })
+        navigate('/')
+      }else{
+        setErrApiResult(result.message)
+      }
+      
+
     })
   };
 
@@ -84,7 +99,14 @@ export function useAuth() {
     .then((result)=> console.log(result))
   };
 
+  const logOut = ()=>{
+    setUserData({
+      userDetails: null,
+      userToken: null
+    })
+  }
+
   // console.log(userData)
 
-  return { userData, logIn, signUp, updatePassword };
+  return { userData , errApiResult , logIn, signUp, logOut, updatePassword };
 }

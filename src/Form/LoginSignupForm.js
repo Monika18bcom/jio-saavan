@@ -4,14 +4,13 @@ import FormButton from "./FormButton";
 import FormInput from "./FormInput";
 import "./LoginSignupForm.css";
 import { useAuth } from '../useAuth';
-import { display } from "@mui/system";
 
 
 function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , setIsMobileLogin }) {
 
   const navigate = useNavigate()
 
-  const { userData, logIn, signUp, updatePassword } = useAuth()
+  const { userData, errApiResult , logIn, signUp, updatePassword } = useAuth()
 
 
   const [isPlaceholderVisible , setIsPlaceholderVisible] = useState(true)
@@ -26,6 +25,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
     passwordBorder:'',
     confirmPasswordBorder:'',
     error: false,
+    errorMessage: '',
   }
 
   const Reducer = ( state , action ) => {
@@ -49,13 +49,15 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
         return {...state , confirmPasswordBorder: action.payload}
       case 'error':
         return {...state , error: action.payload}
+      case 'errorMessage':
+        return {...state , errorMessage: action.payload}
       default : 
         return state
       
     }
 
   }
-  const [{ number , email , password , confirmPassword , numberBorder , emailBorder , passwordBorder , confirmPasswordBorder , error } , dispatch] = useReducer(Reducer , initialState)
+  const [{ number , email , password , confirmPassword , numberBorder , emailBorder , passwordBorder , confirmPasswordBorder , error , errorMessage } , dispatch] = useReducer(Reducer , initialState)
 
 
   const userName = useMemo(()=>{
@@ -79,54 +81,47 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
   }
 
   const handleSubmit = (e) => {
-    console.log("Handle Submit function called")
     e.preventDefault()
     if(!email && !password){
-      dispatch({
-        type: 'emailBorder',
-        payload: "1px solid red"
-      })
+      dispatch({ type: 'emailBorder', payload: "1px solid red" })
     }
     else if (!password){
-      dispatch({
-        type: 'emailBorder',
-        payload: ''
-      })
+      dispatch({ type: 'emailBorder', payload: '' })
 
-      dispatch({
-        type: 'passwordBorder',
-        payload: "1px solid red"
-      })
+      dispatch({ type: 'passwordBorder', payload: "1px solid red" })
     }
-    else if (!confirmPassword){
-      dispatch({
-        type: 'emailBorder',
-        payload: ''
-      })
+    else if (!confirmPassword && (loginType === 'signup')){
+      dispatch({ type: 'emailBorder', payload: '' })
       
-      dispatch({
-        type: 'passwordBorder',
-        payload: ''
-      })
+      dispatch({ type: 'passwordBorder', payload: '' })
 
-      dispatch({
-        type: 'confirmPasswordBorder',
-        payload: "1px solid red"
-      })
+      dispatch({ type: 'confirmPasswordBorder', payload: "1px solid red" })
+    }
+    else{
+      dispatch({ type: 'emailBorder', payload: '' })
+      
+      dispatch({ type: 'passwordBorder', payload: '' })
+
+      dispatch({ type: 'confirmPasswordBorder', payload: '' })
     }
 
     if(password && confirmPassword){
       if(password !== confirmPassword){
-        dispatch({
-          type: 'error',
-          payload: true
-        })
+        dispatch({ type: 'error', payload: true })
+        dispatch({ type: 'errorMessage' , payload: 'Please make sure your passwords match'})
       }
-    }else{
-      dispatch({
-        type: 'error',
-        payload: false
-      })
+    }else if(errApiResult){
+      if(loginType === 'login'){
+        dispatch({ type: 'error', payload: true })
+        dispatch({ type: 'errorMessage' , payload: 'Incorrect username/password. Please try again.'})
+      }else{
+        dispatch({ type: 'error', payload: true })
+        dispatch({ type: 'errorMessage' , payload: 'User already exists. Please try another username.'})
+      }
+      
+    }
+    else{
+      dispatch({ type: 'error', payload: false })
     }
 
     if(loginType === 'login'){
@@ -173,7 +168,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
 
         {
           error && 
-          <div className="loginSignupFormError" >Please make sure your passwords match</div>
+          <div className="loginSignupFormError" >{errorMessage}</div>
         }
       </div>
       <form className="login-signup-input-section" onSubmit={(e) => handleSubmit(e) } >
