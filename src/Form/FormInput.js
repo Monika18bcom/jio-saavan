@@ -2,7 +2,7 @@ import React from "react";
 import "./FormInput.css";
 
 function FormInput(props) {
-  console.log(props)
+  // console.log(props.onChange)
   return (
     <div
       className="form-input-container"
@@ -12,7 +12,7 @@ function FormInput(props) {
         gap: props.gap,
         borderRadius: props.borderRadius,
         backgroundColor: props.bg,
-        border:props.border,
+        border:props.border ? props.border : '1px solid #e9e9e9',
       }}
     >
       {props.isMobileLogin && (
@@ -25,11 +25,17 @@ function FormInput(props) {
       <input
         className="form-input"
         type={props.type}
-        placeholder={props.placeHolder}
+        value={props.value}
+        onChange={props.onChange}
+        placeholder={props.isPlaceholderVisible ? props.placeHolder : ''}
         style={{
           height:'100%',
           width:props.inputWidth,
-          textAlign:props.textAlign
+          textAlign:props.textAlign,
+          '::placeholder': {
+            color: 'red'
+          }
+          // color: props.border
         }}
       />
     </div>

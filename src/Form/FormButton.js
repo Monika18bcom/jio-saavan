@@ -4,11 +4,12 @@ import './FormButton.css'
 function FormButton(props) {
 
   const [isHover , seIsHover] = useState(false)
-  console.log(props.hoverBg , props.bg)
+  // console.log(props.hoverBg , props.bg)
 
   return (
-    <div
+    <button
       className="form-button"
+      type={props.type}
       style={{
         backgroundColor: isHover ? props.hoverBg :props.bg ,
         color: isHover ? props.hoverColor : props.color,
@@ -30,7 +31,7 @@ function FormButton(props) {
       onMouseOut={()=> seIsHover(false)}
     >
       {props.children}
-    </div>
+    </button>
   );
 }
 

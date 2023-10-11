@@ -1,7 +1,8 @@
 .form-button{
     display: flex;
     justify-content: center;
-    align-items: center;   
+    align-items: center; 
+    border: 0;  
 }
 
 .form-button:hover{

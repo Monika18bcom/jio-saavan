@@ -12,7 +12,6 @@
     flex-direction: column;
     gap: 8px;
     text-align: left;
-    margin-bottom: 12px;
     color: #3e3e3e;
 }
 
@@ -25,6 +24,16 @@
 .login-signup-welcome > p{
     font-size: 15px;
     line-height: 1.4;
+}
+
+.loginSignupFormError{
+    background-color: #f3464a;
+    color: #f6f6f6;
+    width: 100%;
+    border-radius: 20px;
+    text-align: center;
+    padding: 8px 5px;
+    font-size: 13px;
 }
 
 .login-signup-input-section{

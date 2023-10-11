@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PROJECT_ID = 'nwi12vygvqne'
 
 export function useAuth() {
 
+    const navigate = useNavigate()
+
     const [userData, setUserData] = useState({
         userDetails: null, 
-        userToken : null
+        userToken : null,
     });
 
   const logIn = (email , password) => {
@@ -25,7 +28,13 @@ export function useAuth() {
       })
     })
     .then((response)=> response.json())
-    .then((result)=> console.log(result))   
+    .then((result)=> {
+      console.log(result)
+      setUserData({
+        userDetails: result.data.user,
+        userToken: result.token
+      })
+    })   
   };
 
   const signUp = (name , email , password) => {
@@ -45,7 +54,12 @@ export function useAuth() {
       })
     })
     .then((response)=> response.json())
-    .then((result)=> console.log(result))
+    .then((result)=> {
+      setUserData({
+        userDetails: result.data.user,
+        userToken: result.token
+      })
+    })
   };
 
   const updatePassword = (name , email , oldPassword , newPassword , token) => {
@@ -54,9 +68,9 @@ export function useAuth() {
     fetch('https://academics.newtonschool.co/api/v1/user/updateMyPassword' , {
       method: 'PATCH',
       headers: {
-          'Content-Type': 'application/json',
-          'projectID' : PROJECT_ID,
-          'Authorization' : `Bearer ${token}`
+        'Content-Type': 'application/json',
+        'projectID' : PROJECT_ID,
+        'Authorization' : `Bearer ${token}`
       },
       body: JSON.stringify({
           name: name,
@@ -70,7 +84,7 @@ export function useAuth() {
     .then((result)=> console.log(result))
   };
 
-  console.log(userData)
+  // console.log(userData)
 
   return { userData, logIn, signUp, updatePassword };
 }

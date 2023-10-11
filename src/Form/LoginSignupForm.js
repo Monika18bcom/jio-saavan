@@ -1,12 +1,71 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useReducer, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import FormButton from "./FormButton";
 import FormInput from "./FormInput";
 import "./LoginSignupForm.css";
+import { useAuth } from '../useAuth';
+import { display } from "@mui/system";
+
 
 function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , setIsMobileLogin }) {
 
   const navigate = useNavigate()
+
+  const { userData, logIn, signUp, updatePassword } = useAuth()
+
+
+  const [isPlaceholderVisible , setIsPlaceholderVisible] = useState(true)
+
+  const initialState = {
+    number: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    numberBorder:'',
+    emailBorder:'',
+    passwordBorder:'',
+    confirmPasswordBorder:'',
+    error: false,
+  }
+
+  const Reducer = ( state , action ) => {
+
+    switch(action.type){
+      case 'number':
+        return {...state , number: action.payload}
+      case 'email':
+        return {...state , email: action.payload}
+      case 'password':
+        return {...state , password: action.payload}
+      case 'confirmPassword':
+        return {...state , confirmPassword: action.payload}
+      case 'numberBorder':
+        return {...state , numberBorder: action.payload}
+      case 'emailBorder':
+        return {...state , emailBorder: action.payload}
+      case 'passwordBorder':
+        return {...state , passwordBorder: action.payload}
+      case 'confirmPasswordBorder':
+        return {...state , confirmPasswordBorder: action.payload}
+      case 'error':
+        return {...state , error: action.payload}
+      default : 
+        return state
+      
+    }
+
+  }
+  const [{ number , email , password , confirmPassword , numberBorder , emailBorder , passwordBorder , confirmPasswordBorder , error } , dispatch] = useReducer(Reducer , initialState)
+
+
+  const userName = useMemo(()=>{
+
+    const idx = email.indexOf('@')
+    if (idx !== -1){
+      return email.substring(0 , idx)
+    }
+
+  },[email])
 
   useEffect(()=>{
     if((loginType === "forgotpassword") && isMobileLogin){
@@ -18,6 +77,76 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
   const handleEmailMobileLogin = () =>{
     setIsMobileLogin(!isMobileLogin)
   }
+
+  const handleSubmit = (e) => {
+    console.log("Handle Submit function called")
+    e.preventDefault()
+    if(!email && !password){
+      dispatch({
+        type: 'emailBorder',
+        payload: "1px solid red"
+      })
+    }
+    else if (!password){
+      dispatch({
+        type: 'emailBorder',
+        payload: ''
+      })
+
+      dispatch({
+        type: 'passwordBorder',
+        payload: "1px solid red"
+      })
+    }
+    else if (!confirmPassword){
+      dispatch({
+        type: 'emailBorder',
+        payload: ''
+      })
+      
+      dispatch({
+        type: 'passwordBorder',
+        payload: ''
+      })
+
+      dispatch({
+        type: 'confirmPasswordBorder',
+        payload: "1px solid red"
+      })
+    }
+
+    if(password && confirmPassword){
+      if(password !== confirmPassword){
+        dispatch({
+          type: 'error',
+          payload: true
+        })
+      }
+    }else{
+      dispatch({
+        type: 'error',
+        payload: false
+      })
+    }
+
+    if(loginType === 'login'){
+      if(email && password){
+        logIn( email , password )
+      }
+      
+    }
+    else if(loginType === 'signup'){
+      if(email && password){
+        signUp(userName , email , password)
+      }
+      
+    }
+    
+    // console.log(email , userName)
+    
+  }
+
+  
 
   return (
     <div className="login-signup-form-container" style={{width: modal && '100%' , height: modal && '100%' , padding : modal && '0px 48px'}}>
@@ -41,15 +170,36 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
           </p>
           )
         } 
+
+        {
+          error && 
+          <div className="loginSignupFormError" >Please make sure your passwords match</div>
+        }
       </div>
-      <form className="login-signup-input-section">
+      <form className="login-signup-input-section" onSubmit={(e) => handleSubmit(e) } >
         <FormInput
           isMobileLogin={isMobileLogin}
           type={(isMobileLogin === false) || (loginType === "forgotpassword")  ? "email" : "number"}
+          value = {(isMobileLogin === false) || (loginType === "forgotpassword")  ? email : number}
+          onChange={(e)=>{
+            if((isMobileLogin === false) || (loginType === "forgotpassword")){
+              dispatch({
+                type: 'email' ,
+                payload : e.target.value
+              })
+            }else {
+              dispatch({
+                type: 'number',
+                payload : e.target.value
+              })
+            }
+            
+          }}
           placeHolder={isMobileLogin ? "Enter your mobile number" : "Email Address"}
+          isPlaceholderVisible={isPlaceholderVisible}
           textAlign={isMobileLogin ? "left" : "center"}
           gap="23px"
-          border="1px solid #e9e9e9"
+          border={(isMobileLogin === false) || (loginType === "forgotpassword")  ? emailBorder : numberBorder }
           inputWidth="100%"
           borderRadius="23px"
           bg="#fff"
@@ -61,10 +211,18 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
           <FormInput
           isMobileLogin={isMobileLogin}
           type="password"
+          value = {password}
+          onChange={(e)=>{
+            dispatch({
+              type: 'password' ,
+              payload : e.target.value
+            })
+          }}
           placeHolder="Password"
+          isPlaceholderVisible={isPlaceholderVisible}
           textAlign="center"
           gap="23px"
-          border="1px solid #e9e9e9"
+          border={passwordBorder}
           inputWidth="100%"
           borderRadius="23px"
           bg="#fff"
@@ -77,10 +235,18 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
           <FormInput
           isMobileLogin={isMobileLogin}
           type="password"
+          value={confirmPassword}
+          onChange={(e)=>{
+            dispatch({
+              type: 'confirmPassword' ,
+              payload : e.target.value
+            })
+          }}
           placeHolder="Confirm Password"
+          isPlaceholderVisible={isPlaceholderVisible}
           textAlign="center"
           gap="23px"
-          border="1px solid #e9e9e9"
+          border={confirmPasswordBorder}
           inputWidth="100%"
           borderRadius="23px"
           bg="#fff"
@@ -89,6 +255,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
           />
         }
         <FormButton
+          type="submit"
           bg="#2bc5b4"
           hoverBg="#1E897D"
           hoverColor="#fff"
@@ -131,7 +298,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
         rates may apply.
         </p> :
         <div className="forget-password-terms-section">
-          {loginType === "login" && <p style={{color: modal && '#2bc5b4' , cursor: modal && 'pointer'}} onClick={()=> modal ? setLoginType("forgotpassword") : navigate('/forgot-password') }>Forget password?</p>}
+          {loginType === "login" && <p style={{color: '#2bc5b4' , cursor: 'pointer'}} onClick={()=> modal ? setLoginType("forgotpassword") : navigate('/forgot-password') }>Forget password?</p>}
           <p className="login-signup-form-terms-field" style={{color : modal && '#a9a9a9'}} >
             By selecting ‘Continue’, you agree to JioSaavn’s
             <a className="terms-page" href="https://www.jiosaavn.com/corporate/terms/" target="_blank" style={{color: modal && '#2a2d36'}}> Terms of Service </a>and
