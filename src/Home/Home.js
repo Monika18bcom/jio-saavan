@@ -7,6 +7,7 @@ import Album from "../Album/Album";
 import { Route, Routes } from 'react-router-dom';
 import NewReleases from "../Browse/NewReleases";
 import TopCharts from "../Browse/TopCharts";
+import MyMusic from "../My-Library/MyMusic";
 
 function Home() {
 
@@ -115,6 +116,9 @@ function Home() {
                 <Route path='/original-podcasts' element={<TopCharts type="podcasts" />} />
                 <Route path='/top-artists' element={<NewReleases type='artist' />} />
                 <Route path='/radio' element={<TopCharts type="radio" />} />
+                <Route path='/my-music' element={<MyMusic />} >
+
+                </Route>
             </Routes>
             <Footer />
         </div>
