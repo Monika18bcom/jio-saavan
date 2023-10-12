@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { NavLink } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
 import './NavBar.css';
@@ -6,19 +6,33 @@ import logo from '../img/jio-saavn-logo.png'
 import {RiArrowDownSLine} from 'react-icons/ri'
 import {RiArrowUpSLine} from 'react-icons/ri'
 import {IoIosSearch} from 'react-icons/io'
-import { useAuth } from '../useAuth';
 
 
 
-function NavBar({setIsNavMusicHover}){
+function NavBar({setIsNavMusicHover , setDisplayAccount , displayAccount}){
 
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
-    const {count} = useContext(JiosaavnContext) 
-    const { userData } = useAuth()
+    const {userData} = useContext(JiosaavnContext) 
 
     const [isSelected, setIsSelected] = useState(false)
     const [profileSelected , setProfileSelected] = useState(false)
+
+    useEffect(()=>{
+        console.log(userData?.userToken , "in useEffect of navBar")
+    },[userData])
+
+    const handleProfile = (e) => {
+
+        if(e.target.classList.contains('nav-bar-user-profile') || e.target.parentElement.classList.contains('nav-bar-user-profile')){
+            console.log("clicked profile")
+            setProfileSelected(!profileSelected)
+            setDisplayAccount(!displayAccount)
+        }
+
+    }
+
+    console.log(userData , ' from navbar')
 
     return(
         <div className="nav-bar">
@@ -44,8 +58,8 @@ function NavBar({setIsNavMusicHover}){
                         {isSelected ? <RiArrowUpSLine className="arrow-icon" /> : <RiArrowDownSLine className="arrow-icon" />}
                     </div>
                     {
-                        userData ? 
-                        <div className="nav-bar-user-profile" >
+                        userData?.userDetails !== null ? 
+                        <div className="nav-bar-user-profile" onClick={(e) => handleProfile(e)} >
                             <img className="nav-bar-profile-img" src={profileImg} alt='Profile Image' ></img>
                             {profileSelected ? <RiArrowUpSLine className="arrow-icon" /> : <RiArrowDownSLine className="arrow-icon" />}
                         </div> :

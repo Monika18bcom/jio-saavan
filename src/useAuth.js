@@ -1,18 +1,16 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { JiosaavnContext } from './App/App';
 
 const PROJECT_ID = 'nwi12vygvqne'
 
 export function useAuth() {
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    const [userData, setUserData] = useState({
-        userDetails: null, 
-        userToken : null,
-    });
+  const {setUserData} = useContext(JiosaavnContext)
 
-    const [errApiResult , setErrApiResult] = useState('')
+  const [errApiResult , setErrApiResult] = useState('')
 
   const logIn = (email , password) => {
     console.log("login from useAuth")
@@ -33,10 +31,8 @@ export function useAuth() {
     .then((result)=> {
       console.log(result)
       if(result.status === 'success'){
-        setUserData({
-          userDetails: result.data.user,
-          userToken: result.token
-        })
+        console.log('status is successfull' , result.data , result.token)
+        setUserData({ userDetails: result.data , userToken: result.token })
         navigate('/')
       }else{
         setErrApiResult(result.message)
@@ -100,6 +96,7 @@ export function useAuth() {
   };
 
   const logOut = ()=>{
+    console.log("logout func called")
     setUserData({
       userDetails: null,
       userToken: null
@@ -108,5 +105,5 @@ export function useAuth() {
 
   // console.log(userData)
 
-  return { userData , errApiResult , logIn, signUp, logOut, updatePassword };
+  return { errApiResult , logIn, signUp, logOut, updatePassword };
 }

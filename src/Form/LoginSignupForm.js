@@ -75,6 +75,19 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
     } 
   },[])
 
+  useEffect(()=>{
+    if(errApiResult){
+      if(loginType === 'login'){
+        dispatch({ type: 'error', payload: true })
+        dispatch({ type: 'errorMessage' , payload: 'Incorrect username/password. Please try again.'})
+      }else{
+        dispatch({ type: 'error', payload: true })
+        dispatch({ type: 'errorMessage' , payload: 'User already exists. Please try another username.'})
+      }
+      
+    }
+  },[errApiResult])
+
 
   const handleEmailMobileLogin = () =>{
     setIsMobileLogin(!isMobileLogin)
@@ -110,15 +123,6 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
         dispatch({ type: 'error', payload: true })
         dispatch({ type: 'errorMessage' , payload: 'Please make sure your passwords match'})
       }
-    }else if(errApiResult){
-      if(loginType === 'login'){
-        dispatch({ type: 'error', payload: true })
-        dispatch({ type: 'errorMessage' , payload: 'Incorrect username/password. Please try again.'})
-      }else{
-        dispatch({ type: 'error', payload: true })
-        dispatch({ type: 'errorMessage' , payload: 'User already exists. Please try another username.'})
-      }
-      
     }
     else{
       dispatch({ type: 'error', payload: false })
@@ -136,9 +140,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
       }
       
     }
-    
-    // console.log(email , userName)
-    
+        
   }
 
   

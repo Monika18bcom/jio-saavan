@@ -5,7 +5,7 @@ import MainPage from './MainPage';
 import LogIn from '../Form/LogIn';
 import Modal from '../Modal/Modal';
 import FormContent from '../Form/FormContent';
-
+import { useAuth } from '../useAuth';
 
 
 export const JiosaavnContext = createContext({})
@@ -17,8 +17,14 @@ function App() {
   const [loginType , setLoginType] = useState("login")
   const [isExpand , setIsExpand] = useState(false)
 
+  const [userData, setUserData] = useState({userDetails: null , userToken: null});
+
+
+  // const { userData } = useAuth()
+
+
   return (
-    <JiosaavnContext.Provider value={{songData , setSongData , isUserLogin , setIsUserLogin , showModal , setShowModal , isExpand , setIsExpand}}>
+    <JiosaavnContext.Provider value={{songData , setSongData , isUserLogin , setIsUserLogin , showModal , setShowModal , isExpand , setIsExpand , userData , setUserData}}>
 
     <div className="App" >
       <Routes>
@@ -29,7 +35,7 @@ function App() {
       </Routes>
 
       {
-        (showModal && !isUserLogin) &&
+        (showModal && !userData.userDetails) &&
         <Modal setShowModal={setShowModal} >
           <FormContent loginType={loginType} setLoginType={setLoginType} modal={showModal} />
         </Modal>

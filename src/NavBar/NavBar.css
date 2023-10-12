@@ -144,11 +144,10 @@
 
 .right-ul{
     display: flex;
-    gap: 5px;
-    /* justify-content: space-around; */
+    gap: 22px;
     list-style-type: none;
     width: auto;
-    /* width: 47%; */
+    margin-right: 11px;
     height: 100%;
     padding-left: 5px;
 }
