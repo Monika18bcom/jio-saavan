@@ -1,9 +1,12 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MainPageContext } from '../App/MainPage'
 import Loader from '../Loader/Loader'
 import './NavMusic.css'
 
-function NavMusic({setIsNavMusicHover}) {
+function NavMusic() {
+
+    const { setIsNavMusicHover } = useContext(MainPageContext)
 
     const initialData = [
         {title: 'New Releases', data:[] , type: 'song' , limit: '10' , sort : "sort" },

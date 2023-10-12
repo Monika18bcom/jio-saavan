@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './UserAccountDetails.css'
 import { useAuth } from '../useAuth';
+import { MainPageContext } from '../App/MainPage';
+import { useNavigate } from 'react-router-dom';
 
 
-function UserAccountDetails({setDisplayAccount}) {
+function UserAccountDetails() {
 
     const { logOut } = useAuth()
+    const { setDisplayAccount } = useContext(MainPageContext)
+    const navigate = useNavigate()
 
 
     const handleLogOut = () => {
@@ -17,7 +21,7 @@ function UserAccountDetails({setDisplayAccount}) {
   return (
     <div className='user-account-details-container'>
         <ul className='user-account-data-top'>
-            <li>My Music</li>
+            <li onClick={()=> navigate('/my-music')} >My Music</li>
             <li>My Profile</li>
             <li>History</li>
             <li>Account Settings</li>

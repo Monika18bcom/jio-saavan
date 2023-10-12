@@ -1,4 +1,5 @@
 import React from 'react'
+import './MyMusicHeader.css'
 
 function MyMusicHeader() {
 
@@ -6,25 +7,23 @@ function MyMusicHeader() {
 
   return (
     <div className='my-music-header-container'>
-        <div>
-            <div>
-                <div>
+        <div className='my-music-header-user-profile'>
+            <div className='my-music-header-img-section'>
+                <div className='profile-img'>
                     <img src={profileImg} alt='Profile Image' ></img>
                 </div>
-                <div>
+                <div className='user-name'>
                     <h2>UserName</h2>
-                    <h3>FREE</h3>
+                    <h3>Free</h3>
                     <span>Go Pro</span>
                 </div>
             </div>
-            <div>
-                <div>
-                    <span>Log Out</span>
-                </div>
+            <div className='my-music-header-logout-section'>
+                <div className='logout-btn'>Log Out</div>
             </div>
         </div>
-        <div>
-            <ul>
+        <div className='my-music-header-user-library'>
+            <ul className='library-ul'>
                 <li>Playlists</li>
                 <li>Songs</li>
                 <li>Albums</li>
@@ -32,14 +31,14 @@ function MyMusicHeader() {
                 <li>Artists</li>
                 <li>History</li>
             </ul>
-            <div>
-                <span>Sync Library</span>
-                <span>Shuffle All</span>
+            <div className='library-btns'>
+                <span className='sync-library'>Sync Library</span>
+                <span className='shuffle-all'>Shuffle All</span>
             </div>
         </div>
-        <div>
+        <div className='my-music-header-usermusic-data'>
             <p><span>count</span><span>type</span></p>
-            <div>
+            <div className='filter-search'>
                 icon
                 <input></input>
             </div>
