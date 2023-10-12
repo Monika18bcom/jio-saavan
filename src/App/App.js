@@ -1,30 +1,34 @@
 import './App.css';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './MainPage';
 import LogIn from '../Form/LogIn';
 import Modal from '../Modal/Modal';
 import FormContent from '../Form/FormContent';
-import { useAuth } from '../useAuth';
 
 
 export const JiosaavnContext = createContext({})
 
 function App() {
   const [songData , setSongData] =  useState([])
-  const [isUserLogin , setIsUserLogin] = useState(false)
   const [showModal , setShowModal] = useState(null)
   const [loginType , setLoginType] = useState("login")
   const [isExpand , setIsExpand] = useState(false)
-
   const [userData, setUserData] = useState({userDetails: null , userToken: null});
 
+  useEffect(()=>{
 
-  // const { userData } = useAuth()
+    const storedUserData = localStorage.getItem('user')
+    console.log(storedUserData , 'user data set in localStorage')
+    
+    if(storedUserData){
+      setUserData(JSON.parse(storedUserData))
+    }
+  },[])
 
-
+  
   return (
-    <JiosaavnContext.Provider value={{songData , setSongData , isUserLogin , setIsUserLogin , showModal , setShowModal , isExpand , setIsExpand , userData , setUserData}}>
+    <JiosaavnContext.Provider value={{songData , setSongData , showModal , setShowModal , isExpand , setIsExpand , userData , setUserData}}>
 
     <div className="App" >
       <Routes>

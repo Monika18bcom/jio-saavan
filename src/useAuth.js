@@ -32,6 +32,9 @@ export function useAuth() {
       console.log(result)
       if(result.status === 'success'){
         console.log('status is successfull' , result.data , result.token)
+
+        localStorage.setItem('user' , JSON.stringify({ userDetails: result.data , userToken: result.token }))
+
         setUserData({ userDetails: result.data , userToken: result.token })
         navigate('/')
       }else{
@@ -60,10 +63,11 @@ export function useAuth() {
     .then((result)=> {
       console.log(result)
       if(result.status === 'success'){
-        setUserData({
-          userDetails: result.data.user,
-          userToken: result.token
-        })
+        console.log('status is successfull' , result.data.user , result.token)
+
+        localStorage.setItem('user' , JSON.stringify({ userDetails: result.data.user , userToken: result.token }))
+
+        setUserData({ userDetails: result.data.user , userToken: result.token })
         navigate('/')
       }else{
         setErrApiResult(result.message)
@@ -97,6 +101,7 @@ export function useAuth() {
 
   const logOut = ()=>{
     console.log("logout func called")
+    localStorage.removeItem('user')
     setUserData({
       userDetails: null,
       userToken: null

@@ -5,14 +5,13 @@ import { useAuth } from '../useAuth';
 
 function UserAccountDetails({setDisplayAccount}) {
 
-    const { userData, logOut } = useAuth()
+    const { logOut } = useAuth()
 
 
     const handleLogOut = () => {
         console.log('Logout clicked')
         logOut()
         setDisplayAccount(false)
-        console.log(userData)
     }
 
   return (

@@ -10,7 +10,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
 
   const navigate = useNavigate()
 
-  const { userData, errApiResult , logIn, signUp, updatePassword } = useAuth()
+  const { errApiResult , logIn, signUp, updatePassword } = useAuth()
 
 
   const [isPlaceholderVisible , setIsPlaceholderVisible] = useState(true)
@@ -131,16 +131,14 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
     if(loginType === 'login'){
       if(email && password){
         logIn( email , password )
-      }
-      
+      }  
     }
     else if(loginType === 'signup'){
       if(email && password){
         signUp(userName , email , password)
-      }
-      
+      }  
     }
-        
+          
   }
 
   

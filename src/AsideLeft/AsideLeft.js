@@ -12,7 +12,7 @@ import { JiosaavnContext } from '../App/App'
 
 function AsideLeft(){
 
-    const {isUserLogin , setShowModal} = useContext(JiosaavnContext)
+    const {userData , setShowModal} = useContext(JiosaavnContext)
 
     const handleLibrary = (e)=>{
         if( e.target.parentElement.classList.contains('asideLeft-ul') || 
@@ -27,7 +27,7 @@ function AsideLeft(){
         e.target.classList.contains('library-artists') || 
         e.target.parentElement.classList.contains('library-artists')
         ){
-            if(!isUserLogin){
+            if(!userData.userToken){
                 console.log("setModal")
                 setShowModal(true)
             }

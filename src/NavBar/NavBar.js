@@ -18,9 +18,9 @@ function NavBar({setIsNavMusicHover , setDisplayAccount , displayAccount}){
     const [isSelected, setIsSelected] = useState(false)
     const [profileSelected , setProfileSelected] = useState(false)
 
-    useEffect(()=>{
-        console.log(userData?.userToken , "in useEffect of navBar")
-    },[userData])
+    // useEffect(()=>{
+    //     console.log(userData?.userToken , "in useEffect of navBar")
+    // },[userData])
 
     const handleProfile = (e) => {
 
@@ -32,7 +32,7 @@ function NavBar({setIsNavMusicHover , setDisplayAccount , displayAccount}){
 
     }
 
-    console.log(userData , ' from navbar')
+    // console.log(userData , ' from navbar')
 
     return(
         <div className="nav-bar">
