@@ -1,14 +1,17 @@
-import React, { useEffect, useMemo, useReducer, useState } from "react";
+import React, { useContext, useEffect, useMemo, useReducer, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import FormButton from "./FormButton";
 import FormInput from "./FormInput";
 import "./LoginSignupForm.css";
 import { useAuth } from '../useAuth';
+import { JiosaavnContext } from "../App/App";
 
 
-function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , setIsMobileLogin }) {
+function LoginSignupForm() {
 
   const navigate = useNavigate()
+  
+  const { loginType , setLoginType , showModal, isMobileLogin , setIsMobileLogin } = useContext(JiosaavnContext)
 
   const { errApiResult , logIn, signUp, updatePassword } = useAuth()
 
@@ -122,6 +125,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
       if(password !== confirmPassword){
         dispatch({ type: 'error', payload: true })
         dispatch({ type: 'errorMessage' , payload: 'Please make sure your passwords match'})
+        return
       }
     }
     else{
@@ -144,13 +148,13 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
   
 
   return (
-    <div className="login-signup-form-container" style={{width: modal && '100%' , height: modal && '100%' , padding : modal && '0px 48px'}}>
-      <div className="login-signup-welcome" style={{textAlign: modal && 'center' , paddingTop: modal && '10px'}}>
-        <h1 style={{fontSize : modal && '24px'}}>{loginType === "forgotpassword" ? "Forgot Your Password?" : "Welcome to JioSaavn."}</h1>
+    <div className="login-signup-form-container" style={{width: showModal && '100%' , height: showModal && '100%' , padding : showModal && '0px 48px'}}>
+      <div className="login-signup-welcome" style={{textAlign: showModal && 'center' , paddingTop: showModal && '10px'}}>
+        <h1 style={{fontSize : showModal && '24px'}}>{loginType === "forgotpassword" ? "Forgot Your Password?" : "Welcome to JioSaavn."}</h1>
         {
           loginType === "forgotpassword" ?
           <p style={{fontSize: '13px'}} >Enter the email address you used when you signed up and we'll help you out.</p> : 
-          (modal ? 
+          (showModal ? 
           <p style={{fontSize: '13px'}}>
             {(loginType === "signup")
               ? "Sign up to create playlists, build your library, get personalized recommendations & more!"
@@ -173,7 +177,6 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
       </div>
       <form className="login-signup-input-section" onSubmit={(e) => handleSubmit(e) } >
         <FormInput
-          isMobileLogin={isMobileLogin}
           type={(isMobileLogin === false) || (loginType === "forgotpassword")  ? "email" : "number"}
           value = {(isMobileLogin === false) || (loginType === "forgotpassword")  ? email : number}
           onChange={(e)=>{
@@ -204,7 +207,6 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
         {
           isMobileLogin === false && loginType !== "forgotpassword" &&
           <FormInput
-          isMobileLogin={isMobileLogin}
           type="password"
           value = {password}
           onChange={(e)=>{
@@ -228,7 +230,6 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
         {
           isMobileLogin === false && loginType !== "forgotpassword" && loginType === "signup" &&
           <FormInput
-          isMobileLogin={isMobileLogin}
           type="password"
           value={confirmPassword}
           onChange={(e)=>{
@@ -270,13 +271,13 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
       { loginType !== "forgotpassword" &&
       <>{
         isMobileLogin ?
-        <p className="login-signup-form-terms-field" style={{color : modal && '#a9a9a9'}}>
+        <p className="login-signup-form-terms-field" style={{color : showModal && '#a9a9a9'}}>
         Select ‘Continue’ to give consent to JioSaavn’s{" "}
         <a
           className="terms-page"
           href="https://www.jiosaavn.com/corporate/terms/"
           target="_blank"
-          style={{color: modal && '#2a2d36'}}
+          style={{color: showModal && '#2a2d36'}}
         >
           Terms of Service
         </a>{" "}
@@ -285,7 +286,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
           className="terms-page"
           href="https://www.jiosaavn.com/corporate/privacy/"
           target="_blank"
-          style={{color: modal && '#2a2d36'}}
+          style={{color: showModal && '#2a2d36'}}
         >
           Privacy Policy
         </a>
@@ -293,16 +294,16 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
         rates may apply.
         </p> :
         <div className="forget-password-terms-section">
-          {loginType === "login" && <p style={{color: '#2bc5b4' , cursor: 'pointer'}} onClick={()=> modal ? setLoginType("forgotpassword") : navigate('/forgot-password') }>Forget password?</p>}
-          <p className="login-signup-form-terms-field" style={{color : modal && '#a9a9a9'}} >
+          {loginType === "login" && <p style={{color: '#2bc5b4' , cursor: 'pointer'}} onClick={()=> showModal ? setLoginType("forgotpassword") : navigate('/forgot-password') }>Forget password?</p>}
+          <p className="login-signup-form-terms-field" style={{color : showModal && '#a9a9a9'}} >
             By selecting ‘Continue’, you agree to JioSaavn’s
-            <a className="terms-page" href="https://www.jiosaavn.com/corporate/terms/" target="_blank" style={{color: modal && '#2a2d36'}}> Terms of Service </a>and
-            <a className="terms-page" href="https://www.jiosaavn.com/corporate/privacy/" target="_blank" style={{color: modal && '#2a2d36'}}> Privacy Policy</a>.
+            <a className="terms-page" href="https://www.jiosaavn.com/corporate/terms/" target="_blank" style={{color: showModal && '#2a2d36'}}> Terms of Service </a>and
+            <a className="terms-page" href="https://www.jiosaavn.com/corporate/privacy/" target="_blank" style={{color: showModal && '#2a2d36'}}> Privacy Policy</a>.
           </p>
         </div>
       }
       <div className="login-signup-form-separator">or connect with</div>
-      <div className="login-signup-email-fb" style={{paddingBottom: modal && '30px'}}>
+      <div className="login-signup-email-fb" style={{paddingBottom: showModal && '30px'}}>
         <FormButton
           bg="#2a2d36"
           hoverBg="#2a2d36"
@@ -314,7 +315,7 @@ function LoginSignupForm({ loginType , setLoginType , modal , isMobileLogin , se
           fontWeight="bolder"
           textAlign="center"
           height="48px"
-          width={modal ? '115%' :"100%"}
+          width={showModal ? '115%' :"100%"}
           borderRadius="23px"
           padding="20px"
           onClick={handleEmailMobileLogin}

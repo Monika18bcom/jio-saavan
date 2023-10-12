@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { JiosaavnContext } from "../App/App";
 import "./FormInput.css";
 
 function FormInput(props) {
   // console.log(props.onChange)
+  const { isMobileLogin } = useContext(JiosaavnContext)
   return (
     <div
       className="form-input-container"
@@ -15,7 +17,7 @@ function FormInput(props) {
         border:props.border ? props.border : '1px solid #e9e9e9',
       }}
     >
-      {props.isMobileLogin && (
+      {isMobileLogin && (
         <img
           className="country-flag"
           src="https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg"

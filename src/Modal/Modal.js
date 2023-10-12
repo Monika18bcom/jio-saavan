@@ -1,7 +1,10 @@
-import React, { useState , useEffect, useRef } from 'react'
+import React, { useState , useEffect, useRef, useContext } from 'react'
+import { JiosaavnContext } from '../App/App';
 import './Modal.css'
 
-function Modal(props) {
+function Modal({ children }) {
+
+  const { setShowModal } = useContext(JiosaavnContext)
 
   const modalRef = useRef();
   const [firstRender , setFirstRender] = useState(false)
@@ -15,7 +18,7 @@ function Modal(props) {
       window.addEventListener('click' , (e)=>{
         console.log("event added")
         if(modalRef?.current && !modalRef.current?.contains(e.target)){
-          props.setShowModal(false);    
+          setShowModal(false);    
         }
       })
     }
@@ -30,7 +33,7 @@ function Modal(props) {
   return (
     <div className='modal-container' >
       <div className='login-modal-container' ref={modalRef}>
-        <div className='login-modal-content'>{props.children}</div>
+        <div className='login-modal-content'>{children}</div>
       </div>
     </div>
   )

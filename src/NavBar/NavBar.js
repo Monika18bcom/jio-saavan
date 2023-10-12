@@ -29,6 +29,10 @@ function NavBar({setIsNavMusicHover , setDisplayAccount , displayAccount}){
             setProfileSelected(!profileSelected)
             setDisplayAccount(!displayAccount)
         }
+        // else{
+        //     setProfileSelected(!profileSelected)
+        //     setDisplayAccount(!displayAccount)
+        // }
 
     }
 

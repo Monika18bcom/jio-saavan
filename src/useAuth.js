@@ -32,10 +32,9 @@ export function useAuth() {
       console.log(result)
       if(result.status === 'success'){
         console.log('status is successfull' , result.data , result.token)
-
+        setUserData({ userDetails: result.data , userToken: result.token })
         localStorage.setItem('user' , JSON.stringify({ userDetails: result.data , userToken: result.token }))
 
-        setUserData({ userDetails: result.data , userToken: result.token })
         navigate('/')
       }else{
         setErrApiResult(result.message)
@@ -64,10 +63,9 @@ export function useAuth() {
       console.log(result)
       if(result.status === 'success'){
         console.log('status is successfull' , result.data.user , result.token)
-
+        setUserData({ userDetails: result.data.user , userToken: result.token })
         localStorage.setItem('user' , JSON.stringify({ userDetails: result.data.user , userToken: result.token }))
 
-        setUserData({ userDetails: result.data.user , userToken: result.token })
         navigate('/')
       }else{
         setErrApiResult(result.message)
