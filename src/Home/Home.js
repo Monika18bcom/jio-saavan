@@ -106,7 +106,7 @@ function Home() {
         <div className="home-loader-container">
             <Loader />
         </div> :
-        <div className="home-section">             
+        <div className="home-section">
             <Routes>
                 <Route path='/' element={<Main mainAlbumArr={homeState} />}/>
                 <Route path='/:type/:name/:id' element={<Album />}/>

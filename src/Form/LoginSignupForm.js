@@ -80,6 +80,19 @@ function LoginSignupForm({loginType}) {
   },[])
 
   useEffect(()=>{
+    dispatch({ type: 'error', payload: false })
+    dispatch({ type: 'number', payload: '' })
+    dispatch({ type: 'email', payload: '' })
+    dispatch({ type: 'password', payload: '' })
+    dispatch({ type: 'confirmPassword', payload: '' })
+    dispatch({ type: 'numberBorder', payload: '' })
+    dispatch({ type: 'emailBorder', payload: '' })
+    dispatch({ type: 'passwordBorder', payload: '' })
+    dispatch({ type: 'confirmPasswordBorder', payload: '' })
+
+  },[loginType , isMobileLogin])
+
+  useEffect(()=>{
     if(errApiResult){
       if(loginType === 'login'){
         dispatch({ type: 'error', payload: true })
@@ -92,40 +105,49 @@ function LoginSignupForm({loginType}) {
     }
   },[errApiResult])
 
-
   const handleEmailMobileLogin = () =>{
     setIsMobileLogin(!isMobileLogin)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(!email && !password){
-      dispatch({ type: 'emailBorder', payload: "1px solid red" })
-    }
-    else if (!password){
-      dispatch({ type: 'emailBorder', payload: '' })
+    if(isMobileLogin){
+      if(number.length >= 0){
+        dispatch({ type: 'error', payload: true })
+        dispatch({ type: 'errorMessage' , payload: 'Please login or signup using email.'})
+        return
+      }
+    }else{
+      if(!email && !password){
+        dispatch({ type: 'emailBorder', payload: "1px solid red" })
+      }
+      else if (!password){
+        dispatch({ type: 'emailBorder', payload: '' })
+  
+        dispatch({ type: 'passwordBorder', payload: "1px solid red" })
+      }
+      else if (!confirmPassword && (loginType === 'signup')){
+        dispatch({ type: 'emailBorder', payload: '' })
+        
+        dispatch({ type: 'passwordBorder', payload: '' })
+  
+        dispatch({ type: 'confirmPasswordBorder', payload: "1px solid red" })
+      }
+      else{
+        dispatch({ type: 'emailBorder', payload: '' })
+        
+        dispatch({ type: 'passwordBorder', payload: '' })
+  
+        dispatch({ type: 'confirmPasswordBorder', payload: '' })
+      }
 
-      dispatch({ type: 'passwordBorder', payload: "1px solid red" })
     }
-    else if (!confirmPassword && (loginType === 'signup')){
-      dispatch({ type: 'emailBorder', payload: '' })
-      
-      dispatch({ type: 'passwordBorder', payload: '' })
-
-      dispatch({ type: 'confirmPasswordBorder', payload: "1px solid red" })
-    }
-    else{
-      dispatch({ type: 'emailBorder', payload: '' })
-      
-      dispatch({ type: 'passwordBorder', payload: '' })
-
-      dispatch({ type: 'confirmPasswordBorder', payload: '' })
-    }
+    
 
     if(password && confirmPassword){
       if(password !== confirmPassword){
         dispatch({ type: 'error', payload: true })
-        dispatch({ type: 'errorMessage' , payload: 'Please make sure your passwords match'})
+        dispatch({ type: 'errorMessage' , payload: 'Please make sure your passwords match.'})
         return
       }
     }
@@ -147,7 +169,6 @@ function LoginSignupForm({loginType}) {
     }
           
   }
-
   
 
   return (
@@ -183,6 +204,10 @@ function LoginSignupForm({loginType}) {
           type={(isMobileLogin === false) || (loginType === "forgotpassword")  ? "email" : "number"}
           value = {(isMobileLogin === false) || (loginType === "forgotpassword")  ? email : number}
           onChange={(e)=>{
+            if(error){
+              dispatch({ type: 'error', payload: false })
+            }
+
             if((isMobileLogin === false) || (loginType === "forgotpassword")){
               dispatch({
                 type: 'email' ,
@@ -213,6 +238,7 @@ function LoginSignupForm({loginType}) {
           type="password"
           value = {password}
           onChange={(e)=>{
+            dispatch({ type: 'error', payload: false })
             dispatch({
               type: 'password' ,
               payload : e.target.value
@@ -236,6 +262,7 @@ function LoginSignupForm({loginType}) {
           type="password"
           value={confirmPassword}
           onChange={(e)=>{
+            dispatch({ type: 'error', payload: false })
             dispatch({
               type: 'confirmPassword' ,
               payload : e.target.value
