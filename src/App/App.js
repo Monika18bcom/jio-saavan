@@ -22,8 +22,8 @@ function App() {
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("user");
-    console.log(storedUserData, "user data set in localStorage");
 
+    // console.log(storedUserData, "user data set in localStorage");
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
     }

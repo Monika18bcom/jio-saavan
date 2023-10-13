@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import NewReleases from "../Browse/NewReleases";
 import TopCharts from "../Browse/TopCharts";
 import MyMusic from "../My-Library/MyMusic";
+import Me from "../NavBar/Me";
 
 function Home() {
 
@@ -123,7 +124,8 @@ function Home() {
                     <Route path="podcasts" element={<MyMusic />} />
                     <Route path="artists" element={<MyMusic />} />
                 </Route>
-                <Route path="/listening-history" element={<MyMusic />}/> 
+                <Route path="/listening-history" element={<MyMusic />}/>
+                <Route path='/me' element={<Me />} /> 
             </Routes>
             <Footer />
         </div>

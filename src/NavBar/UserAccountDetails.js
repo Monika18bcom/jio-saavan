@@ -3,11 +3,13 @@ import './UserAccountDetails.css'
 import { useAuth } from '../useAuth';
 import { MainPageContext } from '../App/MainPage';
 import { useNavigate } from 'react-router-dom';
+import { JiosaavnContext } from '../App/App';
 
 
 function UserAccountDetails() {
 
     const { logOut } = useAuth()
+    const { userData } = useContext(JiosaavnContext)
     const { setDisplayAccount , profileSelected , setProfileSelected } = useContext(MainPageContext)
     const navigate = useNavigate()
     const userAccountRef = useRef()
@@ -42,24 +44,30 @@ function UserAccountDetails() {
 
     const handleClick = (e) =>{
         if(e.target.parentElement.classList.contains('user-account-data-top')){
-            if(e.target.classList.contains('my-music')){
-                navigate('/my-music')
+            if(userData.userDetails){
+                if(e.target.classList.contains('my-music')){
+                    navigate('/my-music')
+                }
+                else if(e.target.classList.contains('my-profile')){
+                    navigate('/me')
+                }
+                else if(e.target.classList.contains('history')){
+                    navigate('/listening-history')
+                }
             }
-            else if(e.target.classList.contains('my-profile')){
-                navigate('/me')
-            }
-            else if(e.target.classList.contains('history')){
-                navigate('/listening-history')
-            }
+            
         }
         else if(e.target.parentElement.classList.contains('user-account-data-bottom')){
             if(e.target.classList.contains('log-out')){
                 logOut()
+                navigate('/')
                 setDisplayAccount(false)
             }
             
         }
     }
+
+    console.log(userData)
 
   return (
     <div className='user-account-details-container' ref={userAccountRef} onClick={(e) => handleClick(e)}>

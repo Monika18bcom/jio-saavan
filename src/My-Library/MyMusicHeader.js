@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from 'react'
 import './MyMusicHeader.css'
 import {IoIosSearch} from 'react-icons/io'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../useAuth'
+
 
 
 function MyMusicHeader() {
 
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
     const { logOut } = useAuth()
+    const navigate = useNavigate()
 
     const [myMusicArr , setMyMusicArr] = useState(false)
 
@@ -31,7 +33,10 @@ function MyMusicHeader() {
                 </div>
             </div>
             <div className='my-music-header-logout-section'>
-                <div className='logout-btn' onClick={()=> logOut()} >Log Out</div>
+                <div className='logout-btn' onClick={()=> { 
+                    logOut()
+                    navigate('/')
+                    }} >Log Out</div>
             </div>
         </div>
         <div className='my-music-header-user-library'>

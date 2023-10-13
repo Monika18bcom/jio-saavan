@@ -19,10 +19,6 @@ function NavBar(){
 
     const [isSelected, setIsSelected] = useState(false)
 
-    // useEffect(()=>{
-    //     console.log(userData?.userToken , "in useEffect of navBar")
-    // },[userData])
-
     const handleProfile = (e) => {
 
         if(e.target.classList.contains('nav-bar-user-profile') || e.target.parentElement.classList.contains('nav-bar-user-profile')){

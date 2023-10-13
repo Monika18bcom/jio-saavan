@@ -1,0 +1,149 @@
+.me-profile-container{
+    width: 90%;
+    height: 100vh;
+    padding: 34px 0 0 44px;
+    color: #3e3e3e;
+}
+
+.me-header{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin-bottom: 44px;
+}
+
+.me-img-section{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    margin-right: 44px;
+    box-shadow: 0 30px 40px -20px rgba(0,0,0,.25);
+}
+
+.me-img-section > img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.me-user-data{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.me-user-data > h1{
+    width: 100%;
+    margin-bottom: 5.5px;
+    font-size: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.21;
+    color: #3e3e3e;   
+}
+
+.me-user-data > p{
+    width: 100%;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 15px;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #3e3e3e;   
+}
+
+.me-user-data > .me-btn-icon{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.me-btn-icon > .me-play-btn{
+    width: 128px;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 44px;
+    background-color: #2bc5b4;
+    color: #fff;
+    border-radius: 24px;
+    border: 1px solid #2bc5b4;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 2.4;
+    font-weight: 700;
+    transition: all .3s ease-in-out;
+}
+
+.me-btn-icon > .me-play-btn:hover{
+    background-color: #1E897D;
+    border: 1px solid #1E897D;
+}
+
+.me-btn-icon > .me-edit-icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #707070;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.me-btn-icon > .me-edit-icon:hover{
+    color: #2a2d36;;
+    border: 1px solid #2a2d36;;
+}
+
+.me-playlists-data-section{
+    width: 100%;
+    height: auto;
+}
+
+.me-playlists-data-section > h2{
+    width: 100%;
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 700;
+    color: #3e3e3e;
+    margin-bottom: 22px;
+}
+
+.me-playlists-data-section > .me-playlists-data{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+
+.me-playlists-data > .me-playlists-img-name{
+    width: 141px;
+    height: 176;
+    margin-bottom: 22px;
+}
+
+.me-playlists-data > .me-playlists-img-name > img{
+    width: 100%;
+    margin-bottom: 11px;
+    border-radius: 4px;
+
+}
+.me-playlists-data > .me-playlists-img-name > h4{
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #3e3e3e;
+}
