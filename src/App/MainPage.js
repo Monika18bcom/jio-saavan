@@ -12,7 +12,7 @@ export const MainPageContext = createContext({})
 function MainPage() {
   const [isNavMusicHover , setIsNavMusicHover] = useState(false)
   const [displayAccount , setDisplayAccount] = useState(false)
-
+  const [profileSelected , setProfileSelected] = useState(false)
 
   return (
     <MainPageContext.Provider 
@@ -20,7 +20,9 @@ function MainPage() {
         isNavMusicHover, 
         setIsNavMusicHover,
         displayAccount,
-        setDisplayAccount
+        setDisplayAccount,
+        profileSelected , 
+        setProfileSelected
       }}
     >
       <NavBar />

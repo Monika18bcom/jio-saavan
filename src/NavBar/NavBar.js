@@ -15,10 +15,10 @@ function NavBar(){
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
     const {userData} = useContext(JiosaavnContext) 
-    const { setIsNavMusicHover , setDisplayAccount , displayAccount } = useContext(MainPageContext)
+    const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected } = useContext(MainPageContext)
 
     const [isSelected, setIsSelected] = useState(false)
-    const [profileSelected , setProfileSelected] = useState(false)
+    // const [] = useState(false)
 
     // useEffect(()=>{
     //     console.log(userData?.userToken , "in useEffect of navBar")
