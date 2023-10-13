@@ -66,6 +66,7 @@ function LoginSignupForm({loginType}) {
   const userName = useMemo(()=>{
 
     const idx = email.indexOf('@')
+    
     if (idx !== -1){
       return email.substring(0 , idx)
     }
@@ -134,11 +135,13 @@ function LoginSignupForm({loginType}) {
 
     if(loginType === 'login'){
       if(email && password){
+        localStorage.setItem('userName' , JSON.stringify(userName))
         logIn( email , password )
       }  
     }
     else if(loginType === 'signup'){
       if(email && password){
+        localStorage.setItem('userName' , JSON.stringify(userName))
         signUp(userName , email , password)
       }  
     }

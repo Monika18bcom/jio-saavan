@@ -18,7 +18,6 @@ function NavBar(){
     const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected } = useContext(MainPageContext)
 
     const [isSelected, setIsSelected] = useState(false)
-    // const [] = useState(false)
 
     // useEffect(()=>{
     //     console.log(userData?.userToken , "in useEffect of navBar")
@@ -31,10 +30,6 @@ function NavBar(){
             setProfileSelected(!profileSelected)
             setDisplayAccount(!displayAccount)
         }
-        // else{
-        //     setProfileSelected(!profileSelected)
-        //     setDisplayAccount(!displayAccount)
-        // }
 
     }
 

@@ -100,6 +100,7 @@ export function useAuth() {
   const logOut = ()=>{
     console.log("logout func called")
     localStorage.removeItem('user')
+    localStorage.removeItem('userName')
     setUserData({
       userDetails: null,
       userToken: null

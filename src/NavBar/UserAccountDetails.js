@@ -40,24 +40,38 @@ function UserAccountDetails() {
 
     },[userAccountRef.current])
 
-
-    const handleLogOut = () => {
-        console.log('Logout clicked')
-        logOut()
-        setDisplayAccount(false)
+    const handleClick = (e) =>{
+        if(e.target.parentElement.classList.contains('user-account-data-top')){
+            if(e.target.classList.contains('my-music')){
+                navigate('/my-music')
+            }
+            else if(e.target.classList.contains('my-profile')){
+                navigate('/me')
+            }
+            else if(e.target.classList.contains('history')){
+                navigate('/listening-history')
+            }
+        }
+        else if(e.target.parentElement.classList.contains('user-account-data-bottom')){
+            if(e.target.classList.contains('log-out')){
+                logOut()
+                setDisplayAccount(false)
+            }
+            
+        }
     }
 
   return (
-    <div className='user-account-details-container' ref={userAccountRef}>
+    <div className='user-account-details-container' ref={userAccountRef} onClick={(e) => handleClick(e)}>
         <ul className='user-account-data-top'>
-            <li onClick={()=> navigate('/my-music')} >My Music</li>
-            <li onClick={()=> navigate('/me')} >My Profile</li>
-            <li onClick={()=> navigate('/listening-history')} >History</li>
-            <li>Account Settings</li>
+            <li className='my-music'>My Music</li>
+            <li className='my-profile'>My Profile</li>
+            <li className='history'>History</li>
+            <li className='account-settings'>Account Settings</li>
         </ul>
         <ul className='user-account-data-bottom'>
-            <li>Help & Support</li>
-            <li onClick={() => handleLogOut()}>Log Out</li>
+            <li className='help-support'>Help & Support</li>
+            <li className='log-out'>Log Out</li>
         </ul>
     </div>
   )

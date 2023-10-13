@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import './MyMusicHeader.css'
 import {IoIosSearch} from 'react-icons/io'
 import { NavLink } from 'react-router-dom'
@@ -8,6 +8,11 @@ function MyMusicHeader() {
 
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
+    const userName = useMemo(()=>{
+        const name = localStorage.getItem('userName')
+        return JSON.parse(name)
+    },[])
+
   return (
     <div className='my-music-header-container'>
         <div className='my-music-header-user-profile'>
@@ -16,7 +21,7 @@ function MyMusicHeader() {
                     <img src={profileImg} alt='Profile Image' ></img>
                 </div>
                 <div className='user-name'>
-                    <h2>UserName</h2>
+                    <h2>{userName}</h2>
                     <h3>Free</h3>
                     <span>Go Pro</span>
                 </div>
