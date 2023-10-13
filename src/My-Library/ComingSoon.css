@@ -1,0 +1,72 @@
+.coming-soon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin-top: 88px;
+}
+
+.coming-soon-container > h4{
+    font-size: 20px;
+    line-height: 1.375;
+    color: #3e3e3e;
+}
+
+.coming-soon-container > p{
+    font-size: 17px;
+    line-height: 1.4;
+    color: #3e3e3e;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 400;
+    margin-bottom: 22px;
+}
+
+.coming-soon-btns{
+    width: 225px;
+    display: flex;
+    flex-direction: column;
+}
+
+.coming-soon-btns > div{
+    width: 100%;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 22px;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 6px 22px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all .3s ease-in-out;
+}
+
+.coming-soon-btns .home-music-btn{
+    background-color: #2bc5b4;
+    color: #fff;
+    border: 1px solid #2bc5b4;
+    margin-bottom: 11px;  
+}
+
+.coming-soon-btns .home-music-btn:hover{
+    background-color: #1E897D;
+    border: 1px solid #1E897D;
+}
+
+.coming-soon-btns .new-releases-btn{
+    background-color: #fff;
+    color: #707070;
+    border: 1px solid #ccc;
+    margin-bottom: 22px;
+}
+
+.coming-soon-btns .new-releases-btn:hover{
+    color: #2bc5b4;
+    border: 1px solid #2bc5b4;
+}
+

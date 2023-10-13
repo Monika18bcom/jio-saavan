@@ -1,12 +1,16 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import './MyMusicHeader.css'
 import {IoIosSearch} from 'react-icons/io'
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../useAuth'
 
 
 function MyMusicHeader() {
 
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
+    const { logOut } = useAuth()
+
+    const [myMusicArr , setMyMusicArr] = useState(false)
 
     const userName = useMemo(()=>{
         const name = localStorage.getItem('userName')
@@ -27,7 +31,7 @@ function MyMusicHeader() {
                 </div>
             </div>
             <div className='my-music-header-logout-section'>
-                <div className='logout-btn'>Log Out</div>
+                <div className='logout-btn' onClick={()=> logOut()} >Log Out</div>
             </div>
         </div>
         <div className='my-music-header-user-library'>
@@ -44,13 +48,16 @@ function MyMusicHeader() {
                 <span className='shuffle-all'>Shuffle All</span>
             </div>
         </div>
-        <div className='my-music-header-usermusic-data'>
-            <p><span>count</span><span>type</span></p>
-            <form className='filter-search'>
-                <IoIosSearch className='search-icon' />
-                <input type='text' placeholder='Filter type'></input>
-            </form>
-        </div>
+        {
+            myMusicArr &&
+            <div className='my-music-header-usermusic-data'>
+                <p><span>count</span><span>type</span></p>
+                <form className='filter-search'>
+                    <IoIosSearch className='search-icon' />
+                    <input type='text' placeholder='Filter type'></input>
+                </form>
+            </div>
+        }
     </div>
   )
 }
