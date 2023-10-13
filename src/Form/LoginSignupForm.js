@@ -7,11 +7,11 @@ import { useAuth } from '../useAuth';
 import { JiosaavnContext } from "../App/App";
 
 
-function LoginSignupForm() {
+function LoginSignupForm({loginType}) {
 
   const navigate = useNavigate()
   
-  const { loginType , setLoginType , showModal, isMobileLogin , setIsMobileLogin } = useContext(JiosaavnContext)
+  const { setLoginType , showModal, isMobileLogin , setIsMobileLogin } = useContext(JiosaavnContext)
 
   const { errApiResult , logIn, signUp, updatePassword } = useAuth()
 

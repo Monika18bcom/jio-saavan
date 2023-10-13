@@ -117,8 +117,13 @@ function Home() {
                 <Route path='/top-artists' element={<NewReleases type='artist' />} />
                 <Route path='/radio' element={<TopCharts type="radio" />} />
                 <Route path='/my-music' element={<MyMusic />} >
-
+                    <Route path="playlists" element={<MyMusic />} />
+                    <Route path="songs" element={<MyMusic />} />
+                    <Route path="albums" element={<MyMusic />} />
+                    <Route path="podcasts" element={<MyMusic />} />
+                    <Route path="artists" element={<MyMusic />} />
                 </Route>
+                <Route path="/listening-history" element={<MyMusic />}/> 
             </Routes>
             <Footer />
         </div>

@@ -1,5 +1,8 @@
 import React from 'react'
 import './MyMusicHeader.css'
+import {IoIosSearch} from 'react-icons/io'
+import { NavLink } from 'react-router-dom'
+
 
 function MyMusicHeader() {
 
@@ -24,12 +27,12 @@ function MyMusicHeader() {
         </div>
         <div className='my-music-header-user-library'>
             <ul className='library-ul'>
-                <li>Playlists</li>
-                <li>Songs</li>
-                <li>Albums</li>
-                <li>Podcasts</li>
-                <li>Artists</li>
-                <li>History</li>
+                <li><NavLink to='playlists'>Playlists</NavLink></li>
+                <li><NavLink to='songs'>Songs</NavLink></li>
+                <li><NavLink to='albums'>Albums</NavLink></li>
+                <li><NavLink to='podcasts'>Podcasts</NavLink></li>
+                <li><NavLink to='artists'>Artists</NavLink></li>
+                <li><NavLink to='/listening-history'>History</NavLink></li>
             </ul>
             <div className='library-btns'>
                 <span className='sync-library'>Sync Library</span>
@@ -38,10 +41,10 @@ function MyMusicHeader() {
         </div>
         <div className='my-music-header-usermusic-data'>
             <p><span>count</span><span>type</span></p>
-            <div className='filter-search'>
-                icon
-                <input></input>
-            </div>
+            <form className='filter-search'>
+                <IoIosSearch className='search-icon' />
+                <input type='text' placeholder='Filter type'></input>
+            </form>
         </div>
     </div>
   )

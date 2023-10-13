@@ -59,7 +59,7 @@ function App() {
 
         {showModal && !userData.userDetails && (
           <Modal>
-            <FormContent />
+            <FormContent loginType={loginType} />
           </Modal>
         )}
       </div>

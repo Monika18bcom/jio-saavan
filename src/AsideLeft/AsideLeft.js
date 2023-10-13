@@ -4,7 +4,7 @@ import {IoMusicalNoteOutline} from 'react-icons/io5'
 import {RiAlbumLine} from 'react-icons/ri'
 import {MdPodcasts} from 'react-icons/md'
 import {LiaMicrophoneAltSolid} from 'react-icons/lia'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import './AsideLeft.css'
 import { useContext } from 'react'
 import { JiosaavnContext } from '../App/App'
@@ -14,24 +14,53 @@ function AsideLeft(){
 
     const {userData , setShowModal} = useContext(JiosaavnContext)
 
+    const navigate = useNavigate()
+
     const handleLibrary = (e)=>{
-        if( e.target.parentElement.classList.contains('asideLeft-ul') || 
-        e.target.classList.contains('library-history') || 
-        e.target.parentElement.classList.contains('library-history') || 
-        e.target.classList.contains('library-songs') || 
-        e.target.parentElement.classList.contains('library-songs') ||
-        e.target.classList.contains('library-albums') || 
-        e.target.parentElement.classList.contains('library-albums') ||
-        e.target.classList.contains('library-podcasts') || 
-        e.target.parentElement.classList.contains('library-podcasts') ||
-        e.target.classList.contains('library-artists') || 
-        e.target.parentElement.classList.contains('library-artists')
-        ){
-            if(!userData.userToken){
+        if(!userData.userToken){
+            if(e.target.classList.contains('library-history') || 
+            e.target.parentElement.classList.contains('library-history') || 
+            e.target.classList.contains('library-songs') || 
+            e.target.parentElement.classList.contains('library-songs') ||
+            e.target.classList.contains('library-albums') || 
+            e.target.parentElement.classList.contains('library-albums') ||
+            e.target.classList.contains('library-podcasts') || 
+            e.target.parentElement.classList.contains('library-podcasts') ||
+            e.target.classList.contains('library-artists') || 
+            e.target.parentElement.classList.contains('library-artists'))
+            {
                 console.log("setModal")
                 setShowModal(true)
             }
+
+        }else{
+            if(e.target.classList.contains('library-history') || 
+            e.target.parentElement.classList.contains('library-history')){
+                console.log("history aside left clicked")
+                navigate('/listening-history')
+            }
+            else if(e.target.classList.contains('library-songs') || 
+            e.target.parentElement.classList.contains('library-songs')){
+                console.log("songs aside left clicked")
+                navigate('my-music/songs')
+            }
+            else if(e.target.classList.contains('library-albums') || 
+            e.target.parentElement.classList.contains('library-albums')){
+                console.log("albums aside left clicked")
+                navigate('my-music/albums')
+            }
+            else if(e.target.classList.contains('library-podcasts') || 
+            e.target.parentElement.classList.contains('library-podcasts')){
+                console.log("podcasts aside left clicked")
+                navigate('my-music/podcasts')
+            }
+            else if(e.target.classList.contains('library-artists') || 
+            e.target.parentElement.classList.contains('library-artists')){
+                console.log("history aside left clicked")
+                navigate('my-music/artists')
+            }
         }
+        
 
     }
 

@@ -6,10 +6,10 @@ import './FormContent.css'
 import { JiosaavnContext } from '../App/App';
 
 
-function FormContent() {
+function FormContent({loginType}) {
 
   const navigate = useNavigate()
-  const { loginType , setLoginType , showModal , isMobileLogin , setIsMobileLogin } = useContext(JiosaavnContext)
+  const {  setLoginType , showModal } = useContext(JiosaavnContext)
 
 
   return (
@@ -86,7 +86,7 @@ function FormContent() {
           }
         </div>
         <div className="login-right-form-container-bottom" >
-          <LoginSignupForm />
+          <LoginSignupForm loginType={loginType} />
         </div>
     </div>
   )
