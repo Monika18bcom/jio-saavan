@@ -5,6 +5,7 @@ import MainPage from "./MainPage";
 import LogIn from "../Form/LogIn";
 import Modal from "../Modal/Modal";
 import FormContent from "../Form/FormContent";
+import GoPro from "../NavBar/GoPro";
 
 export const JiosaavnContext = createContext({});
 
@@ -52,6 +53,7 @@ function App() {
           <Route path="/login" element={<LogIn loginType="login" />} />
           <Route path="/signup" element={<LogIn loginType="signup" />} />
           <Route path="/forgot-password" element={<LogIn loginType="forgotpassword" />} />
+          <Route path="/pro" element={<GoPro />} />
         </Routes>
 
         {showModal && !userData.userDetails && (

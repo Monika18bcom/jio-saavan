@@ -40,7 +40,7 @@ function NavBar(){
                 <ul className="nav-left">
                     <li onMouseEnter={()=> setIsNavMusicHover(true)} onMouseLeave={() => setIsNavMusicHover(false)} ><NavLink className="navlink" to="/">Music</NavLink></li>
                     <li><NavLink className="navlink podcasts" to="/original-podcasts">Podcasts</NavLink></li>
-                    <li><NavLink className="navlink" to="/gopro">Go Pro</NavLink></li>
+                    <li><NavLink className="navlink" target='_blank' to="/pro">Go Pro</NavLink></li>
                 </ul> 
                 <div className="nav-center">
                     <IoIosSearch className="search-icon"/>

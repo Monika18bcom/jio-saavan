@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import MyMusicHeader from './MyMusicHeader'
 import './MyMusic.css'
+import { JiosaavnContext } from "../App/App";
 import ComingSoon from './ComingSoon'
+import { useNavigate } from 'react-router-dom';
 
 function MyMusic() {
+
+  const { userData } = useContext(JiosaavnContext)
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+
+    if(!userData.userToken){
+      
+      navigate('/') 
+    }
+
+  },[])
+
 
   return (
     <div className='my-music-main-container'>

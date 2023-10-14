@@ -15,7 +15,7 @@ function ComingSoon() {
         <p>Tap any <FontAwesomeIcon icon={faHeart} /> or <FontAwesomeIcon icon={faEllipsis} /> button to build your music library.</p>
         <div className='coming-soon-btns'>
             <div className='home-music-btn' onClick={()=> navigate('/')}>
-                <span>Play Weekly Top Songs</span>
+                <span>Play Trending Songs</span>
             </div>
             <div className='new-releases-btn' onClick={()=> navigate('/new-releases')}>
                 <span>Browse New Releases</span>
