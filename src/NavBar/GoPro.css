@@ -1,9 +1,15 @@
 .gopro-main-container{
     width: 100vw;
     height: auto;
+    min-height: 100vh;
     background-color: #f6f6f6;
     display: flex;
     flex-direction: column;
+    /* check this for scrolling */
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* z-index: 7; */
 }
 
 .gopro-header{
@@ -12,13 +18,15 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 8;
     display: flex;
     justify-content: center;
+    background-color: #2a2d3677;
 }
 
 .gopro-sub-header{
-    background-color: #2a2d36;
-    width: 75%;
+    /* background-color: #2a2d36; */
+    width: 74%;
     height: 100%;
     display: flex;
     justify-content: space-between;  
@@ -51,6 +59,7 @@
     color: rgba(255,255,255,.84);
     padding: 7px 20px;
     font-size: 16px;
+    font-weight: 600;
     border-radius: 22px;
     cursor: pointer;
     border: 1px solid #8b9dbf;
@@ -70,7 +79,7 @@
     font-size: 16px;
     cursor: pointer;
     transition: all .12s ease-out;
-    padding-right: 8px;
+    font-weight: 600;
 }
 
 .gopro-my-account span{
@@ -84,3 +93,149 @@
     padding-bottom: 2px;
     border-top: 3px solid #fff;
 }
+
+.gopro-plans-container{
+    width: 100%;
+    height: auto;
+    padding-top: 200px;
+    background-color: #2a2d36;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.gopro-plan-grid{
+    width: 74%;
+    height: 100%;
+    padding: 0 100px;
+}
+
+.gopro-plan-grid > p{
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-style: italic;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.5;
+    /* height: auto; */
+}
+
+.gopro-plan-grid > p > span{
+    color: #2bc5b4;
+}
+
+.gopro-plan-grid > h1{
+    width: 100%;
+    margin-bottom: 50px;
+    font-size: calc(16px * 3);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+}
+
+.gopro-plan-grid > h1 > a{
+    color: inherit;
+}
+
+.gopro-plans-card-section{
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    "yearPlan monthPlan"
+    "whyPro whyPro";
+}
+
+.gopro-plans-card-section .year-plan{
+    grid-area: yearPlan;
+    padding-right: 15px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    /* box-shadow: rgba(42,45,54,.075) 0 12px 34px; */
+}
+
+.gopro-plans-card-section .month-plan{
+    grid-area: monthPlan;
+    padding-left: 15px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    /* box-shadow: rgba(0,0,0,.05) 0 6px 15px; */
+}
+
+.gopro-plans-card-section .why-pro{
+    grid-area: whyPro;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-areas: "pTag payImg payImg";
+    /* box-shadow: inset transparent 0 0 0 0; */
+}
+
+.gopro-plans-card-section .why-pro > p{
+    font-size: 24px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #fff;
+    font-style: italic;
+    display: flex;
+    gap: 3px;
+    grid-area: pTag;
+}
+.why-pro > p > .learn-more{
+    color: #2bc5b4;
+    cursor: pointer;
+    transition: all .12s ease-out;
+    display: flex;
+    align-items: center;
+}
+
+.why-pro .why-pro-pay-img{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    grid-area: payImg;
+}
+
+.why-pro .why-pro-pay-img > .paytm-logo{
+    width: 64px;
+    height: 34px;
+}
+
+.why-pro .why-pro-pay-img > .amazon-logo{
+    width: 116px;
+    height: 20px;   
+}
+
+.gopro-main{
+    width: 100%;
+    height: auto;
+    background-color: #f6f6f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.gopro-sub-main{
+    width: 74%;
+    height: 100%;
+    padding: 0 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.gopro-main-table{
+    width: 100%;
+    background-color: #8b9dbf;
+    
+}
+
+/* padding 80 top 
+bottom 120 */
+
+
+
