@@ -9,7 +9,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    /* z-index: 7; */
 }
 
 .gopro-header{
@@ -25,7 +24,6 @@
 }
 
 .gopro-sub-header{
-    /* background-color: #2a2d36; */
     width: 74%;
     height: 100%;
     display: flex;
@@ -210,7 +208,8 @@
 .gopro-main{
     width: 100%;
     height: auto;
-    background-color: #f6f6f6;
+    background-color: #fff;
+    /* background-color: #f6f6f6; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -218,6 +217,7 @@
     padding-top: 80px;
     padding-bottom: 120px;
     color: #3e3e3e;
+    font-weight: 700;
 }
 
 .gopro-sub-main{
@@ -235,17 +235,50 @@
     text-align: center;
     margin-bottom: 22px;
     font-size: 30px;
-    font-weight: 700;
     line-height: 1.25;
     font-style: italic;
 }
 
 
-.gopro-main-table{
-    width: 100%;
+.gopro-sub-main > .gopro-main-table{
+    width: 90%;
     margin: 50px 0;
-    /* background-color: #8b9dbf; */
-    
+    padding: 0 22px;
+    /* background-color: #8b9dbf; */  
+}
+
+.gopro-sub-main > .try-pro-now{
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    line-height: 1.25;
+    font-style: italic;
+}
+
+.gopro-sub-main > h4{
+    width: 100%;
+    text-align: center;
+    color: #a9a9a9;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.3;
+    font-style: italic;
+    margin-bottom: 18px;
+}
+
+.gopro-sub-main > .pick-plan-btn{
+    color: #fff;
+    background-color: #2bc5b4;
+    font-size: 19px;
+    cursor: pointer;
+    line-height: 2;
+    padding: 7px 42px;
+    border-radius: 26px;
+    transition: all .12s ease-out;
+}
+
+.gopro-sub-main > .pick-plan-btn:hover{
+    background-color: #56D0C3;  
 }
 
 

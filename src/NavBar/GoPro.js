@@ -48,7 +48,7 @@ function GoPro() {
     }
 
     const tableArr = [
-        {col1: 'Benefits' , col2: 'Free' , col3: 'Pro'},
+        {col1: 'Benefits' , col2: 'Free' , col3: 'Pro', border: 'top'},
         {col1: '80+ Million Songs' , col2: true },
         {col1: 'JioTunes' , col2: true },
         {col1: 'Recommendations' , col2: true },
@@ -58,7 +58,7 @@ function GoPro() {
         {col1: 'Highest Quality Audio' },
         {col1: 'Exclusive & Original Content' },
         {col1: 'Listen on Sonos, Alexa & More' },
-        {col1: 'Special Access & Offers' },
+        {col1: 'Special Access & Offers' , border: 'bottom'},
     ]
 
   return (
@@ -107,9 +107,9 @@ function GoPro() {
                         tableArr.map((e , idx)=> <Table key={idx} e={e}/>)
                     }
                 </div>
-                <h3>Try Pro Now</h3>
+                <h3 className='try-pro-now'>Try Pro Now</h3>
                 <h4>Make music beautiful.</h4>
-                <div><span>Pick a Plan</span></div>
+                <div className='pick-plan-btn'><span>Pick a Plan</span></div>
             </main>
         </div>
         <div className='gopro-footer'></div>

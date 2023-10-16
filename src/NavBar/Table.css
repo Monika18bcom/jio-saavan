@@ -1,25 +1,15 @@
 .table-row-section{
     display: flex;
-    
-    /* align-items: center; */
-    /* justify-content: center; */
     width: 100%;
     height: 59px;
-    /* height: 35px; */
-    /* display: grid;
-    grid-template-areas: "data1 data1 data2 data3"; */
-    /* width: 100%; */
-    
 }
 
 .table-row-section .data1{
     width: 70%;
-    /* grid-area: data1; */
-    /* background-color: aqua; */
     display: flex;
     align-items: center;
     border-bottom: 1px solid #e9e9e9;
-
+    font-size: 18px;
 }
 
 .table-row-section .data2{
@@ -28,8 +18,7 @@
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid #e9e9e9;
-    /* background-color: green; */
-    /* grid-area: data2; */
+    font-size: 25px;
 }
 
 .table-row-section .data3{
@@ -37,6 +26,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* grid-area: data3; */
-
+    color: #fff;
+    background-color: #2bc5b4;
+    box-shadow: 0 0 12px 4px rgba(45, 197, 180, 0.33);
 }
