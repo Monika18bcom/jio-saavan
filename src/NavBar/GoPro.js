@@ -113,7 +113,6 @@ function GoPro() {
             </main>
         </div>
         <div className='gopro-footer'>
-            <div></div>
             <div className='gopro-footer-angle'></div>
         </div>
     </div>
