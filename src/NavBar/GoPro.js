@@ -112,7 +112,10 @@ function GoPro() {
                 <div className='pick-plan-btn'><span>Pick a Plan</span></div>
             </main>
         </div>
-        <div className='gopro-footer'></div>
+        <div className='gopro-footer'>
+            <div></div>
+            <div className='gopro-footer-angle'></div>
+        </div>
     </div>
   )
 }
