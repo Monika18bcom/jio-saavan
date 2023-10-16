@@ -26,30 +26,14 @@ function AsideBottom() {
   const navigate = useNavigate();
 
   const [isHover, setIsHover] = useState(false);
-  const [isRepeat, setIsRepeat] = useState(false);
+  const [isRepeat, setIsRepeat] = useState(1);
   const [isPlay, setIsPlay] = useState(true);
   const [isVolume, setIsVolume] = useState(true);
   const [progressWidth, setProgressWidth] = useState(0);
 
   const [localSongData, setLocalSongData] = useState(null);
   const [songUrl, setSongUrl] = useState(defaultSong);
-  const [play, { stop, pause, duration , sound}] = useSound(songUrl, {
-    onplay: () => {
-        console.log('Audio playback started')
-        setIsPlay(false)
-    },
-    onpause: () => {
-        console.log('Audio playback paused')
-        setIsPlay(true)
-    },
-    onend: () => {
-        console.log('Audio playback end')
-        setIsPlay(true)
-    },
-    onresume: () => setIsPlay(false)
-  });
-
-//   console.log(sound)
+  const [play, { stop, pause, duration, isPlaying }] = useSound(songUrl);
 
   const initialDuration = {
     currMin: 0,
@@ -83,13 +67,6 @@ function AsideBottom() {
     durationReducer,
     initialDuration
   );
-
-  useEffect(()=>{
-    if(localSongData?._id === songData){
-        // sound.seek(0)
-        console.log('same song')
-    }
-  },[songData])
 
   useEffect(() => {
     // console.log("Time updated", isPlay , duration , durationState.totalDuration)
@@ -134,7 +111,7 @@ function AsideBottom() {
 
     if (Math.floor(duration / 1000) === durationState.totalDuration) {
       clearTimeout(timer);
-    //   setIsPlay(true);
+      setIsPlay(true);
       durationDispatch({
         type: "currMin",
         payload: 0,
@@ -143,6 +120,7 @@ function AsideBottom() {
         type: "currSec",
         payload: 0,
       });
+
       durationDispatch({
         type: "totalDuration",
         payload: 0,
@@ -153,7 +131,7 @@ function AsideBottom() {
   }, [durationState.totalDuration, isPlay, duration]);
 
   useEffect(() => {
-    // stop();
+    stop();
     if (localSongData && duration > 150) {
       if (duration > 60000) {
         let min = Math.floor(duration / 60000);
@@ -174,6 +152,7 @@ function AsideBottom() {
         });
       }
       play();
+      setIsPlay(false);
     }
   }, [duration]);
 
@@ -188,26 +167,27 @@ function AsideBottom() {
       })
         .then((res) => res.json())
         .then((result) => {
-        //   console.log(result)
+          // console.log(result)
           setLocalSongData(result.data);
           setSongUrl(result.data.audio_url);
         });
     }
   }, [songData]);
 
-
   useEffect(() => {
-    // when the routing changes the expand should go away
     if (isExpand) {
       setIsExpand(false);
     }
   }, [window.location.pathname]);
 
   const handleActions = (e) => {
+    // console.log(e)
     if (
       e.target.classList.contains("expand-album") ||
       e.target.parentElement.classList.contains("expand-album")
     ) {
+      console.log("expand clicked");
+      // console.log(localSongData)
       if (localSongData !== null) {
         setIsExpand(true);
       }
@@ -224,6 +204,16 @@ function AsideBottom() {
     navigate(`/${e.type || "artist"}/${e.name || e.title}/${e._id}`);
   };
 
+  const handlePlayBtn = () => {
+    // if (isPlay) {
+    //   play();
+    //   setIsPlay(false);
+    // } else {
+    //   pause();
+    //   setIsPlay(true);
+    // }
+    console.log("play clicked");
+  };
 
   const handleBottomControls = (e) => {
     if (
@@ -233,16 +223,7 @@ function AsideBottom() {
         "aside-bottom-item-repeat"
       )
     ) {
-        if (localSongData !== null) {
-            if(sound._loop){
-                setIsRepeat(false)
-                sound.loop(false);
-            }else{
-                setIsRepeat(true)
-                sound.loop(true);
-            }
-        }
-
+      console.log("loop");
     } 
     else if (e.target.classList.contains("aside-bottom-item-prev") ||
       e.target.parentElement.classList.contains("aside-bottom-item-prev") ||
@@ -255,10 +236,12 @@ function AsideBottom() {
       e.target.parentElement.parentElement.classList.contains("aside-bottom-item-play-pause")) 
     {
       console.log("play-pause");
-      if (isPlay) {
-        play();
-      } else {
-        pause();
+      if(isPlaying){
+        pause()
+        console.log(isPlaying , "isPlaying after calling pause")
+      }else{
+        play()
+        console.log(isPlaying , "isPlaying after calling play")
       }
     } 
     else if (
@@ -275,6 +258,11 @@ function AsideBottom() {
       console.log("shuffle");
     }
   };
+
+  // console.log("progressWidth",progressWidth , "%")
+  // console.log(durationState)
+  // console.log("line 185 asideBottom",localSongData)
+  // console.log(isExpand)
 
   return (
     <div
@@ -343,10 +331,9 @@ function AsideBottom() {
         >
           <li
             className="aside-bottom-item-repeat"
-            style={{ cursor: localSongData && "pointer" , color: isRepeat && '#2bc5b4'}}
+            style={{ cursor: localSongData && "pointer" }}
           >
-            {/* {isRepeat === (1 || 2) ? <RiRepeatLine /> : <RiRepeatOneFill />} */}
-            <RiRepeatLine />
+            {isRepeat === (1 || 2) ? <RiRepeatLine /> : <RiRepeatOneFill />}
           </li>
           <li
             className="aside-bottom-item-prev"
@@ -356,6 +343,7 @@ function AsideBottom() {
           </li>
           <li
             className="aside-bottom-item-play-pause"
+            onClick={handlePlayBtn}
             style={{ cursor: localSongData && "pointer" }}
           >
             {isPlay ? <HiPlay /> : <IoIosPause />}
