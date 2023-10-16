@@ -215,6 +215,9 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
+    padding-top: 80px;
+    padding-bottom: 120px;
+    color: #3e3e3e;
 }
 
 .gopro-sub-main{
@@ -227,15 +230,23 @@
     align-items: center;
 }
 
+.gopro-sub-main > .more-with-pro{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 22px;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.25;
+    font-style: italic;
+}
+
 
 .gopro-main-table{
     width: 100%;
-    background-color: #8b9dbf;
+    margin: 50px 0;
+    /* background-color: #8b9dbf; */
     
 }
-
-/* padding 80 top 
-bottom 120 */
 
 
 

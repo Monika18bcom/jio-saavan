@@ -7,8 +7,6 @@ import {IoIosArrowDown} from 'react-icons/io'
 import Table from './Table';
 
 
-
-
 function GoPro() {
 
     const yearPlan = {
@@ -50,17 +48,17 @@ function GoPro() {
     }
 
     const tableArr = [
-        'Benefits',
-        '80+ Million Songs',
-        'JioTunes',
-        'Recommendations',
-        'Ad-Free Music',
-        'Unlimited Downloads',
-        'Listen Offline',
-        'Highest Quality Audio',
-        'Exclusive & Original Content',
-        'Listen on Sonos, Alexa & More',
-        'Special Access & Offers'
+        {col1: 'Benefits' , col2: 'Free' , col3: 'Pro'},
+        {col1: '80+ Million Songs' , col2: true },
+        {col1: 'JioTunes' , col2: true },
+        {col1: 'Recommendations' , col2: true },
+        {col1: 'Ad-Free Music'  },
+        {col1: 'Unlimited Downloads' },
+        {col1: 'Listen Offline' },
+        {col1: 'Highest Quality Audio' },
+        {col1: 'Exclusive & Original Content' },
+        {col1: 'Listen on Sonos, Alexa & More' },
+        {col1: 'Special Access & Offers' },
     ]
 
   return (
@@ -103,15 +101,15 @@ function GoPro() {
         </div>
         <div className='gopro-main' id='gopro-main' >
             <main className='gopro-sub-main'>
-                <h3>Get Even More With Pro.</h3>
+                <h3 className='more-with-pro'>Get Even More With Pro.</h3>
                 <div className='gopro-main-table'>
                     {
                         tableArr.map((e , idx)=> <Table key={idx} e={e}/>)
                     }
                 </div>
-                <h3></h3>
-                <h4></h4>
-                <div><span></span></div>
+                <h3>Try Pro Now</h3>
+                <h4>Make music beautiful.</h4>
+                <div><span>Pick a Plan</span></div>
             </main>
         </div>
         <div className='gopro-footer'></div>
