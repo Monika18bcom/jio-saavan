@@ -59,7 +59,7 @@ function MusicCard({data}){
     }
 
     const handleClick = (data) => {
-        navigate(`/${data.type || 'artist' || 'album'}/${(data.name) || (data.title)}/${data._id}`)
+        navigate(`/${data.type}/${(data.name) || (data.title)}/${data._id}`)
     }
 
     return (

@@ -3,6 +3,12 @@ import useSound from 'use-sound';
 
 function Sample() {
 
+  const currentDuration = sound.seek();
+
+// Convert seconds to minutes and seconds
+const minutes = Math.floor(currentDuration / 60);
+const seconds = Math.floor(currentDuration % 60);
+
     const [result , controller] = useSound('https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf94e447ae38c3e33a7253.mp3', {
         onPlay: () => console.log('Audio started playing'),
         onPause: () => console.log('Audio paused'),

@@ -33,23 +33,10 @@ function AsideBottom() {
 
   const [localSongData, setLocalSongData] = useState(null);
   const [songUrl, setSongUrl] = useState(defaultSong);
-  const [play, { stop, pause, duration , sound}] = useSound(songUrl, {
-    onplay: () => {
-        console.log('Audio playback started')
-        setIsPlay(false)
-    },
-    onpause: () => {
-        console.log('Audio playback paused')
-        setIsPlay(true)
-    },
-    onend: () => {
-        console.log('Audio playback end')
-        setIsPlay(true)
-    },
-    onresume: () => setIsPlay(false)
-  });
 
-//   console.log(sound)
+  const [play, { stop, pause, duration , sound}] = useSound(songUrl);
+
+  const [timer , setTimer] = useState()
 
   const initialDuration = {
     currMin: 0,
@@ -84,24 +71,26 @@ function AsideBottom() {
     initialDuration
   );
 
-  useEffect(()=>{
-    if(localSongData?._id === songData){
-        // sound.seek(0)
-        console.log('same song')
-    }
-  },[songData])
-
   useEffect(() => {
-    // console.log("Time updated", isPlay , duration , durationState.totalDuration)
 
-    const timer = setTimeout(() => {
+    console.log('durationState.totalDuration', durationState.totalDuration,'isPlay', isPlay,'duration', duration)
+
+    if(isPlay || !songData){
+      
+      return
+    }
+    const time = setTimeout(() => {
       if (!isPlay && duration) {
-        // console.log("duration updating")
         durationDispatch({
           type: "totalDuration",
         });
+        console.log('setTimeOut called')
       }
-    }, [1000]);
+    }, [1000])
+
+    console.log(timer)
+
+    setTimer(time)
 
     if (durationState.totalDuration > 60) {
       let min = Math.floor(durationState.totalDuration / 60);
@@ -116,7 +105,8 @@ function AsideBottom() {
         type: "currSec",
         payload: sec,
       });
-    } else {
+    } 
+    else {
       let sec = Math.floor(durationState.totalDuration);
       durationDispatch({
         type: "currSec",
@@ -127,14 +117,14 @@ function AsideBottom() {
     if (!isPlay) {
       setProgressWidth(
         Math.floor(
-          (durationState.totalDuration / Math.floor(duration / 1000)) * 100
+          (durationState.totalDuration / Math.ceil(duration / 1000)) * 100
         )
       );
     }
 
-    if (Math.floor(duration / 1000) === durationState.totalDuration) {
+    if (Math.ceil(duration / 1000) === durationState.totalDuration) {
       clearTimeout(timer);
-    //   setIsPlay(true);
+      setIsPlay(true)
       durationDispatch({
         type: "currMin",
         payload: 0,
@@ -148,16 +138,18 @@ function AsideBottom() {
         payload: 0,
       });
       setProgressWidth(0);
-      // console.log("timer current status" ,timer)
     }
+
   }, [durationState.totalDuration, isPlay, duration]);
+  
 
   useEffect(() => {
     // stop();
+    clearTimeout(timer)
     if (localSongData && duration > 150) {
       if (duration > 60000) {
-        let min = Math.floor(duration / 60000);
-        let sec = duration / 1000 - Math.floor(duration / 60000) * 60;
+        let min = Math.ceil(duration / 60000);
+        let sec = duration / 1000 - Math.ceil(duration / 60000) * 60;
         durationDispatch({
           type: "totalMin",
           payload: min,
@@ -167,19 +159,20 @@ function AsideBottom() {
           payload: sec,
         });
       } else {
-        let sec = Math.floor(duration / 1000);
+        let sec = Math.ceil(duration / 1000);
         durationDispatch({
           type: "totalSec",
           payload: sec,
         });
       }
+      setIsPlay(false)
       play();
     }
   }, [duration]);
 
   useEffect(() => {
     stop();
-    setSongUrl(defaultSong);
+    // setSongUrl(defaultSong);
     if (songData.length > 0) {
       fetch(`https://academics.newtonschool.co/api/v1/music/song/${songData}`, {
         headers: {
@@ -188,12 +181,30 @@ function AsideBottom() {
       })
         .then((res) => res.json())
         .then((result) => {
-        //   console.log(result)
           setLocalSongData(result.data);
+          clearTimeout(timer)
+          console.log(timer, 'timer in fetch')
           setSongUrl(result.data.audio_url);
+          durationDispatch({
+            type: "totalDuration",
+            payload: 0,
+          });
+          
         });
     }
   }, [songData]);
+
+  useEffect(()=>{
+    if(localSongData?._id === songData){
+      // stop the current song then play the same song if the song id is same
+      stop()
+      clearTimeout(timer)
+      setIsPlay(false)
+      play()
+      
+      console.log('same song')
+    }
+  },[songData])
 
 
   useEffect(() => {
@@ -256,9 +267,11 @@ function AsideBottom() {
     {
       console.log("play-pause");
       if (isPlay) {
-        play();
+        setIsPlay(false);
+        play();  
       } else {
-        pause();
+        setIsPlay(true);
+        pause(); 
       }
     } 
     else if (
@@ -275,6 +288,9 @@ function AsideBottom() {
       console.log("shuffle");
     }
   };
+
+  console.log(isPlay, 'true = song not playing , false = song playing ')
+  console.log(duration)
 
   return (
     <div

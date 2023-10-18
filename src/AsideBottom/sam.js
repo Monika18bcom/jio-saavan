@@ -33,7 +33,7 @@ function AsideBottom() {
 
   const [localSongData, setLocalSongData] = useState(null);
   const [songUrl, setSongUrl] = useState(defaultSong);
-  const [play, { stop, pause, duration, isPlaying }] = useSound(songUrl);
+  const [play, { stop, pause, duration }] = useSound(songUrl);
 
   const initialDuration = {
     currMin: 0,
