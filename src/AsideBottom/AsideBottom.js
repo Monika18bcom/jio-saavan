@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useReducer } from "react";
+import React, { useState, useContext, useEffect, useReducer, useRef } from "react";
 import "./AsideBottom.css";
 import { IoIosPause } from "react-icons/io";
 import { RiRepeatLine } from "react-icons/ri";
@@ -37,7 +37,7 @@ function AsideBottom() {
 
   const [play, { stop, pause, duration , sound}] = useSound(songUrl);
 
-  const [timer , setTimer] = useState(null)
+  const timerId = useRef(null)
 
   const initialDuration = {
     currMin: 0,
@@ -73,8 +73,6 @@ function AsideBottom() {
   );
 
   useEffect(() => {
-    stop();
-    clearTimeout(timer)
     // setSongUrl(defaultSong);
     if (songData.length > 0) {
       fetch(`https://academics.newtonschool.co/api/v1/music/song/${songData}`, {
@@ -85,8 +83,7 @@ function AsideBottom() {
         .then((res) => res.json())
         .then((result) => {
           setLocalSongData(result.data);
-          // clearTimeout(timer)
-          // console.log(timer, 'timer in fetch')
+          // clearTimeout(timerId.current)
           setSongUrl(result.data.audio_url);
           // durationDispatch({
           //   type: "totalDuration",
@@ -100,18 +97,25 @@ function AsideBottom() {
   useEffect(()=>{
     if(localSongData?._id === songData){
       // stop the current song then play the same song if the song id is same
-      clearTimeout(timer)
+      console.log(timerId.current , 'timerId.current if same song')
+      clearTimeout(timerId.current)
       stop()
       setIsPlay(true)
       play()
       
-      console.log('same song')
+      console.log('same song id')
     }
+    else if(localSongData?._id !== songData){
+      console.log('diff song id')
+      clearTimeout(timerId.current)
+      stop();   
+    }
+    
   },[songData])
 
   useEffect(() => {
     // stop();
-    // clearTimeout(timer)
+    // clearTimeout(timerId.current)
     if (localSongData && duration > 150) {
       if (duration > 60000) {
         let min = Math.ceil(duration / 60000);
@@ -174,7 +178,7 @@ function AsideBottom() {
   useEffect(() => {
     console.log('useEffect called')
 
-    const time = setTimeout(() => {
+    timerId.current = setTimeout(() => {
       if (isPlay && duration) {
         durationDispatch({
           type: "totalDuration",
@@ -182,16 +186,15 @@ function AsideBottom() {
         console.log('setTimeOut called')
       }
     }, [1000])
-  
-    setTimer(time)
+
 
     if(!isPlay || !songData){
-      clearTimeout(timer);
+      clearTimeout(timerId.current);
       return
     }
   
     if (Math.ceil(duration / 1000) === durationState.totalDuration) {
-      clearTimeout(timer);
+      clearTimeout(timerId.current);
       setIsPlay(false)
       console.log('durationState.totalDuration', durationState.totalDuration)
       durationDispatch({
@@ -289,7 +292,7 @@ function AsideBottom() {
 
 
   // console.log(isPlay, 'true = song playing , false = song not playing ')
-  // console.log(duration)
+  console.log(timerId.current , "timerId.current")
 
   return (
     <div
