@@ -21,13 +21,14 @@ import ExpandAlbum from "./ExpandAlbum";
 import { useNavigate } from "react-router-dom";
 
 function AsideBottom() {
+
   const { songData, isExpand, setIsExpand } = useContext(JiosaavnContext);
   // console.log("songData", songData)
   const navigate = useNavigate();
 
   const [isHover, setIsHover] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
-  const [isPlay, setIsPlay] = useState(true);
+  const [isPlay, setIsPlay] = useState(false);
   const [isVolume, setIsVolume] = useState(true);
   const [progressWidth, setProgressWidth] = useState(0);
 
@@ -36,7 +37,7 @@ function AsideBottom() {
 
   const [play, { stop, pause, duration , sound}] = useSound(songUrl);
 
-  const [timer , setTimer] = useState()
+  const [timer , setTimer] = useState(null)
 
   const initialDuration = {
     currMin: 0,
@@ -65,32 +66,85 @@ function AsideBottom() {
         return state;
     }
   };
-
+  
   const [durationState, durationDispatch] = useReducer(
     durationReducer,
     initialDuration
   );
 
   useEffect(() => {
-
-    console.log('durationState.totalDuration', durationState.totalDuration,'isPlay', isPlay,'duration', duration)
-
-    if(isPlay || !songData){
-      
-      return
-    }
-    const time = setTimeout(() => {
-      if (!isPlay && duration) {
-        durationDispatch({
-          type: "totalDuration",
+    stop();
+    clearTimeout(timer)
+    // setSongUrl(defaultSong);
+    if (songData.length > 0) {
+      fetch(`https://academics.newtonschool.co/api/v1/music/song/${songData}`, {
+        headers: {
+          projectId: "nwi12vygvqne",
+        },
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          setLocalSongData(result.data);
+          // clearTimeout(timer)
+          // console.log(timer, 'timer in fetch')
+          setSongUrl(result.data.audio_url);
+          // durationDispatch({
+          //   type: "totalDuration",
+          //   payload: 0,
+          // });
+          
         });
-        console.log('setTimeOut called')
+    }
+  }, [songData]);
+
+  useEffect(()=>{
+    if(localSongData?._id === songData){
+      // stop the current song then play the same song if the song id is same
+      clearTimeout(timer)
+      stop()
+      setIsPlay(true)
+      play()
+      
+      console.log('same song')
+    }
+  },[songData])
+
+  useEffect(() => {
+    // stop();
+    // clearTimeout(timer)
+    if (localSongData && duration > 150) {
+      if (duration > 60000) {
+        let min = Math.ceil(duration / 60000);
+        let sec = duration / 1000 - Math.ceil(duration / 60000) * 60;
+        durationDispatch({
+          type: "totalMin",
+          payload: min,
+        });
+        durationDispatch({
+          type: "totalSec",
+          payload: sec,
+        });
+      } else {
+        let sec = Math.ceil(duration / 1000);
+        durationDispatch({
+          type: "totalSec",
+          payload: sec,
+        });
       }
-    }, [1000])
+      setIsPlay(true)
+      play();
+    }
+  }, [duration]);
 
-    console.log(timer)
-
-    setTimer(time)
+  useEffect(()=>{
+    
+    if (isPlay) {
+      setProgressWidth(
+        Math.floor(
+          (durationState.totalDuration / Math.ceil(duration / 1000)) * 100
+        )
+      );
+    }
 
     if (durationState.totalDuration > 60) {
       let min = Math.floor(durationState.totalDuration / 60);
@@ -114,97 +168,40 @@ function AsideBottom() {
       });
     }
 
-    if (!isPlay) {
-      setProgressWidth(
-        Math.floor(
-          (durationState.totalDuration / Math.ceil(duration / 1000)) * 100
-        )
-      );
-    }
+  },[durationState.totalDuration])
 
+
+  useEffect(() => {
+    console.log('useEffect called')
+
+    const time = setTimeout(() => {
+      if (isPlay && duration) {
+        durationDispatch({
+          type: "totalDuration",
+        });
+        console.log('setTimeOut called')
+      }
+    }, [1000])
+  
+    setTimer(time)
+
+    if(!isPlay || !songData){
+      clearTimeout(timer);
+      return
+    }
+  
     if (Math.ceil(duration / 1000) === durationState.totalDuration) {
       clearTimeout(timer);
-      setIsPlay(true)
-      durationDispatch({
-        type: "currMin",
-        payload: 0,
-      });
-      durationDispatch({
-        type: "currSec",
-        payload: 0,
-      });
+      setIsPlay(false)
+      console.log('durationState.totalDuration', durationState.totalDuration)
       durationDispatch({
         type: "totalDuration",
         payload: 0,
       });
       setProgressWidth(0);
     }
-
-  }, [durationState.totalDuration, isPlay, duration]);
   
-
-  useEffect(() => {
-    // stop();
-    clearTimeout(timer)
-    if (localSongData && duration > 150) {
-      if (duration > 60000) {
-        let min = Math.ceil(duration / 60000);
-        let sec = duration / 1000 - Math.ceil(duration / 60000) * 60;
-        durationDispatch({
-          type: "totalMin",
-          payload: min,
-        });
-        durationDispatch({
-          type: "totalSec",
-          payload: sec,
-        });
-      } else {
-        let sec = Math.ceil(duration / 1000);
-        durationDispatch({
-          type: "totalSec",
-          payload: sec,
-        });
-      }
-      setIsPlay(false)
-      play();
-    }
-  }, [duration]);
-
-  useEffect(() => {
-    stop();
-    // setSongUrl(defaultSong);
-    if (songData.length > 0) {
-      fetch(`https://academics.newtonschool.co/api/v1/music/song/${songData}`, {
-        headers: {
-          projectId: "nwi12vygvqne",
-        },
-      })
-        .then((res) => res.json())
-        .then((result) => {
-          setLocalSongData(result.data);
-          clearTimeout(timer)
-          console.log(timer, 'timer in fetch')
-          setSongUrl(result.data.audio_url);
-          durationDispatch({
-            type: "totalDuration",
-            payload: 0,
-          });
-          
-        });
-    }
-  }, [songData]);
-
-  useEffect(()=>{
-    if(localSongData?._id === songData){
-      // stop the current song then play the same song if the song id is same
-      stop()
-      clearTimeout(timer)
-      setIsPlay(false)
-      play()
-      
-      console.log('same song')
-    }
-  },[songData])
+  }, [durationState.totalDuration, isPlay, duration , songData]);
 
 
   useEffect(() => {
@@ -213,6 +210,7 @@ function AsideBottom() {
       setIsExpand(false);
     }
   }, [window.location.pathname]);
+
 
   const handleActions = (e) => {
     if (
@@ -229,13 +227,13 @@ function AsideBottom() {
       setIsExpand(false);
     }
   };
-
+  
   const handleClick = (e) => {
     console.log(e);
     navigate(`/${e.type || "artist"}/${e.name || e.title}/${e._id}`);
   };
-
-
+  
+  
   const handleBottomControls = (e) => {
     if (
       e.target.classList.contains("aside-bottom-item-repeat") ||
@@ -253,7 +251,7 @@ function AsideBottom() {
                 sound.loop(true);
             }
         }
-
+  
     } 
     else if (e.target.classList.contains("aside-bottom-item-prev") ||
       e.target.parentElement.classList.contains("aside-bottom-item-prev") ||
@@ -266,11 +264,11 @@ function AsideBottom() {
       e.target.parentElement.parentElement.classList.contains("aside-bottom-item-play-pause")) 
     {
       console.log("play-pause");
-      if (isPlay) {
-        setIsPlay(false);
+      if (!isPlay) {
+        setIsPlay(true);
         play();  
       } else {
-        setIsPlay(true);
+        setIsPlay(false);
         pause(); 
       }
     } 
@@ -289,8 +287,9 @@ function AsideBottom() {
     }
   };
 
-  console.log(isPlay, 'true = song not playing , false = song playing ')
-  console.log(duration)
+
+  // console.log(isPlay, 'true = song playing , false = song not playing ')
+  // console.log(duration)
 
   return (
     <div
@@ -374,7 +373,7 @@ function AsideBottom() {
             className="aside-bottom-item-play-pause"
             style={{ cursor: localSongData && "pointer" }}
           >
-            {isPlay ? <HiPlay /> : <IoIosPause />}
+            {!isPlay ? <HiPlay /> : <IoIosPause />}
           </li>
           <li
             className="aside-bottom-item-next"
