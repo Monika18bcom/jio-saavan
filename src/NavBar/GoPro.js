@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './GoPro.css'
 import GoproPlanCard from './GoproPlanCard'
 import logo from "../img/jio-saavn-white-logo.png";
@@ -62,6 +62,12 @@ function GoPro() {
         {col1: 'Special Access & Offers' , border: 'bottom'},
     ]
 
+    const scrollRef = useRef(null)
+
+    const scrollToBenefits = () => {
+        scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+      };
+
   return (
     <div className='gopro-main-container'>
         <div className='gopro-header'>
@@ -91,7 +97,7 @@ function GoPro() {
                     <div className='month-plan'><GoproPlanCard plan={monthPlan} /></div>
                     <div className='why-pro'>
                         <p>Why go Pro?
-                        <span className='learn-more'>Learn More <IoIosArrowDown /></span>
+                        <span className='learn-more' onClick={scrollToBenefits}>Learn More <IoIosArrowDown /></span>
                         </p>
                         <div className='why-pro-pay-img'>
                             <img className='paytm-logo' src='https://static.saavncdn.com/_i/paytm-logo.png' alt='pay-logo'></img>
@@ -101,7 +107,7 @@ function GoPro() {
                 </div>
             </div>
         </div>
-        <div className='gopro-main' id='gopro-main' >
+        <div className='gopro-main' id='gopro-main' ref={scrollRef}>
             <main className='gopro-sub-main'>
                 <h3 className='more-with-pro'>Get Even More With Pro.</h3>
                 <div className='gopro-main-table'>
