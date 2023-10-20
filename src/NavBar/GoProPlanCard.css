@@ -26,6 +26,8 @@
 }
 
 .plans-card-content > h1{
+    width: 100%;
+    text-align: center;
     margin: 30px 0 10px 0;
     color: #fff;
     font-size: 48px;
@@ -33,12 +35,16 @@
 }
 
 .plans-card-content > .plan-cost{
+    width: 100%;
+    text-align: center;
     font-size: 18px;
     color: #fff;
     line-height: 1.5;
 }
 
 .plans-card-content > .plan-offer{
+    width: 100%;
+    text-align: center;
     margin: 0 0 30px 0;
     color: #b6fff7;
     font-size: 18px;
@@ -73,6 +79,41 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+@media (max-width: 768px) {
+
+    .plans-card-header{
+        font-size: 19px;
+    }
+
+    .plans-card-content > h1{
+        font-size: 24px;
+        text-align: left;
+        margin: 0;
+    }
+
+    .plans-card-content > .plan-cost{
+        font-size: 15px;
+        text-align: left;
+    }
+
+    .plans-card-content > .plan-offer{
+        font-size: 15px;
+        text-align: left;
+        margin: 0;
+    }
+
+    .plans-card-content .amazon-paytm{
+        font-size: 16px;
+    }
+
+    .plans-card-content .pay-submit-btn{
+        font-size: 16px;
+    }
+
+    
 }
 
 

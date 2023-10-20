@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { NavLink } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
 import './NavBar.css';
-import logo from '../img/jio-saavn-logo.png'
+import logo from "../img/jio-saavn-white-logo.png";
 import {RiArrowDownSLine} from 'react-icons/ri'
 import {RiArrowUpSLine} from 'react-icons/ri'
 import {IoIosSearch} from 'react-icons/io'
@@ -34,7 +34,11 @@ function NavBar(){
     return(
         <div className="nav-bar">
             <div className="logo-container">
-                <NavLink to="/"><img id="logo-img" src={logo} alt="logo-image"></img></NavLink>
+                <NavLink className='logo-img-section' to='/'>
+                    <img className="logo-img" src={logo} alt='jiosaavn logo'></img>
+                    <h2 className="logo-text">JioSaavn</h2>
+                </NavLink>
+                {/* <NavLink to="/"><img id="logo-img" src={logo} alt="logo-image"></img></NavLink> */}
             </div>
             <div className="nav-container">
                 <ul className="nav-left">

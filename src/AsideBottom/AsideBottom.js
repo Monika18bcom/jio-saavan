@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 function AsideBottom() {
 
   const { songData, isExpand, setIsExpand } = useContext(JiosaavnContext);
-  // console.log("songData", songData)
+
   const navigate = useNavigate();
 
   const [isHover, setIsHover] = useState(false);
@@ -97,7 +97,7 @@ function AsideBottom() {
   useEffect(()=>{
     if(localSongData?._id === songData){
       // stop the current song then play the same song if the song id is same
-      console.log(timerId.current , 'timerId.current if same song')
+      
       clearTimeout(timerId.current)
       stop()
       setIsPlay(true)
@@ -106,16 +106,16 @@ function AsideBottom() {
       console.log('same song id')
     }
     else if(localSongData?._id !== songData){
-      console.log('diff song id')
+      
       clearTimeout(timerId.current)
-      stop();   
+      stop();
+
+      console.log('diff song id')  
     }
-    
+
   },[songData])
 
   useEffect(() => {
-    // stop();
-    // clearTimeout(timerId.current)
     if (localSongData && duration > 150) {
       if (duration > 60000) {
         let min = Math.ceil(duration / 60000);
@@ -196,11 +196,12 @@ function AsideBottom() {
     if (Math.ceil(duration / 1000) === durationState.totalDuration) {
       clearTimeout(timerId.current);
       setIsPlay(false)
-      console.log('durationState.totalDuration', durationState.totalDuration)
+
       durationDispatch({
         type: "totalDuration",
         payload: 0,
       });
+
       setProgressWidth(0);
     }
   
@@ -232,7 +233,6 @@ function AsideBottom() {
   };
   
   const handleClick = (e) => {
-    console.log(e);
     navigate(`/${e.type || "artist"}/${e.name || e.title}/${e._id}`);
   };
   
@@ -290,9 +290,6 @@ function AsideBottom() {
     }
   };
 
-
-  // console.log(isPlay, 'true = song playing , false = song not playing ')
-  console.log(timerId.current , "timerId.current")
 
   return (
     <div

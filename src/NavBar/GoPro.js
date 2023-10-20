@@ -4,6 +4,7 @@ import GoproPlanCard from './GoproPlanCard'
 import logo from "../img/jio-saavn-white-logo.png";
 import { Link } from 'react-router-dom';
 import {IoIosArrowDown} from 'react-icons/io'
+import {GiHamburgerMenu} from 'react-icons/gi'
 import Table from './Table';
 
 
@@ -69,6 +70,7 @@ function GoPro() {
                     <img src={logo} alt='jiosaavn logo'></img>
                     <h2>JioSaavn</h2>
                 </Link>
+                <GiHamburgerMenu className='hamburgur-menu' />
                 <div className='gopro-redeem-account-section'>
                     <div className='gopro-redeem'>
                         <span>Redeem</span>

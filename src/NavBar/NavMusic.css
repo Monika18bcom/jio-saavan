@@ -62,3 +62,10 @@
     cursor: pointer;
     color: #646464;
 }
+
+@media (max-width: 1100px) {
+
+    .nav-music-container{
+        left: 50px;
+    }
+}
