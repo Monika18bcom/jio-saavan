@@ -5,6 +5,7 @@ import logo from "../img/jio-saavn-white-logo.png";
 import { Link } from 'react-router-dom';
 import {IoIosArrowDown} from 'react-icons/io'
 import {GiHamburgerMenu} from 'react-icons/gi'
+import {FaXmark} from 'react-icons/fa6'
 import Table from './Table';
 
 
@@ -63,10 +64,16 @@ function GoPro() {
     ]
 
     const scrollRef = useRef(null)
+    const [isHamburger , setIsHamburger] = useState(false)
 
     const scrollToBenefits = () => {
         scrollRef.current.scrollIntoView({ behavior: 'smooth' });
-      };
+    };
+
+    const toggleHamburger = () => {
+        console.log('func called')
+        setIsHamburger(!isHamburger);
+    }
 
   return (
     <div className='gopro-main-container'>
@@ -76,7 +83,7 @@ function GoPro() {
                     <img src={logo} alt='jiosaavn logo'></img>
                     <h2>JioSaavn</h2>
                 </Link>
-                <GiHamburgerMenu className='hamburgur-menu' />
+                <GiHamburgerMenu className='hamburgur-menu' onClick={toggleHamburger} />
                 <div className='gopro-redeem-account-section'>
                     <div className='gopro-redeem'>
                         <span>Redeem</span>
@@ -123,7 +130,22 @@ function GoPro() {
         <div className='gopro-footer'>
             <div className='gopro-footer-angle'></div>
         </div>
+        {
+            isHamburger &&
+            <div className='gopro-modal-bg'>
+                <div className='gopro-modal-container'>
+                    <div className='gopro-modal-btns-section'>
+                        <div className='gopro-modal-redeem'>
+                            <span>Redeem</span>
+                        </div>
+                        <div className='gopro-modal-account'>My Account</div>
+                    </div>
+                    <FaXmark className='gopro-xmark' onClick={toggleHamburger} />
+                </div>
+            </div>
+        }
     </div>
+    
   )
 }
 

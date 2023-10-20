@@ -87,4 +87,8 @@
     .music-card-img{
         height: 110px;
     }
+
+    .music-card-play{
+        height: 80px;
+    }
 }

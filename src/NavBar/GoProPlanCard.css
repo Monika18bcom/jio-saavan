@@ -88,6 +88,10 @@
         font-size: 19px;
     }
 
+    .plans-card-content{
+        padding-top: 0;
+    }
+
     .plans-card-content > h1{
         font-size: 24px;
         text-align: left;

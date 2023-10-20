@@ -5,7 +5,6 @@ import {IoCheckmarkCircle} from 'react-icons/io5'
 
 
 function GoproPlanCard(props) {
-  console.log(props.plan.mainStyle.bg)
 
   return (
     <div

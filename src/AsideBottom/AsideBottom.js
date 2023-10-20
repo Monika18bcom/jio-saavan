@@ -72,27 +72,22 @@ function AsideBottom() {
     initialDuration
   );
 
-  useEffect(() => {
-    // setSongUrl(defaultSong);
-    if (songData.length > 0) {
-      fetch(`https://academics.newtonschool.co/api/v1/music/song/${songData}`, {
-        headers: {
-          projectId: "nwi12vygvqne",
-        },
-      })
-        .then((res) => res.json())
-        .then((result) => {
-          setLocalSongData(result.data);
-          // clearTimeout(timerId.current)
-          setSongUrl(result.data.audio_url);
-          // durationDispatch({
-          //   type: "totalDuration",
-          //   payload: 0,
-          // });
-          
-        });
-    }
-  }, [songData]);
+  async function fetchSongData(){
+
+    console.log('fetch called')
+
+    const response = await fetch(`https://academics.newtonschool.co/api/v1/music/song/${songData}`, {
+      headers: {
+        projectId: "nwi12vygvqne",
+      },
+    })
+
+    const result = await response.json()
+
+    setLocalSongData(result.data);
+    setSongUrl(result.data.audio_url);
+
+  }
 
   useEffect(()=>{
     if(localSongData?._id === songData){
@@ -106,11 +101,18 @@ function AsideBottom() {
       console.log('same song id')
     }
     else if(localSongData?._id !== songData){
-      
-      clearTimeout(timerId.current)
-      stop();
+      // console.log('diff song id','localSongData._id ' , localSongData  ,'songData', songData)
 
-      console.log('diff song id')  
+      if(localSongData){
+        console.log('second time')
+        clearTimeout(timerId.current)
+        stop();
+      }
+      
+      if (songData.length > 0) {
+        fetchSongData()
+      }
+     
     }
 
   },[songData])
@@ -176,14 +178,14 @@ function AsideBottom() {
 
 
   useEffect(() => {
-    console.log('useEffect called')
+    // console.log('useEffect called')
 
     timerId.current = setTimeout(() => {
       if (isPlay && duration) {
         durationDispatch({
           type: "totalDuration",
         });
-        console.log('setTimeOut called')
+        // console.log('setTimeOut called')
       }
     }, [1000])
 

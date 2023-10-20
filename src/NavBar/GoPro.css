@@ -13,7 +13,7 @@
 
 .gopro-header{
     height: 64px;
-    width: 100vw;
+    width: 100%;
     padding: 0 44px;
     position: fixed;
     top: 0;
@@ -312,6 +312,79 @@
     z-index: 7;
 }
 
+
+.gopro-modal-bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    background-color: rgba(0,0,0,.48);
+    transition: opacity .34s;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: flex-end;
+    /* overflow-y: hidden; */
+}
+
+.gopro-modal-container{
+    width: 300px;
+    background-color: #2a2d36;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.gopro-modal-btns-section{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: 100px;
+    padding: 45px 30px;
+}
+
+.gopro-modal-btns-section .gopro-modal-redeem{
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a2d36;
+    color: rgba(255,255,255,.84);
+    padding: 9px 25px;
+    font-size: 22px;
+    font-weight: 600;
+    border-radius: 22px;
+    cursor: pointer;
+    border: 1px solid #8b9dbf;
+    transition: all .12s ease-out;
+}
+
+.gopro-modal-btns-section .gopro-modal-redeem:hover{
+    background-color: #fff;
+    color: #2a2d36;
+    border: 1px solid rgba(255,255,255,.84);   
+}
+
+.gopro-modal-btns-section .gopro-modal-account{
+    width: auto;
+    height: 100%;
+    color: rgba(255,255,255,.84);
+    font-size: 22px;
+    cursor: pointer;
+    transition: all .12s ease-out;
+}
+
+.gopro-modal-btns-section .gopro-modal-account:hover{
+    color: #8b9dbf;  
+}
+
+.gopro-xmark{
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    margin: 18px;
+}
+
 @media (max-width: 1140px) {
 
     .gopro-sub-header{
@@ -329,12 +402,18 @@
 
 @media (max-width: 768px) {
 
+    .gopro-plans-container{
+        padding-top: 100px;
+    }
+
     .gopro-plan-grid > p{
-        font-size: 18px;  
+        font-size: 18px;
+        margin-bottom: 10px; 
     }
 
     .gopro-plan-grid > h1{
         font-size: 20px;
+        margin-bottom: 15px;
     }
 
     .gopro-plans-card-section{
@@ -349,8 +428,15 @@
     .gopro-sub-header > .hamburgur-menu {
         display: block;
     }
+    
+    .gopro-modal-bg{
+        display: flex;
+        right: 0;
+    }
 
     .gopro-redeem-account-section{
         display: none;
     }
 }
+
+/* transition: all .34s .08s cubic-bezier(0.175, 0.84, 0.193, 1.269); background: #2a2d36;transition: all .12s ease-out; */
