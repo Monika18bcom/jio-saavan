@@ -1,35 +1,22 @@
 import React, { useState, useContext, useEffect, useReducer, useRef } from "react";
 import "./AsideBottom.css";
-import { IoIosPause } from "react-icons/io";
-import { RiRepeatLine } from "react-icons/ri";
-import { RiRepeatOneFill } from "react-icons/ri";
-import { HiPlay } from "react-icons/hi2";
-import { TbPlayerSkipBackFilled } from "react-icons/tb";
-import { TbPlayerSkipForwardFilled } from "react-icons/tb";
-import { PiShuffleBold } from "react-icons/pi";
-import { BsThreeDots } from "react-icons/bs";
-import { MdVolumeOff } from "react-icons/md";
-import { MdVolumeUp } from "react-icons/md";
-import { GrExpand } from "react-icons/gr";
-import { BsArrowsAngleContract } from "react-icons/bs";
 // import {BsArrowsAngleExpand} from 'react-icons/bs'
 import defaultSong from "../song/DefaultAudio.mp3";
 
 import useSound from "use-sound";
 import { JiosaavnContext } from "../App/App";
 import ExpandAlbum from "./ExpandAlbum";
-import { useNavigate } from "react-router-dom";
+import AsideBottomControls from "./AsideBottomControls";
+import AsideBottomActions from "./AsideBottomActions";
+import AsideBottomAlbum from "./AsideBottomAlbum";
 
 function AsideBottom() {
 
-  const { songData, isExpand, setIsExpand } = useContext(JiosaavnContext);
+  const { songData, isExpand } = useContext(JiosaavnContext);
 
-  const navigate = useNavigate();
 
   const [isHover, setIsHover] = useState(false);
-  const [isRepeat, setIsRepeat] = useState(false);
   const [isPlay, setIsPlay] = useState(false);
-  const [isVolume, setIsVolume] = useState(true);
   const [progressWidth, setProgressWidth] = useState(0);
 
   const [localSongData, setLocalSongData] = useState(null);
@@ -90,6 +77,14 @@ function AsideBottom() {
   }
 
   useEffect(()=>{
+    console.log('song url changed')
+    setProgressWidth(0)
+
+    clearTimeout(timerId.current)
+
+  },[songUrl])
+
+  useEffect(()=>{
     if(localSongData?._id === songData){
       // stop the current song then play the same song if the song id is same
       
@@ -143,6 +138,8 @@ function AsideBottom() {
   }, [duration]);
 
   useEffect(()=>{
+
+    console.log('progress bar use effect')
     
     if (isPlay) {
       setProgressWidth(
@@ -175,7 +172,6 @@ function AsideBottom() {
     }
 
   },[durationState.totalDuration])
-
 
   useEffect(() => {
     // console.log('useEffect called')
@@ -210,89 +206,6 @@ function AsideBottom() {
   }, [durationState.totalDuration, isPlay, duration , songData]);
 
 
-  useEffect(() => {
-    // when the routing changes the expand should go away
-    if (isExpand) {
-      setIsExpand(false);
-    }
-  }, [window.location.pathname]);
-
-
-  const handleActions = (e) => {
-    if (
-      e.target.classList.contains("expand-album") ||
-      e.target.parentElement.classList.contains("expand-album")
-    ) {
-      if (localSongData !== null) {
-        setIsExpand(true);
-      }
-    } else if (
-      e.target.classList.contains("contract-album") ||
-      e.target.parentElement.classList.contains("contract-album")
-    ) {
-      setIsExpand(false);
-    }
-  };
-  
-  const handleClick = (e) => {
-    navigate(`/${e.type || "artist"}/${e.name || e.title}/${e._id}`);
-  };
-  
-  
-  const handleBottomControls = (e) => {
-    if (
-      e.target.classList.contains("aside-bottom-item-repeat") ||
-      e.target.parentElement.classList.contains("aside-bottom-item-repeat") ||
-      e.target.parentElement.parentElement.classList.contains(
-        "aside-bottom-item-repeat"
-      )
-    ) {
-        if (localSongData !== null) {
-            if(sound._loop){
-                setIsRepeat(false)
-                sound.loop(false);
-            }else{
-                setIsRepeat(true)
-                sound.loop(true);
-            }
-        }
-  
-    } 
-    else if (e.target.classList.contains("aside-bottom-item-prev") ||
-      e.target.parentElement.classList.contains("aside-bottom-item-prev") ||
-      e.target.parentElement.parentElement.classList.contains("aside-bottom-item-prev")) 
-    {
-      console.log("prev");
-    } 
-    else if (e.target.classList.contains("aside-bottom-item-play-pause") ||
-      e.target.parentElement.classList.contains("aside-bottom-item-play-pause") ||
-      e.target.parentElement.parentElement.classList.contains("aside-bottom-item-play-pause")) 
-    {
-      console.log("play-pause");
-      if (!isPlay) {
-        setIsPlay(true);
-        play();  
-      } else {
-        setIsPlay(false);
-        pause(); 
-      }
-    } 
-    else if (
-      e.target.classList.contains("aside-bottom-item-next") ||
-      e.target.parentElement.classList.contains("aside-bottom-item-next") ||
-      e.target.parentElement.parentElement.classList.contains("aside-bottom-item-next")) 
-    {
-      console.log("next");
-    } else if (
-      e.target.classList.contains("aside-bottom-item-shuffle") ||
-      e.target.parentElement.classList.contains("aside-bottom-item-shuffle") ||
-      e.target.parentElement.parentElement.classList.contains("aside-bottom-item-shuffle")) 
-    {
-      console.log("shuffle");
-    }
-  };
-
-
   return (
     <div
       id="aside-bottom"
@@ -314,130 +227,9 @@ function AsideBottom() {
         className="aside-bottom-content"
         style={{ opacity: localSongData === null && "0.5" }}
       >
-        <div className="aside-bottom-album">
-          {!isExpand && (
-            <>
-              <img
-                className="aside-bottom-img"
-                src={localSongData?.thumbnail}
-                alt={localSongData?.title}
-                style={{ cursor: localSongData && "pointer" }}
-                onClick={() => handleClick(localSongData)}
-              ></img>
-              <div className="aside-bottom-album-info">
-                <h4
-                  className="aside-bottom-album-title"
-                  style={{
-                    color: isHover ? "black" : "#3e3e3e",
-                    cursor: localSongData && "pointer",
-                  }}
-                  onClick={() => handleClick(localSongData)}
-                >
-                  {localSongData?.title}
-                </h4>
-                <p className="aside-bottom-album-artist">
-                  {localSongData?.artist &&
-                    localSongData?.artist.map((e, idx) => (
-                      <span
-                        key={e._id}
-                        onClick={() => handleClick(e)}
-                        style={{ cursor: localSongData && "pointer" }}
-                      >
-                        {e.name +
-                          `${
-                            idx < localSongData.artist.length - 1 ? ", " : ""
-                          }`}
-                      </span>
-                    ))}
-                </p>
-              </div>
-            </>
-          )}
-        </div>
-        <ul
-          className="aside-bottom-controls"
-          onClick={(e) => handleBottomControls(e)}
-        >
-          <li
-            className="aside-bottom-item-repeat"
-            style={{ cursor: localSongData && "pointer" , color: isRepeat && '#2bc5b4'}}
-          >
-            {/* {isRepeat === (1 || 2) ? <RiRepeatLine /> : <RiRepeatOneFill />} */}
-            <RiRepeatLine />
-          </li>
-          <li
-            className="aside-bottom-item-prev"
-            style={{ cursor: localSongData && "pointer" }}
-          >
-            <TbPlayerSkipBackFilled />
-          </li>
-          <li
-            className="aside-bottom-item-play-pause"
-            style={{ cursor: localSongData && "pointer" }}
-          >
-            {!isPlay ? <HiPlay /> : <IoIosPause />}
-          </li>
-          <li
-            className="aside-bottom-item-next"
-            style={{ cursor: localSongData && "pointer" }}
-          >
-            <TbPlayerSkipForwardFilled />
-          </li>
-          <li
-            className="aside-bottom-item-shuffle"
-            style={{ cursor: localSongData && "pointer" }}
-          >
-            <PiShuffleBold />
-          </li>
-        </ul>
-        <ul className="aside-bottom-actions" onClick={(e) => handleActions(e)}>
-          <li
-            className="aside-btm-item duration"
-            style={{ cursor: localSongData ? "pointer" : "default" }}
-          >
-            <span id="real-time-duration">{`${
-              durationState.currMin > 9
-                ? durationState.currMin
-                : "0" + durationState.currMin
-            }:${
-              durationState.currSec > 9
-                ? durationState.currSec
-                : "0" + durationState.currSec
-            }`}</span>{" "}
-            /{" "}
-            <span id="total-duration">{`${
-              durationState.totalMin > 9
-                ? durationState.totalMin
-                : "0" + durationState.totalMin
-            }:${
-              durationState.totalSec > 9
-                ? durationState.totalSec
-                : "0" + durationState.totalSec
-            }`}</span>
-          </li>
-          <li
-            className="aside-btm-item more-info"
-            style={{ cursor: localSongData && "pointer" }}
-          >
-            <BsThreeDots />
-          </li>
-          <li
-            className="aside-btm-item volume"
-            style={{ cursor: localSongData && "pointer" }}
-          >
-            {isVolume ? <MdVolumeUp /> : <MdVolumeOff />}
-          </li>
-          <li
-            className="aside-btm-item expand"
-            style={{ cursor: localSongData && "pointer" }}
-          >
-            {isExpand ? (
-              <BsArrowsAngleContract className="contract-album" />
-            ) : (
-              <GrExpand className="expand-album" />
-            )}
-          </li>
-        </ul>
+        <AsideBottomAlbum localSongData={localSongData} />
+        <AsideBottomControls localSongData={localSongData} durationState={durationState} />
+        <AsideBottomActions localSongData={localSongData} isPlay={isPlay} setIsPlay={setIsPlay} play={play} pause={pause} sound={sound} />
       </div>
     </div>
   );
