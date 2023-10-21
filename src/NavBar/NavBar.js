@@ -14,7 +14,7 @@ function NavBar(){
 
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
-    const {userData} = useContext(JiosaavnContext) 
+    const { userData , setSearchOpen , searchOpen } = useContext(JiosaavnContext) 
     const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected } = useContext(MainPageContext)
 
     const [isSelected, setIsSelected] = useState(false)
@@ -27,6 +27,10 @@ function NavBar(){
             setDisplayAccount(!displayAccount)
         }
 
+    }
+
+    const OpenSearch = () =>{
+        setSearchOpen(!searchOpen)
     }
 
     // console.log(userData , ' from navbar')
@@ -46,7 +50,7 @@ function NavBar(){
                     <li><NavLink className="navlink podcasts" to="/original-podcasts">Podcasts</NavLink></li>
                     <li><NavLink className="navlink" target='_blank' to="/pro">Go Pro</NavLink></li>
                 </ul> 
-                <div className="nav-center">
+                <div className="nav-center" onClick={OpenSearch}>
                     <IoIosSearch className="search-icon"/>
                     <p id="search-input">Search</p>
                 </div>

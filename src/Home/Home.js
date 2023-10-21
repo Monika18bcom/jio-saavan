@@ -1,7 +1,6 @@
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import './Home.css'
 import Footer from '../Footer/Footer'
-import Loader from "../Loader/Loader";
 import Main from "../Main/Main";
 import Album from "../Album/Album";
 import { Route, Routes } from 'react-router-dom';
@@ -9,10 +8,12 @@ import NewReleases from "../Browse/NewReleases";
 import TopCharts from "../Browse/TopCharts";
 import MyMusic from "../My-Library/MyMusic";
 import Me from "../NavBar/Me";
+import { JiosaavnContext } from "../App/App";
 
 function Home() {
 
-    const [isLoading , setIsLoading] = useState(false)
+    const { setIsLoading } = useContext(JiosaavnContext)
+
 
     const homeAlbumContainer = [
         {title: 'Trending Now', data:[] , type: 'song' , limit: '40' , action: 'trendingNow'},
@@ -103,10 +104,6 @@ function Home() {
 
     return(
 
-        isLoading ? 
-        <div className="home-loader-container">
-            <Loader />
-        </div> :
         <div className="home-section">
             <Routes>
                 <Route path='/' element={<Main mainAlbumArr={homeState} />}/>

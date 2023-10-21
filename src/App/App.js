@@ -6,6 +6,7 @@ import LogIn from "../Form/LogIn";
 import Modal from "../Modal/Modal";
 import FormContent from "../Form/FormContent";
 import GoPro from "../NavBar/GoPro";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 export const JiosaavnContext = createContext({});
 
@@ -20,6 +21,8 @@ function App() {
     userDetails: null,
     userToken: null,
   });
+  const [isLoading , setIsLoading] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("user");
@@ -44,7 +47,11 @@ function App() {
         userData,
         setUserData,
         isMobileLogin, 
-        setIsMobileLogin
+        setIsMobileLogin,
+        isLoading,
+        setIsLoading,
+        searchOpen,
+        setSearchOpen
       }}
     >
       <div className="App">
