@@ -14,7 +14,7 @@ function NavBar(){
 
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
-    const { userData , setSearchOpen , searchOpen } = useContext(JiosaavnContext) 
+    const { userData , setSearchOpen } = useContext(JiosaavnContext) 
     const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected } = useContext(MainPageContext)
 
     const [isSelected, setIsSelected] = useState(false)
@@ -30,7 +30,7 @@ function NavBar(){
     }
 
     const OpenSearch = () =>{
-        setSearchOpen(!searchOpen)
+        setSearchOpen(true)
     }
 
     // console.log(userData , ' from navbar')

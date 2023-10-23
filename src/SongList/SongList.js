@@ -13,15 +13,12 @@ function SongList({data, num, artistArr}) {
 
     
 
-    const {songData , setSongData} = useContext(JiosaavnContext)
+    const {songId , setSongId} = useContext(JiosaavnContext)
+
     const navigate = useNavigate()
-    // console.log(songData , "data 11 line song list")
 
     const [isHover, setIsHover] = useState(false)
     const [isLikeRed, setIsLikeRed] = useState(false);
-    // const [idx , setIdx] = useState(null)
-
-
 
     const songListMouseOver = ()=>{
         setIsHover(true)
@@ -31,32 +28,21 @@ function SongList({data, num, artistArr}) {
         setIsHover(false)
     }
 
-    const handleClick = (e)=>{
-        if(e.target.classList.contains("song-list-play-icon") || e.target.parentElement.classList.contains("song-list-play-icon")){
-            console.log("play button clicked")
-            if(data){
-                // console.log(data._id)
-                setSongData(data._id)
-                // setIdx(data._id)
-            }
-        }else if(e.target.classList.contains("song-list-song-title")){
-            console.log("title" , e)
-            // navigate(`/${e.type || 'artist'}/${(e.name) || (e.title)}/${e._id}`)
-        }else if(e.target.classList.contains("song-list-song-artist")){
-            console.log("artist" , e)
-            // navigate(`/${e.type || 'artist'}/${(e.name) || (e.title)}/${e._id}`)
-        }else if(e.target.classList.contains("song-list-like-icon") || e.target.parentElement.classList.contains("song-list-like-icon")){
-            console.log("like icon")
-            setIsLikeRed(!isLikeRed)
-        }else if(e.target.classList.contains("song-list-option-icon") || e.target.parentElement.classList.contains("song-list-option-icon")){
-            console.log("options")
-        }
-
-    }
 
     const handleClickAlbum = (e) => {
-        console.log(e)
+        // console.log(e)
         navigate(`/${e.type || 'artist'}/${(e.name) || (e.title)}/${e._id}`)
+    }
+
+    const setSongIdx = () =>{
+        if(data){
+            // console.log(data._id)
+            setSongId(data._id)
+        }
+    }
+
+    const toggleLike = () =>{
+        setIsLikeRed(!isLikeRed)
     }
 
     
@@ -68,14 +54,14 @@ function SongList({data, num, artistArr}) {
         style={{backgroundColor: isHover && '#fff',borderRadius: isHover && '4px', border: isHover && '1px solid #e9e9e9'}} 
         onMouseOver={songListMouseOver} 
         onMouseOut={songListMouseOut} 
-        onClick={(e)=>handleClick(e)}>
-        <div className='song-list-play-index'>  
+        >
+        <div className='song-list-play-index' onClick={setSongIdx}>  
             {
                 isHover ? <BsPlayCircle className='song-list-play-icon' style={{fontSize: "26px"}} />  : <div className='song-list-song-num'>{num ? num + 1 : 1}</div>
             }
         </div>
         <div className='song-list-song-info'>
-            <h4 className='song-list-song-title' style={{color: data._id === songData && '#2bc5b4'}} onClick={()=>handleClickAlbum(data)} >{data.title}</h4>
+            <h4 className='song-list-song-title' style={{color: data._id === songId && '#2bc5b4'}} onClick={()=>handleClickAlbum(data)} >{data.title}</h4>
             <p className='song-list-song-artist'>
                 {
                     artistArr?.name || 
@@ -93,7 +79,7 @@ function SongList({data, num, artistArr}) {
         </div>
         {
             isLikeRed ? 
-            <AiFillHeart className='song-list-like-icon' style={{color: 'red'}} /> : <AiOutlineHeart className='song-list-like-icon' />
+            <AiFillHeart className='song-list-like-icon' style={{color: 'red'}} onClick={toggleLike} /> : <AiOutlineHeart className='song-list-like-icon' onClick={toggleLike} />
         }
         <div className='song-list-duration-option'>
             {

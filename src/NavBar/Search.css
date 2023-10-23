@@ -31,12 +31,14 @@
     padding: 0 11px;
     width: auto;
     height: 100%;
+    cursor: pointer;
 }
 
 .search-input-section > .close-icon{
     color: #2bc5b4;
     font-size: 25px;
     transition: right .3s ease-in-out;
+    cursor: pointer;
 }
 
 .search-input-section > .close-icon:hover{
@@ -46,6 +48,13 @@
 .search-list-section{
     max-height: 800px;
     padding-top: 22px;
+}
+
+.song-item-section{
+    background-color: #258f83;
+    width: 300px;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
 }
 
 /* SearchInput Component Css written below */
