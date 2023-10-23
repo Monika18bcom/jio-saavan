@@ -4,6 +4,7 @@ import {MdCancel} from 'react-icons/md'
 import './Search.css'
 import { JiosaavnContext } from '../App/App'
 import SongItem from './SongItem'
+import Loader from '../Loader/Loader'
 
 
 function Search() {
@@ -12,6 +13,8 @@ function Search() {
 
   const { setSearchOpen } = useContext(JiosaavnContext)
   const [inputValue , setInputValue] = useState('')
+
+  const [isLoading , setIsLoading] = useState(false)
 
   const [songNum, setSongNum] = useState(true);
   const [songPoster, setSongPoster] = useState(true);
@@ -99,10 +102,11 @@ function Search() {
   }
 
   useEffect(()=>{
-
+    setIsLoading(true)
     trendingData.map((e)=>{
       trendingFetch(e)
     })
+    setIsLoading(false)
 
   },[])
 
@@ -116,17 +120,21 @@ function Search() {
         <MdCancel className='close-icon' onClick={()=>setSearchOpen(false)}/>    
       </div>
       <div className='search-list-section'>
+        {isLoading ? 
+        <div className="search-loader-container">
+            <Loader />
+        </div> :
         <div className='trending-container'>
-          <h5>TRENDING</h5>
+          <h5>Trending</h5>
           <div className='song-item-section'>
             {
               trendingArr?.map((e, idx)=>(
-                <SongItem key={idx} data={e} songPoster={songPoster} songInfo={songInfo} imgMarginR='11px' />
+                <SongItem key={idx} data={e} songPoster={songPoster} songInfo={songInfo} imgMarginR='11px' width='400px'/>
               ))
             }
             
           </div>
-        </div>
+        </div>}
 
       </div>
     </div>

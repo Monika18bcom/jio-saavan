@@ -7,7 +7,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
 import "./SongItem.css";
 
-function SongItem({data ,songNum,cancelIcon,likeIcon,durDots, songPoster , songInfo , imgMarginR , bg , borderR , border}) {
+function SongItem({data ,songNum,cancelIcon,likeIcon,durDots, songPoster , songInfo , imgMarginR , bg , borderR , border , width}) {
     console.log(data)
   const [isHover, setIsHover] = useState(false);
   
@@ -20,6 +20,7 @@ function SongItem({data ,songNum,cancelIcon,likeIcon,durDots, songPoster , songI
       onMouseOut={()=>setIsHover(false)}
       style={{
         height: height,
+        width: width
         // backgroundColor: (bg && isHover) && "#fff",
         // borderRadius: (borderR && isHover) && "4px",
         // border: (border && isHover) && "1px solid #e9e9e9",

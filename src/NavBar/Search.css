@@ -50,11 +50,23 @@
     padding-top: 22px;
 }
 
-.song-item-section{
-    background-color: #258f83;
-    width: 300px;
-    /* display: flex; */
-    /* flex-wrap: wrap; */
+.search-loader-container{
+    width: 100%;
+    padding: 20px 0;
+}
+
+.search-list-section .trending-container > h5{
+    margin-bottom: 11px;
+    text-transform: uppercase;
+    color: #707070;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 1.8333333333;
+}
+
+.search-list-section .trending-container > .song-item-section{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 /* SearchInput Component Css written below */
