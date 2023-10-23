@@ -11,7 +11,7 @@ function Main({mainAlbumArr}) {
 
   return (
     isLoading ? 
-    <div className="home-loader-container">
+    <div className="main-loader-container">
         <Loader />
     </div> :
     <main className='main-album-content'>

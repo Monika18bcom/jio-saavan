@@ -6,7 +6,7 @@
     
 }
 
-.home-loader-container{
+.main-loader-container{
     width: 100%;
     padding: 90px 0;
 }
@@ -18,3 +18,13 @@
     font-size: 1.3333333333rem;
     color: #3e3e3e;
 }
+
+
+
+/* @media (max-width: 1100px) {
+    
+    .home-loader-container{
+        width: 100%;
+        left: 0;
+    }
+} */

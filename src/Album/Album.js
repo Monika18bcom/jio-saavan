@@ -38,7 +38,7 @@ function Album() {
 
   return (
     isLoading ? 
-    <div className="loader-container">
+    <div className="album-loader-container">
       <Loader />
     </div> :
     <div className='album-container'>
