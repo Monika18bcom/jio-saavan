@@ -453,6 +453,24 @@
     .gopro-redeem-account-section{
         display: none;
     }
+
+    .gopro-main{
+        padding: 65px 20px 100px 20px;
+        
+    }
+
+    .gopro-sub-main > .more-with-pro{
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .gopro-sub-main > .gopro-main-table{
+        padding: 0;
+    }
+
+    .gopro-sub-main > .try-pro-now{
+        font-size: 20px;
+    }
 }
 
 /* transition: all .34s .08s cubic-bezier(0.175, 0.84, 0.193, 1.269); background: #2a2d36;transition: all .12s ease-out; */
