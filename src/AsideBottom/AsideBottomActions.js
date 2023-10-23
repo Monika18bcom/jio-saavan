@@ -7,38 +7,36 @@ import { BsArrowsAngleContract } from "react-icons/bs";
 import { JiosaavnContext } from '../App/App';
  
 function AsideBottomActions({ localSongData , durationState }) {
-  console.log(durationState)
+  // console.log(durationState)
 
-    const { isExpand, setIsExpand } = useContext(JiosaavnContext)
-    const [isVolume, setIsVolume] = useState(true);
+  const { isExpand, setIsExpand } = useContext(JiosaavnContext)
+  const [isVolume, setIsVolume] = useState(true);
 
 
-    useEffect(() => {
-        // when the routing changes the expand should go away
-        if (isExpand) {
-          setIsExpand(false);
+  useEffect(() => {
+    // when the routing changes the expand should go away
+    if (isExpand) {
+      setIsExpand(false);
+    }
+  }, [window.location.pathname]);
+
+
+  const handleActions = (e) => {
+      if (
+        e.target.classList.contains("expand-album") ||
+        e.target.parentElement.classList.contains("expand-album")
+      ) {
+        if (localSongData !== null) {
+          setIsExpand(true);
         }
-      }, [window.location.pathname]);
-
-
-    const handleActions = (e) => {
-        if (
-          e.target.classList.contains("expand-album") ||
-          e.target.parentElement.classList.contains("expand-album")
-        ) {
-          if (localSongData !== null) {
-            setIsExpand(true);
-          }
-        } else if (
-          e.target.classList.contains("contract-album") ||
-          e.target.parentElement.classList.contains("contract-album")
-        ) {
-          setIsExpand(false);
-        }
-    };
-      
-
-
+      } else if (
+        e.target.classList.contains("contract-album") ||
+        e.target.parentElement.classList.contains("contract-album")
+      ) {
+        setIsExpand(false);
+      }
+  };
+    
 
   return (
     <ul className="aside-bottom-actions" onClick={(e) => handleActions(e)}>
@@ -46,7 +44,7 @@ function AsideBottomActions({ localSongData , durationState }) {
         className="aside-btm-item duration"
         style={{ cursor: localSongData ? "pointer" : "default" }}
         >
-        {/* <span id="real-time-duration">{`${
+        <span id="real-time-duration">{`${
             durationState.currMin > 9
             ? durationState.currMin
             : "0" + durationState.currMin
@@ -64,7 +62,7 @@ function AsideBottomActions({ localSongData , durationState }) {
             durationState.totalSec > 9
             ? durationState.totalSec
             : "0" + durationState.totalSec
-        }`}</span> */}
+        }`}</span>
         </li>
         <li
         className="aside-btm-item more-info"

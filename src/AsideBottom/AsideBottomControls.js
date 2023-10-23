@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { IoIosPause } from "react-icons/io";
 import { RiRepeatLine } from "react-icons/ri";
 import { RiRepeatOneFill } from "react-icons/ri";
@@ -7,82 +7,131 @@ import { TbPlayerSkipBackFilled } from "react-icons/tb";
 import { TbPlayerSkipForwardFilled } from "react-icons/tb";
 import { PiShuffleBold } from "react-icons/pi";
 
-function AsideBottomControls({ localSongData , isPlay, setIsPlay , play , pause , sound }) {
+function AsideBottomControls({
+  songId,
+  localSongData,
+  isPlay,
+  setIsPlay,
+  play,
+  pause,
+  sound,
+  duration,
+  timerId,
+  setTimerId,
+  durationState,
+  durationDispatch,
+  setProgressWidth,
+}) {
+  const [isRepeat, setIsRepeat] = useState(false);
 
-    const [isRepeat, setIsRepeat] = useState(false);
+  useEffect(() => {
+    console.log('useEffect controls')
     
-
-
-// useEffect(() => {
-//   first
-
-//   return () => {
-//     second
-//   }
-// }, [third])
-
-    const handlePlay = () =>{
-        console.log("play-pause");
-        if (!isPlay) {
-        setIsPlay(true);
-        play();  
-        } else {
-        setIsPlay(false);
-        pause(); 
-        }
+    if(isPlay && songId){
+      setTimerId(
+        setTimeout(() => {
+          if (isPlay && duration) {
+            durationDispatch({
+              type: "totalDuration",
+            });
+            console.log("setTimeOut called");
+          }
+        }, 1000)
+      );
+    }
+    else if (!isPlay || !songId) {
+      clearTimeout(timerId);
+      return;
+    }
+    else if (localSongData?._id  !== songId) {
+      clearTimeout(timerId);
     }
 
-    const handleLoop = () =>{
-        console.log("loop");
-        if (localSongData !== null) {
-            if(sound._loop){
-                setIsRepeat(false)
-                sound.loop(false);
-            }else{
-                setIsRepeat(true)
-                sound.loop(true);
-            }
-        }
+    // console.log('timerId' , timerId)
+
+    if (Math.ceil(duration / 1000) === durationState.totalDuration) {
+      clearTimeout(timerId);
+      setIsPlay(false);
+
+      durationDispatch({
+        type: "totalDuration",
+        payload: 0,
+      });
+
+      setProgressWidth(0);
     }
 
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [durationState.totalDuration , isPlay , songId]);
+
+//   duration, dependencies of above useEffect
+
+  const handlePlay = () => {
+    console.log("play-pause");
+    if (!isPlay) {
+      setIsPlay(true);
+      play();
+    } else {
+      setIsPlay(false);
+      pause();
+    }
+  };
+
+  const handleLoop = () => {
+    console.log("loop");
+    if (localSongData !== null) {
+      if (sound._loop) {
+        setIsRepeat(false);
+        sound.loop(false);
+      } else {
+        setIsRepeat(true);
+        sound.loop(true);
+      }
+    }
+  };
 
   return (
     <ul className="aside-bottom-controls">
-        <li
+      <li
         className="aside-bottom-item-repeat"
-        style={{ cursor: localSongData && "pointer" , color: isRepeat && '#2bc5b4'}}
+        style={{
+          cursor: localSongData && "pointer",
+          color: isRepeat && "#2bc5b4",
+        }}
         onClick={handleLoop}
-        >
+      >
         {/* {isRepeat === (1 || 2) ? <RiRepeatLine /> : <RiRepeatOneFill />} */}
         <RiRepeatLine />
-        </li>
-        <li
+      </li>
+      <li
         className="aside-bottom-item-prev"
         style={{ cursor: localSongData && "pointer" }}
-        >
+      >
         <TbPlayerSkipBackFilled />
-        </li>
-        <li
+      </li>
+      <li
         className="aside-bottom-item-play-pause"
         style={{ cursor: localSongData && "pointer" }}
         onClick={handlePlay}
-        >
+      >
         {!isPlay ? <HiPlay /> : <IoIosPause />}
-        </li>
-        <li
+      </li>
+      <li
         className="aside-bottom-item-next"
         style={{ cursor: localSongData && "pointer" }}
-        >
+      >
         <TbPlayerSkipForwardFilled />
-        </li>
-        <li
+      </li>
+      <li
         className="aside-bottom-item-shuffle"
         style={{ cursor: localSongData && "pointer" }}
-        >
+      >
         <PiShuffleBold />
-        </li>
+      </li>
     </ul>
-  )
+  );
 }
 
-export default AsideBottomControls
+export default AsideBottomControls;

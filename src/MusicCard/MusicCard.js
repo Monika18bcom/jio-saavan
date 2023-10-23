@@ -18,7 +18,7 @@ function MusicCard({data}){
     const [isLikeRed, setIsLikeRed] = useState(false);
     const navigate = useNavigate()
     
-    const {setSongData} = useContext(JiosaavnContext);
+    const {setSongId} = useContext(JiosaavnContext);
 
     const handleMouseOver = ()=>{
         setIsHover(true);
@@ -31,19 +31,19 @@ function MusicCard({data}){
     const handleMusicCardControls = (e)=>{
         if(e.target.classList.contains('music-card-play-btn-bg') || e.target.classList.contains('music-card-play-btn') || e.target.parentElement.classList.contains('music-card-play-btn')){
             console.log('play clicked')
-            setSongData('')
+            setSongId(null)
             if(data.type === "song"){
                 setTimeout(()=>{
-                    setSongData(data._id)
+                    setSongId(data._id)
                 },500)
             }else if(data.type === "album"){
                 setTimeout(()=>{
-                    setSongData(data?.songs[0]._id)
+                    setSongId(data?.songs[0]._id)
                 },500)
                 
             }else{
                 setTimeout(()=>{
-                    setSongData(data.songs[0])
+                    setSongId(data.songs[0])
                 },500)
                 
             }

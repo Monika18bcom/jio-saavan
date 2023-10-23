@@ -1,4 +1,10 @@
-import React, { useState, useContext, useEffect, useReducer, useRef } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useReducer,
+  useCallback,
+} from "react";
 import "./AsideBottom.css";
 // import {BsArrowsAngleExpand} from 'react-icons/bs'
 import defaultSong from "../song/DefaultAudio.mp3";
@@ -11,20 +17,20 @@ import AsideBottomActions from "./AsideBottomActions";
 import AsideBottomAlbum from "./AsideBottomAlbum";
 
 function AsideBottom() {
+  const { songId, isExpand } = useContext(JiosaavnContext);
 
-  const { songData, isExpand } = useContext(JiosaavnContext);
-
-
-  const [isHover, setIsHover] = useState(false);
   const [isPlay, setIsPlay] = useState(false);
   const [progressWidth, setProgressWidth] = useState(0);
 
   const [localSongData, setLocalSongData] = useState(null);
   const [songUrl, setSongUrl] = useState(defaultSong);
 
-  const [play, { stop, pause, duration , sound}] = useSound(songUrl);
+  const [play, { stop, pause, duration, sound }] = useSound(songUrl);
+  const [timerId, setTimerId] = useState(null);
 
-  const timerId = useRef(null)
+  // const timerId = useRef(null)
+
+  // console.log(timerId , 'timerId')
 
   const initialDuration = {
     currMin: 0,
@@ -53,94 +59,107 @@ function AsideBottom() {
         return state;
     }
   };
-  
+
   const [durationState, durationDispatch] = useReducer(
     durationReducer,
     initialDuration
   );
 
-  async function fetchSongData(){
+  async function fetchSongData() {
+    // console.log("fetch called");
 
-    console.log('fetch called')
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/music/song/${songId}`,
+        {
+          headers: {
+            projectId: "nwi12vygvqne",
+          },
+        }
+      );
 
-    const response = await fetch(`https://academics.newtonschool.co/api/v1/music/song/${songData}`, {
-      headers: {
-        projectId: "nwi12vygvqne",
-      },
-    })
+      const result = await response.json();
 
-    const result = await response.json()
-
-    setLocalSongData(result.data);
-    setSongUrl(result.data.audio_url);
-
+      setLocalSongData(result.data);
+      setSongUrl(result.data.audio_url);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  useEffect(()=>{
-    console.log('song url changed')
-    setProgressWidth(0)
+  useEffect(() => {
+    setProgressWidth(0);
+    // clearTimeout(timerId.current)
 
-    clearTimeout(timerId.current)
-
-  },[songUrl])
-
-  useEffect(()=>{
-    if(localSongData?._id === songData){
+    if (localSongData?._id === songId) {
       // stop the current song then play the same song if the song id is same
-      
-      clearTimeout(timerId.current)
-      stop()
-      setIsPlay(true)
-      play()
-      
-      console.log('same song id')
-    }
-    else if(localSongData?._id !== songData){
-      // console.log('diff song id','localSongData._id ' , localSongData  ,'songData', songData)
 
-      if(localSongData){
-        console.log('second time')
-        clearTimeout(timerId.current)
+      clearTimeout(timerId);
+      stop();
+      durationDispatch({
+        type: "totalDuration",
+        payload: 0,
+      });
+      setIsPlay(true);
+      play();
+
+      console.log("same song id",'durationState.totalDuration', durationState.totalDuration);
+
+    } else if (songId) {
+      if (localSongData && localSongData?._id !== songId) {
+        clearTimeout(timerId);
         stop();
+        durationDispatch({
+          type: "totalDuration",
+          payload: 0,
+        });
+        fetchSongData();
+
+        console.log("second time",'durationState.totalDuration', durationState.totalDuration );
       }
-      
-      if (songData.length > 0) {
-        fetchSongData()
-      }
-     
+
+      fetchSongData();
+      console.log('durationState.totalDuration', durationState.totalDuration)
+
+    }
+  }, [songId]);
+
+  const convertDuration = useCallback((durationMs)=>{
+    const totalSec = Math.ceil(durationMs / 1000)
+    const min = Math.floor(totalSec / 60)
+    const sec = totalSec % 60
+
+    return {
+      min, 
+      sec,
     }
 
-  },[songData])
+  },[])
 
   useEffect(() => {
+
     if (localSongData && duration > 150) {
-      if (duration > 60000) {
-        let min = Math.ceil(duration / 60000);
-        let sec = duration / 1000 - Math.ceil(duration / 60000) * 60;
-        durationDispatch({
-          type: "totalMin",
-          payload: min,
-        });
-        durationDispatch({
-          type: "totalSec",
-          payload: sec,
-        });
-      } else {
-        let sec = Math.ceil(duration / 1000);
-        durationDispatch({
-          type: "totalSec",
-          payload: sec,
-        });
-      }
-      setIsPlay(true)
+
+      const dur = convertDuration(duration)
+      // console.log(dur)
+
+      durationDispatch({
+        type: "totalMin",
+        payload: dur.min,
+      });
+      durationDispatch({
+        type: "totalSec",
+        payload: dur.sec,
+      });
+
+      setIsPlay(true);
       play();
+
     }
   }, [duration]);
 
-  useEffect(()=>{
-
-    console.log('progress bar use effect')
-    
+  useEffect(() => {
+    // console.log("progress bar" , progressWidth );
     if (isPlay) {
       setProgressWidth(
         Math.floor(
@@ -162,8 +181,7 @@ function AsideBottom() {
         type: "currSec",
         payload: sec,
       });
-    } 
-    else {
+    } else {
       let sec = Math.floor(durationState.totalDuration);
       durationDispatch({
         type: "currSec",
@@ -171,40 +189,7 @@ function AsideBottom() {
       });
     }
 
-  },[durationState.totalDuration])
-
-  useEffect(() => {
-    // console.log('useEffect called')
-
-    timerId.current = setTimeout(() => {
-      if (isPlay && duration) {
-        durationDispatch({
-          type: "totalDuration",
-        });
-        // console.log('setTimeOut called')
-      }
-    }, [1000])
-
-
-    if(!isPlay || !songData){
-      clearTimeout(timerId.current);
-      return
-    }
-  
-    if (Math.ceil(duration / 1000) === durationState.totalDuration) {
-      clearTimeout(timerId.current);
-      setIsPlay(false)
-
-      durationDispatch({
-        type: "totalDuration",
-        payload: 0,
-      });
-
-      setProgressWidth(0);
-    }
-  
-  }, [durationState.totalDuration, isPlay, duration , songData]);
-
+  }, [durationState.totalDuration]);
 
   return (
     <div
@@ -228,8 +213,25 @@ function AsideBottom() {
         style={{ opacity: localSongData === null && "0.5" }}
       >
         <AsideBottomAlbum localSongData={localSongData} />
-        <AsideBottomControls localSongData={localSongData} durationState={durationState} />
-        <AsideBottomActions localSongData={localSongData} isPlay={isPlay} setIsPlay={setIsPlay} play={play} pause={pause} sound={sound} />
+        <AsideBottomControls
+          songId={songId}
+          localSongData={localSongData}
+          isPlay={isPlay}
+          setIsPlay={setIsPlay}
+          play={play}
+          pause={pause}
+          sound={sound}
+          duration={duration}
+          timerId={timerId}
+          setTimerId={setTimerId}
+          durationState={durationState}
+          durationDispatch={durationDispatch}
+          setProgressWidth={setProgressWidth}
+        />
+        <AsideBottomActions
+          localSongData={localSongData}
+          durationState={durationState}
+        />
       </div>
     </div>
   );

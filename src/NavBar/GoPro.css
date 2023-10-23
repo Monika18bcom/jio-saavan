@@ -419,6 +419,22 @@
     .gopro-plans-card-section{
         display: flex;
         flex-direction: column;
+        padding: 0;
+    }
+
+    .gopro-plans-card-section > .year-plan{
+        padding: 0;
+    }
+
+    .gopro-plans-card-section > .month-plan{
+        padding: 0;
+    }
+
+    .gopro-plans-card-section > .why-pro{
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 15px;
     }
 
     .gopro-plans-card-section .why-pro p{

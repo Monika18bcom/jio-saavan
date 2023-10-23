@@ -11,8 +11,10 @@ import { faL } from "@fortawesome/free-solid-svg-icons";
 export const JiosaavnContext = createContext({});
 
 function App() {
+
+  const [songId , setSongId] = useState(null)
   
-  const [songData, setSongData] = useState([]);
+  // const [songData, setSongData] = useState([]);
   const [showModal, setShowModal] = useState(null);
   const [loginType, setLoginType] = useState("login");
   const [isMobileLogin, setIsMobileLogin] = useState(true);
@@ -36,8 +38,8 @@ function App() {
   return (
     <JiosaavnContext.Provider
       value={{
-        songData,
-        setSongData,
+        songId , 
+        setSongId,
         showModal,
         setShowModal,
         loginType,
