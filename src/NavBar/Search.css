@@ -60,6 +60,12 @@
     color: #707070;
 }
 
+.search-suggession-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .search-list-section .trending-container > h5{
     margin-bottom: 11px;
     text-transform: uppercase;

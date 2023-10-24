@@ -61,14 +61,23 @@ function Search() {
     return newArr;
   }, [trendingData]);
 
-  const searchReducer = () =>{
-    
+  const searchReducer = (state , action) =>{
+    switch (action.type) {
+      case action.type:
+        return state.map((e) => {
+          if (e.type === action.type) {
+            setIsLoading(false);
+            return { ...e, data: action.payload };
+          } else return { ...e };
+        });
+      default: return state;
+    }
   }
 
   const [searchState , searchDispatch] = useReducer(searchReducer,[
-    { data: [], type: "song" , limit: '3'},
-    { data: [], type: "album" , limit: '3'},
-    { data: [], type: "artist" , limit: '3'},
+    { data: [], type: "song" , limit: '3' , key: 'title'},
+    { data: [], type: "album" , limit: '3' , key: 'title'},
+    { data: [], type: "artist" , limit: '3' , key: 'name'},
   ])
 
   async function searchFetch(e) {
@@ -76,7 +85,7 @@ function Search() {
 
     try {
       const response = await fetch(
-        `https://academics.newtonschool.co/api/v1/music/${e.type}?search={"title":"${inputValue}"}&limit=${e.limit}`,
+        `https://academics.newtonschool.co/api/v1/music/${e.type}?search={"${e.key}":"${inputValue}"}&limit=${e.limit}`,
         {
           headers: {
             projectID: PROJECT_ID,
@@ -90,7 +99,7 @@ function Search() {
         type: e.type,
         payload: result.data
       })
-      console.log(result);
+      // console.log(result);
     } catch (err) {
       console.log(err);
     }
@@ -154,7 +163,8 @@ function Search() {
       window.removeEventListener('click', ()=>{})
     }
 
-},[searchRef.current])
+  },[searchRef.current])
+
 
   return (
     <div className="search-container" ref={searchRef}>
@@ -176,7 +186,11 @@ function Search() {
           {
             inputValue ?
             <div className="search-suggession-section">
-            <SearchSuggession /> 
+              {
+                searchState.map((e,idx)=>(
+                  <SearchSuggession key={idx} e={e}/> 
+                ))
+              }
             </div> :
         
             <div className="trending-container">

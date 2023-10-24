@@ -18,6 +18,8 @@
 
 .song-item-idx > .play-icon {
     font-size: 30px;
+    /* width: 100%; */
+    /* height: 100%; */
     color: #fff;   
 }
 
@@ -33,10 +35,11 @@
 .song-item-img > .play-icon{
     width: 100%;
     height: 100%;
-    opacity: 0.5;
-    /* font-size: 25px; */
-    /* color: #fff; */
-    /* background-color: transparent; */
+    border-radius: 4px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
 }
 
 .song-item-container > .song-item-img > .img-bg{

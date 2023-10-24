@@ -31,42 +31,45 @@ function SongItem({
   songInfoJC,
   songInfoFSz,
   songInfoFCo,
-  num
+  num,
 }) {
   // console.log(data);
 
-  const { setSearchOpen , setSongId } = useContext(JiosaavnContext)
+  const { setSearchOpen, setSongId } = useContext(JiosaavnContext);
 
   const [isHover, setIsHover] = useState(false);
 
   const [isLiked, setIsLiked] = useState(false);
 
   // border'1px solid #e9e9e9
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleClickAlbum = (e) =>{
-    navigate(`/${data.type ? "song" : data.artists ? "album" : "artist"}/${(e.name) || (e.title)}/${e._id}`)
-    if(!songList){
-      setSearchOpen(false)
+  const handleClickAlbum = (e) => {
+    navigate(
+      `/${data.type ? "song" : data.artists ? "album" : "artist"}/${
+        e.name || e.title
+      }/${e._id}`
+    );
+    if (!songList) {
+      setSearchOpen(false);
     }
-  }
+  };
 
-  const setSongIdx = () =>{
+  const setSongIdx = () => {
     // console.log('clicked play')
-    setSongId(null)
-    if(data.type === "song"){
-      setSongId(data._id)
-    }
-    else if (data.songs.length > 0){
-      if(data.artists){
+    setSongId(null);
+    if (data.type === "song") {
+      setSongId(data._id);
+    } else if (data.songs.length > 0) {
+      if (data.artists) {
         // console.log('album')
-        setSongId(data.songs[0]._id)
-      }else{
+        setSongId(data.songs[0]._id);
+      } else {
         // console.log('artist')
-        setSongId(data.songs[0])
+        setSongId(data.songs[0]);
       }
     }
-  }
+  };
 
   return (
     <div
@@ -84,7 +87,13 @@ function SongItem({
       {songNum && (
         <div className="song-item-idx">
           {isHover && !songPoster ? (
-            <BsPlayCircle className="play-icon" style={{ cursor: playCur }} onClick={setSongIdx} />
+            <BsPlayCircle
+              className="play-icon"
+              style={{
+                cursor: playCur,
+              }}
+              onClick={setSongIdx}
+            />
           ) : (
             <p>{num ? num + 1 : 1}</p>
           )}
@@ -93,7 +102,16 @@ function SongItem({
       {songPoster && (
         <div className="song-item-img" style={{ marginRight: imgMarginR }}>
           {isHover ? (
-            <BsPlayCircle className="play-icon" style={{ cursor: playCur }} onClick={setSongIdx} />
+            <BsPlayCircle
+              className="play-icon"
+              style={{
+                cursor: playCur,
+                backgroundImage: `url(${
+                  data.type ? data.thumbnail : data.image
+                })`,
+              }}
+              onClick={setSongIdx}
+            />
           ) : (
             <div
               className="img-bg"
@@ -117,32 +135,44 @@ function SongItem({
             color: songInfoFCo,
           }}
         >
-          <h4 className="song-info-title" style={{ cursor: titleCur }} onClick={()=>handleClickAlbum(data)} >
+          <h4
+            className="song-info-title"
+            style={{ cursor: titleCur }}
+            onClick={() => handleClickAlbum(data)}
+          >
             {data.type ? data.title : data.artists ? data.title : data.name}
           </h4>
           <p className="song-info-type" style={{ cursor: typeCur }}>
             {data.type ? "Song" : data.artists ? "Album" : "Artist"}
           </p>
-          {songList && 
+          {songList && (
             <>
-              <h4 className="song-info-title" style={{ cursor: titleCur }} onClick={()=>handleClickAlbum(data)} >
+              <h4
+                className="song-info-title"
+                style={{ cursor: titleCur }}
+                onClick={() => handleClickAlbum(data)}
+              >
                 {data.title}
               </h4>
               <p className="song-info-type" style={{ cursor: typeCur }}>
-                {
-                  
-                  data?.artists.map((e , idx)=>{
-                    if(data.artist.includes(e._id)){
-                      return  <span key={e._id} onClick={()=>handleClickAlbum(e)}>{e.name + `${idx < (data.artists.length -1) ? ", " : ""}`}</span>
-                    }
-                  }) || 
-                  data?.artist?.map((e , idx)=> (
-                    <span key={e._id} onClick={()=>handleClickAlbum(e)}>{e.name + `${idx < (data.artist.length -1) ? ", " : ""}`}</span>
-                  ))
-                }
+                {data?.artists.map((e, idx) => {
+                  if (data.artist.includes(e._id)) {
+                    return (
+                      <span key={e._id} onClick={() => handleClickAlbum(e)}>
+                        {e.name +
+                          `${idx < data.artists.length - 1 ? ", " : ""}`}
+                      </span>
+                    );
+                  }
+                }) ||
+                  data?.artist?.map((e, idx) => (
+                    <span key={e._id} onClick={() => handleClickAlbum(e)}>
+                      {e.name + `${idx < data.artist.length - 1 ? ", " : ""}`}
+                    </span>
+                  ))}
               </p>
             </>
-          }
+          )}
         </div>
       )}
       {cancelIcon && (
