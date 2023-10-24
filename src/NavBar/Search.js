@@ -3,6 +3,7 @@ import React, {
   useEffect,
   useMemo,
   useReducer,
+  useRef,
   useState,
 } from "react";
 import SearchInput from "./SearchInput";
@@ -16,6 +17,9 @@ function Search() {
   const PROJECT_ID = "nwi12vygvqne";
 
   const { setSearchOpen } = useContext(JiosaavnContext);
+  const searchRef = useRef()
+  const [firstRender , setFirstRender] = useState(false)
+
   const [inputValue, setInputValue] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -57,7 +61,7 @@ function Search() {
   }, [trendingData]);
 
   async function searchFetch() {
-    console.log("search fetch called");
+    // console.log("search fetch called");
 
     try {
       const response = await fetch(
@@ -85,7 +89,6 @@ function Search() {
   }, [inputValue]);
 
   async function trendingFetch(e) {
-    // console.log("trending fetch called");
     try {
       const response = await fetch(
         `https://academics.newtonschool.co/api/v1/music/${e.type}?limit=4`,
@@ -97,7 +100,6 @@ function Search() {
       );
 
       const result = await response.json();
-      // console.log(result);
       dispatchTrendingData({
         type: e.type,
         payload: result.data,
@@ -114,8 +116,29 @@ function Search() {
     });
   }, []);
 
+  useEffect(()=>{
+
+    if(!firstRender){
+      setFirstRender(true)
+      return
+    }
+
+    if(searchRef.current && firstRender){
+      window.addEventListener('click', (e)=>{
+        if(searchRef.current && !searchRef?.current?.contains(e.target)){
+          setSearchOpen(false)
+        }
+      })
+    }
+
+    return () =>{
+      window.removeEventListener('click', ()=>{})
+    }
+
+},[searchRef.current])
+
   return (
-    <div className="search-container">
+    <div className="search-container" ref={searchRef}>
       <div className="search-input-section">
         <SearchInput inputValue={inputValue} setInputValue={setInputValue} />
 

@@ -2,7 +2,6 @@ import React from "react";
 import "./Loader.css";
 
 function Loader({ border, size , margin }) {
-  console.log(border, size)
   return (
     <div
       className="loader"
