@@ -7,63 +7,91 @@ import { AiFillHeart } from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
 import "./SongItem.css";
 
-function SongItem({data ,songNum,cancelIcon,likeIcon,durDots, songPoster , songInfo , imgMarginR , bg , borderR , border , width}) {
-    console.log(data)
+function SongItem({
+  data,
+  songNum,
+  cancelIcon,
+  likeIcon,
+  durDots,
+  songPoster,
+  songInfo,
+  imgMarginR,
+  bg,
+  borderR,
+  border,
+  width,
+  playCur,
+  titleCur,
+  typeCur,
+  songInfoFD,
+  songInfoAI,
+  songInfoJC,
+  songInfoFSz,
+  songInfoFCo,
+}) {
+  console.log(data);
+
   const [isHover, setIsHover] = useState(false);
-  
+
   const [isLiked, setIsLiked] = useState(false);
+
+  // border'1px solid #e9e9e9
 
   return (
     <div
       className="song-item-container"
-      onMouseOver={()=>setIsHover(true)}
-      onMouseOut={()=>setIsHover(false)}
+      onMouseOver={() => setIsHover(true)}
+      onMouseOut={() => setIsHover(false)}
       style={{
         height: height,
-        width: width
-        // backgroundColor: (bg && isHover) && "#fff",
-        // borderRadius: (borderR && isHover) && "4px",
-        // border: (border && isHover) && "1px solid #e9e9e9",
+        width: width,
+        backgroundColor: isHover && bg,
+        borderRadius: isHover && borderR,
+        border: isHover && border,
       }}
     >
       {songNum && (
         <div className="song-item-idx">
           {isHover && !songPoster ? (
-            <BsPlayCircle className="play-icon" />
+            <BsPlayCircle className="play-icon" style={{ cursor: playCur }} />
           ) : (
             <p>1</p>
           )}
         </div>
       )}
       {songPoster && (
-        <div className="song-item-img" style={{marginRight:imgMarginR}}>
+        <div className="song-item-img" style={{ marginRight: imgMarginR }}>
           {isHover ? (
-            <BsPlayCircle className="play-icon" />
+            <BsPlayCircle className="play-icon" style={{ cursor: playCur }} />
           ) : (
             <div
               className="img-bg"
               style={{
-                backgroundImage: `url(${data.type ? data.thumbnail :  data.image })`,
+                backgroundImage: `url(${
+                  data.type ? data.thumbnail : data.image
+                })`,
               }}
-            >
-            </div>
+            ></div>
           )}
         </div>
       )}
       {songInfo && (
         <div
           className="song-item-info"
-          //   style={{
-          //     display: display,
-          //     flexDirection: flexDirection,
-          //     alignItems: alignItems,
-          //     justifyContent: justifyContent,
-          //     fontSize:fontSize,
-          //     color:color
-          //   }}
+          style={{
+            flexDirection: songInfoFD,
+            alignItems: songInfoAI,
+            justifyContent: songInfoJC,
+            fontSize: songInfoFSz,
+            color: songInfoFCo,
+          }}
         >
-          <h4 className="song-info-title">{data.type ? data.title : data.artists ? data.title : data.name }</h4>
-          <p className="song-info-type">{data.type ? 'Song' : data.songs? 'Artist': 'Album'}</p>
+          <h4 className="song-info-title" style={{ cursor: titleCur }}>
+            {data.type ? data.title : data.artists ? data.title : data.name}
+          </h4>
+          <p className="song-info-type" style={{ cursor: typeCur }}>
+            {data.type ? "Song" : data.artists ? "Album" : "Artist"}
+          </p>
         </div>
       )}
       {cancelIcon && (

@@ -47,7 +47,7 @@
 
 .search-list-section{
     max-height: 800px;
-    padding-top: 22px;
+    padding: 22px 0;
 }
 
 .search-loader-container{

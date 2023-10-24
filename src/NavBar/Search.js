@@ -30,6 +30,7 @@ function Search() {
       case action.type:
         return state.map((e)=>{
           if(e.type === action.type){
+            setIsLoading(false)
             return {...e , data : action.payload}
           }
           else return {...e}
@@ -82,7 +83,7 @@ function Search() {
   },[inputValue])
 
   async function trendingFetch(e){
-    console.log('trending fetch called')
+    console.log('trending fetch called', isLoading , 'isLoading')
     try{
       const response =await  fetch(`https://academics.newtonschool.co/api/v1/music/${e.type}?limit=4`, {
         headers:{
@@ -102,11 +103,12 @@ function Search() {
   }
 
   useEffect(()=>{
-    setIsLoading(true)
+    
     trendingData.map((e)=>{
+      setIsLoading(true)
       trendingFetch(e)
     })
-    setIsLoading(false)
+    
 
   },[])
 
@@ -129,7 +131,7 @@ function Search() {
           <div className='song-item-section'>
             {
               trendingArr?.map((e, idx)=>(
-                <SongItem key={idx} data={e} songPoster={songPoster} songInfo={songInfo} imgMarginR='11px' width='400px'/>
+                <SongItem key={idx} data={e} songPoster={songPoster} songInfo={songInfo} imgMarginR='11px' width='350px' playCur='pointer' titleCur='pointer' />
               ))
             }
             
