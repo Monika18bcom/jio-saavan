@@ -1,7 +1,8 @@
 import React from "react";
 import "./Loader.css";
 
-function Loader({ border, size }) {
+function Loader({ border, size , margin }) {
+  console.log(border, size)
   return (
     <div
       className="loader"
@@ -10,6 +11,7 @@ function Loader({ border, size }) {
         borderTop: `${border}px solid #ccc7c7`,
         width: `${size}px`,
         height: `${size}px`,
+        margin:`${margin}px`
       }}
     ></div>
   );

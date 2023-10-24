@@ -28,8 +28,6 @@ function Search() {
   const [durDots, setDurDots] = useState(true);
 
   const trendingDataReducer = (state, action) => {
-    // console.log(action.type , 'action.type')
-    // console.log(action.payload)
     switch (action.type) {
       case action.type:
         return state.map((e) => {
@@ -72,6 +70,7 @@ function Search() {
       );
 
       const result = await response.json();
+      setIsLoading(false);
       console.log(result);
     } catch (err) {
       console.log(err);
@@ -80,6 +79,7 @@ function Search() {
 
   useEffect(() => {
     if (inputValue.trim() !== "") {
+      setIsLoading(true);
       searchFetch();
     }
   }, [inputValue]);
@@ -127,7 +127,8 @@ function Search() {
       {
         isLoading ?
         <div className="search-loader-container">
-          <Loader />
+          <Loader size='25' border='3' margin='0' /> 
+          <p>Loading results</p>
         </div>:
         <div className="search-list-section">
           {

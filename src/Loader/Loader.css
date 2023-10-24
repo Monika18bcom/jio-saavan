@@ -1,10 +1,10 @@
 .loader {
     margin: auto;
-    border: 6px solid #f6f6f6;
-    border-radius: 50%;
+    /* border: 6px solid #f6f6f6;
     border-top: 6px solid #ccc7c7;
     width: 60px;
-    height: 60px;
+    height: 60px; */
+    border-radius: 50%;
     animation: spinner .37s linear infinite;
 }
 

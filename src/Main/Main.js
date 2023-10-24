@@ -12,7 +12,7 @@ function Main({mainAlbumArr}) {
   return (
     isLoading ? 
     <div className="main-loader-container">
-        <Loader />
+        <Loader size='60' border='6'  />
     </div> :
     <main className='main-album-content'>
         {
