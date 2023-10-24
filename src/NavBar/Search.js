@@ -12,6 +12,7 @@ import "./Search.css";
 import { JiosaavnContext } from "../App/App";
 import SongItem from "./SongItem";
 import Loader from "../Loader/Loader";
+import SearchSuggession from "./SearchSuggession";
 
 function Search() {
   const PROJECT_ID = "nwi12vygvqne";
@@ -60,12 +61,22 @@ function Search() {
     return newArr;
   }, [trendingData]);
 
-  async function searchFetch() {
+  const searchReducer = () =>{
+    
+  }
+
+  const [searchState , searchDispatch] = useReducer(searchReducer,[
+    { data: [], type: "song" , limit: '3'},
+    { data: [], type: "album" , limit: '3'},
+    { data: [], type: "artist" , limit: '3'},
+  ])
+
+  async function searchFetch(e) {
     // console.log("search fetch called");
 
     try {
       const response = await fetch(
-        `https://academics.newtonschool.co/api/v1/music/song?search={"title":"${inputValue}"}`,
+        `https://academics.newtonschool.co/api/v1/music/${e.type}?search={"title":"${inputValue}"}&limit=${e.limit}`,
         {
           headers: {
             projectID: PROJECT_ID,
@@ -75,6 +86,10 @@ function Search() {
 
       const result = await response.json();
       setIsLoading(false);
+      searchDispatch({
+        type: e.type,
+        payload: result.data
+      })
       console.log(result);
     } catch (err) {
       console.log(err);
@@ -83,8 +98,12 @@ function Search() {
 
   useEffect(() => {
     if (inputValue.trim() !== "") {
-      setIsLoading(true);
-      searchFetch();
+
+      searchState.map((e)=>{
+        setIsLoading(true);
+        searchFetch(e);
+      })
+      
     }
   }, [inputValue]);
 
@@ -155,7 +174,11 @@ function Search() {
         </div>:
         <div className="search-list-section">
           {
-            !inputValue &&
+            inputValue ?
+            <div className="search-suggession-section">
+            <SearchSuggession /> 
+            </div> :
+        
             <div className="trending-container">
               <h5>Trending</h5>
               <div className="song-item-section">
