@@ -33,18 +33,21 @@ function MusicCard({data}){
             console.log('play clicked')
             setSongId(null)
             if(data.type === "song"){
-                setTimeout(()=>{
-                    setSongId(data._id)
-                },500)
+                setSongId(data._id)
+                // setTimeout(()=>{
+                //     setSongId(data._id)
+                // },500)
             }else if(data.type === "album"){
-                setTimeout(()=>{
-                    setSongId(data?.songs[0]._id)
-                },500)
+                setSongId(data?.songs[0]._id)
+                // setTimeout(()=>{
+                //     setSongId(data?.songs[0]._id)
+                // },500)
                 
             }else{
-                setTimeout(()=>{
-                    setSongId(data.songs[0])
-                },500)
+                setSongId(data.songs[0])
+                // setTimeout(()=>{
+                //     setSongId(data.songs[0])
+                // },500)
                 
             }
                        
