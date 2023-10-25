@@ -6,13 +6,11 @@ import {AiFillHeart} from 'react-icons/ai'
 import {faEllipsis} from '@fortawesome/free-solid-svg-icons'
 import {faPlay} from '@fortawesome/free-solid-svg-icons'
 
-
 import { JiosaavnContext } from "../App/App";
 import { useNavigate } from 'react-router-dom'
 
 
 function MusicCard({data  , cardWidth , imgHeight}){
-    // console.log("musiccard.....",data)
 
     const [isHover, setIsHover] = useState(false);
     const [isLikeRed, setIsLikeRed] = useState(false);
@@ -30,32 +28,19 @@ function MusicCard({data  , cardWidth , imgHeight}){
 
     const handleMusicCardControls = (e)=>{
         if(e.target.classList.contains('music-card-play-btn-bg') || e.target.classList.contains('music-card-play-btn') || e.target.parentElement.classList.contains('music-card-play-btn')){
-            console.log('play clicked')
             setSongId(null)
             if(data.type === "song"){
                 setSongId(data._id)
-                // setTimeout(()=>{
-                //     setSongId(data._id)
-                // },500)
             }else if(data.type === "album"){
                 setSongId(data?.songs[0]._id)
-                // setTimeout(()=>{
-                //     setSongId(data?.songs[0]._id)
-                // },500)
-                
             }else{
                 setSongId(data.songs[0])
-                // setTimeout(()=>{
-                //     setSongId(data.songs[0])
-                // },500)
-                
             }
                        
         }else if(e.target.classList.contains('music-card-like-btn') || e.target.parentElement.classList.contains('music-card-like-btn')){
-            console.log("clicked like button")
             setIsLikeRed(!isLikeRed);
         }else if(e.target.classList.contains('music-card-option-btn') || e.target.parentElement.classList.contains('music-card-option-btn')){
-            console.log('option btn')
+            
         }else{
             navigate(`/${data.type}/${(data.name) || (data.title)}/${data._id}`)
         }

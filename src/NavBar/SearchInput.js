@@ -16,7 +16,6 @@ function SearchInput() {
       navigate(`search/song/${inputValue}`)
       setSearchOpen(false)
       setInputValue('')
-      console.log('keydown func called')
     }
   }
   return (

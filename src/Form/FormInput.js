@@ -3,7 +3,6 @@ import { JiosaavnContext } from "../App/App";
 import "./FormInput.css";
 
 function FormInput(props) {
-  // console.log(props.onChange)
   const { isMobileLogin } = useContext(JiosaavnContext)
   return (
     <div
@@ -37,7 +36,6 @@ function FormInput(props) {
           '::placeholder': {
             color: 'red'
           }
-          // color: props.border
         }}
       />
     </div>

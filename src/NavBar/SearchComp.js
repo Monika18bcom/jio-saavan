@@ -7,9 +7,7 @@ import SongItem from "./SongItem";
 
 function SearchComp() {
   const { type, input } = useParams();
-  const { sArr, searchState } = useContext(JiosaavnContext);
-
-//   console.log(searchState, "sArr");
+  const { searchState } = useContext(JiosaavnContext);
 
   return (
     <div className="search-comp-container">

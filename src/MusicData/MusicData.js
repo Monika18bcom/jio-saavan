@@ -5,8 +5,6 @@ import {IoIosArrowBack} from 'react-icons/io'
 import {IoIosArrowForward} from 'react-icons/io'
 
 function MusicData({album}){
-    // console.log(album)
-    // const [musicDataArr , setMusicDataArr] = useState([]);
 
     const [isArrowHover, setIsArrowHover] = useState(false);
     const [isALDisabled ,setIsALDisabled] = useState(true)

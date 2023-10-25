@@ -1,6 +1,5 @@
 import React from 'react'
 import './Table.css'
-import {BsCheckLg} from 'react-icons/bs'
 import {HiCheck} from 'react-icons/hi'
 import {FaXmark} from 'react-icons/fa6'
 

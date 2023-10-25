@@ -60,7 +60,6 @@ function Search() {
   }, [trendingData]);
 
   async function searchFetch(e) {
-    // console.log("search fetch called");
 
     try {
       const response = await fetch(
@@ -78,7 +77,6 @@ function Search() {
         type: e.type,
         payload: result.data
       })
-      console.log(result);
     } catch (err) {
       console.log(err);
     }

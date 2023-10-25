@@ -39,7 +39,6 @@ function NavBar(){
                     <img className="logo-img" src={logo} alt='jiosaavn logo'></img>
                     <h2 className="logo-text">JioSaavn</h2>
                 </NavLink>
-                {/* <NavLink to="/"><img id="logo-img" src={logo} alt="logo-image"></img></NavLink> */}
             </div>
             <div className="nav-container">
                 <ul className="nav-left">

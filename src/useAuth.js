@@ -13,7 +13,6 @@ export function useAuth() {
   const [errApiResult , setErrApiResult] = useState('')
 
   const logIn = (email , password) => {
-    console.log("login from useAuth")
 
     fetch('https://academics.newtonschool.co/api/v1/user/login', {
       method: 'POST',
@@ -29,9 +28,7 @@ export function useAuth() {
     })
     .then((response)=> response.json())
     .then((result)=> {
-      console.log(result)
       if(result.status === 'success'){
-        console.log('status is successfull' , result.data , result.token)
         setUserData({ userDetails: result.data , userToken: result.token })
         localStorage.setItem('user' , JSON.stringify({ userDetails: result.data , userToken: result.token }))
 
@@ -43,7 +40,6 @@ export function useAuth() {
   };
 
   const signUp = (name , email , password) => {
-    console.log("signup from useAuth")
 
     fetch('https://academics.newtonschool.co/api/v1/user/signup', {
       method: 'POST',
@@ -60,9 +56,7 @@ export function useAuth() {
     })
     .then((response)=> response.json())
     .then((result)=> {
-      console.log(result)
       if(result.status === 'success'){
-        console.log('status is successfull' , result.data.user , result.token)
         setUserData({ userDetails: result.data.user , userToken: result.token })
         localStorage.setItem('user' , JSON.stringify({ userDetails: result.data.user , userToken: result.token }))
 
@@ -76,7 +70,6 @@ export function useAuth() {
   };
 
   const updatePassword = (name , email , oldPassword , newPassword , token) => {
-    console.log("update password from useAuth")
 
     fetch('https://academics.newtonschool.co/api/v1/user/updateMyPassword' , {
       method: 'PATCH',
@@ -98,7 +91,6 @@ export function useAuth() {
   };
 
   const logOut = ()=>{
-    console.log("logout func called")
     localStorage.removeItem('user')
     localStorage.removeItem('userName')
     setUserData({
@@ -106,8 +98,6 @@ export function useAuth() {
       userToken: null
     })
   }
-
-  // console.log(userData)
 
   return { errApiResult , logIn, signUp, logOut, updatePassword };
 }

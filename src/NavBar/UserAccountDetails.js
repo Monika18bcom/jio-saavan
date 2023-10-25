@@ -19,13 +19,11 @@ function UserAccountDetails() {
     useEffect(()=>{
 
         if(!firstRender){
-            console.log(firstRender)
             setFirstRender(true)
             return
         }
 
         if(userAccountRef.current && firstRender){
-            console.log(profileSelected)
             window.addEventListener('click', (e)=>{
                 if(userAccountRef.current && !userAccountRef?.current?.contains(e.target)){
                     setDisplayAccount(false)
@@ -67,7 +65,6 @@ function UserAccountDetails() {
         }
     }
 
-    console.log(userData)
 
   return (
     <div className='user-account-details-container' ref={userAccountRef} onClick={(e) => handleClick(e)}>

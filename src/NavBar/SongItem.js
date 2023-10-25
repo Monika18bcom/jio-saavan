@@ -9,8 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
 import useSound from "use-sound";
 
-import defaultSong from "../song/DefaultAudio.mp3";
-
 
 function SongItem({
   data,
@@ -49,7 +47,6 @@ function SongItem({
 
   const [isLiked, setIsLiked] = useState(false);
 
-  // border'1px solid #e9e9e9
   const navigate = useNavigate();
 
   const [ , { duration }] = useSound(data?.audio_url);
@@ -189,7 +186,6 @@ function SongItem({
                   artistArr?.artists.map((e , idx)=>{
                       if(data.artist.includes(e._id)){
                           return  <span key={e._id} onClick={()=>handleClickAlbum(e)}>{e.name + `${idx < (artistArr.artists.length -1) ? ", " : ""}`}</span>
-                          // return `${e.name},`;
                       }
                   }) || 
                   data?.artist?.map((e , idx)=> (

@@ -5,13 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
 
 function SearchSuggession({ e , inputValue}) {
-  console.log(e.data , 'e.data');
   const navigate = useNavigate()
   const {setSearchOpen} = useContext(JiosaavnContext)
 
   const handleNavigate = () =>{
     navigate(`search/${e.type}/${inputValue}`)
-    // setSArr(e)
     setSearchOpen(false)
   }
   return (

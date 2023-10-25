@@ -35,7 +35,6 @@ function NavMusic() {
     const navigate = useNavigate()
 
     const handleClick = (e , type) =>{
-        console.log(e , type)
         navigate(`/${type}/${(e.name) || (e.title)}/${e._id}`)
         setIsNavMusicHover(false)
     }

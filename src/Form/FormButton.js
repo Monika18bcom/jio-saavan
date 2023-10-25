@@ -4,7 +4,6 @@ import './FormButton.css'
 function FormButton(props) {
 
   const [isHover , seIsHover] = useState(false)
-  // console.log(props.hoverBg , props.bg)
 
   return (
     <button

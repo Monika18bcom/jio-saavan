@@ -101,7 +101,6 @@ function Home() {
         })
     },[])
 
-    // console.log(homeState , homeAlbumArr)
 
     return(
 

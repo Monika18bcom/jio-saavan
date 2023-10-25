@@ -5,8 +5,6 @@ import FormContent from "./FormContent";
 
 function LogIn({ loginType }) {
 
-  // console.log(loginType)
-
   return (
     <div className="login-container">
       <FormImages />

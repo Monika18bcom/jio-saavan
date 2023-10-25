@@ -71,7 +71,6 @@ function GoPro() {
     };
 
     const toggleHamburger = () => {
-        console.log('func called')
         setIsHamburger(!isHamburger);
     }
 
@@ -97,7 +96,6 @@ function GoPro() {
         <div className='gopro-plans-container'>
             <div className='gopro-plan-grid'>
                 <p>All your music and JioTunes,<span> plus...</span></p>
-                {/* on click more should re direct to benefits */}
                 <h1>Ad-free Music, Unlimited Downloads,<br />Exclusive Original Content and <span onClick={scrollToBenefits} >More</span>.</h1>
                 <div className='gopro-plans-card-section'>
                     <div className='year-plan'><GoproPlanCard plan={yearPlan} /></div>
