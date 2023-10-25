@@ -6,7 +6,6 @@ import React, {
   useCallback,
 } from "react";
 import "./AsideBottom.css";
-// import {BsArrowsAngleExpand} from 'react-icons/bs'
 import defaultSong from "../song/DefaultAudio.mp3";
 
 import useSound from "use-sound";
@@ -27,10 +26,6 @@ function AsideBottom() {
 
   const [play, { stop, pause, duration, sound }] = useSound(songUrl);
   const [timerId, setTimerId] = useState(null);
-
-  // const timerId = useRef(null)
-
-  // console.log(timerId , 'timerId')
 
   const initialDuration = {
     currMin: 0,
@@ -66,7 +61,6 @@ function AsideBottom() {
   );
 
   async function fetchSongData() {
-    // console.log("fetch called");
 
     try {
       const response = await fetch(
@@ -89,7 +83,6 @@ function AsideBottom() {
 
   useEffect(() => {
     setProgressWidth(0);
-    // clearTimeout(timerId.current)
 
     if (localSongData?._id === songId) {
       // stop the current song then play the same song if the song id is same
@@ -103,7 +96,6 @@ function AsideBottom() {
       setIsPlay(true);
       play();
 
-      console.log("same song id",'durationState.totalDuration', durationState.totalDuration);
 
     } else if (songId) {
       if (localSongData && localSongData?._id !== songId) {
@@ -115,11 +107,9 @@ function AsideBottom() {
         });
         fetchSongData();
 
-        console.log("second time",'durationState.totalDuration', durationState.totalDuration );
       }
 
       fetchSongData();
-      console.log('durationState.totalDuration', durationState.totalDuration)
 
     }
   }, [songId]);
@@ -141,7 +131,6 @@ function AsideBottom() {
     if (localSongData && duration > 150) {
 
       const dur = convertDuration(duration)
-      // console.log(dur)
 
       durationDispatch({
         type: "totalMin",
@@ -159,7 +148,6 @@ function AsideBottom() {
   }, [duration]);
 
   useEffect(() => {
-    // console.log("progress bar" , progressWidth );
     if (isPlay) {
       setProgressWidth(
         Math.floor(

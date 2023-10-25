@@ -5,17 +5,14 @@ import { JiosaavnContext } from '../App/App';
 import './ExpandAlbum.css'
 
 function ExpandAlbum({ localSongData }) {
+  const navigate = useNavigate()
+  const { setIsExpand } = useContext(JiosaavnContext)
 
-    // console.log("expandAlbum file",localSongData)
-    const navigate = useNavigate()
-    const { setIsExpand } = useContext(JiosaavnContext)
+  const [isHover, setIsHover] = useState(false);
 
-    const [isHover, setIsHover] = useState(false);
-
-    const handleClick = (e) => {
-      console.log(e)
-      navigate(`/${e.type || 'artist'}/${(e.name) || (e.title)}/${e._id}`)
-      setIsExpand(false)
+  const handleClick = (e) => {
+    navigate(`/${e.type || 'artist'}/${(e.name) || (e.title)}/${e._id}`)
+    setIsExpand(false)
   }
 
 

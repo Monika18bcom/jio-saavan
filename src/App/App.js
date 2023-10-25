@@ -6,7 +6,6 @@ import LogIn from "../Form/LogIn";
 import Modal from "../Modal/Modal";
 import FormContent from "../Form/FormContent";
 import GoPro from "../NavBar/GoPro";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 
 export const JiosaavnContext = createContext({});
 
@@ -14,7 +13,6 @@ function App() {
 
   const [songId , setSongId] = useState(null)
   
-  // const [songData, setSongData] = useState([]);
   const [showModal, setShowModal] = useState(null);
   const [loginType, setLoginType] = useState("login");
   const [isMobileLogin, setIsMobileLogin] = useState(true);
@@ -49,8 +47,6 @@ function App() {
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("user");
-
-    // console.log(storedUserData, "user data set in localStorage");
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
     }

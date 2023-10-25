@@ -59,8 +59,11 @@
     padding-bottom: 22px;
 }
  
-#footer-app-version a{
+#footer-app-version p{
+    display: inline-block;
     padding-right: 22px;
+    font-size: .8666666667rem;
+    text-decoration: none;
 }
 
 #footer-icons{

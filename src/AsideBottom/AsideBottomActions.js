@@ -7,7 +7,6 @@ import { BsArrowsAngleContract } from "react-icons/bs";
 import { JiosaavnContext } from '../App/App';
  
 function AsideBottomActions({ localSongData , durationState }) {
-  // console.log(durationState)
 
   const { isExpand, setIsExpand } = useContext(JiosaavnContext)
   const [isVolume, setIsVolume] = useState(true);

@@ -22,7 +22,6 @@ function NavBar(){
     const handleProfile = (e) => {
 
         if(e.target.classList.contains('nav-bar-user-profile') || e.target.parentElement.classList.contains('nav-bar-user-profile')){
-            console.log("clicked profile")
             setProfileSelected(!profileSelected)
             setDisplayAccount(!displayAccount)
         }
@@ -32,8 +31,6 @@ function NavBar(){
     const OpenSearch = () =>{
         setSearchOpen(true)
     }
-
-    // console.log(userData , ' from navbar')
 
     return(
         <div className="nav-bar">

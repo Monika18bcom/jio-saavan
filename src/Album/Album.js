@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Album.css";
 import AlbumPoster from "../AlbumPoster/AlbumPoster";
-import SongList from "../SongList/SongList";
 import Loader from "../Loader/Loader";
 import SongItem from "../NavBar/SongItem";
 
@@ -11,7 +10,6 @@ function Album() {
 
   const [dataArr, setDataArr] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  // const [isSelected , setIsSeleceted] = useState(null)
 
   async function fetchData() {
     try {
@@ -36,8 +34,6 @@ function Album() {
     setIsLoading(true);
     fetchData();
   }, [type, id]);
-
-  // console.log(dataArr , 'dataArr')
 
   return isLoading ? (
     <div className="album-loader-container">
@@ -75,7 +71,6 @@ function Album() {
             titleCur="pointer"
             typeCur="pointer"
           />
-          // <SongList key={id} data={e} num={id} artistArr={dataArr} />
         )) ||
           (dataArr && 
             <SongItem 
@@ -101,8 +96,6 @@ function Album() {
               titleCur="pointer"
               typeCur="pointer"
             />
-
-            // <SongList data={dataArr} />
           )}
       </div>
     </div>

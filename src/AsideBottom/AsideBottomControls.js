@@ -24,9 +24,7 @@ function AsideBottomControls({
 }) {
   const [isRepeat, setIsRepeat] = useState(false);
 
-  useEffect(() => {
-    console.log('useEffect controls')
-    
+  useEffect(() => {    
     if(isPlay && songId){
       setTimerId(
         setTimeout(() => {
@@ -34,7 +32,6 @@ function AsideBottomControls({
             durationDispatch({
               type: "totalDuration",
             });
-            console.log("setTimeOut called");
           }
         }, 1000)
       );
@@ -46,8 +43,6 @@ function AsideBottomControls({
     else if (localSongData?._id  !== songId) {
       clearTimeout(timerId);
     }
-
-    // console.log('timerId' , timerId)
 
     if (Math.ceil(duration / 1000) === durationState.totalDuration) {
       clearTimeout(timerId);
@@ -66,10 +61,7 @@ function AsideBottomControls({
     };
   }, [durationState.totalDuration , isPlay , songId]);
 
-//   duration, dependencies of above useEffect
-
   const handlePlay = () => {
-    console.log("play-pause");
     if (!isPlay) {
       setIsPlay(true);
       play();
@@ -80,7 +72,6 @@ function AsideBottomControls({
   };
 
   const handleLoop = () => {
-    console.log("loop");
     if (localSongData !== null) {
       if (sound._loop) {
         setIsRepeat(false);

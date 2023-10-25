@@ -26,7 +26,6 @@ function Browse({type,surpriseMeId}) {
   const browseRef = useRef()
 
   const handleSurpriseMe =()=>{
-    console.log("surprise me" , surpriseMeId)
     if(surpriseMeId){
       setSongData(surpriseMeId)
     }
@@ -39,9 +38,6 @@ function Browse({type,surpriseMeId}) {
   const handleRightArrow = ()=>{
     browseRef.current.scrollBy({left: browseRef.current.offsetWidth , behavior: 'smooth'})
   }
-
-  console.log(isALDisabled , isARDisabled)
-
 
   return (
     <div className='browse-container'>
@@ -71,7 +67,6 @@ function Browse({type,surpriseMeId}) {
               }
 
               if((browseRef.current.scrollWidth - (browseRef.current.scrollLeft + browseRef.current.offsetWidth)) >1){
-                console.log((browseRef.current.scrollWidth - (browseRef.current.scrollLeft + browseRef.current.offsetWidth)))
                 setIsARDisabled(false)
               }else{
                 setIsARDisabled(true)

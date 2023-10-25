@@ -29,39 +29,31 @@ function AsideLeft(){
             e.target.classList.contains('library-artists') || 
             e.target.parentElement.classList.contains('library-artists'))
             {
-                console.log("setModal")
                 setShowModal(true)
             }
 
         }else{
             if(e.target.classList.contains('library-history') || 
             e.target.parentElement.classList.contains('library-history')){
-                console.log("history aside left clicked")
                 navigate('/listening-history')
             }
             else if(e.target.classList.contains('library-songs') || 
             e.target.parentElement.classList.contains('library-songs')){
-                console.log("songs aside left clicked")
                 navigate('my-music/songs')
             }
             else if(e.target.classList.contains('library-albums') || 
             e.target.parentElement.classList.contains('library-albums')){
-                console.log("albums aside left clicked")
                 navigate('my-music/albums')
             }
             else if(e.target.classList.contains('library-podcasts') || 
             e.target.parentElement.classList.contains('library-podcasts')){
-                console.log("podcasts aside left clicked")
                 navigate('my-music/podcasts')
             }
             else if(e.target.classList.contains('library-artists') || 
             e.target.parentElement.classList.contains('library-artists')){
-                console.log("history aside left clicked")
                 navigate('my-music/artists')
             }
         }
-        
-
     }
 
     return (
