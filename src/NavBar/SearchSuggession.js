@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
 
 function SearchSuggession({ e , inputValue}) {
-  // console.log(e);
+  console.log(e.data , !e.data);
   const navigate = useNavigate()
   const {setSearchOpen} = useContext(JiosaavnContext)
 
@@ -21,19 +21,23 @@ function SearchSuggession({ e , inputValue}) {
         <span onClick={handleNavigate}>View All</span>
       </div>
       <div className="song-list">
-        {e?.data?.map((e, idx) => (
-          idx < 4 &&
-          <SongItem
-            key={idx}
-            data={e}
-            songPoster={true}
-            songInfo={true}
-            imgMarginR="11px"
-            width="215px"
-            playCur="pointer"
-            titleCur="pointer"
-          />
-        ))}
+        {
+          !e.data ?
+          <p>Result not found</p> :
+          e?.data?.map((e, idx) => (
+            idx < 4 &&
+            <SongItem
+              key={idx}
+              data={e}
+              songPoster={true}
+              songInfo={true}
+              imgMarginR="11px"
+              width="215px"
+              playCur="pointer"
+              titleCur="pointer"
+            />
+          ))
+        }
       </div>
     </div>
   );

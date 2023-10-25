@@ -9,7 +9,7 @@ function SearchComp() {
   const { type, input } = useParams();
   const { sArr, searchState } = useContext(JiosaavnContext);
 
-  console.log(searchState, "sArr");
+//   console.log(searchState, "sArr");
 
   return (
     <div className="search-comp-container">
@@ -37,7 +37,7 @@ function SearchComp() {
           type === e?.type && (
             <div className="song-list-section" key={idx} style={{display: type !== 'song' && 'flex' , flexWrap: type !== 'song' && 'wrap' , gap: type !== 'song' && '20px'  }}>
               {
-                e?.data.length < 1 ?
+                !e.data ?
                 <p>Result not found</p> :
                 e?.data?.map((data, idx) => (
                     type === 'song' ?
