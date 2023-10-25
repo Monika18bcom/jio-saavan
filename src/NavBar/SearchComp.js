@@ -37,7 +37,7 @@ function SearchComp() {
           type === e?.type && (
             <div className="song-list-section" key={idx} style={{display: type !== 'song' && 'flex' , flexWrap: type !== 'song' && 'wrap' , gap: type !== 'song' && '20px'  }}>
               {
-                !e.data ?
+                e.data.length < 1 ?
                 <p>Result not found</p> :
                 e?.data?.map((data, idx) => (
                     type === 'song' ?

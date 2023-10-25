@@ -22,7 +22,7 @@ function SearchSuggession({ e , inputValue}) {
       </div>
       <div className="song-list">
         {
-          !e.data ?
+          e.data.length < 1 ?
           <p>Result not found</p> :
           e?.data?.map((e, idx) => (
             idx < 4 &&
