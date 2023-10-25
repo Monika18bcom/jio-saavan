@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 function MusicCard({data  , cardWidth , imgHeight}){
-    console.log("musiccard.....",data)
+    // console.log("musiccard.....",data)
 
     const [isHover, setIsHover] = useState(false);
     const [isLikeRed, setIsLikeRed] = useState(false);

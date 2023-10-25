@@ -60,6 +60,7 @@ function SearchComp() {
                       borderR='4px'
                       border='1px solid #e9e9e9'
                       imgMarginR="22px"
+                      likeIconMarginR="11px"
                       width="100%"
                       height='64px'
                       playCur="pointer"

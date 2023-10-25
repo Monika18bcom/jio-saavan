@@ -33,9 +33,12 @@ function SongItem({
   songInfoFCo,
   songInfoMarginR,
   songlistWidth,
+  numMarginR,
+  likeIconMarginR,
   num,
+  artistArr
 }) {
-  // console.log(data);
+  console.log(data);
 
   const { setSearchOpen, setSongId } = useContext(JiosaavnContext);
 
@@ -94,7 +97,7 @@ function SongItem({
       }}
     >
       {songNum && (
-        <div className="song-item-idx">
+        <div className="song-item-idx" style={{marginRight: numMarginR}}>
           {isHover && !songPoster ? (
             <BsPlayCircle
               className="play-icon"
@@ -155,7 +158,18 @@ function SongItem({
                 {data.type ? data.title : data.artists ? data.title : data.name}
               </h4>
               <p className="song-info-type" style={{ cursor: typeCur , width: songlistWidth }}>
-                {
+                {artistArr ?
+                  artistArr?.name || 
+                  artistArr?.artists.map((e , idx)=>{
+                      if(data.artist.includes(e._id)){
+                          return  <span key={e._id} onClick={()=>handleClickAlbum(e)}>{e.name + `${idx < (artistArr.artists.length -1) ? ", " : ""}`}</span>
+                          // return `${e.name},`;
+                      }
+                  }) || 
+                  data?.artist?.map((e , idx)=> (
+                      <span key={e._id} onClick={()=>handleClickAlbum(e)}>{e.name + `${idx < (data.artist.length -1) ? ", " : ""}`}</span>
+                  )) :
+                
                   data?.artists?.map((e, idx) => {
                     if (data?.artist?.includes(e._id)) {
                       return (
@@ -166,7 +180,7 @@ function SongItem({
                       );
                     }
                   }) ||
-                  
+
                   data?.artist?.map((e, idx) => (
                     <span key={e._id} onClick={() => handleClickAlbum(e)}>
                       {e.name + `${idx < data.artist.length - 1 ? ", " : ""}`}
@@ -200,6 +214,7 @@ function SongItem({
         <div
           className="song-item-like-icon"
           onClick={() => setIsLiked(!isLiked)}
+          style={{marginRight: likeIconMarginR}}
         >
           {isLiked ? <AiFillHeart style={{color: 'red'}} /> : <AiOutlineHeart />}
         </div>
