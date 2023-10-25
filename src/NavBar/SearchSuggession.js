@@ -18,7 +18,10 @@ function SearchSuggession({ e , inputValue}) {
     <div className="suggestion-container">
       <div className="header">
         <h5>{`${e.type}s`}</h5>
-        <span onClick={handleNavigate}>View All</span>
+        {
+          e?.data?.length > 1 &&
+          <span onClick={handleNavigate}>View All</span>
+        }
       </div>
       <div className="song-list">
         {
