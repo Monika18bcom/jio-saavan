@@ -4,6 +4,8 @@ import { BsThreeDots } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
+import {PiDotsSixVerticalBold} from 'react-icons/pi'
+
 import "./SongItem.css";
 import { useNavigate } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
@@ -38,7 +40,8 @@ function SongItem({
   numMarginR,
   likeIconMarginR,
   num,
-  artistArr
+  artistArr,
+  queue
 }) {
 
   const { setSearchOpen, setSongId } = useContext(JiosaavnContext);
@@ -134,6 +137,10 @@ function SongItem({
           )}
         </div>
       )}
+      {
+        queue &&
+        <PiDotsSixVerticalBold />
+      }
       {songPoster && (
         <div className="song-item-img" style={{ marginRight: imgMarginR }}>
           {isHover ? (

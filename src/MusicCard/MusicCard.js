@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom'
 
 function MusicCard({data  , cardWidth , imgHeight}){
 
+    // console.log(data , 'music card data')
+
     const [isHover, setIsHover] = useState(false);
     const [isLikeRed, setIsLikeRed] = useState(false);
     const navigate = useNavigate()
@@ -30,11 +32,17 @@ function MusicCard({data  , cardWidth , imgHeight}){
         if(e.target.classList.contains('music-card-play-btn-bg') || e.target.classList.contains('music-card-play-btn') || e.target.parentElement.classList.contains('music-card-play-btn')){
             setSongId(null)
             if(data.type === "song"){
+                console.log(data , 'song')
                 setSongId(data._id)
+                sessionStorage.setItem('queueData' , JSON.stringify({ id: data._id , type: 'song' }))
             }else if(data.type === "album"){
+                console.log(data , 'album')
                 setSongId(data?.songs[0]._id)
+                sessionStorage.setItem('queueData' , JSON.stringify({ id: data._id , type: 'song' }))
             }else{
+                console.log(data, 'artist')
                 setSongId(data.songs[0])
+                sessionStorage.setItem('queueData' , JSON.stringify({ id: data._id , type: 'song' }))
             }
                        
         }else if(e.target.classList.contains('music-card-like-btn') || e.target.parentElement.classList.contains('music-card-like-btn')){

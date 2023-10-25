@@ -1,15 +1,16 @@
 .aside-right-section{
-    display: none;
+    /* display: none; */
     position: fixed;
     z-index: 7;
     top: 99px;
-    right: 1px;
-    height: 487.800px;
-    width: 438.400px;
+    right: 0;
+    /* height: 487px; */
+    width: 440px;
     border: 1px solid #e9e9e9;
     box-shadow: 0 0 12px 4px rgba(0,0,0,.05);
     border-radius: 8px 0 0 8px;
     background-color: #f6f6f6;
+    transition: all .3s ease-in-out;
 }
 
 .aside-right-header{
@@ -37,31 +38,34 @@
 
 .aside-right-header-actions .more-info{
     font-size: 26px;
-    color: #b9b7b7;
+    color: #3e3e3e;
+    /* color: #b9b7b7; */
 }
 
 .aside-right-header-actions .save-btn{
-    width: 74.9px;
-    height: 33.2px;
+    width: auto;
     padding: 6px 22px;
     background-color: #2bc5b4;
+    border: 1px solid #2bc5b4;
     color: #fff;
     border-radius: 18px;
-    font-size: .9333333333rem;
+    font-size: 15px;
     cursor: pointer;
 }
 
 .aside-right-header-actions .clear-btn{
-    width: 74.9px;
-    height: 33.2px;
+    width: auto;
     padding: 6px 22px;
     background-color: #fff;
     color: #707070;
-    font-weight: 500;
     border-radius: 18px;
-    font-size: .9333333333rem;
+    font-size: 15px;
     border: 1px solid #ccc;
     cursor: pointer;
+}
+
+.aside-right-section > hr { 
+    border: 1px solid #e9e9e9;   
 }
 
 .aside-right-content{
