@@ -1,9 +1,6 @@
-/* .suggestion-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-} */
+.suggestion-container {
+    min-width: 215px;
+}
 
 .suggestion-container > .header {
     display: flex;
