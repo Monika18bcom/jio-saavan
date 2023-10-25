@@ -59,3 +59,14 @@
     padding-top: 2px;
     border-bottom: 2px solid #3e3e3e;
 }
+
+.search-comp-container .song-list-section{
+    min-height: 300px;
+}
+
+.search-comp-container .song-list-section p{
+    font-size: 16px;
+    color: #202020; 
+    padding-top: 20px;
+    font-style: italic;
+}

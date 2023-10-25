@@ -41,9 +41,9 @@ function App() {
   }
 
   const [searchState , searchDispatch] = useReducer(searchReducer,[
-    { data: [], type: "song" , limit: '30' , key: 'title'},
-    { data: [], type: "album" , limit: '30' , key: 'title'},
-    { data: [], type: "artist" , limit: '30' , key: 'name'},
+    { data: [], type: "song" , limit: '100' , key: 'title'},
+    { data: [], type: "album" , limit: '100' , key: 'title'},
+    { data: [], type: "artist" , limit: '100' , key: 'name'},
   ])
 
 

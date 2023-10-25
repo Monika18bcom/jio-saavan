@@ -18,7 +18,7 @@ function SearchComp() {
       </p>
       {
         searchState.map((e , idx)=>(   
-            type === e.type && <p className="results" key={idx}>{e?.data?.length > 1 ? `${e?.data?.length} results` : `0 result` }</p>   
+            type === e.type && <p className="results" key={idx}>{e?.data?.length > 1 ? `${e?.data?.length} results` : e?.data?.length === 1 ? `${e?.data?.length} result` : '0 result' }</p>   
         ))
       }
       <ul className="sub-header-ul">
