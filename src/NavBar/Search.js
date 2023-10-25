@@ -59,25 +59,6 @@ function Search() {
     return newArr;
   }, [trendingData]);
 
-  // const searchReducer = (state , action) =>{
-  //   switch (action.type) {
-  //     case action.type:
-  //       return state.map((e) => {
-  //         if (e.type === action.type) {
-  //           setIsLoading(false);
-  //           return { ...e, data: action.payload };
-  //         } else return { ...e };
-  //       });
-  //     default: return state;
-  //   }
-  // }
-
-  // const [searchState , searchDispatch] = useReducer(searchReducer,[
-  //   { data: [], type: "song" , limit: '3' , key: 'title'},
-  //   { data: [], type: "album" , limit: '3' , key: 'title'},
-  //   { data: [], type: "artist" , limit: '3' , key: 'name'},
-  // ])
-
   async function searchFetch(e) {
     // console.log("search fetch called");
 
@@ -97,7 +78,7 @@ function Search() {
         type: e.type,
         payload: result.data
       })
-      // console.log(result);
+      console.log(result);
     } catch (err) {
       console.log(err);
     }

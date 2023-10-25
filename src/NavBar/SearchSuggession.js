@@ -22,6 +22,7 @@ function SearchSuggession({ e , inputValue}) {
       </div>
       <div className="song-list">
         {e?.data?.map((e, idx) => (
+          idx < 4 &&
           <SongItem
             key={idx}
             data={e}
