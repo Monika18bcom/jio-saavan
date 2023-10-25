@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { BsPlayCircle } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -7,6 +7,10 @@ import { MdOutlineCancel } from "react-icons/md";
 import "./SongItem.css";
 import { useNavigate } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
+import useSound from "use-sound";
+
+import defaultSong from "../song/DefaultAudio.mp3";
+
 
 function SongItem({
   data,
@@ -38,7 +42,6 @@ function SongItem({
   num,
   artistArr
 }) {
-  console.log(data);
 
   const { setSearchOpen, setSongId } = useContext(JiosaavnContext);
 
@@ -48,6 +51,32 @@ function SongItem({
 
   // border'1px solid #e9e9e9
   const navigate = useNavigate();
+
+  const [ , { duration }] = useSound(data?.audio_url);
+
+  const [dur , setsur] = useState({})  
+
+  const convertDuration = useCallback((durationMs)=>{
+    const totalSec = Math.ceil(durationMs / 1000)
+    const min = Math.floor(totalSec / 60)
+    const sec = totalSec % 60
+
+    return {
+      min, 
+      sec,
+    }
+
+  },[])
+
+  useEffect(() => {
+
+    if (duration) {
+
+      const d = convertDuration(duration)
+      setsur(d)
+    }
+  }, [duration]);
+  
 
   const handleClickAlbum = (e) => {
 
@@ -68,16 +97,13 @@ function SongItem({
   };
 
   const setSongIdx = () => {
-    // console.log('clicked play')
     setSongId(null);
     if (data.type === "song") {
       setSongId(data._id);
     } else if (data.songs.length > 0) {
       if (data.artists) {
-        // console.log('album')
         setSongId(data.songs[0]._id);
       } else {
-        // console.log('artist')
         setSongId(data.songs[0]);
       }
     }
@@ -221,7 +247,24 @@ function SongItem({
       )}
       {durDots && (
         <div className="song-item-dur-dots">
-          {isHover ? <BsThreeDots /> : <p>3:00</p>}
+          { isHover ? 
+            <BsThreeDots /> : 
+            <p>
+              {
+                duration !== null ?
+                `${
+                  dur?.min > 9
+                  ? dur.min
+                  : "0" + dur.min
+                  }:${
+                  dur.sec > 9
+                  ? dur.sec
+                  : "0" + dur.sec
+                }`:
+                '00:00'
+              }
+            </p>
+          }
         </div>
       )}
     </div>
