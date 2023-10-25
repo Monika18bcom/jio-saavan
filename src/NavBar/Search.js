@@ -78,14 +78,6 @@ function Search() {
         type: e.type,
         payload: result.data
       })
-
-      if(result.status === 'fail'){
-        searchDispatch({
-          type: 'message',
-          payload: result.message,
-        })
-      }
-      
       console.log(result);
     } catch (err) {
       console.log(err);

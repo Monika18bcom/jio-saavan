@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
 
 function SearchSuggession({ e , inputValue}) {
-  console.log(e.data , !e.data);
+  console.log(e.data , 'e.data');
   const navigate = useNavigate()
   const {setSearchOpen} = useContext(JiosaavnContext)
 
@@ -22,8 +22,8 @@ function SearchSuggession({ e , inputValue}) {
       </div>
       <div className="song-list">
         {
-          e.data.length < 1 ?
-          <p>Result not found</p> :
+          (e?.data?.length < 1 || !e.data) ?
+          <p>{`No ${e.type}s found`}</p> :
           e?.data?.map((e, idx) => (
             idx < 4 &&
             <SongItem
