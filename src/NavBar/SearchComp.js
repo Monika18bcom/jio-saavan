@@ -61,11 +61,12 @@ function SearchComp() {
                       border='1px solid #e9e9e9'
                       imgMarginR="22px"
                       width="100%"
+                      height='64px'
                       playCur="pointer"
                       titleCur="pointer"
                       typeCur="pointer"
                     /> :
-                    <MusicCard data={{...data, type: e.type}} /> 
+                    <MusicCard key={idx} data={{...data, type: e.type}} cardWidth='134px' imgWidth='134px' imgHeight='134px' /> 
                   ))
               }
             </div>

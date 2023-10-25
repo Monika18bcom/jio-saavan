@@ -1,4 +1,3 @@
-import { height } from "@mui/system";
 import React, { useContext, useState } from "react";
 import { BsPlayCircle } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
@@ -23,6 +22,7 @@ function SongItem({
   borderR,
   border,
   width,
+  height,
   playCur,
   titleCur,
   typeCur,
@@ -155,21 +155,24 @@ function SongItem({
                 {data.type ? data.title : data.artists ? data.title : data.name}
               </h4>
               <p className="song-info-type" style={{ cursor: typeCur , width: songlistWidth }}>
-                {data?.artists?.map((e, idx) => {
-                  if (data?.artist?.includes(e._id)) {
-                    return (
-                      <span key={e._id} onClick={() => handleClickAlbum(e)}>
-                        {e.name +
-                          `${idx < data.artists.length - 1 ? ", " : ""}`}
-                      </span>
-                    );
-                  }
-                }) ||
+                {
+                  data?.artists?.map((e, idx) => {
+                    if (data?.artist?.includes(e._id)) {
+                      return (
+                        <span key={e._id} onClick={() => handleClickAlbum(e)}>
+                          {e.name +
+                            `${idx < data.artists.length - 1 ? ", " : ""}`}
+                        </span>
+                      );
+                    }
+                  }) ||
+                  
                   data?.artist?.map((e, idx) => (
                     <span key={e._id} onClick={() => handleClickAlbum(e)}>
                       {e.name + `${idx < data.artist.length - 1 ? ", " : ""}`}
                     </span>
-                  ))}
+                  ))
+                }
               </p>
             </>
           ) : (

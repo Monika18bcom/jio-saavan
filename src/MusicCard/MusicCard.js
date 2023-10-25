@@ -11,8 +11,8 @@ import { JiosaavnContext } from "../App/App";
 import { useNavigate } from 'react-router-dom'
 
 
-function MusicCard({data}){
-    // console.log("musiccard.....",data)
+function MusicCard({data  , cardWidth , imgHeight}){
+    console.log("musiccard.....",data)
 
     const [isHover, setIsHover] = useState(false);
     const [isLikeRed, setIsLikeRed] = useState(false);
@@ -66,8 +66,8 @@ function MusicCard({data}){
     }
 
     return (
-        <div className='music-card-container' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
-            <div className='music-card-img' style={{backgroundImage:`url(${data.image || data.thumbnail})`, borderRadius : data.type === "artist" && '50%'}}>
+        <div className='music-card-container' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} style={{width : cardWidth}} >
+            <div className='music-card-img' style={{backgroundImage:`url(${data.image || data.thumbnail})`, borderRadius : data.type === "artist" && '50%', height: imgHeight}}>
                 {
                     isHover &&
                     <div className='music-card-controls' style={{borderRadius : data.type === "artist" && '50%'}} onClick={(e) => handleMusicCardControls(e)}>
@@ -96,7 +96,7 @@ function MusicCard({data}){
                         data.title || data.name
                     }
                 </h4>
-                <p className='music-card-artist'>
+                <p className='music-card-artist'>   
                     {
                         data?.artist?.map((e , idx) => (
                             <span key={e._id} className={e._id} onClick={()=>handleClick(e)}>{e.name + `${idx < (data.artist.length -1) ? ", " : ""}`}</span>
