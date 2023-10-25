@@ -1,5 +1,5 @@
 import "./App.css";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import MainPage from "./MainPage";
 import LogIn from "../Form/LogIn";
@@ -25,6 +25,27 @@ function App() {
   });
   const [isLoading , setIsLoading] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [inputValue, setInputValue] = useState("");
+
+  const searchReducer = (state , action) =>{
+    switch (action.type) {
+      case action.type:
+        return state.map((e) => {
+          if (e.type === action.type) {
+            setIsLoading(false);
+            return { ...e, data: action.payload };
+          } else return { ...e };
+        });
+      default: return state;
+    }
+  }
+
+  const [searchState , searchDispatch] = useReducer(searchReducer,[
+    { data: [], type: "song" , limit: '3' , key: 'title'},
+    { data: [], type: "album" , limit: '3' , key: 'title'},
+    { data: [], type: "artist" , limit: '3' , key: 'name'},
+  ])
+
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("user");
@@ -53,7 +74,11 @@ function App() {
         isLoading,
         setIsLoading,
         searchOpen,
-        setSearchOpen
+        setSearchOpen,
+        inputValue, 
+        setInputValue,
+        searchState , 
+        searchDispatch
       }}
     >
       <div className="App">

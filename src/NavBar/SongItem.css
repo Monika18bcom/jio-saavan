@@ -5,7 +5,7 @@
     align-items: center;
     color: #3e3e3e;
     padding: 5px 0;
-    /* border: 1px solid #f6f6f6; */
+    border: 1px solid transparent;
 }
 
 .song-item-container > .song-item-idx{

@@ -31,6 +31,8 @@ function SongItem({
   songInfoJC,
   songInfoFSz,
   songInfoFCo,
+  songInfoMarginR,
+  songlistWidth,
   num,
 }) {
   // console.log(data);
@@ -45,11 +47,18 @@ function SongItem({
   const navigate = useNavigate();
 
   const handleClickAlbum = (e) => {
-    navigate(
-      `/${data.type ? "song" : data.artists ? "album" : "artist"}/${
-        e.name || e.title
-      }/${e._id}`
-    );
+
+    if(songList){
+      navigate(`/${e.type || 'artist'}/${(e.name) || (e.title)}/${e._id}`)
+    }
+    else{
+      navigate(
+        `/${data.type ? "song" : data.artists ? "album" : "artist"}/${
+          e.name || e.title
+        }/${e._id}`
+      );
+    }
+    
     if (!songList) {
       setSearchOpen(false);
     }
@@ -133,30 +142,21 @@ function SongItem({
             justifyContent: songInfoJC,
             fontSize: songInfoFSz,
             color: songInfoFCo,
+            marginRight: songInfoMarginR
           }}
         >
-          <h4
-            className="song-info-title"
-            style={{ cursor: titleCur }}
-            onClick={() => handleClickAlbum(data)}
-          >
-            {data.type ? data.title : data.artists ? data.title : data.name}
-          </h4>
-          <p className="song-info-type" style={{ cursor: typeCur }}>
-            {data.type ? "Song" : data.artists ? "Album" : "Artist"}
-          </p>
-          {songList && (
+          {songList ? (
             <>
               <h4
                 className="song-info-title"
-                style={{ cursor: titleCur }}
+                style={{ cursor: titleCur , width: songlistWidth}}
                 onClick={() => handleClickAlbum(data)}
               >
-                {data.title}
+                {data.type ? data.title : data.artists ? data.title : data.name}
               </h4>
-              <p className="song-info-type" style={{ cursor: typeCur }}>
-                {data?.artists.map((e, idx) => {
-                  if (data.artist.includes(e._id)) {
+              <p className="song-info-type" style={{ cursor: typeCur , width: songlistWidth }}>
+                {data?.artists?.map((e, idx) => {
+                  if (data?.artist?.includes(e._id)) {
                     return (
                       <span key={e._id} onClick={() => handleClickAlbum(e)}>
                         {e.name +
@@ -172,6 +172,19 @@ function SongItem({
                   ))}
               </p>
             </>
+          ) : (
+            <>
+              <h4
+                className="song-info-title"
+                style={{ cursor: titleCur }}
+                onClick={() => handleClickAlbum(data)}
+              >
+                {data.type ? data.title : data.artists ? data.title : data.name}
+              </h4>
+              <p className="song-info-type" style={{ cursor: typeCur }}>
+                {data.type ? "Song" : data.artists ? "Album" : "Artist"}
+              </p>
+            </>
           )}
         </div>
       )}
@@ -185,7 +198,7 @@ function SongItem({
           className="song-item-like-icon"
           onClick={() => setIsLiked(!isLiked)}
         >
-          {isLiked ? <AiFillHeart /> : <AiOutlineHeart />}
+          {isLiked ? <AiFillHeart style={{color: 'red'}} /> : <AiOutlineHeart />}
         </div>
       )}
       {durDots && (

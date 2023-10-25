@@ -17,11 +17,9 @@ import SearchSuggession from "./SearchSuggession";
 function Search() {
   const PROJECT_ID = "nwi12vygvqne";
 
-  const { setSearchOpen } = useContext(JiosaavnContext);
+  const { setSearchOpen , inputValue , setInputValue , searchState , searchDispatch } = useContext(JiosaavnContext);
   const searchRef = useRef()
   const [firstRender , setFirstRender] = useState(false)
-
-  const [inputValue, setInputValue] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -61,24 +59,24 @@ function Search() {
     return newArr;
   }, [trendingData]);
 
-  const searchReducer = (state , action) =>{
-    switch (action.type) {
-      case action.type:
-        return state.map((e) => {
-          if (e.type === action.type) {
-            setIsLoading(false);
-            return { ...e, data: action.payload };
-          } else return { ...e };
-        });
-      default: return state;
-    }
-  }
+  // const searchReducer = (state , action) =>{
+  //   switch (action.type) {
+  //     case action.type:
+  //       return state.map((e) => {
+  //         if (e.type === action.type) {
+  //           setIsLoading(false);
+  //           return { ...e, data: action.payload };
+  //         } else return { ...e };
+  //       });
+  //     default: return state;
+  //   }
+  // }
 
-  const [searchState , searchDispatch] = useReducer(searchReducer,[
-    { data: [], type: "song" , limit: '3' , key: 'title'},
-    { data: [], type: "album" , limit: '3' , key: 'title'},
-    { data: [], type: "artist" , limit: '3' , key: 'name'},
-  ])
+  // const [searchState , searchDispatch] = useReducer(searchReducer,[
+  //   { data: [], type: "song" , limit: '3' , key: 'title'},
+  //   { data: [], type: "album" , limit: '3' , key: 'title'},
+  //   { data: [], type: "artist" , limit: '3' , key: 'name'},
+  // ])
 
   async function searchFetch(e) {
     // console.log("search fetch called");
@@ -169,7 +167,7 @@ function Search() {
   return (
     <div className="search-container" ref={searchRef}>
       <div className="search-input-section">
-        <SearchInput inputValue={inputValue} setInputValue={setInputValue} />
+        <SearchInput />
 
         <span className="search-clear" onClick={() => setInputValue("")}>
           Clear
@@ -188,7 +186,7 @@ function Search() {
             <div className="search-suggession-section">
               {
                 searchState.map((e,idx)=>(
-                  <SearchSuggession key={idx} e={e}/> 
+                  <SearchSuggession key={idx} e={e} inputValue={inputValue} /> 
                 ))
               }
             </div> :

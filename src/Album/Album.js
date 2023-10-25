@@ -39,7 +39,7 @@ function Album() {
   return (
     isLoading ? 
     <div className="album-loader-container">
-      <Loader />
+      <Loader size='60' border='6'  />
     </div> :
     <div className='album-container'>
       <AlbumPoster data={dataArr} type={type}/>
