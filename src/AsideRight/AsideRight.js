@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './AsideRight.css'
 import {BsThreeDots} from 'react-icons/bs'
 
@@ -6,7 +6,36 @@ import {BsThreeDots} from 'react-icons/bs'
 
 function AsideRight() {
 
-    const [autoPlay, setAutoPlay] = useState(false)
+    const [autoPlay, setAutoPlay] = useState(false);
+    const [dataArr, setDataArr] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [queueData, setQueueData] = useState(null)
+
+    // async function fetchData() {
+    //     try {
+    //     const res = await fetch(
+    //         `https://academics.newtonschool.co/api/v1/music/${queueId.type}/${queueId.id}`,
+    //         {
+    //         headers: {
+    //             projectId: "nwi12vygvqne",
+    //         },
+    //         }
+    //     );
+
+    //     const result = await res.json();
+    //     setIsLoading(false);
+    //     setDataArr(result.data);
+    //     } catch (err) {
+    //     console.log(err);
+    //     }
+    // }
+
+    useEffect(() => {
+        setQueueData(sessionStorage.getItem('queueData'))
+        // setIsLoading(true);
+        // fetchData();
+    }, []);
+
   return (
     <div className='aside-right-section'>
         <div className='aside-right-header'>
