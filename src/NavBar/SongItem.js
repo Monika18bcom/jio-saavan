@@ -10,7 +10,6 @@ import "./SongItem.css";
 import { useNavigate } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
 import useSound from "use-sound";
-import { padding } from "@mui/system";
 
 
 function SongItem({
@@ -46,6 +45,7 @@ function SongItem({
   queue,
   cancelIconMarginR
 }) {
+
 
   const { setSearchOpen, setSongId } = useContext(JiosaavnContext);
 

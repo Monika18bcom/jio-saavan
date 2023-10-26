@@ -18,7 +18,7 @@ function MusicCard({data  , cardWidth , imgHeight}){
     const [isLikeRed, setIsLikeRed] = useState(false);
     const navigate = useNavigate()
     
-    const {setSongId} = useContext(JiosaavnContext);
+    const {setSongId , setUpdateQueue} = useContext(JiosaavnContext);
 
     const handleMouseOver = ()=>{
         setIsHover(true);
@@ -32,18 +32,21 @@ function MusicCard({data  , cardWidth , imgHeight}){
         if(e.target.classList.contains('music-card-play-btn-bg') || e.target.classList.contains('music-card-play-btn') || e.target.parentElement.classList.contains('music-card-play-btn')){
             setSongId(null)
             if(data.type === "song"){
-                console.log(data , 'song')
                 setSongId(data._id)
+                
                 sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'song' }))
+                setUpdateQueue(data._id)
                 // sessionStorage.setItem('queueData' , JSON.stringify({ id: data._id , type: 'song' }))
             }else if(data.type === "album"){
-                console.log(data , 'album')
                 setSongId(data?.songs[0]._id)
+
                 sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'album' }))
+                setUpdateQueue(data._id)
             }else{
-                console.log(data, 'artist')
                 setSongId(data.songs[0])
+
                 sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'artist' }))
+                setUpdateQueue(data._id)
             }
                        
         }else if(e.target.classList.contains('music-card-like-btn') || e.target.parentElement.classList.contains('music-card-like-btn')){

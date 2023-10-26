@@ -24,6 +24,7 @@ function App() {
   const [isLoading , setIsLoading] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [inputValue, setInputValue] = useState("");
+  const [updateQueue, setUpdateQueue] = useState(null)
 
   const searchReducer = (state , action) =>{
     switch (action.type) {
@@ -74,7 +75,9 @@ function App() {
         inputValue, 
         setInputValue,
         searchState , 
-        searchDispatch
+        searchDispatch,
+        updateQueue, 
+        setUpdateQueue
       }}
     >
       <div className="App">

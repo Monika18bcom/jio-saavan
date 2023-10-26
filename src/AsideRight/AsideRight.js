@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './AsideRight.css'
 import {BsThreeDots} from 'react-icons/bs'
 import SongItem from '../NavBar/SongItem';
+import { JiosaavnContext } from '../App/App';
 
 
 
 function AsideRight() {
+
+    const {updateQueue} = useContext(JiosaavnContext)
 
     const [autoPlay, setAutoPlay] = useState(false);
     
@@ -16,14 +19,32 @@ function AsideRight() {
         if (data) {
             setQueueData(JSON.parse(data))
         }
-    }, [queueData]);
+    }, [updateQueue]);
+
+    useEffect(()=>{
+
+        if(queueData?.data?.type === 'artist'){
+
+            fetch(
+                `https://academics.newtonschool.co/api/v1/music/${queueData.data.type}/${queueData.data._id}`,
+                {
+                  headers: {
+                    projectId: "nwi12vygvqne",
+                  },
+                }
+            )
+            .then((response)=>response.json())
+            .then((result)=> setQueueData({data: result.data }))
+            .catch(err => console.log(err))
+        }
+
+    },[queueData])
+
 
     const clearQueue = () =>{
-        // console.log('clear btn clicked')
         sessionStorage.removeItem('queueData')
     }
 
-    // console.log('queueData',queueData)
 
   return (
     <div className='aside-right-section'>
@@ -55,7 +76,7 @@ function AsideRight() {
                     cancelIconMarginR='11px'
                     bg="#fff"
                     border="1px solid #e9e9e9"
-                    imgMarginR="11px"
+                    imgMarginR="18px"
                     likeIconMarginR="11px"
                     width="100%"
                     height='64px'
@@ -79,7 +100,7 @@ function AsideRight() {
                     cancelIconMarginR='11px'
                     bg="#fff"
                     border="1px solid #e9e9e9"
-                    imgMarginR="11px"
+                    imgMarginR="18px"
                     likeIconMarginR="11px"
                     width="100%"
                     height='64px'

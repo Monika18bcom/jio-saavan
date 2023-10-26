@@ -35,6 +35,7 @@ function Album() {
     fetchData();
   }, [type, id]);
 
+
   return isLoading ? (
     <div className="album-loader-container">
       <Loader size="60" border="6" />

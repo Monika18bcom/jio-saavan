@@ -74,6 +74,7 @@
 
 .aside-right-content{
     overflow-y: auto;
+    overflow-x: hidden;
     width: 438.4px;
     height: 431.8px;
 }
