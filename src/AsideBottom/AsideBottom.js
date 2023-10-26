@@ -156,7 +156,7 @@ function AsideBottom() {
       );
     }
 
-    if (durationState.totalDuration > 60) {
+    if (durationState.totalDuration >= 60) {
       let min = Math.floor(durationState.totalDuration / 60);
       let sec =
         durationState.totalDuration -
@@ -170,10 +170,10 @@ function AsideBottom() {
         payload: sec,
       });
     } else {
-      let sec = Math.floor(durationState.totalDuration);
+      // let sec = Math.floor(durationState.totalDuration);
       durationDispatch({
         type: "currSec",
-        payload: sec,
+        payload: durationState.totalDuration,
       });
     }
 

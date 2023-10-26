@@ -34,15 +34,16 @@ function MusicCard({data  , cardWidth , imgHeight}){
             if(data.type === "song"){
                 console.log(data , 'song')
                 setSongId(data._id)
-                sessionStorage.setItem('queueData' , JSON.stringify({ id: data._id , type: 'song' }))
+                sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'song' }))
+                // sessionStorage.setItem('queueData' , JSON.stringify({ id: data._id , type: 'song' }))
             }else if(data.type === "album"){
                 console.log(data , 'album')
                 setSongId(data?.songs[0]._id)
-                sessionStorage.setItem('queueData' , JSON.stringify({ id: data._id , type: 'song' }))
+                sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'album' }))
             }else{
                 console.log(data, 'artist')
                 setSongId(data.songs[0])
-                sessionStorage.setItem('queueData' , JSON.stringify({ id: data._id , type: 'song' }))
+                sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'artist' }))
             }
                        
         }else if(e.target.classList.contains('music-card-like-btn') || e.target.parentElement.classList.contains('music-card-like-btn')){

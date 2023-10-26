@@ -10,6 +10,7 @@ import "./SongItem.css";
 import { useNavigate } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
 import useSound from "use-sound";
+import { padding } from "@mui/system";
 
 
 function SongItem({
@@ -27,6 +28,7 @@ function SongItem({
   border,
   width,
   height,
+  padding,
   playCur,
   titleCur,
   typeCur,
@@ -41,7 +43,8 @@ function SongItem({
   likeIconMarginR,
   num,
   artistArr,
-  queue
+  queue,
+  cancelIconMarginR
 }) {
 
   const { setSearchOpen, setSongId } = useContext(JiosaavnContext);
@@ -120,6 +123,7 @@ function SongItem({
         backgroundColor: isHover && bg,
         borderRadius: isHover && borderR,
         border: isHover && border,
+        padding: padding,
       }}
     >
       {songNum && (
@@ -139,7 +143,10 @@ function SongItem({
       )}
       {
         queue &&
-        <PiDotsSixVerticalBold />
+        <div>
+          <PiDotsSixVerticalBold />
+        </div>
+        
       }
       {songPoster && (
         <div className="song-item-img" style={{ marginRight: imgMarginR }}>
@@ -235,8 +242,8 @@ function SongItem({
         </div>
       )}
       {cancelIcon && (
-        <div className="song-item-cancel-icon">
-          <MdOutlineCancel />
+        <div className="song-item-cancel-icon" style={{marginRight:cancelIconMarginR}}>
+          {isHover && <MdOutlineCancel />}
         </div>
       )}
       {likeIcon && (

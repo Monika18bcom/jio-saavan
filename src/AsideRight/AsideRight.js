@@ -1,40 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import './AsideRight.css'
 import {BsThreeDots} from 'react-icons/bs'
+import SongItem from '../NavBar/SongItem';
 
 
 
 function AsideRight() {
 
     const [autoPlay, setAutoPlay] = useState(false);
-    const [dataArr, setDataArr] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    
     const [queueData, setQueueData] = useState(null)
 
-    // async function fetchData() {
-    //     try {
-    //     const res = await fetch(
-    //         `https://academics.newtonschool.co/api/v1/music/${queueId.type}/${queueId.id}`,
-    //         {
-    //         headers: {
-    //             projectId: "nwi12vygvqne",
-    //         },
-    //         }
-    //     );
-
-    //     const result = await res.json();
-    //     setIsLoading(false);
-    //     setDataArr(result.data);
-    //     } catch (err) {
-    //     console.log(err);
-    //     }
-    // }
-
     useEffect(() => {
-        setQueueData(sessionStorage.getItem('queueData'))
-        // setIsLoading(true);
-        // fetchData();
-    }, []);
+        const data = sessionStorage.getItem('queueData');
+        if (data) {
+            setQueueData(JSON.parse(data))
+        }
+    }, [queueData]);
+
+    console.log('queueData',queueData)
 
   return (
     <div className='aside-right-section'>
@@ -49,7 +33,56 @@ function AsideRight() {
         <hr></hr>
         <div className='aside-right-content'>
             <ul className='aside-right-album-container'>
-                
+                {queueData?.data?.songs?.map((e, id) => (
+                    <SongItem
+                    key={id}
+                    data={e}
+                    artistArr={queueData.data}
+                    // queue={true}
+                    songPoster={true}
+                    songInfo={true}
+                    likeIcon={true}
+                    durDots={true}
+                    songList={true}
+                    cancelIcon={true}
+                    padding='10px 15px'
+                    songInfoMarginR="11px"
+                    cancelIconMarginR='11px'
+                    bg="#fff"
+                    border="1px solid #e9e9e9"
+                    imgMarginR="11px"
+                    likeIconMarginR="11px"
+                    width="100%"
+                    height='64px'
+                    playCur="pointer"
+                    titleCur="pointer"
+                    typeCur="pointer"
+                    />
+                )) ||
+                (queueData?.data && 
+                    <SongItem 
+                    data={queueData.data}
+                    // queue={true}
+                    songPoster={true}
+                    songInfo={true}
+                    likeIcon={true}
+                    durDots={true}
+                    songList={true}
+                    cancelIcon={true}
+                    padding='10px 15px'
+                    songInfoMarginR="11px"
+                    cancelIconMarginR='11px'
+                    bg="#fff"
+                    border="1px solid #e9e9e9"
+                    imgMarginR="11px"
+                    likeIconMarginR="11px"
+                    width="100%"
+                    height='64px'
+                    playCur="pointer"
+                    titleCur="pointer"
+                    typeCur="pointer"
+                    />
+                )}
             </ul>
             {
                 autoPlay &&
