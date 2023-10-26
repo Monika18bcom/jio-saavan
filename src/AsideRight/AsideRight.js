@@ -18,7 +18,12 @@ function AsideRight() {
         }
     }, [queueData]);
 
-    console.log('queueData',queueData)
+    const clearQueue = () =>{
+        // console.log('clear btn clicked')
+        sessionStorage.removeItem('queueData')
+    }
+
+    // console.log('queueData',queueData)
 
   return (
     <div className='aside-right-section'>
@@ -27,7 +32,7 @@ function AsideRight() {
             <div className='aside-right-header-actions'>
                 <BsThreeDots className='aside-right more-info' />
                 <div className='aside-right save-btn'>Save</div>
-                <div className='aside-right clear-btn'>Clear</div>
+                <div className='aside-right clear-btn' onClick={clearQueue}>Clear</div>
             </div>
         </div>
         <hr></hr>
