@@ -47,7 +47,7 @@ function SongItem({
 }) {
 
 
-  const { setSearchOpen, setSongId } = useContext(JiosaavnContext);
+  const { setSearchOpen, songId, setSongId } = useContext(JiosaavnContext);
 
   const [isHover, setIsHover] = useState(false);
 
@@ -189,7 +189,7 @@ function SongItem({
             <>
               <h4
                 className="song-info-title"
-                style={{ cursor: titleCur , width: songlistWidth}}
+                style={{ cursor: titleCur , width: songlistWidth , color: data._id === songId && '#2bc5b4'}}
                 onClick={() => handleClickAlbum(data)}
               >
                 {data.type ? data.title : data.artists ? data.title : data.name}
@@ -229,7 +229,7 @@ function SongItem({
             <>
               <h4
                 className="song-info-title"
-                style={{ cursor: titleCur }}
+                style={{ cursor: titleCur , color: data._id === songId && '#2bc5b4' }}
                 onClick={() => handleClickAlbum(data)}
               >
                 {data.type ? data.title : data.artists ? data.title : data.name}
