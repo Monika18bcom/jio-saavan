@@ -8,6 +8,7 @@ import NavMusic from '../NavBar/NavMusic';
 import UserAccountDetails from '../NavBar/UserAccountDetails';
 import { JiosaavnContext } from './App';
 import Search from '../NavBar/Search';
+import './App.css'
 
 export const MainPageContext = createContext({})
 
@@ -16,7 +17,7 @@ function MainPage() {
   const [displayAccount , setDisplayAccount] = useState(false)
   const [profileSelected , setProfileSelected] = useState(false)
 
-  const { searchOpen } = useContext(JiosaavnContext)
+  const { searchOpen , isExpand } = useContext(JiosaavnContext)
 
   return (
     <MainPageContext.Provider 
@@ -33,7 +34,7 @@ function MainPage() {
       <AsideLeft />
       <Home />
       <AsideBottom />
-      <AsideRight />
+      {!isExpand && <div className='aside-right-queue'><AsideRight /></div>}
       {isNavMusicHover && <NavMusic />}
       {displayAccount && <UserAccountDetails /> }
       {searchOpen && <Search />}

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { JiosaavnContext } from '../App/App';
+import AsideRight from '../AsideRight/AsideRight';
 
 import './ExpandAlbum.css'
 
@@ -30,7 +31,9 @@ function ExpandAlbum({ localSongData }) {
                   }
                 </p>
             </div>
-        <div className='expand-album-queue-section' >Queue</div>
+        <div className='expand-album-queue-section' >
+          <AsideRight width='600px' />
+        </div>
 
     </div>
   )

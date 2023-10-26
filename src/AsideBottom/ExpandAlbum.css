@@ -41,4 +41,25 @@
 
 .expand-album-queue-section{
     width: 50%;
+    /* top: 88px; */
+    position: absolute;
+    top: 24px;
+    bottom: 132px;
+    left: 50%;
+    /* display: flex;
+    justify-content: center; */
+    /* width: 45%; */
 }
+
+.expand-album-queue-section::after{
+    background: linear-gradient(hsla(0,0%,96%,0),#f6f6f6 80%,#f6f6f6);
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 44px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+

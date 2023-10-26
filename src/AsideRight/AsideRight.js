@@ -6,7 +6,7 @@ import { JiosaavnContext } from '../App/App';
 
 
 
-function AsideRight() {
+function AsideRight({width}) {
 
     const {updateQueue} = useContext(JiosaavnContext)
 
@@ -47,7 +47,7 @@ function AsideRight() {
 
 
   return (
-    <div className='aside-right-section'>
+    <div className='aside-right-section' style={{width:width}}>
         <div className='aside-right-header'>
             <div className='aside-right-header-title'>Queue</div>
             <div className='aside-right-header-actions'>
