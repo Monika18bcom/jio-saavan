@@ -82,9 +82,12 @@ function AsideBottom() {
   }
 
   useEffect(() => {
-    setProgressWidth(0);
+    // setProgressWidth(0);
+
+    console.log('useEffect Called')
 
     if (localSongData?._id === songId) {
+      console.log('localSongData',localSongData ,'songId', songId)
       // stop the current song then play the same song if the song id is same
 
       clearTimeout(timerId);
@@ -97,7 +100,10 @@ function AsideBottom() {
       play();
 
 
-    } else if (songId) {
+    } 
+    else if (songId) {
+      console.log('localSongData',localSongData ,'songId', songId)
+
       if (localSongData && localSongData?._id !== songId) {
         clearTimeout(timerId);
         stop();
@@ -141,6 +147,10 @@ function AsideBottom() {
         payload: dur.sec,
       });
 
+      if(timerId){
+        clearTimeout(timerId)
+      }
+
       setIsPlay(true);
       play();
 
@@ -154,6 +164,8 @@ function AsideBottom() {
           (durationState.totalDuration / Math.ceil(duration / 1000)) * 100
         )
       );
+    }else{
+      setProgressWidth(0)
     }
 
     if (durationState.totalDuration >= 60) {
