@@ -31,23 +31,25 @@ function MusicCard({data  , cardWidth , imgHeight}){
     const handleMusicCardControls = (e)=>{
         if(e.target.classList.contains('music-card-play-btn-bg') || e.target.classList.contains('music-card-play-btn') || e.target.parentElement.classList.contains('music-card-play-btn')){
             setSongId(null)
-            if(data.type === "song"){
-                setSongId(data._id)
-                
-                sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'song' }))
-                setUpdateQueue(data._id)
-                // sessionStorage.setItem('queueData' , JSON.stringify({ id: data._id , type: 'song' }))
-            }else if(data.type === "album"){
-                setSongId(data?.songs[0]._id)
-
-                sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'album' }))
-                setUpdateQueue(data._id)
-            }else{
-                setSongId(data.songs[0])
-
-                sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'artist' }))
-                setUpdateQueue(data._id)
-            }
+            setTimeout(()=>{
+                if(data.type === "song"){
+                    setSongId(data._id)
+                    
+                    sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'song' }))
+                    setUpdateQueue(data._id)
+                    // sessionStorage.setItem('queueData' , JSON.stringify({ id: data._id , type: 'song' }))
+                }else if(data.type === "album"){
+                    setSongId(data?.songs[0]._id)
+    
+                    sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'album' }))
+                    setUpdateQueue(data._id)
+                }else{
+                    setSongId(data.songs[0])
+    
+                    sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'artist' }))
+                    setUpdateQueue(data._id)
+                }
+            },500)
                        
         }else if(e.target.classList.contains('music-card-like-btn') || e.target.parentElement.classList.contains('music-card-like-btn')){
             setIsLikeRed(!isLikeRed);

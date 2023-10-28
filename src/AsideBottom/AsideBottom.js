@@ -86,6 +86,8 @@ function AsideBottom() {
 
     console.log('useEffect Called')
 
+    setIsPlay(false)
+
     if (localSongData?._id === songId) {
       console.log('localSongData',localSongData ,'songId', songId)
       // stop the current song then play the same song if the song id is same
