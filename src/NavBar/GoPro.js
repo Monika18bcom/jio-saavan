@@ -1,12 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import './GoPro.css'
 import GoproPlanCard from './GoproPlanCard'
 import logo from "../img/jio-saavn-white-logo.png";
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import {IoIosArrowDown} from 'react-icons/io'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {FaXmark} from 'react-icons/fa6'
 import Table from './Table';
+import { MainPageContext } from '../App/MainPage';
 
 
 function GoPro() {
@@ -65,6 +66,9 @@ function GoPro() {
 
     const scrollRef = useRef(null)
     const [isHamburger , setIsHamburger] = useState(false)
+    const navigate = useNavigate()
+
+    // const {isProActive, setIsProActive} = useContext(MainPageContext)
 
     const scrollToBenefits = () => {
         scrollRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -73,6 +77,22 @@ function GoPro() {
     const toggleHamburger = () => {
         setIsHamburger(!isHamburger);
     }
+
+    const windowMessageFunc = () =>{
+        window.opener.postMessage('proActivated','*')
+    }
+
+    // const toggleProActive = () =>{
+    //     const isPro = JSON.parse(localStorage.getItem('isProActive'))
+    //     // console.log('togglePro',typeof isPro)
+    //     navigate(-1)
+    //     if(!isPro){
+    //         console.log('proActive')
+    //         localStorage.setItem('isProActive', true)
+    //         // setIsProActive(!isProActive)
+    //     } 
+    //     localStorage.setItem('isProActive', false)  
+    // }
 
   return (
     <div className='gopro-main-container'>
@@ -85,10 +105,10 @@ function GoPro() {
                 <GiHamburgerMenu className='hamburgur-menu' onClick={toggleHamburger} />
                 <div className='gopro-redeem-account-section'>
                     <div className='gopro-redeem'>
-                        <span>Redeem</span>
+                        <span onClick={windowMessageFunc}>Redeem</span>
                     </div>
                     <div className='gopro-my-account'>
-                        <span>My Account</span>
+                        <span onClick={windowMessageFunc}>My Account</span>
                     </div>
                 </div>
             </div>
@@ -122,7 +142,7 @@ function GoPro() {
                 </div>
                 <h3 className='try-pro-now'>Try Pro Now</h3>
                 <h4>Make music beautiful.</h4>
-                <div className='pick-plan-btn'><span>Pick a Plan</span></div>
+                <div className='pick-plan-btn' onClick={windowMessageFunc}><span>Pick a Plan</span></div>
             </main>
         </div>
         <div className='gopro-footer'>
@@ -134,9 +154,9 @@ function GoPro() {
                 <div className='gopro-modal-container'>
                     <div className='gopro-modal-btns-section'>
                         <div className='gopro-modal-redeem'>
-                            <span>Redeem</span>
+                            <span onClick={windowMessageFunc}>Redeem</span>
                         </div>
-                        <div className='gopro-modal-account'>My Account</div>
+                        <div className='gopro-modal-account' onClick={windowMessageFunc}>My Account</div>
                     </div>
                     <FaXmark className='gopro-xmark' onClick={toggleHamburger} />
                 </div>

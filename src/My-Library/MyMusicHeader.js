@@ -1,8 +1,9 @@
-import React, { useMemo, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import './MyMusicHeader.css'
 import {IoIosSearch} from 'react-icons/io'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../useAuth'
+import { MainPageContext } from '../App/MainPage'
 
 
 
@@ -11,6 +12,8 @@ function MyMusicHeader() {
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
     const { logOut } = useAuth()
     const navigate = useNavigate()
+
+    const {isProActive} = useContext(MainPageContext)
 
     const [myMusicArr , setMyMusicArr] = useState(false)
 
@@ -29,7 +32,7 @@ function MyMusicHeader() {
                 <div className='user-name'>
                     <h2>{userName}</h2>
                     <h3>Free</h3>
-                    <span>Go Pro</span>
+                    <span>{isProActive ? 'Pro Member' :'Go Pro'}</span>
                 </div>
             </div>
             <div className='my-music-header-logout-section'>

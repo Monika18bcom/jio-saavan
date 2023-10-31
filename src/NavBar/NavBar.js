@@ -32,6 +32,17 @@ function NavBar(){
         setSearchOpen(true)
     }
 
+    const openWindowTabFunc = () =>{
+        const newTab = window.open('/pro' , '_blank')
+        window.addEventListener('message',(event)=>{
+            if(event.data === 'proActivated' && newTab){
+                newTab.close()
+                window.history.push('/')
+    
+            }
+        })
+    }
+
     return(
         <div className="nav-bar">
             <div className="logo-container">
@@ -44,7 +55,9 @@ function NavBar(){
                 <ul className="nav-left">
                     <li onMouseEnter={()=> setIsNavMusicHover(true)} onMouseLeave={() => setIsNavMusicHover(false)} ><NavLink className="navlink" to="/">Music</NavLink></li>
                     <li><NavLink className="navlink podcasts" to="/original-podcasts">Podcasts</NavLink></li>
-                    <li><NavLink className="navlink" target='_blank' to="/pro">Go Pro</NavLink></li>
+                    {/* <li className="go-pro-item" onClick={openWindowTabFunc}>Go Pro</li> */}
+                    {/* <li onClick={openWindowTabFunc}><NavLink className="navlink" target='_blank' to="/pro">Go Pro</NavLink></li> */}
+                    <li onClick={openWindowTabFunc}><NavLink className="navlink" >Go Pro</NavLink></li>
                 </ul> 
                 <div className="nav-center" onClick={OpenSearch}>
                     <IoIosSearch className="search-icon"/>

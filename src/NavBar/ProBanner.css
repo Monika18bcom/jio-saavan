@@ -20,17 +20,30 @@
     font-size: 15px;
 }
 
-.pro-banner-content > .pro-banner-link > a{
+.pro-banner-content > .pro-banner-link {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: #2bc5b4;
     transition: all .3s ease-in-out;
+    cursor: pointer;
 }
 
-.pro-banner-content > .pro-banner-link > a:hover{
+/* .pro-banner-content > .pro-banner-link > a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #2bc5b4;
+    transition: all .3s ease-in-out;
+} */
+
+.pro-banner-content > .pro-banner-link:hover{
     color: #15625A;
 }
+
+/* .pro-banner-content > .pro-banner-link > a:hover{
+    color: #15625A;
+} */
 
 .pro-banner-container > .cancel-btn{
     width: 5%;

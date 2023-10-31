@@ -63,6 +63,17 @@
     height: 100%;
 }
 
+.nav-left .go-pro-item{
+    color: #3e3e3e;
+    font-weight: bold;
+    font-size: 14.8px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .navlink{
     color: #3e3e3e;
     text-decoration: none;
@@ -72,8 +83,7 @@
     height: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-    
+    align-items: center;   
 }
 
 .podcasts.active{
