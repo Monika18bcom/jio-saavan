@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
 import './NavBar.css';
 import logo from "../img/jio-saavn-white-logo.png";
@@ -15,9 +15,11 @@ function NavBar(){
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
     const { userData , setSearchOpen } = useContext(JiosaavnContext) 
-    const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected } = useContext(MainPageContext)
+    const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected ,isProActive, setIsProActive} = useContext(MainPageContext)
 
     const [isSelected, setIsSelected] = useState(false)
+
+    const navigate = useNavigate()
 
     const handleProfile = (e) => {
 
@@ -33,12 +35,15 @@ function NavBar(){
     }
 
     const openWindowTabFunc = () =>{
+        if(isProActive){
+            navigate('/my-music')
+            return;
+        }
         const newTab = window.open('/pro' , '_blank')
         window.addEventListener('message',(event)=>{
             if(event.data === 'proActivated' && newTab){
                 newTab.close()
-                window.history.push('/')
-    
+                setIsProActive(true)
             }
         })
     }

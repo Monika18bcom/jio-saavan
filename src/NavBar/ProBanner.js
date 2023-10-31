@@ -17,8 +17,6 @@ function ProBanner() {
       console.log(event , 'event')
       if(event.data === 'proActivated' && newTab){
         newTab.close()
-        history.push('/')
-
       }
     })
   }
