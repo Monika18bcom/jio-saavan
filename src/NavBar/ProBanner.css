@@ -1,0 +1,45 @@
+.pro-banner-container{
+    width: 100%;
+    height: 65px;
+    background-color: #2a2d36;
+    position: fixed;
+    left: 0;
+    bottom: 79.5px;
+    z-index: 7;
+    transition: all .3s ease-in-out;
+    display: flex;
+    align-items: center;
+    color: #f6f6f6;
+}
+
+.pro-banner-content{
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+.pro-banner-content > .pro-banner-link > a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #2bc5b4;
+    transition: all .3s ease-in-out;
+}
+
+.pro-banner-content > .pro-banner-link > a:hover{
+    color: #15625A;
+}
+
+.pro-banner-container > .cancel-btn{
+    width: 5%;
+    display: flex;
+    justify-content: center;  
+    cursor: pointer;
+}
+
+.pro-banner-container > .cancel-btn .cancel-icon{
+    cursor: pointer;
+    font-size: 25px;
+}

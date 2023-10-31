@@ -14,7 +14,9 @@
   width: 440px;
   position: fixed;
   z-index: 7;
-  top: 99px;
+  top: 15%;
+  bottom: 21%;
+  /* top: 99px; */
   /* right: 0; */
   right: -365px;
   border: 1px solid #e9e9e9;

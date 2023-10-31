@@ -9,6 +9,7 @@ import UserAccountDetails from '../NavBar/UserAccountDetails';
 import { JiosaavnContext } from './App';
 import Search from '../NavBar/Search';
 import './App.css'
+import ProBanner from '../NavBar/ProBanner';
 
 export const MainPageContext = createContext({})
 
@@ -16,6 +17,7 @@ function MainPage() {
   const [isNavMusicHover , setIsNavMusicHover] = useState(false)
   const [displayAccount , setDisplayAccount] = useState(false)
   const [profileSelected , setProfileSelected] = useState(false)
+  const [proBanner , setProBanner] = useState(true)
 
   const { searchOpen , isExpand } = useContext(JiosaavnContext)
 
@@ -27,12 +29,15 @@ function MainPage() {
         displayAccount,
         setDisplayAccount,
         profileSelected , 
-        setProfileSelected
+        setProfileSelected,
+        proBanner , 
+        setProBanner
       }}
     >
       <NavBar />
       <AsideLeft />
       <Home />
+      {proBanner && <ProBanner />}
       <AsideBottom />
       {!isExpand && <div className='aside-right-queue'><AsideRight /></div>}
       {isNavMusicHover && <NavMusic />}
