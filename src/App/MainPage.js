@@ -59,7 +59,7 @@ function MainPage() {
       {displayAccount && <UserAccountDetails /> }
       {searchOpen && <Search />}
       {displayMusicLang && <MusicLanguages /> }
-      <ErrorComp>play again</ErrorComp>
+      <ErrorComp>coming soon</ErrorComp>
     </MainPageContext.Provider>
   )
 }
