@@ -15,19 +15,14 @@ function NavBar(){
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
     const { userData, setUserData , setSearchOpen } = useContext(JiosaavnContext) 
-    const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected } = useContext(MainPageContext)
+    const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected ,displayMusicLang , setDisplayMusicLang , musicLangArrow, setMusicLangArrow } = useContext(MainPageContext)
 
-    const [isSelected, setIsSelected] = useState(false)
 
     const navigate = useNavigate()
 
-    const handleProfile = (e) => {
-
-        if(e.target.classList.contains('nav-bar-user-profile') || e.target.parentElement.classList.contains('nav-bar-user-profile')){
-            setProfileSelected(!profileSelected)
-            setDisplayAccount(!displayAccount)
-        }
-
+    const handleProfile = () => {
+        setProfileSelected(!profileSelected)
+        setDisplayAccount(!displayAccount)
     }
 
     const OpenSearch = () =>{
@@ -47,6 +42,11 @@ function NavBar(){
                 setUserData({...userData , isProActive: true});
             }
         })
+    }
+
+    const displayMusicLangFunc = () =>{
+        setDisplayMusicLang(!displayMusicLang)
+        setMusicLangArrow(!musicLangArrow)
     }
 
     return(
@@ -70,16 +70,16 @@ function NavBar(){
                     <p id="search-input">Search</p>
                 </div>
                 <div className="nav-right">
-                    <div className="select-lang">
+                    <div className="select-lang" onClick={displayMusicLangFunc}>
                         <div className="select-div">
                             <p className="music-lang">Music Languages</p>
                             <p className="lang">Hindi</p>
                         </div>
-                        {isSelected ? <RiArrowUpSLine className="arrow-icon" /> : <RiArrowDownSLine className="arrow-icon" />}
+                        {musicLangArrow ? <RiArrowUpSLine className="arrow-icon" /> : <RiArrowDownSLine className="arrow-icon" />}
                     </div>
                     {
                         userData?.userDetails !== null ? 
-                        <div className="nav-bar-user-profile" onClick={(e) => handleProfile(e)} >
+                        <div className="nav-bar-user-profile" onClick={handleProfile} >
                             <img className="nav-bar-profile-img" src={profileImg} alt='Profile Image' ></img>
                             {profileSelected ? <RiArrowUpSLine className="arrow-icon" /> : <RiArrowDownSLine className="arrow-icon" />}
                         </div> :

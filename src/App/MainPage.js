@@ -10,6 +10,7 @@ import { JiosaavnContext } from './App';
 import Search from '../NavBar/Search';
 import './App.css'
 import ProBanner from '../NavBar/ProBanner';
+import MusicLanguages from '../NavBar/MusicLanguages';
 
 export const MainPageContext = createContext({})
 
@@ -18,6 +19,9 @@ function MainPage() {
   const [displayAccount , setDisplayAccount] = useState(false)
   const [profileSelected , setProfileSelected] = useState(false)
   const [proBanner , setProBanner] = useState(true)
+  const [displayMusicLang , setDisplayMusicLang] = useState(false)
+  const [musicLangArrow, setMusicLangArrow] = useState(false)
+
 
   const {userData} = useContext(JiosaavnContext)
 
@@ -34,6 +38,10 @@ function MainPage() {
         setProfileSelected,
         proBanner , 
         setProBanner,
+        displayMusicLang , 
+        setDisplayMusicLang,
+        musicLangArrow, 
+        setMusicLangArrow
       }}
     >
       <NavBar />
@@ -45,6 +53,7 @@ function MainPage() {
       {isNavMusicHover && <NavMusic />}
       {displayAccount && <UserAccountDetails /> }
       {searchOpen && <Search />}
+      {displayMusicLang && <MusicLanguages /> }
     </MainPageContext.Provider>
   )
 }
