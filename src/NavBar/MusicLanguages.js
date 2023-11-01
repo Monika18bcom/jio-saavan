@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import {IoIosCheckmarkCircle} from 'react-icons/io'
+import { MainPageContext } from '../App/MainPage'
 import './MusicLanguages.css'
 
 
@@ -12,10 +13,39 @@ function MusicLanguages() {
     
     const [isChecked, setIsChecked] = useState(false)
     const [error , setError] = useState(false)
+    const {setDisplayMusicLang , musicLangArrow, setMusicLangArrow } = useContext(MainPageContext)
+
+    const musicLangRef = useRef()
+
+    const [firstRender , setFirstRender] = useState(false)
+
+    useEffect(()=>{
+
+        if(!firstRender){
+            setFirstRender(true)
+            return
+        }
+
+        if(musicLangRef.current && firstRender){
+            window.addEventListener('click', (e)=>{
+                if(musicLangRef.current && !musicLangRef?.current?.contains(e.target)){
+                    setDisplayMusicLang(false)
+                    setMusicLangArrow(!musicLangArrow)
+                }
+            })
+        }
+
+        return () =>{
+            window.removeEventListener('click', ()=>{
+
+            })
+        }
+
+    },[musicLangRef.current])
 
     
   return (
-    <div className='music-lang-container'>
+    <div className='music-lang-container' ref={musicLangRef}>
         <div className='music-lang-header'>
             <h5>What music do you like?</h5>
             <p>Pick all the languages you want to listen to.</p>
@@ -29,9 +59,6 @@ function MusicLanguages() {
                         {
                             isChecked && <IoIosCheckmarkCircle className='check-icon' />
                         }
-                        {/* <div className='check-icon-section'>
-                            
-                        </div> */}
                     </li>
                 ))}
             </ul>
