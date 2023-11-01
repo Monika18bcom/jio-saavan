@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { MdOutlineCancel } from "react-icons/md"
 import {IoIosArrowForward} from 'react-icons/io'
 import './ProBanner.css'
-import { Link } from 'react-router-dom'
 import { MainPageContext } from '../App/MainPage'
 
 
@@ -14,7 +13,6 @@ function ProBanner() {
   const openWindowTabFunc = () =>{
     const newTab = window.open('/pro' , '_blank')
     window.addEventListener('message',(event)=>{
-      console.log(event , 'event')
       if(event.data === 'proActivated' && newTab){
         newTab.close()
       }

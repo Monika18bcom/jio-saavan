@@ -20,6 +20,7 @@ function App() {
   const [userData, setUserData] = useState({
     userDetails: null,
     userToken: null,
+    isproActive: false,
   });
   const [isLoading , setIsLoading] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -52,6 +53,13 @@ function App() {
       setUserData(JSON.parse(storedUserData));
     }
   }, []);
+
+  useEffect(() => {
+    if(userData.userToken){
+      localStorage.setItem('user' , JSON.stringify(userData))
+    }
+  }, [userData]);
+
 
   return (
     <JiosaavnContext.Provider

@@ -8,7 +8,7 @@ export function useAuth() {
 
   const navigate = useNavigate()
 
-  const {setUserData} = useContext(JiosaavnContext)
+  const {userData , setUserData} = useContext(JiosaavnContext)
 
   const [errApiResult , setErrApiResult] = useState('')
 
@@ -29,8 +29,7 @@ export function useAuth() {
     .then((response)=> response.json())
     .then((result)=> {
       if(result.status === 'success'){
-        setUserData({ userDetails: result.data , userToken: result.token })
-        localStorage.setItem('user' , JSON.stringify({ userDetails: result.data , userToken: result.token }))
+        setUserData({...userData , userDetails: result.data , userToken: result.token})
 
         navigate('/')
       }else{
@@ -57,15 +56,12 @@ export function useAuth() {
     .then((response)=> response.json())
     .then((result)=> {
       if(result.status === 'success'){
-        setUserData({ userDetails: result.data.user , userToken: result.token })
-        localStorage.setItem('user' , JSON.stringify({ userDetails: result.data.user , userToken: result.token }))
+        setUserData({...userData , userDetails: result.data.user , userToken: result.token })
 
         navigate('/')
       }else{
         setErrApiResult(result.message)
       }
-      
-
     })
   };
 
@@ -95,7 +91,8 @@ export function useAuth() {
     localStorage.removeItem('userName')
     setUserData({
       userDetails: null,
-      userToken: null
+      userToken: null,
+      isProActive: false,
     })
   }
 

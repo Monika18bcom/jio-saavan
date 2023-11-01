@@ -1,13 +1,12 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './GoPro.css'
 import GoproPlanCard from './GoproPlanCard'
 import logo from "../img/jio-saavn-white-logo.png";
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {IoIosArrowDown} from 'react-icons/io'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {FaXmark} from 'react-icons/fa6'
 import Table from './Table';
-import { MainPageContext } from '../App/MainPage';
 
 
 function GoPro() {
@@ -66,9 +65,6 @@ function GoPro() {
 
     const scrollRef = useRef(null)
     const [isHamburger , setIsHamburger] = useState(false)
-    const navigate = useNavigate()
-
-    // const {isProActive, setIsProActive} = useContext(MainPageContext)
 
     const scrollToBenefits = () => {
         scrollRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -81,18 +77,6 @@ function GoPro() {
     const windowMessageFunc = () =>{
         window.opener.postMessage('proActivated','*')
     }
-
-    // const toggleProActive = () =>{
-    //     const isPro = JSON.parse(localStorage.getItem('isProActive'))
-    //     // console.log('togglePro',typeof isPro)
-    //     navigate(-1)
-    //     if(!isPro){
-    //         console.log('proActive')
-    //         localStorage.setItem('isProActive', true)
-    //         // setIsProActive(!isProActive)
-    //     } 
-    //     localStorage.setItem('isProActive', false)  
-    // }
 
   return (
     <div className='gopro-main-container'>

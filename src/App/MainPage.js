@@ -18,17 +18,8 @@ function MainPage() {
   const [displayAccount , setDisplayAccount] = useState(false)
   const [profileSelected , setProfileSelected] = useState(false)
   const [proBanner , setProBanner] = useState(true)
-  const [isProActive, setIsProActive] = useState(false)
 
-  // console.log(isProActive, 'mainpage.js')
-
-  useEffect(()=>{
-    localStorage.setItem('isProActive' , isProActive)
-    const isPro = JSON.parse(localStorage.getItem('isProActive'))
-    if(isPro){
-      setIsProActive(isPro)
-    } 
-  },[])
+  const {userData} = useContext(JiosaavnContext)
 
   const { searchOpen , isExpand } = useContext(JiosaavnContext)
 
@@ -43,14 +34,12 @@ function MainPage() {
         setProfileSelected,
         proBanner , 
         setProBanner,
-        isProActive, 
-        setIsProActive
       }}
     >
       <NavBar />
       <AsideLeft />
       <Home />
-      {(proBanner && !isProActive) && <ProBanner />}
+      {(proBanner && !userData?.isProActive) && <ProBanner />}
       <AsideBottom />
       {!isExpand && <div className='aside-right-queue'><AsideRight /></div>}
       {isNavMusicHover && <NavMusic />}

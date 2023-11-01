@@ -14,8 +14,8 @@ function NavBar(){
 
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
-    const { userData , setSearchOpen } = useContext(JiosaavnContext) 
-    const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected ,isProActive, setIsProActive} = useContext(MainPageContext)
+    const { userData, setUserData , setSearchOpen } = useContext(JiosaavnContext) 
+    const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected } = useContext(MainPageContext)
 
     const [isSelected, setIsSelected] = useState(false)
 
@@ -35,7 +35,8 @@ function NavBar(){
     }
 
     const openWindowTabFunc = () =>{
-        if(isProActive){
+
+        if(userData?.isProActive){
             navigate('/my-music')
             return;
         }
@@ -43,7 +44,7 @@ function NavBar(){
         window.addEventListener('message',(event)=>{
             if(event.data === 'proActivated' && newTab){
                 newTab.close()
-                setIsProActive(true)
+                setUserData({...userData , isProActive: true});
             }
         })
     }
