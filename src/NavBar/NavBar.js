@@ -15,10 +15,12 @@ function NavBar(){
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
     const { userData, setUserData , setSearchOpen } = useContext(JiosaavnContext) 
-    const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected ,displayMusicLang , setDisplayMusicLang , musicLangArrow, setMusicLangArrow } = useContext(MainPageContext)
+    const { setIsNavMusicHover , setDisplayAccount , displayAccount , profileSelected , setProfileSelected ,displayMusicLang , setDisplayMusicLang , musicLangArrow, setMusicLangArrow , musicLangName } = useContext(MainPageContext)
 
 
     const navigate = useNavigate()
+
+    // const [musicLangName , setMusicLangName] = useState('Hindi')
 
     const handleProfile = () => {
         setProfileSelected(!profileSelected)
@@ -73,7 +75,7 @@ function NavBar(){
                     <div className="select-lang" onClick={displayMusicLangFunc}>
                         <div className="select-div">
                             <p className="music-lang">Music Languages</p>
-                            <p className="lang">Hindi</p>
+                            <p className="lang">{musicLangName}</p>
                         </div>
                         {musicLangArrow ? <RiArrowUpSLine className="arrow-icon" /> : <RiArrowDownSLine className="arrow-icon" />}
                     </div>

@@ -21,6 +21,8 @@ function MainPage() {
   const [proBanner , setProBanner] = useState(true)
   const [displayMusicLang , setDisplayMusicLang] = useState(false)
   const [musicLangArrow, setMusicLangArrow] = useState(false)
+  const [musicLangName , setMusicLangName] = useState('Hindi')
+
 
 
   const {userData} = useContext(JiosaavnContext)
@@ -41,7 +43,9 @@ function MainPage() {
         displayMusicLang , 
         setDisplayMusicLang,
         musicLangArrow, 
-        setMusicLangArrow
+        setMusicLangArrow,
+        musicLangName , 
+        setMusicLangName
       }}
     >
       <NavBar />
