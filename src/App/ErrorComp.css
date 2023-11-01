@@ -1,0 +1,21 @@
+.error-comp-section{
+    position: fixed;
+    bottom: 85px;
+    left: 44%;
+    z-index: 7;
+    width: auto;
+    height: 45px;
+    border-radius: 4px;
+    background-color: #2bc5b4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.error-comp-section > span{
+    color: #fff;
+    width: auto;
+    padding: 11px 22px;
+    text-transform: capitalize;
+}

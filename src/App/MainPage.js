@@ -11,6 +11,7 @@ import Search from '../NavBar/Search';
 import './App.css'
 import ProBanner from '../NavBar/ProBanner';
 import MusicLanguages from '../NavBar/MusicLanguages';
+import ErrorComp from './ErrorComp';
 
 export const MainPageContext = createContext({})
 
@@ -58,6 +59,7 @@ function MainPage() {
       {displayAccount && <UserAccountDetails /> }
       {searchOpen && <Search />}
       {displayMusicLang && <MusicLanguages /> }
+      <ErrorComp>play again</ErrorComp>
     </MainPageContext.Provider>
   )
 }
