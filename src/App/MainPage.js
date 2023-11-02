@@ -12,6 +12,7 @@ import './App.css'
 import ProBanner from '../NavBar/ProBanner';
 import MusicLanguages from '../NavBar/MusicLanguages';
 import ErrorComp from './ErrorComp';
+import OptionsModal from '../Modal/OptionsModal';
 
 export const MainPageContext = createContext({})
 
@@ -60,6 +61,7 @@ function MainPage() {
       {searchOpen && <Search />}
       {displayMusicLang && <MusicLanguages /> }
       {showErrorComp && <ErrorComp>{showErrorComp}</ErrorComp>}
+      <OptionsModal />
     </MainPageContext.Provider>
   )
 }
