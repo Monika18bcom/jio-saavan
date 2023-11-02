@@ -70,22 +70,24 @@ function MusicCard({data  , cardWidth , imgHeight}){
                 {
                     isHover &&
                     <div className='music-card-controls' style={{borderRadius : data.type === "artist" && '50%'}} onClick={(e) => handleMusicCardControls(e)}>
-                        <div className='music-card-play'>
-                            <div className='music-card-play-btn-bg'>
-                                <FontAwesomeIcon className='music-card-play-btn' icon={faPlay} style={{color: '#fff' , textAlign:'center'}} />
+                        <div className='music-card-controls-sub'>
+                            <div className='music-card-play'>
+                                <div className='music-card-play-btn-bg'>
+                                    <FontAwesomeIcon className='music-card-play-btn' icon={faPlay} style={{color: '#fff' , textAlign:'center'}} />
+                                </div>
                             </div>
-                        </div>
-                        {
-                            data.type !== "artist" &&
-                            <div className='music-card-heart-ellipsis'>
                             {
-                                isLikeRed ? 
-                                <AiFillHeart className='music-card-like-btn' style={{color: 'red'}} /> : 
-                                <FontAwesomeIcon className='music-card-like-btn' icon={faHeart} style={{color: '#fff'}} />
+                                data.type !== "artist" &&
+                                <div className='music-card-heart-ellipsis'>
+                                {
+                                    isLikeRed ? 
+                                    <AiFillHeart className='music-card-like-btn' style={{color: 'red'}} /> : 
+                                    <FontAwesomeIcon className='music-card-like-btn' icon={faHeart} style={{color: '#fff'}} />
+                                }
+                                <FontAwesomeIcon className='music-card-option-btn' icon={faEllipsis} style={{color: '#fff'}} />
+                                </div>
                             }
-                            <FontAwesomeIcon className='music-card-option-btn' icon={faEllipsis} style={{color: '#fff'}} />
-                            </div>
-                        }
+                        </div>
                     </div>
                 }
             </div>

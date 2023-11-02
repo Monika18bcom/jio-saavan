@@ -70,3 +70,16 @@
     gap: 22px;
     margin-bottom: 22px;  
 }
+
+
+@media (max-width: 980px) {
+    .music-data-section{
+        width: 100%;
+    }
+
+    .music-data-section .music-data-arrow{
+        display: none;
+    }
+
+  
+}

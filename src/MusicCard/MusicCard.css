@@ -20,6 +20,11 @@
     border-radius: 4px;
 }
 
+.music-card-controls-sub{
+    width: inherit;
+    height: inherit;
+}
+
 .music-card-play{
     width: inherit;
     height: 80%;
@@ -76,6 +81,7 @@
     color: #595757;
 }
 
+
 @media (max-width: 1200px) {
     .music-card-container{
         width: 93px;
@@ -99,5 +105,30 @@
 
     .music-card-img{
         height: 110px;
+    }
+}
+
+@media (max-width: 980px) {
+
+    .music-card-container{
+        min-width: 277px;
+        height: 312px;
+        cursor: pointer;
+    }
+
+    .music-card-img{
+        height: 277px;
+    }
+
+    .music-card-controls{
+        background-color: transparent;
+    }
+
+    .music-card-controls-sub{
+        display: none;
+    }
+
+    .music-card-artist{
+        display: none;
     }
 }

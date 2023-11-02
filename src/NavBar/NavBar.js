@@ -77,6 +77,7 @@ function NavBar(){
                             <p className="music-lang">Music Languages</p>
                             <p className="lang">{musicLangName}</p>
                         </div>
+                        <div className="nav-music-langs">Languages</div>
                         {musicLangArrow ? <RiArrowUpSLine className="arrow-icon" /> : <RiArrowDownSLine className="arrow-icon" />}
                     </div>
                     {

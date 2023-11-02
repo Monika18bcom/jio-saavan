@@ -18,8 +18,8 @@ function Main({mainAlbumArr}) {
         {
         mainAlbumArr?.map((album, idx)=>(
             <div className="main-album-section" key={idx}>
-                <h2 className='main-album-heading'>{album.title}</h2>
-                {album && <MusicData album={album} />}
+              <h2 className='main-album-heading'>{album.title}</h2>
+              {album && <MusicData album={album} />}
             </div>
         ))
         }

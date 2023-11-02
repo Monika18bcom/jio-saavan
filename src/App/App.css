@@ -31,3 +31,14 @@
 }
 
 
+@media (max-width: 980px) {
+
+  .aside-right-queue{
+    display: none;
+  }
+
+}
+
+
+
+

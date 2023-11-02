@@ -61,12 +61,12 @@ function MusicData({album}){
                 ref={musicDataRef} >
                 <div className="music-data-row-1">
                     {album?.data?.map((e,idx)=>(
-                        idx < 20 && <div key={idx} className="music-data-card"><MusicCard data={{...e, type: album.type}}/></div>
+                        idx < 20 && <MusicCard key={idx} data={{...e, type: album.type}}/>
                     ))}
                 </div>
                 <div className="music-data-row-2">
                     {album?.data?.map((e,idx)=>(
-                       idx >= 20 && <div key={idx} className="music-data-card"><MusicCard data={{...e, type: album.type}}/></div>
+                       idx >= 20 && <MusicCard key={idx} data={{...e, type: album.type}}/>
                     ))}
                 </div>
             </div> 
