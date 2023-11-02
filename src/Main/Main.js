@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './Main.css'
 import MusicData from '../MusicData/MusicData'
 import Loader from "../Loader/Loader";
@@ -8,6 +8,10 @@ import { JiosaavnContext } from '../App/App';
 function Main({mainAlbumArr}) {
 
   const { isLoading } = useContext(JiosaavnContext)
+
+  useEffect(()=>{
+    window.scrollTo({top:0 , behavior: 'smooth'})
+  },[])
 
   return (
     isLoading ? 

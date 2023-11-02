@@ -35,6 +35,10 @@ function Album() {
     fetchData();
   }, [type, id]);
 
+  useEffect(()=>{
+    window.scrollTo({top:0 , behavior: 'smooth'})
+  },[])
+
 
   return isLoading ? (
     <div className="album-loader-container">

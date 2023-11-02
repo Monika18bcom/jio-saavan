@@ -27,6 +27,8 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [updateQueue, setUpdateQueue] = useState(null)
 
+  const [showErrorComp , setShowErrorComp] = useState(null)
+
   const searchReducer = (state , action) =>{
     switch (action.type) {
       case action.type:
@@ -85,7 +87,9 @@ function App() {
         searchState , 
         searchDispatch,
         updateQueue, 
-        setUpdateQueue
+        setUpdateQueue,
+        showErrorComp , 
+        setShowErrorComp
       }}
     >
       <div className="App">

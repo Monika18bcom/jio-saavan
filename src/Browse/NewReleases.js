@@ -14,6 +14,10 @@ function NewReleases({type}) {
 
     const [randomIdx , setRandonIdx] = useState(0)
 
+    useEffect(()=>{
+        window.scrollTo({top:0 , behavior: 'smooth'})
+    },[])
+
 
     useEffect(()=>{
         setIsLoading(true)

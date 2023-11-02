@@ -1,5 +1,6 @@
 .music-card-container{
     width: 141.6px;
+    min-width: 141.6px;
     height: 194.2px;
 }
 

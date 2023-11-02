@@ -11,6 +11,10 @@ function MyMusic() {
   const navigate = useNavigate()
 
   useEffect(()=>{
+    window.scrollTo({top:0 , behavior: 'smooth'})
+  },[])
+
+  useEffect(()=>{
 
     if(!userData.userToken){
       

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { JiosaavnContext } from "../App/App";
 import MusicCard from "../MusicCard/MusicCard";
@@ -8,6 +8,10 @@ import SongItem from "./SongItem";
 function SearchComp() {
   const { type, input } = useParams();
   const { searchState } = useContext(JiosaavnContext);
+
+  useEffect(()=>{
+    window.scrollTo({top:0 , behavior: 'smooth'})
+  },[])
 
   return (
     <div className="search-comp-container">

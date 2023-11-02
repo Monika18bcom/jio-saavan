@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import './Me.css'
 import {PiPencilSimple} from 'react-icons/pi'
 import {BsDot} from 'react-icons/bs'
@@ -17,6 +17,10 @@ function Me() {
             return string.charAt(0).toUpperCase() + string.slice(1)
         }
         return string
+    },[])
+
+    useEffect(()=>{
+        window.scrollTo({top:0 , behavior: 'smooth'})
     },[])
 
   return (

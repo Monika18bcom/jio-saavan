@@ -26,7 +26,7 @@ function MainPage() {
 
 
 
-  const {userData} = useContext(JiosaavnContext)
+  const {userData , showErrorComp , setShowErrorComp} = useContext(JiosaavnContext)
 
   const { searchOpen , isExpand } = useContext(JiosaavnContext)
 
@@ -59,7 +59,7 @@ function MainPage() {
       {displayAccount && <UserAccountDetails /> }
       {searchOpen && <Search />}
       {displayMusicLang && <MusicLanguages /> }
-      <ErrorComp>coming soon</ErrorComp>
+      {showErrorComp && <ErrorComp>{showErrorComp}</ErrorComp>}
     </MainPageContext.Provider>
   )
 }
