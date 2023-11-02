@@ -1,7 +1,8 @@
 .error-comp-section{
     position: fixed;
     bottom: 85px;
-    left: 44%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 7;
     width: auto;
     height: 45px;

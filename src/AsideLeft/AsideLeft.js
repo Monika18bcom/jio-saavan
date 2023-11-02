@@ -12,7 +12,7 @@ import { JiosaavnContext } from '../App/App'
 
 function AsideLeft(){
 
-    const {userData , setShowModal} = useContext(JiosaavnContext)
+    const {userData , setShowModal , setShowErrorComp} = useContext(JiosaavnContext)
 
     const navigate = useNavigate()
 
@@ -54,6 +54,10 @@ function AsideLeft(){
                 navigate('my-music/artists')
             }
         }
+    }
+
+    const handlePlaylistBtn = (e) =>{
+        setShowErrorComp(`${e.target.innerText} area is being updated. Get ready for something new soon!`)
     }
 
     return (
@@ -100,7 +104,7 @@ function AsideLeft(){
                     </div>
                 </li>
             </ul>
-            <div id="new-playlist" className='asideLeft-new-playlist'>
+            <div id="new-playlist" className='asideLeft-new-playlist' onClick={handlePlaylistBtn}>
                 <AiOutlinePlus />
                 New Playlist
             </div>

@@ -9,7 +9,7 @@ import { JiosaavnContext } from '../App/App';
 function UserAccountDetails() {
 
     const { logOut } = useAuth()
-    const { userData , showErrorComp , setShowErrorComp } = useContext(JiosaavnContext)
+    const { userData , setShowErrorComp } = useContext(JiosaavnContext)
     const { setDisplayAccount , profileSelected , setProfileSelected } = useContext(MainPageContext)
     const navigate = useNavigate()
     const userAccountRef = useRef()
@@ -52,7 +52,7 @@ function UserAccountDetails() {
                 else if(e.target.classList.contains('history')){
                     navigate('/listening-history')
                 }else{
-                    setShowErrorComp(`${e.target.innerHTML} coming soon...`)
+                    setShowErrorComp(`${e.target.innerText} coming soon...`)
                 }
             }
             
@@ -63,7 +63,7 @@ function UserAccountDetails() {
                 navigate('/')
                 setDisplayAccount(false)
             }else{
-                setShowErrorComp(`${e.target.innerHTML} coming soon...`)
+                setShowErrorComp(`${e.target.innerText} coming soon...`)
             }
             
         }
