@@ -28,6 +28,8 @@ function App() {
   const [updateQueue, setUpdateQueue] = useState(null)
 
   const [showErrorComp , setShowErrorComp] = useState(null)
+  const [showOption , setShowOption] = useState(false)
+
 
   const searchReducer = (state , action) =>{
     switch (action.type) {
@@ -89,7 +91,9 @@ function App() {
         updateQueue, 
         setUpdateQueue,
         showErrorComp , 
-        setShowErrorComp
+        setShowErrorComp,
+        showOption , 
+        setShowOption
       }}
     >
       <div className="App">

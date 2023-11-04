@@ -27,9 +27,8 @@ function MainPage() {
 
 
 
-  const {userData , showErrorComp , setShowErrorComp} = useContext(JiosaavnContext)
+  const {userData , showErrorComp , showOption , searchOpen , isExpand} = useContext(JiosaavnContext)
 
-  const { searchOpen , isExpand } = useContext(JiosaavnContext)
 
   return (
     <MainPageContext.Provider 
@@ -61,7 +60,7 @@ function MainPage() {
       {searchOpen && <Search />}
       {displayMusicLang && <MusicLanguages /> }
       {showErrorComp && <ErrorComp>{showErrorComp}</ErrorComp>}
-      <OptionsModal />
+      { showOption && <OptionsModal />}
     </MainPageContext.Provider>
   )
 }

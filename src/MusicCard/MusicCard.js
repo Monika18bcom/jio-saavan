@@ -18,7 +18,7 @@ function MusicCard({data  , cardWidth , imgHeight}){
     const [isLikeRed, setIsLikeRed] = useState(false);
     const navigate = useNavigate()
     
-    const {setSongId , setUpdateQueue} = useContext(JiosaavnContext);
+    const {setSongId , setUpdateQueue , showOption , setShowOption} = useContext(JiosaavnContext);
 
     const handleMouseOver = ()=>{
         setIsHover(true);
@@ -54,7 +54,10 @@ function MusicCard({data  , cardWidth , imgHeight}){
         }else if(e.target.classList.contains('music-card-like-btn') || e.target.parentElement.classList.contains('music-card-like-btn')){
             setIsLikeRed(!isLikeRed);
         }else if(e.target.classList.contains('music-card-option-btn') || e.target.parentElement.classList.contains('music-card-option-btn')){
-            
+            let width = (window.innerWidth - 195) > e.clientX ? e.clientX : window.innerWidth - (195 + 30) 
+            let height = (window.innerHeight - 200) > e.clientY ? e.clientY : window.innerHeight - (200 + 20)
+
+            setShowOption({top: height , left: width})
         }else{
             navigate(`/${data.type}/${(data.name) || (data.title)}/${data._id}`)
         }

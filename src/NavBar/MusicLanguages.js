@@ -72,7 +72,7 @@ function MusicLanguages() {
             <ul className='music-lang-ul'>
                 {langArr.map((e,idx)=>(
                     <li key={idx} className='music-lang-list-item' onClick={()=> handleChecked(idx , e)}>
-                        <div className='lang-name'>{e}</div>
+                        <div className='lang-name' style={{color: checkedIdx === idx && "#2bc5b4"}}>{e}</div>
                         {
                             checkedIdx === idx && <IoIosCheckmarkCircle className='check-icon' />
                         }
