@@ -138,6 +138,7 @@
 
     #footer-icons{
         flex-direction: column;
+        margin-bottom: 150px;
     }
     
     /* #footer-app-version p{

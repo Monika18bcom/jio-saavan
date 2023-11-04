@@ -23,12 +23,12 @@ function Search() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [songNum, setSongNum] = useState(true);
-  const [songPoster, setSongPoster] = useState(true);
-  const [songInfo, setSongInfo] = useState(true);
-  const [cancelIcon, setCancelIcon] = useState(true);
-  const [likeIcon, setLikeIcon] = useState(true);
-  const [durDots, setDurDots] = useState(true);
+  // const [songNum, setSongNum] = useState(true);
+  // const [songPoster, setSongPoster] = useState(true);
+  // const [songInfo, setSongInfo] = useState(true);
+  // const [cancelIcon, setCancelIcon] = useState(true);
+  // const [likeIcon, setLikeIcon] = useState(true);
+  // const [durDots, setDurDots] = useState(true);
 
   const trendingDataReducer = (state, action) => {
     switch (action.type) {
@@ -177,8 +177,8 @@ function Search() {
                   <SongItem
                     key={idx}
                     data={e}
-                    songPoster={songPoster}
-                    songInfo={songInfo}
+                    songPoster="true"
+                    songInfo="true"
                     imgMarginR="11px"
                     width="350px"
                     playCur="pointer"

@@ -26,8 +26,8 @@ function MyMusic() {
 
   return (
     <div className='my-music-main-container'>
-        <MyMusicHeader />
-        <ComingSoon />
+      <MyMusicHeader />
+      <div className='coming-soon'><ComingSoon /></div>
     </div>
   )
 }

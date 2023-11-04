@@ -5,6 +5,15 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../useAuth'
 import { MainPageContext } from '../App/MainPage'
 
+import {GoHistory} from 'react-icons/go'
+import {IoMusicalNoteOutline} from 'react-icons/io5'
+import {RiAlbumLine} from 'react-icons/ri'
+import {MdPodcasts} from 'react-icons/md'
+import {LiaMicrophoneAltSolid} from 'react-icons/lia'
+import {PiPlaylist} from 'react-icons/pi'
+import {IoIosArrowForward} from 'react-icons/io'
+
+
 
 
 function MyMusicHeader() {
@@ -44,16 +53,67 @@ function MyMusicHeader() {
         </div>
         <div className='my-music-header-user-library'>
             <ul className='library-ul'>
-                <li><NavLink to='playlists'>Playlists</NavLink></li>
-                <li><NavLink to='songs'>Songs</NavLink></li>
-                <li><NavLink to='albums'>Albums</NavLink></li>
-                <li><NavLink to='podcasts'>Podcasts</NavLink></li>
-                <li><NavLink to='artists'>Artists</NavLink></li>
-                <li><NavLink to='/listening-history'>History</NavLink></li>
+                <li>
+                    <NavLink to='playlists'>
+                        <div>
+                            <PiPlaylist className="icons" />
+                            Playlists
+                        </div>
+                        <IoIosArrowForward className='right-arrow' />
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to='songs'>
+                        <div>
+                            <IoMusicalNoteOutline className="icons" />
+                            Songs
+                        </div>
+                        <IoIosArrowForward className='right-arrow' />
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to='albums'>
+                        <div>
+                            <RiAlbumLine className="icons" />
+                            Albums
+                        </div>
+                        <IoIosArrowForward className='right-arrow' />
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to='podcasts'>
+                        <div>
+                            <MdPodcasts className="icons" />
+                            Podcasts
+                        </div>
+                        <IoIosArrowForward className='right-arrow' />
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to='artists'>
+                        <div>
+                            <LiaMicrophoneAltSolid className="icons" />
+                            Artists
+                        </div>
+                        <IoIosArrowForward className='right-arrow' />
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to='/listening-history'>
+                        <div>
+                            <GoHistory className="icons" />
+                            History
+                        </div>
+                        <IoIosArrowForward className='right-arrow' />
+                    </NavLink>
+                </li>
             </ul>
             <div className='library-btns'>
                 <span className='sync-library'>Sync Library</span>
                 <span className='shuffle-all'>Shuffle All</span>
+            </div>
+            <div className='responsive-logout'>
+                <span>Logout</span>
             </div>
         </div>
         {

@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 function ResponsiveNavbar() {
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
-    const {userData} = useContext(JiosaavnContext)
+    const {userData , setSearchOpen} = useContext(JiosaavnContext)
 
     const navigate = useNavigate()
 
@@ -21,7 +21,8 @@ function ResponsiveNavbar() {
             <GoHome className='icon' />
             <span>Home</span>
         </li>
-        <li className='search' onClick={()=>navigate('/')} >
+        <li className='search' onClick={()=>navigate('/search')} >
+            {/* onClick={()=>setSearchOpen(true)} */}
             <IoIosSearch className='icon' />
             <span>Search</span>
         </li>
@@ -32,7 +33,7 @@ function ResponsiveNavbar() {
 
         {
             userData?.userDetails !== null ? 
-            <li className='my-music' onClick={()=>navigate('/')} >
+            <li className='my-music' onClick={()=>navigate('/my-music')} >
                 <img src={profileImg} alt='Profile Image' ></img>
                 <span>My Music</span>
             </li> :
