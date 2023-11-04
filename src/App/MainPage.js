@@ -13,6 +13,7 @@ import ProBanner from '../NavBar/ProBanner';
 import MusicLanguages from '../NavBar/MusicLanguages';
 import ErrorComp from './ErrorComp';
 import OptionsModal from '../Modal/OptionsModal';
+import ResponsiveNavbar from './ResponsiveNavbar';
 
 export const MainPageContext = createContext({})
 
@@ -61,6 +62,7 @@ function MainPage() {
       {displayMusicLang && <MusicLanguages /> }
       {showErrorComp && <ErrorComp>{showErrorComp}</ErrorComp>}
       { showOption && <OptionsModal />}
+      <ResponsiveNavbar />
     </MainPageContext.Provider>
   )
 }

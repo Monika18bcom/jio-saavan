@@ -1,0 +1,42 @@
+.responsive-navbar-container{
+    display: none;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 9;
+    width: 100%;
+    height: 66px;
+    background-color: #f6f6f6;
+    list-style-type: none;
+    box-shadow: inset 0 0 0 1px #e9e9e9;
+    transition: all .3s ease-in-out;
+}
+
+.responsive-navbar-container li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #3e3e3e;
+    cursor: pointer;
+}
+
+.responsive-navbar-container li .icon{
+    font-size: 26px;
+}
+
+.responsive-navbar-container li span{
+    font-size: 12px;
+    line-height: 1;
+    padding-top: 5px;
+}
+  
+  
+@media (max-width: 980px) {
+
+.responsive-navbar-container{
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr); 
+}
+
+}
