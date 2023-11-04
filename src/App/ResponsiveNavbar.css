@@ -42,6 +42,7 @@
 .responsive-navbar-container{
     display: grid;
     grid-template-columns: repeat(4 , 1fr); 
+    z-index: 8;
 }
 
 }

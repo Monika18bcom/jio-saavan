@@ -121,6 +121,7 @@
 
     #aside-bottom{
         margin-bottom: 66px;
+        z-index: 8;
     }
 
 }
