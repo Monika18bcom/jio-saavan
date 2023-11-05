@@ -6,12 +6,14 @@ import {AiOutlineCompass} from 'react-icons/ai'
 import './ResponsiveNavbar.css'
 import { JiosaavnContext } from './App'
 import { useNavigate } from 'react-router-dom'
+import { MainPageContext } from './MainPage'
 
 
 function ResponsiveNavbar() {
     const profileImg = 'https://staticfe.saavn.com/web6/jioindw/dist/1696482270/_i/default_images/default-user-150x150.jpg'
 
     const {userData , setSearchOpen} = useContext(JiosaavnContext)
+    const {setIsNavMusicHover , isNavMusicHover} = useContext(MainPageContext)
 
     const navigate = useNavigate()
 
@@ -26,7 +28,7 @@ function ResponsiveNavbar() {
             <IoIosSearch className='icon' />
             <span>Search</span>
         </li>
-        <li className='browse' onClick={()=>navigate('/')} >
+        <li className='browse' onClick={()=>setIsNavMusicHover(!isNavMusicHover)} >
             <AiOutlineCompass className='icon' />
             <span>Browse</span>
         </li>

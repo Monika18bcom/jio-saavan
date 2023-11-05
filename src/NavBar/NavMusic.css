@@ -21,8 +21,13 @@
     padding: 22px;
     color: #3e3e3e;
 }
+
+.nav-music-container > .nav-music-content{
+    width: inherit;
+    height: inherit;
+}
  
-.nav-music-container > h3{
+.nav-music-container > .nav-music-content > h3{
     font-size: 24px;
     padding-bottom: 22px;
     margin-bottom: 22px;
@@ -63,9 +68,87 @@
     color: #646464;
 }
 
+.nav-music-view-all{
+    display: none;
+}
+
 @media (max-width: 1100px) {
 
     .nav-music-container{
         left: 50px;
+    }
+}
+
+@media (max-width: 980px) {
+
+    .nav-music-container{
+        width: 100%;
+        top: 0;
+        left: 0;
+        bottom: 66px;
+        border-radius: initial;
+        padding-bottom: 0;
+        background-color: #f6f6f6;
+    }
+
+    .nav-music-container > .nav-music-content{
+        height: 522px;
+        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .nav-music-container > .nav-music-content::after{
+        background: linear-gradient(hsla(0,0%,96%,0),#f6f6f6 80%,#f6f6f6);
+        bottom: 97px;
+        content: "";
+        display: block;
+        height: 44px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+    }
+    
+
+    .nav-music-container > .nav-music-content > h3{
+        font-size: 20px;
+    }
+
+    .nav-music-container > .nav-music-content > .nav-music-collections{
+        height: 100%;
+        flex-direction: column;
+        
+    }
+
+    .nav-music-container > .nav-music-content > .nav-music-collections ul li{
+        font-weight: 500;
+    }
+    
+    .nav-music-view-all{
+        display: block;
+        width: 100%;
+        padding: 22px;
+    }
+
+    .nav-music-view-all > span{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        color: #fff;
+        background-color: #2bc5b4;
+        border: 1px solid #2bc5b4;
+        border-radius: 22px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 2.4;
+        transition: all .3s ease-in-out;
+    }
+
+    .nav-music-view-all > span:hover {
+        background-color: #1E897D;
+        border: 1px solid #1E897D;
     }
 }

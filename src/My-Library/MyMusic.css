@@ -1,6 +1,7 @@
 .my-music-main-container{
     width: 90%;
-    height: 100vh;
+    height: auto;
+    /* height: 100vh; */
     padding: 34px 0 0 44px;
     color: #3e3e3e;
     background-color: #f6f6f6;
@@ -17,9 +18,5 @@
         z-index: 8;
         top: -64px;
     }
-
-    .my-music-main-container .coming-soon{
-        display: none;
-    }    
     
 }

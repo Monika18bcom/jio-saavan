@@ -11,6 +11,8 @@ import Me from "../NavBar/Me";
 import { JiosaavnContext } from "../App/App";
 import SearchComp from "../NavBar/SearchComp";
 import Search from "../NavBar/Search";
+import ComingSoon from "../My-Library/ComingSoon";
+import History from "../My-Library/History";
 
 function Home() {
 
@@ -122,13 +124,14 @@ function Home() {
                 <Route path='/top-artists' element={<NewReleases type='artist' />} />
                 <Route path='/radio' element={<TopCharts type="radio" />} />
                 <Route path='/my-music' element={<MyMusic />} >
-                    <Route path="playlists" element={<MyMusic />} />
-                    <Route path="songs" element={<MyMusic />} />
-                    <Route path="albums" element={<MyMusic />} />
-                    <Route path="podcasts" element={<MyMusic />} />
-                    <Route path="artists" element={<MyMusic />} />
+                    <Route index element={<ComingSoon />} />
+                    <Route path="playlists" element={<ComingSoon />} />
+                    <Route path="songs" element={<ComingSoon />} />
+                    <Route path="albums" element={<ComingSoon />} />
+                    <Route path="podcasts" element={<ComingSoon />} />
+                    <Route path="artists" element={<ComingSoon />} />
                 </Route>
-                <Route path="/listening-history" element={<MyMusic />}/>
+                <Route path="/listening-history" element={<History />}/>
                 <Route path='/me' element={<Me />} /> 
             </Routes>
             <Footer />

@@ -3,7 +3,8 @@ import MyMusicHeader from './MyMusicHeader'
 import './MyMusic.css'
 import { JiosaavnContext } from "../App/App";
 import ComingSoon from './ComingSoon'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Outlet } from 'react-router-dom';
+
 
 function MyMusic() {
 
@@ -25,10 +26,12 @@ function MyMusic() {
 
 
   return (
-    <div className='my-music-main-container'>
-      <MyMusicHeader />
-      <div className='coming-soon'><ComingSoon /></div>
-    </div>
+    <>
+      <div className='my-music-main-container'>
+        <MyMusicHeader />  
+      </div>
+      <Outlet />
+    </>
   )
 }
 

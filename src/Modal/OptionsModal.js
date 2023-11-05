@@ -19,7 +19,7 @@ function OptionsModal() {
   }
 
   const clickFunc = (e) =>{
-    console.log('clicked' , e , optionRef)
+    // console.log('clicked' , e , optionRef)
     if(!firstRef.current){
       firstRef.current = true;
       return;
