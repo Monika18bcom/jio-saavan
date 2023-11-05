@@ -9,10 +9,13 @@ import { useNavigate } from "react-router-dom";
 import { MainPageContext } from "../App/MainPage";
 import Loader from "../Loader/Loader";
 import "./NavMusic.css";
+import {HiXMark} from 'react-icons/hi2'
+
+
+// HiXMark
 
 function NavMusic() {
   const { setIsNavMusicHover } = useContext(MainPageContext);
-
 
   const initialData = [
     {
@@ -97,19 +100,21 @@ function NavMusic() {
     <div
       className="nav-music-container"
       onMouseOver={() => {
-        if(window.innerWidth > 980){
-            setIsNavMusicHover(true)
+        if (window.innerWidth > 980) {
+          setIsNavMusicHover(true);
         }
-        
       }}
       onMouseLeave={() => {
-        if(window.innerWidth > 980){
-            setIsNavMusicHover(false)
+        if (window.innerWidth > 980) {
+          setIsNavMusicHover(false);
         }
       }}
     >
       <div className="nav-music-content">
-        <h3>What's Hot on JioSaavn</h3>
+        <div className="nav-music-header">
+            <h3>What's Hot on JioSaavn</h3>
+            <HiXMark className="x-mark" onClick={() => setIsNavMusicHover(false)} />
+        </div>
         {isLoading ? (
           <Loader />
         ) : (
@@ -135,7 +140,13 @@ function NavMusic() {
           </div>
         )}
       </div>
-      <div className="nav-music-view-all">
+      <div
+        className="nav-music-view-all"
+        onClick={() => {
+            setIsNavMusicHover(false)
+            navigate("/new-releases");
+        }}
+      >
         <span>View All</span>
       </div>
     </div>
