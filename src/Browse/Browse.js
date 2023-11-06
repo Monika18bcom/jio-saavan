@@ -11,7 +11,9 @@ import { JiosaavnContext } from "../App/App";
 
 function Browse({type,surpriseMeId}) {
 
-  const {setSongData} = useContext(JiosaavnContext)
+  console.log('surprise me' , surpriseMeId , 'browse.js')
+
+  const {setSongId} = useContext(JiosaavnContext)
   
   const langArr = ['For You','Hindi','Tamil','Telugu','English','Punjabi',
                   'Marathi','Gujarati','Bengali',
@@ -26,9 +28,15 @@ function Browse({type,surpriseMeId}) {
 
   const browseRef = useRef()
 
+  const [browseDropDown, setBrowseDropDown] = useState(false)
+
   const handleSurpriseMe =()=>{
     if(surpriseMeId){
-      setSongData(surpriseMeId)
+      setSongId(surpriseMeId)
+    }
+
+    if(browseDropDown){
+      setBrowseDropDown(false)
     }
   }
 
@@ -43,19 +51,25 @@ function Browse({type,surpriseMeId}) {
   return (
     <div className='browse-container'>
       <div className='browse-nav-section'>
-        <div className='browse-drop-down'>
+        <div className='browse-drop-down' onClick={()=> setBrowseDropDown(!browseDropDown)}>
           <span className='drop-down-header'>Browse</span>
           <IoIosArrowDown className='drop-down-arrow' />
         </div>
-        <ul className='browse-nav-ul'>
-          <li><NavLink to='/new-releases'>New Releases</NavLink></li>
-          <li><NavLink to='/top-charts'>Charts</NavLink></li>
-          <li><NavLink to='/top-playlists'>Top Playlists</NavLink></li>
-          <li><NavLink to='/original-podcasts'>Podcasts</NavLink></li>
-          <li><NavLink to='/top-artists'>Top Artists</NavLink></li>
-          <li><NavLink to='/radio'>Radio</NavLink></li>
-        </ul>
-        <div className='browse-nav-btn' onClick={handleSurpriseMe} >Surprise Me</div>
+        <div className='browse-nav-main-ul-section' style={{display: (!browseDropDown && window.innerWidth < 980) && "none" }} >
+          <span className='responsive-browse-header' style={{display: (!browseDropDown && window.innerWidth > 980) && "none" }}>Browse</span>
+          <div className='browse-nav-sub-ul-section'>
+            <ul className='browse-nav-ul' >
+              <li><NavLink to='/new-releases'>New Releases</NavLink></li>
+              <li><NavLink to='/top-charts'>Charts</NavLink></li>
+              <li><NavLink to='/top-playlists'>Top Playlists</NavLink></li>
+              <li><NavLink to='/original-podcasts'>Podcasts</NavLink></li>
+              <li><NavLink to='/top-artists'>Top Artists</NavLink></li>
+              <li><NavLink to='/radio'>Radio</NavLink></li>
+            </ul>
+            <div className='browse-nav-btn' onClick={handleSurpriseMe} >Surprise Me</div>
+          </div>
+          <span className='responsive-browse-footer' onClick={()=>setBrowseDropDown(!browseDropDown)} style={{display: (!browseDropDown && window.innerWidth > 980) && "none" }}>Cancel</span>
+        </div>
       </div>
       {
         ((type === 'song')|| (type === 'album') || (type === 'radio')) && 

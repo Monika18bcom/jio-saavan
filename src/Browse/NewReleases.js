@@ -48,6 +48,8 @@ function NewReleases({type}) {
         
     },[type])
 
+    console.log(surpriseMeId , 'surpriseMeId')
+
   return (
     <div className='new-releases-container'>
         <Browse type={type} surpriseMeId={surpriseMeId}/>
