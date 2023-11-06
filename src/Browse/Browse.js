@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from 'react'
 import './Browse.css'
 import {IoIosArrowBack} from 'react-icons/io'
 import {IoIosArrowForward} from 'react-icons/io'
+import {IoIosArrowDown} from 'react-icons/io'
 import { NavLink } from 'react-router-dom'
 
 import { JiosaavnContext } from "../App/App";
@@ -42,6 +43,10 @@ function Browse({type,surpriseMeId}) {
   return (
     <div className='browse-container'>
       <div className='browse-nav-section'>
+        <div className='browse-drop-down'>
+          <span className='drop-down-header'>Browse</span>
+          <IoIosArrowDown className='drop-down-arrow' />
+        </div>
         <ul className='browse-nav-ul'>
           <li><NavLink to='/new-releases'>New Releases</NavLink></li>
           <li><NavLink to='/top-charts'>Charts</NavLink></li>

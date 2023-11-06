@@ -23,7 +23,7 @@ function ResponsiveNavbar() {
             <GoHome className='icon' />
             <span>Home</span>
         </li>
-        <li className='search' onClick={()=>navigate('/search')} >
+        <li className='search' onClick={()=>setSearchOpen(true)} >
             {/* onClick={()=>setSearchOpen(true)} */}
             <IoIosSearch className='icon' />
             <span>Search</span>

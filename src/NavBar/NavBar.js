@@ -60,13 +60,13 @@ function NavBar() {
 
   return (
     <div className="nav-bar">
-      <div className="logo-container">
+      <div className="logo-container" style={{display:window.innerWidth <980 && window.location.pathname !== '/' && "flex" , width: window.innerWidth <980 && window.location.pathname !== '/' && "100%" , justifyContent: window.innerWidth <980 && window.location.pathname !== '/' && "center" }}>
         <NavLink className="logo-img-section" to="/">
           <img className="logo-img" src={logo} alt="jiosaavn logo"></img>
           <h2 className="logo-text">JioSaavn</h2>
         </NavLink>
       </div>
-      <div className="nav-container">
+      <div className="nav-container" style={{display:window.innerWidth <980 && window.location.pathname !== '/' && "none"}} >
         <ul className="nav-left">
           <li
             onMouseEnter={() => setIsNavMusicHover(true)}
@@ -92,7 +92,7 @@ function NavBar() {
           <p id="search-input">Search</p>
         </div>
         <div className="nav-right">
-          <div className="select-lang" onClick={displayMusicLangFunc}>
+          <div className="select-lang" onClick={displayMusicLangFunc} >
             <div className="select-div">
               <p className="music-lang">Music Languages</p>
               <p className="lang">{musicLangName}</p>

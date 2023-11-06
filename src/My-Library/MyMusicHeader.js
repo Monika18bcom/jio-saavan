@@ -31,8 +31,10 @@ function MyMusicHeader() {
         return JSON.parse(name)
     },[])
 
+    console.log("window.location.pathname", window.location.pathname)
+
   return (
-    <div className='my-music-header-container'>
+    <div className='my-music-header-container' style={{display:window.innerWidth <980 && window.location.pathname !== '/my-music' && "none"}}>
         <div className='my-music-header-user-profile'>
             <div className='my-music-header-img-section'>
                 <div className='profile-img'>
@@ -54,7 +56,7 @@ function MyMusicHeader() {
         <div className='my-music-header-user-library'>
             <ul className='library-ul'>
                 <li>
-                    <NavLink to='playlists'>
+                    <NavLink to='/my-music/playlists'>
                         <div>
                             <PiPlaylist className="icons" />
                             Playlists
@@ -63,7 +65,7 @@ function MyMusicHeader() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='songs'>
+                    <NavLink to='/my-music/songs'>
                         <div>
                             <IoMusicalNoteOutline className="icons" />
                             Songs
@@ -72,7 +74,7 @@ function MyMusicHeader() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='albums'>
+                    <NavLink to='/my-music/albums'>
                         <div>
                             <RiAlbumLine className="icons" />
                             Albums
@@ -81,7 +83,7 @@ function MyMusicHeader() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='podcasts'>
+                    <NavLink to='/my-music/podcasts'>
                         <div>
                             <MdPodcasts className="icons" />
                             Podcasts
@@ -90,7 +92,7 @@ function MyMusicHeader() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='artists'>
+                    <NavLink to='/my-music/artists'>
                         <div>
                             <LiaMicrophoneAltSolid className="icons" />
                             Artists

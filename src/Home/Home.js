@@ -115,7 +115,7 @@ function Home() {
             <Routes>
                 <Route path='/' element={<Main mainAlbumArr={homeState} />}/>
                 <Route path='/:type/:name/:id' element={<Album />}/>
-                <Route path='/search' element={<Search />} />
+                {/* <Route path='/search' element={<Search />} /> */}
                 <Route path='/search/:type/:input' element={<SearchComp /> } />
                 <Route path='/new-releases' element={<NewReleases type='album' />} />
                 <Route path='/top-charts' element={<TopCharts type="charts" />} />

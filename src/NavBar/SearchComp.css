@@ -70,3 +70,9 @@
     padding-top: 20px;
     font-style: italic;
 }
+
+@media (max-width: 980px){
+    .search-comp-container{
+        padding-right: 44px;
+    }
+}

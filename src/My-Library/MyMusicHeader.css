@@ -314,13 +314,15 @@
         width: 100%;
         padding: 0 22px;
         justify-content: initial;
+        height: auto;
     }
     
     .my-music-header-user-library .library-btns > span{
-        padding: 6px 22px;
+        /* padding: 6px 22px; */
         font-size: 20px;
         line-height: 2.4;
-        padding: 22px 0;
+        /* padding: 22px 0; */
+        padding: 0;
     }
 
     .my-music-header-user-library .responsive-logout{
@@ -328,6 +330,7 @@
         width: 100%;
         background-color: #fff;
         padding: 0 22px;
+        margin-top: 22px;
     }
 
     .my-music-header-user-library .responsive-logout span{
@@ -338,9 +341,9 @@
         font-size: 20px;
         font-weight: 700;
         line-height: 2.4;
-        border-radius: 22px;
+        /* border-radius: 22px; */
         cursor: pointer;
         color: #707070;
-        border: 1px solid #ccc;
+        /* border: 1px solid #ccc; */
     }
 }
