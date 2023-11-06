@@ -197,7 +197,7 @@ function AsideBottom() {
     <div
       id="aside-bottom"
       className="aside-bottom-section"
-      style={{ top: isExpand && "64px", height: isExpand && "91%" }}
+      style={{ top: isExpand && "64px", height: isExpand && "91%" , zIndex:isExpand && window.innerWidth < 980 && '9' }}
     >
       {isExpand && <ExpandAlbum localSongData={localSongData} />}
       <div className="aside-bottom-progress-bar">

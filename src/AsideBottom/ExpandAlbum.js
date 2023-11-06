@@ -19,21 +19,21 @@ function ExpandAlbum({ localSongData }) {
 
   return (
     <div className='expand-album-container'>
-        <div className='expand-album-img-section'>
-                <img src={localSongData?.thumbnail} alt={localSongData?.title}></img>
-                <h3 style={{color: isHover ? 'black' : '#3e3e3e'}} onClick={()=>handleClick(localSongData)} >{localSongData?.title}</h3>
-                <p>
-                  {
-                    localSongData?.artist && 
-                    localSongData?.artist.map((e , idx)=> (
-                        <span key={e._id} onClick={()=>handleClick(e)}>{e.name + `${idx < (localSongData.artist.length -1) ? ", " : ""}`}</span>
-                    ))
-                  }
-                </p>
-            </div>
-        <div className='expand-album-queue-section' >
-          <AsideRight width='600px' />
-        </div>
+      <div className='expand-album-img-section'>
+        <img src={localSongData?.thumbnail} alt={localSongData?.title}></img>
+        <h3 style={{color: isHover ? 'black' : '#3e3e3e'}} onClick={()=>handleClick(localSongData)} >{localSongData?.title}</h3>
+        <p>
+          {
+            localSongData?.artist && 
+            localSongData?.artist.map((e , idx)=> (
+                <span key={e._id} onClick={()=>handleClick(e)}>{e.name + `${idx < (localSongData.artist.length -1) ? ", " : ""}`}</span>
+            ))
+          }
+        </p>
+      </div>
+      <div className='expand-album-queue-section' >
+        <AsideRight width='600px' albumContentHeight="450px" />
+      </div>
 
     </div>
   )

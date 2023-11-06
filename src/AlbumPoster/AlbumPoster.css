@@ -87,3 +87,33 @@
     font-size: 32px;
 }
 
+
+@media (max-width: 980px){
+    .album-poster-container{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .album-poster-description{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .album-poster-controls{
+        width: fit-content;
+    }
+
+    .album-poster-controls .album-poster-play-btn{
+        width: fit-content;
+        padding: 6px 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .album-poster-options-btn{
+        display: none;
+    }
+}
+

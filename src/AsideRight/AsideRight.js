@@ -6,7 +6,7 @@ import { JiosaavnContext } from '../App/App';
 
 
 
-function AsideRight({width}) {
+function AsideRight({width , albumContentHeight}) {
 
     const {updateQueue} = useContext(JiosaavnContext)
 
@@ -57,7 +57,7 @@ function AsideRight({width}) {
             </div>
         </div>
         <hr></hr>
-        <div className='aside-right-content'>
+        <div className='aside-right-content' style={{height: albumContentHeight}}>
             <ul className='aside-right-album-container'>
                 {queueData?.data?.songs?.map((e, id) => (
                     <SongItem

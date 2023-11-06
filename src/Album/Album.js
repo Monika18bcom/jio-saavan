@@ -37,7 +37,7 @@ function Album() {
 
   useEffect(()=>{
     window.scrollTo({top:0 , behavior: 'smooth'})
-  },[])
+  },[window.location.pathname])
 
 
   return isLoading ? (
