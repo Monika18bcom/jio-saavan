@@ -81,14 +81,12 @@ function OptionsModal() {
   }
 
   const copyToClipboard = () =>{
-    console.log(`https://jio-saavan-ten.vercel.app/${optionsData.type}/${(optionsData.name) || (optionsData.title)}/${optionsData._id}`)
+    const text = `https://jio-saavan-ten.vercel.app/${optionsData.type}/${(optionsData.name) || (optionsData.title)}/${optionsData._id}`
+    navigator.clipboard.writeText(text)
     setLinkCopied(true)
-    setTimeout(()=>{
-      
-    },200)
   }
 
-  console.log(optionsData , "optionsData")
+  // console.log(optionsData , "optionsData")
 
   return (
     <div className='options-modal-container' ref={optionRef} style={{top:showOption?.top , left:showOption?.left}} >
