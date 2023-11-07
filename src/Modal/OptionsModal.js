@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import {IoIosArrowForward} from 'react-icons/io'
 import {IoIosArrowBack} from 'react-icons/io'
 import { JiosaavnContext } from '../App/App'
@@ -8,7 +8,11 @@ import './OptionsModal.css'
 
 function OptionsModal() {
 
-  const {showOption , setShowOption} = useContext(JiosaavnContext)
+  const {showOption , setShowOption , setShowErrorComp , optionsData , setOptionsData , setSongId , setUpdateQueue} = useContext(JiosaavnContext)
+
+  const [mainOptions , setMainOptions] = useState(true)
+  const [linkCopied , setLinkCopied] = useState(false)
+
 
   const optionRef = useRef()
 
@@ -42,31 +46,76 @@ function OptionsModal() {
     }
   },[])
 
+  useEffect(()=>{
+    setTimeout(()=>{
+      setLinkCopied(false)
+    },900)
+
+  },[linkCopied])
+
+  const handlePlayNow = () => {
+    setSongId(null)
+    setTimeout(()=>{
+      if(optionsData?.type === "song"){
+        setSongId(optionsData?._id)
+        
+        sessionStorage.setItem('queueData' , JSON.stringify({ data: optionsData , type: 'song' }))
+        setUpdateQueue(optionsData?._id)
+
+      }else if(optionsData?.type === "album"){
+        setSongId(optionsData?.songs[0]._id)
+
+        sessionStorage.setItem('queueData' , JSON.stringify({ data: optionsData , type: 'album' }))
+        setUpdateQueue(optionsData?._id)
+      }else{
+        setSongId(optionsData?.songs[0])
+
+        sessionStorage.setItem('queueData' , JSON.stringify({ data: optionsData , type: 'artist' }))
+        setUpdateQueue(optionsData?._id)
+      }
+    },500)
+  }
+
+  const handleErrorComp = (e) => {
+    setShowErrorComp(`${e.target.innerText} in progress...`)
+  }
+
+  const copyToClipboard = () =>{
+    console.log(`https://jio-saavan-ten.vercel.app/${optionsData.type}/${(optionsData.name) || (optionsData.title)}/${optionsData._id}`)
+    setLinkCopied(true)
+    setTimeout(()=>{
+      
+    },200)
+  }
+
+  console.log(optionsData , "optionsData")
+
   return (
-    <div className='options-modal-parent'>
-      <div className='options-modal-container' ref={optionRef} style={{top:showOption?.top , left:showOption?.left}}>
+    <div className='options-modal-container' ref={optionRef} style={{top:showOption?.top , left:showOption?.left}} >
+        
+      {
+        mainOptions ?
         <ul className='options-modal-ul-1'>
-          <li className='play-now'>Play Album Now</li>
-          <li className='save-to-lib'>Save to Library</li>
-          <li className='add-to-queue'>Add to Queue</li>
-          <li className='add-to-playlists'>Add to Playlists</li>
-          <li className='share'>
+          <li className='play-now' onClick={handlePlayNow}>Play Album Now</li>
+          <li className='save-to-lib' onClick={handleErrorComp}>Save to Library</li>
+          <li className='add-to-queue' onClick={handleErrorComp}>Add to Queue</li>
+          <li className='add-to-playlists' onClick={handleErrorComp}>Add to Playlists</li>
+          <li className='share' onClick={()=> setMainOptions(false)}>
             <span>Share</span>
             <IoIosArrowForward className='frw-arrow' />
           </li>
-        </ul>
-
-        {/* <ul className='options-modal-ul-2'>
-          <li className='back-btn'>
+        </ul> :
+        <ul className='options-modal-ul-2'>
+          <li className='back-btn' onClick={()=> setMainOptions(true)} >
             <IoIosArrowBack className='back-arrow' />
             <span>Back</span>
           </li>
-          <li className='copy-link'>Copy Link</li>
-          <li className='twitter'>Twitter</li>
-          <li className='facebook'>Facebook</li>
-          <li className='email'>Email</li>
-        </ul> */}
-      </div>
+          <li className='copy-link' onClick={copyToClipboard}>{linkCopied ? "Link Copied👍" : "Copy Link"}</li>
+          <li className='twitter' onClick={()=> window.open("https://twitter.com/JioSaavn", '_blank')}>Twitter</li>
+          <li className='facebook' onClick={()=> window.open("https://www.facebook.com/JioSaavn", '_blank')}>Facebook</li>
+          <li className='email' onClick={()=> window.open('mailto:jiosaavn@gmail.com')}>Email</li>
+        </ul>
+      }  
     </div>
   )
 }

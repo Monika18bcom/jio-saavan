@@ -18,7 +18,7 @@ function MusicCard({data  , cardWidth , imgHeight}){
     const [isLikeRed, setIsLikeRed] = useState(false);
     const navigate = useNavigate()
     
-    const {setSongId , setUpdateQueue , showOption , setShowOption} = useContext(JiosaavnContext);
+    const {setSongId , setUpdateQueue , setShowOption , setOptionsData} = useContext(JiosaavnContext);
 
     const handleMouseOver = ()=>{
         setIsHover(true);
@@ -58,6 +58,7 @@ function MusicCard({data  , cardWidth , imgHeight}){
             let height = (window.innerHeight - 200) > e.clientY ? e.clientY : window.innerHeight - (200 + 20)
 
             setShowOption({top: height , left: width})
+            setOptionsData(data)
         }else{
             navigate(`/${data.type}/${(data.name) || (data.title)}/${data._id}`)
         }

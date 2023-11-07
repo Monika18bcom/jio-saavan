@@ -12,6 +12,8 @@ export const JiosaavnContext = createContext({});
 function App() {
 
   const [songId , setSongId] = useState(null)
+
+  const [optionsData , setOptionsData] = useState(null)
   
   const [showModal, setShowModal] = useState(null);
   const [loginType, setLoginType] = useState("login");
@@ -93,7 +95,9 @@ function App() {
         showErrorComp , 
         setShowErrorComp,
         showOption , 
-        setShowOption
+        setShowOption,
+        optionsData , 
+        setOptionsData
       }}
     >
       <div className="App">
