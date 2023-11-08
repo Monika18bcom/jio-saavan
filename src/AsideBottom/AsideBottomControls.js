@@ -72,15 +72,15 @@ function AsideBottomControls({
   };
 
   const handleLoop = () => {
-    if (localSongData !== null) {
-      if (sound._loop) {
-        setIsRepeat(false);
-        sound.loop(false);
-      } else {
-        setIsRepeat(true);
-        sound.loop(true);
-      }
-    }
+    // if (localSongData !== null) {
+    //   if (sound._loop) {
+    //     setIsRepeat(false);
+    //     sound.loop(false);
+    //   } else {
+    //     setIsRepeat(true);
+    //     sound.loop(true);
+    //   }
+    // }
   };
 
   return (

@@ -13,7 +13,7 @@ function History() {
   return (
     <div className='history-container'>
       <MyMusicHeader />
-      <div className='coming-soon'><ComingSoon /></div>
+      <ComingSoon />
     </div>
   )
 }

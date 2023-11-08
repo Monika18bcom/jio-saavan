@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './Browse.css'
 import {IoIosArrowBack} from 'react-icons/io'
 import {IoIosArrowForward} from 'react-icons/io'
@@ -11,7 +11,7 @@ import { JiosaavnContext } from "../App/App";
 
 function Browse({type,surpriseMeId}) {
 
-  console.log('surprise me' , surpriseMeId , 'browse.js')
+  // console.log('surprise me' , surpriseMeId , 'browse.js')
 
   const {setSongId} = useContext(JiosaavnContext)
   
@@ -29,6 +29,12 @@ function Browse({type,surpriseMeId}) {
   const browseRef = useRef()
 
   const [browseDropDown, setBrowseDropDown] = useState(false)
+
+  useEffect(()=>{
+    
+    setBrowseDropDown(false)
+
+  },[window.location.pathname])
 
   const handleSurpriseMe =()=>{
     if(surpriseMeId){

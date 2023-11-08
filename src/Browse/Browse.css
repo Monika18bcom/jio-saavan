@@ -275,7 +275,7 @@
     }
 
     .browse-nav-main-ul-section > .browse-nav-sub-ul-section .browse-nav-ul .active{
-        padding-top: initial;
+        /* padding-top: initial; */
         border-bottom: initial;
     }
 

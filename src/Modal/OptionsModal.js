@@ -86,6 +86,26 @@ function OptionsModal() {
     setLinkCopied(true)
   }
 
+  const toggleOptions = (e) => {
+    // console.log(e.target.parentElement.classList)
+    // setMainOptions(false)
+    // ()=> setMainOptions(true)
+
+    // console.log(mainOptions , "toggle func clicked")
+
+    if(e.target.parentElement.classList.contains('share') || e.target.classList.contains('share')){
+      console.log("share class")
+      setMainOptions(false) 
+    }
+
+    if(e.target.parentElement.classList.contains('back-btn') || e.target.classList.contains('back-btn')){
+      console.log("back-btn class")
+      setMainOptions(true) 
+    }
+  }
+
+  console.log(mainOptions , "mainOptions")
+
   // console.log(optionsData , "optionsData")
 
   return (
@@ -98,13 +118,13 @@ function OptionsModal() {
           <li className='save-to-lib' onClick={handleErrorComp}>Save to Library</li>
           <li className='add-to-queue' onClick={handleErrorComp}>Add to Queue</li>
           <li className='add-to-playlists' onClick={handleErrorComp}>Add to Playlists</li>
-          <li className='share' onClick={()=> setMainOptions(false)}>
+          <li className='share' onClick={()=> setMainOptions(false) }>
             <span>Share</span>
             <IoIosArrowForward className='frw-arrow' />
           </li>
         </ul> :
         <ul className='options-modal-ul-2'>
-          <li className='back-btn' onClick={()=> setMainOptions(true)} >
+          <li className='back-btn' onClick={toggleOptions} >
             <IoIosArrowBack className='back-arrow' />
             <span>Back</span>
           </li>
