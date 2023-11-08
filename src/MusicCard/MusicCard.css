@@ -133,3 +133,15 @@
         display: none;
     }
 }
+
+@media (max-width: 740px) {
+
+    .music-card-container{
+        min-width: 166px;
+        /* cursor: pointer; */
+    }
+
+    .music-card-img{
+        height: 166px;
+    }
+}

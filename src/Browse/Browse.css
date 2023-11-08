@@ -132,6 +132,7 @@
 }
 
 .browse-lang-ul span{
+    display: inline-flex;
     width: auto;
     font-size: 13px;
     padding: 7px 22px;

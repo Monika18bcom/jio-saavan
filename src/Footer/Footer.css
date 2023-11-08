@@ -141,9 +141,10 @@
         margin-bottom: 150px;
     }
     
-    /* #footer-app-version p{
-        width: auto;
-        min-width: 120px;
+    #footer-app-version p{
+        /* width: auto; */
+        /* min-width: 120px; */
+        width: fit-content;
         
-    } */
+    }
 }

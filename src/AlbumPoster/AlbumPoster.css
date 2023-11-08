@@ -1,21 +1,22 @@
 .album-poster-container{
     width: 100%;
-    /* height: 30%; */
-    display: flex;
+    display: grid;
+    grid-template-columns: 0.35fr 1fr;
+    /* display: flex; */
     align-items: center;
     margin-bottom: 44px;
     color: #3e3e3e;
 }
 
 .album-poster-image-section{
-    width: 25.5%;
+    width: 100%;
+    /* width: 25.5%; */
     /* height: 100%; */
     padding-right: 44px;
 }
 
 .album-poster-image{
     width: 100%;
-    /* height: 100%; */
     border-radius: 4px;
     box-shadow: 0 30px 40px -20px #979595;
 
@@ -90,14 +91,38 @@
 
 @media (max-width: 980px){
     .album-poster-container{
+        /* grid-template-rows: 0.35fr 0.5fr;
+        grid-template-columns: 1fr; */
+        justify-content: center;
+        display: flex;
         flex-direction: column;
         gap: 20px;
     }
 
+    .album-poster-image-section{
+        padding-right: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .album-poster-image{
+        max-height: 180px;
+        max-width: 180px;
+    }
+    
     .album-poster-description{
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
+    }
+
+    .album-poster-description > h1{
+        font-size: 24px;
+    }
+
+    .album-poster-description > p{
+        font-size: 15px;
     }
 
     .album-poster-controls{
