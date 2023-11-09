@@ -62,7 +62,7 @@ function MainPage() {
       {displayMusicLang && <MusicLanguages /> }
       {showErrorComp && <ErrorComp>{showErrorComp}</ErrorComp>}
       { showOption && <OptionsModal />}
-      <ResponsiveNavbar />
+      { !isExpand && <ResponsiveNavbar />}
     </MainPageContext.Provider>
   )
 }

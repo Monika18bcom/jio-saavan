@@ -16,17 +16,17 @@ function Main({mainAlbumArr}) {
   return (
     isLoading ? 
     <div className="main-loader-container">
-        <Loader size='60' border='6'  />
+      <Loader size='60' border='6'  />
     </div> :
     <main className='main-album-content'>
-        {
-        mainAlbumArr?.map((album, idx)=>(
-            <div className="main-album-section" key={idx}>
-              <h2 className='main-album-heading'>{album.title}</h2>
-              {album && <MusicData album={album} />}
-            </div>
-        ))
-        }
+      {
+      mainAlbumArr?.map((album, idx)=>(
+        <div className="main-album-section" key={idx}>
+          <h2 className='main-album-heading'>{album.title}</h2>
+          {album && <MusicData album={album} />}
+        </div>
+      ))
+      }
     </main>
   )
 }

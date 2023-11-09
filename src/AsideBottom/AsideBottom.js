@@ -212,7 +212,7 @@ function AsideBottom() {
       </div>
       <div
         className="aside-bottom-content"
-        style={{ opacity: localSongData === null && "0.5" }}
+        style={{ opacity: localSongData === null && "0.5" , justifyContent: window.innerWidth <= 980 ? "space-between" }}
       >
         <AsideBottomAlbum localSongData={localSongData} />
         <AsideBottomControls
@@ -230,10 +230,14 @@ function AsideBottom() {
           durationDispatch={durationDispatch}
           setProgressWidth={setProgressWidth}
         />
-        <AsideBottomActions
+        {
+          
+          window.innerWidth > 980 &&
+          <AsideBottomActions
           localSongData={localSongData}
           durationState={durationState}
-        />
+          />
+        }
       </div>
     </div>
   );

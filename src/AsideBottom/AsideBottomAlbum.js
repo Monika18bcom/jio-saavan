@@ -4,18 +4,22 @@ import { JiosaavnContext } from '../App/App'
 
 function AsideBottomAlbum({localSongData}) {
 
-    const { isExpand } = useContext(JiosaavnContext)
+    const { isExpand , setIsExpand } = useContext(JiosaavnContext)
     const navigate = useNavigate()
     const [isHover, setIsHover] = useState(false);
 
 
     const handleClick = (e) => {
+
+        if(window.innerWidth <= 980){
+            setIsExpand(true)
+        }
         navigate(`/${e.type || "artist"}/${e.name || e.title}/${e._id}`);
     };
 
     
   return (
-    <div className="aside-bottom-album">
+    <div className="aside-bottom-album" style={{width: window.innerWidth <= 980 && "100%" , justifyContent: window.innerWidth <= 980 && "space-between", display: (window.innerWidth <= 980 && isExpand) && "none" }}>
         {!isExpand && (
         <>
             <img

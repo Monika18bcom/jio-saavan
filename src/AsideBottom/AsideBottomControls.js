@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoIosPause } from "react-icons/io";
 import { RiRepeatLine } from "react-icons/ri";
 import { RiRepeatOneFill } from "react-icons/ri";
@@ -6,6 +6,7 @@ import { HiPlay } from "react-icons/hi2";
 import { TbPlayerSkipBackFilled } from "react-icons/tb";
 import { TbPlayerSkipForwardFilled } from "react-icons/tb";
 import { PiShuffleBold } from "react-icons/pi";
+import { JiosaavnContext } from "../App/App";
 
 function AsideBottomControls({
   songId,
@@ -22,10 +23,13 @@ function AsideBottomControls({
   durationDispatch,
   setProgressWidth,
 }) {
+
+
+  const {isExpand} = useContext(JiosaavnContext)
   const [isRepeat, setIsRepeat] = useState(false);
 
-  useEffect(() => {    
-    if(isPlay && songId){
+  useEffect(() => {
+    if (isPlay && songId) {
       setTimerId(
         setTimeout(() => {
           if (isPlay && duration) {
@@ -35,12 +39,10 @@ function AsideBottomControls({
           }
         }, 1000)
       );
-    }
-    else if (!isPlay || !songId) {
+    } else if (!isPlay || !songId) {
       clearTimeout(timerId);
       return;
-    }
-    else if (localSongData?._id  !== songId) {
+    } else if (localSongData?._id !== songId) {
       clearTimeout(timerId);
     }
 
@@ -59,7 +61,7 @@ function AsideBottomControls({
     return () => {
       clearTimeout(timerId);
     };
-  }, [durationState.totalDuration , isPlay , songId]);
+  }, [durationState.totalDuration, isPlay, songId]);
 
   const handlePlay = () => {
     if (!isPlay) {
@@ -83,13 +85,15 @@ function AsideBottomControls({
     // }
   };
 
+
   return (
-    <ul className="aside-bottom-controls">
+    <ul className="aside-bottom-controls" style={{width: (window.innerWidth <= 980 && !isExpand) && "fit-content" , padding:(window.innerWidth <= 980 && !isExpand) && "0 22px"}}>
       <li
         className="aside-bottom-item-repeat"
         style={{
-          cursor: localSongData && "pointer",
           color: isRepeat && "#2bc5b4",
+          opacity: "0.5",
+          display: (window.innerWidth <= 980 && !isExpand) && "none"
         }}
         onClick={handleLoop}
       >
@@ -98,7 +102,8 @@ function AsideBottomControls({
       </li>
       <li
         className="aside-bottom-item-prev"
-        style={{ cursor: localSongData && "pointer" }}
+        style={{ opacity: "0.5" ,display: (window.innerWidth <= 980 && !isExpand) && "none"}}
+        // style={{ cursor: localSongData && "pointer", opacity: "0.5" }}
       >
         <TbPlayerSkipBackFilled />
       </li>
@@ -111,13 +116,13 @@ function AsideBottomControls({
       </li>
       <li
         className="aside-bottom-item-next"
-        style={{ cursor: localSongData && "pointer" }}
+        style={{ opacity: "0.5",display: (window.innerWidth <= 980 && !isExpand) && "none" }}
       >
         <TbPlayerSkipForwardFilled />
       </li>
       <li
         className="aside-bottom-item-shuffle"
-        style={{ cursor: localSongData && "pointer" }}
+        style={{  opacity: "0.5" ,display: (window.innerWidth <= 980 && !isExpand) && "none"}}
       >
         <PiShuffleBold />
       </li>
