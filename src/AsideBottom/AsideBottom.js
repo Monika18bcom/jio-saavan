@@ -212,7 +212,7 @@ function AsideBottom() {
       </div>
       <div
         className="aside-bottom-content"
-        style={{ opacity: localSongData === null && "0.5" , justifyContent: window.innerWidth <= 980 && "space-between" }}
+        style={{ opacity: localSongData === null && "0.5"}}
       >
         <AsideBottomAlbum localSongData={localSongData} />
         <AsideBottomControls

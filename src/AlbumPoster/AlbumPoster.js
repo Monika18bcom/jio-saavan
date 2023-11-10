@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './AlbumPoster.css'
 import {BsThreeDots} from 'react-icons/bs'
 import {AiOutlineHeart} from 'react-icons/ai'
 import {AiFillHeart} from 'react-icons/ai'
 import {BsDot} from 'react-icons/bs'
+import { JiosaavnContext } from '../App/App'
 
 
 function AlbumPoster({data , type}) {
+
+    // console.log(data)
+
+    const {setSongId , setUpdateQueue , setShowErrorComp} = useContext(JiosaavnContext)
 
     const [isPlayHover, setIsPlayHover] = useState(false)
     const [isLikeHover, setIsLikeHover] = useState(false)
@@ -33,6 +38,24 @@ function AlbumPoster({data , type}) {
         }
     }
 
+    const handlePlayNow = () => {
+        
+        setSongId(null)
+        setTimeout(()=>{
+            if(type === "song"){
+                setSongId(data?._id)
+                
+                sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: 'song' }))
+                setUpdateQueue(data._id)
+            }else{
+                setSongId(data?.songs[0]?._id)
+
+                sessionStorage.setItem('queueData' , JSON.stringify({ data: data , type: type }))
+                setUpdateQueue(data._id)
+            }
+        },500)
+    }
+
 
   return (
     <div className='album-poster-container'>
@@ -49,11 +72,11 @@ function AlbumPoster({data , type}) {
             </>
             }
             <div className='album-poster-controls' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
-                <div className='album-poster-play-btn' style={{backgroundColor: isPlayHover && '#1E897D'}} >Play</div>
-                <div className='album-poster-like-btn' style={{borderColor: isLikeHover && '#707070'}} >
+                <div className='album-poster-play-btn' style={{backgroundColor: isPlayHover && '#1E897D'}} onClick={handlePlayNow}>Play</div>
+                <div className='album-poster-like-btn' style={{borderColor: isLikeHover && '#707070'}} onClick={()=> setShowErrorComp("work in progress")} >
                     <AiOutlineHeart className='album-poster-like-icon'/>
                 </div>
-                <div className='album-poster-options-btn' style={{borderColor: isOptionsHover && '#707070'}}>
+                <div className='album-poster-options-btn' style={{borderColor: isOptionsHover && '#707070'}} onClick={()=> setShowErrorComp("work in progress")} >
                     <BsThreeDots className='album-poster-options-icon' />
                 </div>
             </div>

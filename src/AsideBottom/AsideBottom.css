@@ -117,11 +117,38 @@
     font-weight: bolder;
 }
 
+
 @media (max-width: 980px) {
 
     #aside-bottom{
         margin-bottom: 66px;
         z-index: 8;
+    }
+
+    .aside-bottom-content{
+        display: grid;
+        grid-template-columns: 90% 10%;
+    }
+
+    .aside-bottom-album{
+        width: 100%;
+    }
+
+    .aside-bottom-album-info{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .aside-bottom-album-info{
+        align-items: initial;
     }
 
 }

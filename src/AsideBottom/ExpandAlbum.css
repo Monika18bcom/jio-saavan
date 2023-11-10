@@ -16,8 +16,10 @@
     padding-top: 10px;
 }
 
+
 .expand-album-img-section > img{
-    width: 350px;
+    width: 50%;
+    max-width: 350px;
     margin-bottom: 22px;
     border-radius: 4px;
     /* box-shadow: 0 30px 40px -20px #979595; */

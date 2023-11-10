@@ -1,5 +1,5 @@
 import './MusicCard.css'
-import { useState , useContext } from 'react'
+import { useState , useContext, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHeart} from '@fortawesome/free-regular-svg-icons'
 import {AiFillHeart} from 'react-icons/ai'

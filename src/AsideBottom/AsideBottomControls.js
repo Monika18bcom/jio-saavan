@@ -23,9 +23,7 @@ function AsideBottomControls({
   durationDispatch,
   setProgressWidth,
 }) {
-
-
-  const {isExpand} = useContext(JiosaavnContext)
+  const { isExpand } = useContext(JiosaavnContext);
   const [isRepeat, setIsRepeat] = useState(false);
 
   useEffect(() => {
@@ -85,15 +83,21 @@ function AsideBottomControls({
     // }
   };
 
-
   return (
-    <ul className="aside-bottom-controls" style={{width: (window.innerWidth <= 980 && !isExpand) && "fit-content" , padding:(window.innerWidth <= 980 && !isExpand) && "0 22px"}}>
+    <ul
+      className="aside-bottom-controls"
+      style={{
+        marginLeft: window.innerWidth <= 980 && isExpand && "40%"
+        // width: window.innerWidth <= 980 && !isExpand && "fit-content",
+        // padding: window.innerWidth <= 980 && !isExpand && "0 22px",
+      }}
+    >
       <li
         className="aside-bottom-item-repeat"
         style={{
           color: isRepeat && "#2bc5b4",
           opacity: "0.5",
-          display: (window.innerWidth <= 980 && !isExpand) && "none"
+          display: window.innerWidth <= 980 && !isExpand && "none",
         }}
         onClick={handleLoop}
       >
@@ -102,7 +106,10 @@ function AsideBottomControls({
       </li>
       <li
         className="aside-bottom-item-prev"
-        style={{ opacity: "0.5" ,display: (window.innerWidth <= 980 && !isExpand) && "none"}}
+        style={{
+          opacity: "0.5",
+          display: window.innerWidth <= 980 && !isExpand && "none",
+        }}
         // style={{ cursor: localSongData && "pointer", opacity: "0.5" }}
       >
         <TbPlayerSkipBackFilled />
@@ -116,13 +123,19 @@ function AsideBottomControls({
       </li>
       <li
         className="aside-bottom-item-next"
-        style={{ opacity: "0.5",display: (window.innerWidth <= 980 && !isExpand) && "none" }}
+        style={{
+          opacity: "0.5",
+          display: window.innerWidth <= 980 && !isExpand && "none",
+        }}
       >
         <TbPlayerSkipForwardFilled />
       </li>
       <li
         className="aside-bottom-item-shuffle"
-        style={{  opacity: "0.5" ,display: (window.innerWidth <= 980 && !isExpand) && "none"}}
+        style={{
+          opacity: "0.5",
+          display: window.innerWidth <= 980 && !isExpand && "none",
+        }}
       >
         <PiShuffleBold />
       </li>

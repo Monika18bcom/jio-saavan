@@ -177,13 +177,14 @@ function SongItem({
         <div
           className="song-item-info"
           style={{
-            flexDirection: window.innerWidth < 980 ? 'column' : songInfoFD,
+            flexDirection: songInfoFD,
+            // flexDirection: window.innerWidth < 980 ? 'column' : songInfoFD,
             alignItems: songInfoAI,
             justifyContent: songInfoJC,
             fontSize: songInfoFSz,
             color: songInfoFCo,
             marginRight: songInfoMarginR,
-            gap:window.innerWidth < 980 && "5px"
+            // gap:window.innerWidth < 980 && "5px"
           }}
         >
           {songList ? (

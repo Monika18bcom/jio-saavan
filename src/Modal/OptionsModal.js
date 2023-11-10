@@ -8,7 +8,7 @@ import './OptionsModal.css'
 
 function OptionsModal() {
 
-  const {showOption , setShowOption , setShowErrorComp , optionsData , setOptionsData , setSongId , setUpdateQueue} = useContext(JiosaavnContext)
+  const {showOption , setShowOption , setShowErrorComp , optionsData , setSongId , setUpdateQueue} = useContext(JiosaavnContext)
 
   const [mainOptions , setMainOptions] = useState(true)
   const [linkCopied , setLinkCopied] = useState(false)
@@ -54,6 +54,7 @@ function OptionsModal() {
   },[linkCopied])
 
   const handlePlayNow = () => {
+    setShowOption(false)
     setSongId(null)
     setTimeout(()=>{
       if(optionsData?.type === "song"){

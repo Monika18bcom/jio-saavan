@@ -19,7 +19,7 @@ function AsideBottomAlbum({localSongData}) {
 
     
   return (
-    <div className="aside-bottom-album" style={{width: window.innerWidth <= 980 && "100%" , justifyContent: window.innerWidth <= 980 && "space-between", display: (window.innerWidth <= 980 && isExpand) && "none" }}>
+    <div className="aside-bottom-album" style={{display: (window.innerWidth <= 980 && isExpand) && "none" }}>
         {!isExpand && (
         <>
             <img

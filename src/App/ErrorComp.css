@@ -21,3 +21,9 @@
     font-style: italic;
     text-transform: capitalize;
 }
+
+@media (max-width: 980px){
+    .error-comp-section{
+        bottom: 155px; 
+    }
+}
